@@ -50,7 +50,7 @@ export const App = () => {
               }
             >
               <td>
-                {!selectedGood && (
+                {selectedGood !== good && (
                   <button
                     data-cy="AddButton"
                     type="button"
