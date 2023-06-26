@@ -1,7 +1,6 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
-import cn from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -44,34 +43,52 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map(good => (
-            <tr
-              key={good}
-              data-cy="Good"
-              className={cn({
-                'has-background-success-light': nameGood === good,
-              })}
-            >
-              <td>
-                <button
-                  data-cy={nameGood === good ? 'RemoveButton' : 'AddButton'}
-                  type="button"
-                  className={cn('button', { 'is-info': nameGood === good })}
-                  onClick={() => {
-                    if (nameGood === good) {
+            nameGood === good ? (
+              <tr
+                key={good}
+                data-cy="Good"
+                className="has-background-success-light"
+              >
+                <td>
+                  <button
+                    data-cy="RemoveButton"
+                    type="button"
+                    className="button is-info"
+                    onClick={() => {
                       setNameGoog('');
-                    } else {
-                      setNameGoog(good);
-                    }
-                  }}
-                >
-                  {nameGood === good ? '-' : '+'}
-                </button>
-              </td>
+                    }}
+                  >
+                    -
+                  </button>
+                </td>
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            ) : (
+              <tr
+                key={good}
+                data-cy="Good"
+              >
+                <td>
+                  <button
+                    data-cy="AddButton"
+                    type="button"
+                    className="button"
+                    onClick={() => {
+                      setNameGoog(good);
+                    }}
+                  >
+                    +
+                  </button>
+                </td>
+
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            )
           ))}
 
         </tbody>
