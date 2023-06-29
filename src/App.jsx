@@ -57,12 +57,14 @@ export const App = () => {
                   className={cn({
                     'has-background-success-light': isSelected,
                   })}
+                  key={goodElement}
                 >
                   <td>
                     <button
-                      data-cy={isSelected
-                        ? 'RemoveButton'
-                        : 'AddButton'
+                      data-cy={
+                        isSelected
+                          ? 'RemoveButton'
+                          : 'AddButton'
                       }
                       type="button"
                       className={cn('button', {
