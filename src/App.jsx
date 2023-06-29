@@ -23,6 +23,8 @@ export const App = () => {
     setSelected(prev => (prev === good ? '' : good));
   }
 
+  const currentGoodIsSelected = good => good === selected;
+
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
@@ -45,24 +47,24 @@ export const App = () => {
         <tbody>
           {goods.map(good => (
             <tr
-              key={goods.indexOf(good)}
+              key={good}
               data-cy="Good"
               className={classNames({
-                'has-background-success-light': good === selected,
+                'has-background-success-light': currentGoodIsSelected(good),
               })}
             >
               <td>
                 <button
-                  data-cy={good === selected
+                  data-cy={currentGoodIsSelected(good)
                     ? 'RemoveButton'
                     : 'AddButton'
                   }
                   type="button"
                   className={classNames('button',
-                    { 'is-info': good === selected })}
+                    { 'is-info': currentGoodIsSelected(good) })}
                   onClick={() => clickOnGood(good)}
                 >
-                  {good === selected ? '-' : '+'}
+                  {currentGoodIsSelected(good) ? '-' : '+'}
                 </button>
               </td>
 
