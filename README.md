@@ -6,6 +6,7 @@ You are given an array of goods. Render them in a table with the ability to sele
 
 In this task, we use the [Bulma CSS framework](https://bulma.io/). It is already installed and imported so that you may use its classes.
 
+
 1. Write everything inside the `App` (**don't** create additional components).
 1. Save a `selectedGood` in the state (`Jam` is the default value).
 1. Show the name of the selected good in the `h1.title` (`Jam is selected`).
