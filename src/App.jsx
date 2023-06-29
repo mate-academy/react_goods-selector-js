@@ -21,8 +21,7 @@ export const App = () => {
 
   return (
     <main className="section container">
-      {product === ''
-        ? (
+      {!product ? (
           <h1 className="title is-flex is-align-items-center">
             No goods selected
           </h1>
@@ -33,7 +32,7 @@ export const App = () => {
 
             <button
               onClick={() => {
-                setProduct(``);
+                setProduct('');
               }}
               data-cy="ClearButton"
               type="button"
