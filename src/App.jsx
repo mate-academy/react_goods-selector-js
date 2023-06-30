@@ -23,10 +23,6 @@ export const App = () => {
     setSelectedGood(prev => (prev === good ? '' : good));
   }
 
-  // function currentGoodIsSelected(good) {
-  //   return good === selectedGood;
-  // }
-
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
