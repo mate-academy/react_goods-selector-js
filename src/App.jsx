@@ -20,16 +20,19 @@ export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
   const removeGood = () => {
     setSelectedGood('');
-  }
+  };
+
   const addGood = (good) => {
     setSelectedGood(good);
-  }
+  };
 
   return (
     <main className="section container">
       {selectedGood ? (
         <h1 className="title is-flex is-align-items-center">
-          {selectedGood} is selected
+          {selectedGood}
+          {' '}
+          is selected
 
           <button
             data-cy="ClearButton"
@@ -51,7 +54,7 @@ export const App = () => {
               data-cy="Good"
               key={good}
               className={cn({
-                'has-background-success-light': selectedGood
+                'has-background-success-light': selectedGood,
               })}
             >
               <td>
