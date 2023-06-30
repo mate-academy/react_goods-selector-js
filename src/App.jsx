@@ -37,7 +37,7 @@ export const App = () => {
                 />
               </>
             )
-            : (<>No goods selected</>)
+            : ('No goods selected')
         }
       </h1>
 
