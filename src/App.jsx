@@ -18,26 +18,28 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
-  const selectedClassName = good => (
+  const selectClassName = good => (
     selectedGood === good
       ? 'has-background-success-light'
       : ''
   );
+
+  const clearSelectedGood = () => {
+    setSelectedGood('');
+  };
 
   return (
     <main className="section container">
       {selectedGood
         ? (
           <h1 className="title is-flex is-align-items-center">
-            {`${selectedGood} `}
-            is selected
+            {`${selectedGood} is selected`}
+
             <button
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => {
-                setSelectedGood('');
-              }}
+              onClick={() => clearSelectedGood()}
             />
           </h1>
         )
@@ -53,7 +55,7 @@ export const App = () => {
           {goods.map(good => (
             <tr
               data-cy="Good"
-              className={selectedClassName(good)}
+              className={selectClassName(good)}
             >
               <td>
                 {selectedGood === good
@@ -62,9 +64,7 @@ export const App = () => {
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={() => {
-                        setSelectedGood('');
-                      }}
+                      onClick={() => clearSelectedGood()}
                     >
                       -
                     </button>
@@ -74,9 +74,7 @@ export const App = () => {
                       data-cy="AddButton"
                       type="button"
                       className="button"
-                      onClick={() => {
-                        setSelectedGood(good);
-                      }}
+                      onClick={() => setSelectedGood(good)}
                     >
                       +
                     </button>
