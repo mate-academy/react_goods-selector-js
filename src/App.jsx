@@ -16,20 +16,6 @@ export const goods = [
   'Garlic',
 ];
 
-const arrOfKeys = [];
-
-function setRandomKey() {
-  const randomKey = Math.floor(Math.random() * 1000);
-
-  if (!arrOfKeys.includes(randomKey)) {
-    arrOfKeys.push(randomKey);
-
-    return randomKey;
-  }
-
-  return setRandomKey();
-}
-
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
   const selectedTitle = selectedGood
@@ -60,7 +46,7 @@ export const App = () => {
 
             return (
               <tr
-                key={setRandomKey()}
+                key={good}
                 data-cy="Good"
                 className={cn('', {
                   'has-background-success-light': selected,
