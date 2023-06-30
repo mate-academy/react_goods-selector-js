@@ -19,7 +19,7 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
-  function clickOnGood(good) {
+  function handleSelect(good) {
     setSelectedGood(prev => (prev === good ? '' : good));
   }
 
@@ -61,9 +61,10 @@ export const App = () => {
                       : 'AddButton'
                     }
                     type="button"
-                    className={classNames('button',
-                      { 'is-info': currentGoodIsSelected })}
-                    onClick={() => clickOnGood(good)}
+                    className={classNames('button', {
+                      'is-info': currentGoodIsSelected,
+                    })}
+                    onClick={() => handleSelect(good)}
                   >
                     {currentGoodIsSelected ? '-' : '+'}
                   </button>
