@@ -19,26 +19,36 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
-  const isSelectedGood = selectedGood ? `${selectedGood} is selected` : 'No goods selected';
+  const isSelectedExist = selectedGood
+    ? `${selectedGood} is selected`
+    : 'No goods selected';
 
   return (
     <main className="section container">
-
       <h1 className="title is-flex is-align-items-center">
-        {isSelectedGood}
-        {selectedGood && (<button onClick={() => setSelectedGood('')} data-cy="ClearButton" type="button" className="delete ml-3" />)}
-
+        {isSelectedExist}
+        {selectedGood && (
+          <button
+            onClick={() => setSelectedGood('')}
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+          />
+        )}
       </h1>
 
       <table className="table">
         <tbody>
           {goods.map((good) => {
-            const isGood = good === selectedGood;
+            const isSelectedGood = good === selectedGood;
 
             return (
-              <tr className={isGood && 'has-background-success-light'} data-cy="Good">
+              <tr
+                className={isSelectedGood && 'has-background-success-light'}
+                data-cy="Good"
+              >
                 <td>
-                  {isGood ? (
+                  {isSelectedGood ? (
                     <button
                       data-cy="RemoveButton"
                       type="button"
@@ -48,7 +58,12 @@ export const App = () => {
                       -
                     </button>
                   ) : (
-                    <button onClick={() => setSelectedGood(good)} data-cy="AddButton" type="button" className="button">
+                    <button
+                      onClick={() => setSelectedGood(good)}
+                      data-cy="AddButton"
+                      type="button"
+                      className="button"
+                    >
                       +
                     </button>
                   )}
