@@ -22,10 +22,10 @@ export const App = () => {
   return (
     <main className="section container">
       {!product ? (
-          <h1 className="title is-flex is-align-items-center">
-            No goods selected
-          </h1>
-        )
+        <h1 className="title is-flex is-align-items-center">
+          No goods selected
+        </h1>
+      )
         : (
           <h1 className="title is-flex is-align-items-center">
             {`${product} is selected`}
@@ -46,6 +46,7 @@ export const App = () => {
         <tbody>
           {goods.map(good => (
             <tr
+              key={good}
               data-cy="Good"
               className={classNames({
                 'has-background-success-light': isEqual(good, product),
@@ -54,11 +55,7 @@ export const App = () => {
               <td>
                 <button
                   onClick={() => {
-                    if (isEqual(good, product)) {
-                      setProduct('');
-                    } else {
-                      setProduct(good);
-                    }
+                    setProduct(chooseProduct(good, product));
                   }}
                   data-cy={isEqual(good, product)
                     ? 'RemoveButton'
@@ -87,3 +84,11 @@ export const App = () => {
 };
 
 const isEqual = (thisValue, getValue) => getValue === thisValue;
+
+const chooseProduct = (thisValue, getValue) => {
+  if (!isEqual(thisValue, getValue)) {
+    return thisValue;
+  }
+
+  return '';
+};
