@@ -55,28 +55,31 @@ export const App = () => {
               })}
             >
               <td>
-                <button
-                  data-cy={cn('', {
-                    AddButton: !isCurrentGood(good),
-                    RemoveButton: isCurrentGood(good),
-                  })}
-                  type="button"
-                  className={cn('button', {
-                    ' is-info': isCurrentGood(good),
-                  })}
-                  onClick={() => {
-                    setSelectedGood(
-                      isCurrentGood(good)
-                        ? ''
-                        : good,
-                    );
-                  }}
-                >
-                  {isCurrentGood(good)
-                    ? '-'
-                    : '+'
-                  }
-                </button>
+                {isCurrentGood(good)
+                  ? (
+                    <button
+                      data-cy="RemoveButton"
+                      type="button"
+                      className="button is-info"
+                      onClick={() => {
+                        setSelectedGood('');
+                      }}
+                    >
+                      -
+                    </button>
+                  )
+                  : (
+                    <button
+                      data-cy="AddButton"
+                      type="button"
+                      className="button"
+                      onClick={() => {
+                        setSelectedGood(good);
+                      }}
+                    >
+                      +
+                    </button>
+                  )}
               </td>
 
               <td data-cy="GoodTitle" className="is-vcentered">
