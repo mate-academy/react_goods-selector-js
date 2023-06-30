@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import cn from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -40,40 +41,46 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
-            <tr
-              key={good}
-              data-cy="Good"
-              className={selectedGood === good
-                ? 'has-background-success-light'
-                : ''}
-            >
-              <td>
-                <button
-                  type="button"
-                  data-cy={selectedGood === good
-                    ? 'RemoveButton'
-                    : 'AddButton'
-                  }
-                  className={`button ${selectedGood === good ? 'is-info' : ''}`}
-                  onClick={() => {
-                    if (selectedGood === good) {
-                      setSelectedGood('');
-                    } else {
-                      setSelectedGood(good);
+          {goods.map((good) => {
+            const check = selectedGood === good;
+
+            return (
+              <tr
+                key={good}
+                data-cy="Good"
+                className={cn({
+                  'has-background-success-light': check,
+                })}
+              >
+                <td>
+                  <button
+                    type="button"
+                    data-cy={check
+                      ? 'RemoveButton'
+                      : 'AddButton'
                     }
-                  }}
-                >
-                  {selectedGood === good ? '-' : '+'}
-                </button>
+                    className={cn('button', {
+                      'is-info': check,
+                    })}
+                    onClick={() => {
+                      if (check) {
+                        setSelectedGood('');
+                      } else {
+                        setSelectedGood(good);
+                      }
+                    }}
+                  >
+                    {check ? '-' : '+'}
+                  </button>
 
-              </td>
+                </td>
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
-          ))}
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </main>
