@@ -19,6 +19,16 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
+  const togleSelectedGood = (good) => {
+    setSelectedGood(
+      selectedGood !== good
+        ? good
+        : '',
+    );
+  };
+
+  const isSelected = good => selectedGood === good;
+
   return (
     <main className="section container">
 
@@ -28,58 +38,48 @@ export const App = () => {
           : `${selectedGood} is selected`
         }
 
-        {selectedGood
-          ? (
-            <button
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-              onClick={() => {
-                setSelectedGood('');
-              }}
-            />
-          )
-          : ''
-        }
+        {selectedGood && (
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={() => {
+              setSelectedGood('');
+            }}
+          />
+        )}
       </h1>
 
       <table className="table">
         <tbody>
-          {goods.map((good) => {
-            const isSelected = good === selectedGood;
+          {goods.map(good => (
+            <tr
+              key={good}
+              data-cy="Good"
+              className={cn({
+                'has-background-success-light': isSelected(good),
+              })}
+            >
+              <td>
+                <button
+                  data-cy={isSelected(good) ? 'RemoveButton' : 'AddButton'}
+                  type="button"
+                  className={cn('button', {
+                    'is-info': isSelected(good),
+                  })}
+                  onClick={() => {
+                    togleSelectedGood(good);
+                  }}
+                >
+                  {!isSelected(good) ? '+' : '-'}
+                </button>
+              </td>
 
-            return (
-              <tr
-                key={good}
-                data-cy="Good"
-                className={cn({
-                  'has-background-success-light': isSelected,
-                })}
-              >
-                <td>
-                  <button
-                    data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
-                    type="button"
-                    className={cn('button', {
-                      'is-info': isSelected,
-                    })}
-                    onClick={() => {
-                      // eslint-disable-next-line no-unused-expressions
-                      isSelected
-                        ? setSelectedGood('')
-                        : setSelectedGood(good);
-                    }}
-                  >
-                    {!isSelected ? '+' : '-'}
-                  </button>
-                </td>
-
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            );
-          })}
+              <td data-cy="GoodTitle" className="is-vcentered">
+                {good}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </main>
