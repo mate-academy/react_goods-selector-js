@@ -23,9 +23,9 @@ export const App = () => {
     setSelectedGood(prev => (prev === good ? '' : good));
   }
 
-  function currentGoodIsSelected(good) {
-    return good === selectedGood;
-  }
+  // function currentGoodIsSelected(good) {
+  //   return good === selectedGood;
+  // }
 
   return (
     <main className="section container">
@@ -47,34 +47,38 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
-            <tr
-              key={good}
-              data-cy="Good"
-              className={classNames({
-                'has-background-success-light': currentGoodIsSelected(good),
-              })}
-            >
-              <td>
-                <button
-                  data-cy={currentGoodIsSelected(good)
-                    ? 'RemoveButton'
-                    : 'AddButton'
-                  }
-                  type="button"
-                  className={classNames('button',
-                    { 'is-info': currentGoodIsSelected(good) })}
-                  onClick={() => clickOnGood(good)}
-                >
-                  {currentGoodIsSelected(good) ? '-' : '+'}
-                </button>
-              </td>
+          {goods.map((good) => {
+            const currentGoodIsSelected = good === selectedGood;
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
-          ))}
+            return (
+              <tr
+                key={good}
+                data-cy="Good"
+                className={classNames({
+                  'has-background-success-light': currentGoodIsSelected,
+                })}
+              >
+                <td>
+                  <button
+                    data-cy={currentGoodIsSelected
+                      ? 'RemoveButton'
+                      : 'AddButton'
+                    }
+                    type="button"
+                    className={classNames('button',
+                      { 'is-info': currentGoodIsSelected })}
+                    onClick={() => clickOnGood(good)}
+                  >
+                    {currentGoodIsSelected ? '-' : '+'}
+                  </button>
+                </td>
+
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </main>
