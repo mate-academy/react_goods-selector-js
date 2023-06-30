@@ -18,7 +18,6 @@ export const goods = [
 
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
-  const [goodIndex, setGoodIndex] = useState(goods.indexOf('Jam'));
 
   return (
     <main className="section container">
@@ -43,7 +42,7 @@ export const App = () => {
         <tbody>
           {goods.map((good, index) => {
             const isCurrentGood = classNames(
-              { 'has-background-success-light': index === goodIndex },
+              { 'has-background-success-light': good === selectedGood },
             );
 
             return (
@@ -56,7 +55,6 @@ export const App = () => {
                       className="button"
                       onClick={() => {
                         setSelectedGood(good);
-                        setGoodIndex(index);
                       }}
                     >
                       +
@@ -68,7 +66,6 @@ export const App = () => {
                       className="button is-info"
                       onClick={() => {
                         setSelectedGood('');
-                        setGoodIndex(null);
                       }}
                     >
                       -
