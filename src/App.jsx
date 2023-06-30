@@ -30,12 +30,12 @@ export const App = () => {
           `${selectedGood} is selected`
         )}
 
-        {selectedGood !== '' && (
+        {selectedGood && (
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={value => changeValue('')}
+            onClick={() => changeValue('')}
           />
         )}
       </h1>
@@ -60,7 +60,7 @@ export const App = () => {
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
-                    onClick={value => changeValue('')}
+                    onClick={() => changeValue('')}
                   >
                     -
                   </button>
@@ -69,7 +69,7 @@ export const App = () => {
                     data-cy="AddButton"
                     type="button"
                     className="button"
-                    onClick={value => changeValue(good)}
+                    onClick={() => changeValue(good)}
                   >
                     +
                   </button>
