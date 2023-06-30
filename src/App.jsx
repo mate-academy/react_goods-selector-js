@@ -30,10 +30,9 @@ export const App = () => {
     <main className="section container">
       {selectedGood ? (
         <h1 className="title is-flex is-align-items-center">
-          `$
           {selectedGood}
           {' '}
-          is selected`
+          is selected
 
           <button
             data-cy="ClearButton"
