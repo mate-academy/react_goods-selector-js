@@ -59,7 +59,7 @@ export function App() {
                   <button
                     data-cy="RemoveButton"
                     type="button"
-                    className="button button is-info"
+                    className="button is-info"
                     onClick={() => {
                       clearState();
                     }}
