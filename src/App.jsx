@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
@@ -16,21 +17,23 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setValue] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedGood
-          ? `${selectedGood} is selected`
-          : 'No goods selected'}
-        {selectedGood && (
-          <button
-            data-cy="ClearButton"
-            type="button"
-            className="delete ml-3"
-            onClick={() => setValue('')}
-          />
+        {selectedGood ? (
+          <>
+            {`${selectedGood} is selected`}
+            <button
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={() => setSelectedGood('')}
+            />
+          </>
+        ) : (
+          'No goods selected'
         )}
       </h1>
       <table className="table">
@@ -39,19 +42,19 @@ export const App = () => {
             <tr
               key={good}
               data-cy="Good"
-              className={
-                selectedGood && selectedGood === good
-                  ? 'has-background-success-light'
-                  : ''
-              }
+              className={cn({
+                'has-background-success-light': selectedGood === good,
+              })
+
+          }
             >
               <td>
-                {selectedGood && selectedGood === good ? (
+                {selectedGood === good ? (
                   <button
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
-                    onClick={() => setValue('')}
+                    onClick={() => setSelectedGood('')}
                   >
                     -
                   </button>
@@ -60,7 +63,7 @@ export const App = () => {
                     data-cy="AddButton"
                     type="button"
                     className="button"
-                    onClick={() => setValue(good)}
+                    onClick={() => setSelectedGood(good)}
                   >
                     +
                   </button>
