@@ -19,17 +19,8 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
-  const selectGood = (good) => {
-    if (good === selectedGood) {
-      setSelectedGood('');
-    } else {
-      setSelectedGood(good);
-    }
-  };
-
-  const removeGood = () => {
-    setSelectedGood('');
-  };
+  const selectGood = good => setSelectedGood(good === selectedGood ? '' : good);
+  const removeGood = () => setSelectedGood('');
 
   return (
     <main className="section container">
