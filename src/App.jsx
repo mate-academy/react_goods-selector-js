@@ -44,9 +44,7 @@ export const App = () => {
               data-cy="Good"
               className={cn({
                 'has-background-success-light': selectedGood === good,
-              })
-
-          }
+              })}
             >
               <td>
                 {selectedGood === good ? (
