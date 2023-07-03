@@ -17,7 +17,8 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setGood] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
+  const clearGood = () => setSelectedGood('');
 
   return (
     <main className="section container">
@@ -33,7 +34,7 @@ export const App = () => {
             {`${selectedGood} is selected`}
 
             <button
-              onClick={() => setGood('')}
+              onClick={clearGood}
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
@@ -54,7 +55,7 @@ export const App = () => {
                 ? (
                   <td>
                     <button
-                      onClick={() => setGood('')}
+                      onClick={clearGood}
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
@@ -66,7 +67,7 @@ export const App = () => {
                 : (
                   <td>
                     <button
-                      onClick={() => setGood(good)}
+                      onClick={() => setSelectedGood(good)}
                       data-cy="AddButton"
                       type="button"
                       className="button"
