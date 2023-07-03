@@ -57,8 +57,8 @@ export const App = () => {
                   'has-background-success-light': isCheckedGood,
                 })}
               >
-                {isCheckedGood ? (
-                  <td>
+                <td>
+                  {isCheckedGood ? (
                     <button
                       data-cy="RemoveButton"
                       type="button"
@@ -67,9 +67,7 @@ export const App = () => {
                     >
                       -
                     </button>
-                  </td>
-                ) : (
-                  <td>
+                  ) : (
                     <button
                       data-cy="AddButton"
                       type="button"
@@ -80,8 +78,8 @@ export const App = () => {
                     >
                       +
                     </button>
-                  </td>
-                )}
+                  )}
+                </td>
 
                 <td data-cy="GoodTitle" className="is-vcentered">
                   {good}
