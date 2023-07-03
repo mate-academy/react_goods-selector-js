@@ -19,28 +19,13 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
-  const heading = (
-    <h1 className="title is-flex is-align-items-center">
-      {selectedGood
-        ? `${selectedGood} is selected`
-        : 'No goods selected'
-      }
-
-      {selectedGood
-        && (
-          <button
-            onClick={() => setSelectedGood('')}
-            data-cy="ClearButton"
-            type="button"
-            className="delete ml-3"
-          />
-        )}
-    </h1>
-  );
+  function unselectGood() {
+    setSelectedGood('');
+  }
 
   function handleGoodClick(currentGood) {
     if (currentGood === selectedGood) {
-      setSelectedGood('');
+      unselectGood();
     } else {
       setSelectedGood(currentGood);
     }
@@ -78,7 +63,22 @@ export const App = () => {
 
   return (
     <main className="section container">
-      {heading}
+      <h1 className="title is-flex is-align-items-center">
+        {selectedGood
+          ? `${selectedGood} is selected`
+          : 'No goods selected'
+        }
+
+        {selectedGood
+          && (
+            <button
+              onClick={unselectGood}
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+            />
+          )}
+      </h1>
 
       <table className="table">
         <tbody>
