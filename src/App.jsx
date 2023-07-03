@@ -18,7 +18,7 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
-  const selectClassName = good => (
+  const getSelectedClassName = good => (
     selectedGood === good
       ? 'has-background-success-light'
       : ''
@@ -26,6 +26,10 @@ export const App = () => {
 
   const clearSelectedGood = () => {
     setSelectedGood('');
+  };
+
+  const selectGood = (good) => {
+    setSelectedGood(good);
   };
 
   return (
@@ -39,7 +43,7 @@ export const App = () => {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => clearSelectedGood()}
+              onClick={clearSelectedGood}
             />
           </h1>
         )
@@ -55,7 +59,7 @@ export const App = () => {
           {goods.map(good => (
             <tr
               data-cy="Good"
-              className={selectClassName(good)}
+              className={getSelectedClassName(good)}
             >
               <td>
                 {selectedGood === good
@@ -64,7 +68,7 @@ export const App = () => {
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={() => clearSelectedGood()}
+                      onClick={clearSelectedGood}
                     >
                       -
                     </button>
@@ -74,7 +78,7 @@ export const App = () => {
                       data-cy="AddButton"
                       type="button"
                       className="button"
-                      onClick={() => setSelectedGood(good)}
+                      onClick={() => selectGood(good)}
                     >
                       +
                     </button>
