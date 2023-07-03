@@ -22,6 +22,10 @@ export const App = () => {
     setSelectedGood(good);
   };
 
+  const clearGood = () => {
+    setSelectedGood('');
+  };
+
   return (
     <main className="section container">
       {!selectedGood
@@ -33,7 +37,7 @@ export const App = () => {
           <h1 className="title is-flex is-align-items-center">
             {`${selectedGood} is selected`}
             <button
-              onClick={() => selectGood('')}
+              onClick={clearGood}
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
@@ -64,7 +68,7 @@ export const App = () => {
                     </button>
                   ) : (
                     <button
-                      onClick={() => selectGood('')}
+                      onClick={clearGood}
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
