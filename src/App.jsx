@@ -1,5 +1,6 @@
 import 'bulma/css/bulma.css';
 import { useState } from 'react';
+import cn from 'classnames';
 
 import './App.scss';
 
@@ -17,41 +18,37 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [value, setValue] = useState('Jam');
-  const [isCleared, setCleared] = useState(false);
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
-  const selectValue = (good) => {
-    if (good !== value) {
-      setValue(good);
-      setCleared(false);
+  const clearGood = () => setSelectedGood('');
+
+  const selectGood = (good) => {
+    if (good === selectedGood) {
+      clearGood();
     } else {
-      setValue(null);
-      setCleared(true);
+      setSelectedGood(good);
     }
   };
 
   return (
     <main className="section container">
       {
-        isCleared
+        selectedGood
           ? (
             <h1 className="title is-flex is-align-items-center">
-              No goods selected
-            </h1>
-          )
-          : (
-            <h1 className="title is-flex is-align-items-center">
-              {`${value} is selected`}
+              {`${selectedGood} is selected`}
 
               <button
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => {
-                  setCleared(true);
-                  setValue(null);
-                }}
+                onClick={clearGood}
               />
+            </h1>
+          )
+          : (
+            <h1 className="title is-flex is-align-items-center">
+              No goods selected
             </h1>
           )
       }
@@ -63,19 +60,23 @@ export const App = () => {
               <tr
                 key={good}
                 data-cy="Good"
-                className={good === value ? 'has-background-success-light' : ''}
+                className={cn({
+                  'has-background-success-light': good === selectedGood,
+                })}
               >
                 <td>
                   <button
-                    data-cy={good === value ? 'RemoveButton' : 'AddButton'}
+                    data-cy={good === selectedGood
+                      ? 'RemoveButton'
+                      : 'AddButton'}
                     type="button"
-                    className={value === good
-                      ? 'button is-info'
-                      : 'button'
-                    }
-                    onClick={() => selectValue(good)}
+                    className={cn(
+                      'button',
+                      { 'is-info': selectedGood === good },
+                    )}
+                    onClick={() => selectGood(good)}
                   >
-                    {value === good ? '-' : '+'}
+                    {selectedGood === good ? '-' : '+'}
                   </button>
                 </td>
 
