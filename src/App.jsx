@@ -33,9 +33,7 @@ export const App = () => {
     />
   );
 
-  const clearButtonVisibility = selectedProduct
-    ? <ClearButton />
-    : '';
+  const clearButtonVisibility = selectedProduct && <ClearButton />;
 
   const ProductButton = (productState, product) => (
     <button
