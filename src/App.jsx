@@ -57,7 +57,7 @@ export const App = () => {
                 <td>
                   <button
                     onClick={
-                      () => setSelectedGood(isSelected ? clearGood : good)
+                      () => setSelectedGood(isSelected ? "" : good)
                     }
                     data-cy={
                       isSelected ? 'RemoveButton' : 'AddButton'
