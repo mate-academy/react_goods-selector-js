@@ -21,7 +21,7 @@ export const App = () => {
 
   function selectGood(good) {
     if (selectedGood === good) {
-      setSelectedGood(null);
+      setSelectedGood('');
     } else {
       setSelectedGood(good);
     }
