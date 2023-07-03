@@ -23,6 +23,10 @@ export function App() {
     setSelectedGood('');
   };
 
+  const selectGood = (good) => {
+    setSelectedGood(good);
+  };
+
   return (
     <main className="section container">
 
@@ -35,9 +39,7 @@ export function App() {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => {
-              setSelectedGood('');
-            }}
+            onClick={clearState}
           />
           )}
         </h1>
@@ -60,9 +62,7 @@ export function App() {
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
-                    onClick={() => {
-                      clearState();
-                    }}
+                    onClick={clearState}
                   >
                     -
                   </button>
@@ -73,9 +73,7 @@ export function App() {
                     data-cy="AddButton"
                     type="button"
                     className="button"
-                    onClick={() => {
-                      setSelectedGood(good);
-                    }}
+                    onClick={() => selectGood(good)}
                   >
                     +
                   </button>
