@@ -17,6 +17,8 @@ export const goods = [
 
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
+  const clearGood = () => (setSelectedGood(''));
+  const selectGood = good => (setSelectedGood(good));
 
   return (
 
@@ -29,14 +31,11 @@ export const App = () => {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => {
-                setSelectedGood('');
-              }}
+              onClick={clearGood}
             />
           </h1>
         )
         : (
-          // eslint-disable-next-line max-len
           <h1 className="title">No goods selected</h1>)
       }
 
@@ -45,8 +44,9 @@ export const App = () => {
           {goods.map(good => (
             <tr
               data-cy="Good"
-              // eslint-disable-next-line max-len
-              className={good === selectedGood && 'has-background-success-light'}
+              className={
+                good === selectedGood
+                && 'has-background-success-light'}
               key={good}
             >
               {good === selectedGood
@@ -56,9 +56,7 @@ export const App = () => {
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={() => {
-                        setSelectedGood('');
-                      }}
+                      onClick={clearGood}
                     >
                       -
                     </button>
@@ -70,9 +68,7 @@ export const App = () => {
                       data-cy="AddButton"
                       type="button"
                       className="button"
-                      onClick={() => {
-                        setSelectedGood(good);
-                      }}
+                      onClick={() => selectGood(good)}
                     >
                       +
                     </button>
