@@ -30,9 +30,7 @@ export const App = () => {
     <main className="section container">
       {selectedGood ? (
         <h1 className="title is-flex is-align-items-center">
-          {selectedGood}
-          {' '}
-          is selected
+          {`${selectedGood} is selected`}          
 
           <button
             data-cy="ClearButton"
@@ -72,7 +70,7 @@ export const App = () => {
                     data-cy="AddButton"
                     type="button"
                     className="button"
-                    onClick={() => addGood(good)}
+                    onClick={addGood.bind(null, good)}
                   >
                     +
                   </button>
