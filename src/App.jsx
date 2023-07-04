@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import cn from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -20,24 +21,21 @@ export const App = () => {
 
   return (
     <main className="section container">
-      {selectedGood ? (
-        <h1 className="title is-flex is-align-items-center">
-          {`${selectedGood} is selected`}
+      <h1 className="title is-flex is-align-items-center">
+        {selectedGood
+          ? `${selectedGood} is selected`
+          : 'No goods selected'
+        }
 
-          <button
-            data-cy="ClearButton"
-            type="button"
-            className="delete ml-3"
-            onClick={() => {
-              setSelectedGood('');
-            }}
-          />
-        </h1>
-      ) : (
-        <h1 className="title is-flex is-align-items-center">
-          No goods selected
-        </h1>
-      )}
+        {selectedGood && (
+        <button
+          data-cy="ClearButton"
+          type="button"
+          className="delete ml-3"
+          onClick={() => setSelectedGood('')}
+        />
+        )}
+      </h1>
 
       <table className="table">
         <tbody>
@@ -45,25 +43,22 @@ export const App = () => {
             <tr
               key={good}
               data-cy="Good"
-              className={selectedGood === good
-                ? 'has-background-success-light'
-                : ''}
+              className={cn({
+                'has-background-success-light': selectedGood === good,
+              })}
             >
-              {selectedGood === good ? (
-                <td>
+              <td>
+                {selectedGood === good ? (
+
                   <button
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
-                    onClick={() => {
-                      setSelectedGood('');
-                    }}
+                    onClick={() => setSelectedGood('')}
                   >
                     -
                   </button>
-                </td>
-              ) : (
-                <td>
+                ) : (
                   <button
                     data-cy="AddButton"
                     type="button"
@@ -74,8 +69,8 @@ export const App = () => {
                   >
                     +
                   </button>
-                </td>
-              )}
+                )}
+              </td>
 
               <td data-cy="GoodTitle" className="is-vcentered">
                 {good}
