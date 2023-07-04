@@ -24,17 +24,28 @@ export const App = () => {
 
   const goodSelectedBlock = (
     <h1 className="title is-flex is-align-items-center">
-      {good}
-      {' is selected'}
+      {`${good} is selected`}
 
       <button
         data-cy="ClearButton"
         type="button"
         className="delete ml-3"
-        onClick={() => setGood('')}
+        onClick={clearGood}
       />
     </h1>
   );
+
+  function selectGood(isSelected, newGood) {
+    if (isSelected) {
+      clearGood();
+    } else {
+      setGood(newGood);
+    }
+  }
+
+  function clearGood() {
+    setGood('');
+  }
 
   return (
     <>
@@ -46,7 +57,7 @@ export const App = () => {
 
         <table className="table">
           <tbody>
-            {goods.map((goodElement, index) => {
+            {goods.map((goodElement) => {
               const isSelected = good === goodElement;
 
               return (
@@ -68,7 +79,7 @@ export const App = () => {
                       className={cn('button', {
                         'is-info': isSelected,
                       })}
-                      onClick={() => setGood(isSelected ? '' : goodElement)}
+                      onClick={() => selectGood(isSelected, goodElement)}
                     >
                       {isSelected ? '-' : '+'}
                     </button>
