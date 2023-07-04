@@ -22,15 +22,18 @@ export const App = () => {
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectProduct ? `${selectProduct} is selected` : `No goods selected`}
-        {selectProduct && (
-          <button
-            data-cy="ClearButton"
-            type="button"
-            className="delete ml-3"
-            onClick={() => setSelectProduct('')}
-          />
-        )}
+        {selectProduct 
+          ? (
+              <>
+                 `${selectProduct} is selected` 
+                  <button
+                    data-cy="ClearButton"
+                    type="button"
+                    className="delete ml-3"
+                    onClick={() => setSelectProduct('')}
+                   />
+           :  `No goods selected`}
+        
 
       </h1>
 
