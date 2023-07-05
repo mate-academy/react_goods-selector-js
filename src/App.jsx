@@ -18,11 +18,11 @@ export const goods = [
 export const App = () => {
   const [selectGood, setGoods] = useState(goods[8]);
 
-  function handleAddGoog(good) {
+  function handleAddGood(good) {
     setGoods(good);
   }
 
-  function handleDelGoog() {
+  function handleRemoveGood() {
     setGoods('');
   }
 
@@ -37,7 +37,7 @@ export const App = () => {
             type="button"
             className="delete ml-3"
             onClick={() => {
-              handleAddGoog();
+              handleAddGood();
             }}
           />
         </h1>
@@ -62,7 +62,7 @@ export const App = () => {
                     type="button"
                     className="button"
                     onClick={() => {
-                      handleAddGoog(good);
+                      handleAddGood(good);
                     }}
                   >
                     +
@@ -73,7 +73,7 @@ export const App = () => {
                     type="button"
                     className="button is-info"
                     onClick={() => {
-                      handleDelGoog();
+                      handleRemoveGood();
                     }}
                   >
                     -
