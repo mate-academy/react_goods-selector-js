@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { useState } from 'react';
 import cn from 'classnames';
 import 'bulma/css/bulma.css';
@@ -19,30 +18,23 @@ export const goods = [
 
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
-  const [isSelected, setIsSelected] = useState(true);
 
   const checkSelectingGood = (row) => {
-    if (isSelected) {
+    if (selectedGood) {
       const selected = document.querySelector(
         '.has-background-success-light',
       );
 
       if (selected !== row) {
-        const button = selected.querySelector('.button');
-
         selected.classList.remove(
           'has-background-success-light',
         );
-        button.innerText = '+';
-        button.dataset.cy = 'AddButton';
-        button.classList.remove('is-info');
       }
     }
   };
 
   const selectItem = (e) => {
     const row = e.target.closest('tr');
-    const button = e.currentTarget;
 
     if (!row) {
       return;
@@ -52,40 +44,11 @@ export const App = () => {
     const goodInnerText = row.querySelector('[data-cy="GoodTitle"]').innerText;
 
     row.classList.toggle('has-background-success-light');
-    console.log(isSelected);
 
     if (row.classList.contains('has-background-success-light')) {
-      button.innerText = '-';
-      button.dataset.cy = 'RemoveButton';
-      button.classList.add('is-info');
       setSelectedGood(goodInnerText);
-      setIsSelected(true);
     } else {
-      button.innerText = '+';
-      button.dataset.cy = 'AddButton';
-      button.classList.remove('is-info');
       setSelectedGood('');
-      setIsSelected(false);
-    }
-  };
-
-  const deselectItem = () => {
-    setSelectedGood('');
-    if (isSelected) {
-      const selected = document.querySelector(
-        '.has-background-success-light',
-      );
-      const button = selected.querySelector('.button');
-
-      console.log(selected);
-
-      selected.classList.remove(
-        'has-background-success-light',
-      );
-      button.innerText = '+';
-      button.dataset.cy = 'AddButton';
-      button.classList.remove('is-info');
-      setIsSelected(false);
     }
   };
 
@@ -102,7 +65,9 @@ export const App = () => {
           data-cy="ClearButton"
           type="button"
           className="delete ml-3"
-          onClick={deselectItem}
+          onClick={() => {
+            setSelectedGood('');
+          }}
         />
         )}
       </h1>
@@ -112,24 +77,24 @@ export const App = () => {
           {goods.map(good => (
             <tr
               data-cy="Good"
-              key={`${goods.indexOf(good)}`}
+              key={good}
               className={cn({
-                'has-background-success-light': good === 'Jam',
+                'has-background-success-light': selectedGood === good,
               })}
             >
               <td>
                 <button
-                  data-cy={good === 'Jam' ? 'RemoveButton' : 'AddButton'}
+                  data-cy={selectedGood === good ? 'RemoveButton' : 'AddButton'}
                   type="button"
                   className={cn(
                     'button',
                     {
-                      'is-info': good === 'Jam',
+                      'is-info': selectedGood === good,
                     },
                   )}
                   onClick={selectItem}
                 >
-                  {good === 'Jam' ? '-' : '+'}
+                  {selectedGood === good ? '-' : '+'}
                 </button>
               </td>
 
