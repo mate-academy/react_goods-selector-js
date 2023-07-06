@@ -17,51 +17,51 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [value, setValue] = useState('Jam');
+  const [currentGood, setCurrentGood] = useState('Jam');
+
+  function isSelectedGood(currentGoodSelected) {
+    if (currentGoodSelected) {
+      return `${currentGoodSelected} is selected`;
+    }
+
+    return `No goods selected`;
+  }
 
   return (
     <main className="section container">
-      {
-        value === ''
-          ? (
-            <h1
-              className="title is-flex is-align-items-center"
-            >
-              No goods selected
-            </h1>
-          )
-          : (
-            <h1 className="title is-flex is-align-items-center">
-              {`${value} is selected`}
+      <h1 className="title is-flex is-align-items-center">
+        {isSelectedGood(currentGood)}
 
-              <button
-                data-cy="ClearButton"
-                type="button"
-                className="delete ml-3"
-                onClick={() => setValue('')}
-              />
-            </h1>
-          )
-      }
+        {
+          currentGood && (
+            <button
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={() => setCurrentGood('')}
+            />
+          )}
+      </h1>
 
       <table className="table">
         <tbody>
 
           {goods.map(good => (
             <tr
+              key={good}
               data-cy="Good"
               className={cn('', {
-                'has-background-success-light': value === good,
+                'has-background-success-light': currentGood === good,
               })}
             >
               <td>
                 {
-                  good !== value ? (
+                  good !== currentGood ? (
                     <button
                       data-cy="AddButton"
                       type="button"
                       className="button"
-                      onClick={() => setValue(good)}
+                      onClick={() => setCurrentGood(good)}
                     >
                       +
                     </button>
@@ -70,7 +70,7 @@ export const App = () => {
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={() => setValue('')}
+                      onClick={() => setCurrentGood('')}
                     >
                       -
                     </button>
