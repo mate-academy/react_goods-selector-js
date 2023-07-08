@@ -17,13 +17,13 @@ export const goods = [
 
 export const App = () => {
   const [selected, setSelected] = useState('Jam');
-  const unselected = () => {
+  const unselect = () => {
     setSelected('');
   };
 
   return (
     <main className="section container">
-      {selected === ''
+      {!selected
         ? (
           <h1 className="title is-flex is-align-items-center">
             No goods selected
@@ -34,7 +34,7 @@ export const App = () => {
             {`${selected} is selected`}
 
             <button
-              onClick={unselected}
+              onClick={unselect}
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
@@ -45,51 +45,42 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => (selected !== good
-            ? (
-              <tr data-cy="Good" key={good}>
-                <td>
+          {goods.map(good => ((
+            <tr
+              data-cy="Good"
+              key={good}
+              className={selected === good && 'has-background-success-light'}
+            >
+              <td>
+                {selected === good ? (
                   <button
-                    onClick={(event) => {
-                      const newGood = event.target.closest('td').nextSibling;
-
-                      setSelected(`${newGood.innerText}`);
-                    }}
-                    data-cy="AddButton"
-                    type="button"
-                    className="button"
-                  >
-                    +
-                  </button>
-                </td>
-
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            )
-            : (
-              <tr
-                data-cy="Good"
-                className="has-background-success-light"
-                key={good}
-              >
-                <td>
-                  <button
-                    onClick={unselected}
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
+                    onClick={unselect}
                   >
                     -
                   </button>
-                </td>
+                ) : (
+                  <button
+                    data-cy="AddButton"
+                    type="button"
+                    className="button"
+                    onClick={(event) => {
+                      setSelected(`${good}`);
+                    }}
+                  >
+                    +
+                  </button>
+                )}
+              </td>
 
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            )))}
+              <td data-cy="GoodTitle" className="is-vcentered">
+                {good}
+              </td>
+            </tr>
+          )
+          ))}
         </tbody>
       </table>
     </main>
