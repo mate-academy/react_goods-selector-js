@@ -23,13 +23,7 @@ export const App = () => {
   };
 
   const onGoodClick = good => () => {
-    setSelectedGood((prevSeleted) => {
-      if (prevSeleted === good) {
-        return '';
-      }
-
-      return good;
-    });
+    setSelectedGood(prevSeleted => (prevSeleted === good ? '' : good));
   };
 
   return (
@@ -62,16 +56,25 @@ export const App = () => {
               key={good}
             >
               <td>
-                <button
-                  data-cy={selectedGood === good ? 'RemoveButton' : 'AddButton'}
-                  type="button"
-                  className={cn('button', {
-                    'is-info': selectedGood === good,
-                  })}
-                  onClick={onGoodClick(good)}
-                >
-                  {selectedGood === good ? '-' : '+'}
-                </button>
+                {selectedGood === good ? (
+                  <button
+                    data-cy="RemoveButton"
+                    type="button"
+                    className="button is-info"
+                    onClick={onGoodClick(good)}
+                  >
+                    -
+                  </button>
+                ) : (
+                  <button
+                    data-cy="AddButton"
+                    type="button"
+                    className="button"
+                    onClick={onGoodClick(good)}
+                  >
+                    +
+                  </button>
+                )}
               </td>
 
               <td data-cy="GoodTitle" className="is-vcentered">
