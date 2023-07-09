@@ -67,7 +67,7 @@ export const App = () => {
                     type="button"
                     className="button"
                     onClick={(event) => {
-                      setSelected(`${good}`);
+                      setSelected(good);
                     }}
                   >
                     +
