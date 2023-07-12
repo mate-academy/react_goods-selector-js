@@ -16,7 +16,9 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setGood] = useState('Jam');
+  const [selectedGood, setGood] = useState(
+    goods[goods.indexOf('Jam') || goods[0]],
+  );
 
   return (
     <main className="section container">
@@ -47,6 +49,7 @@ export const App = () => {
               className={
                 good === selectedGood && 'has-background-success-light'
               }
+              key={good}
             >
               <td>
                 {good === selectedGood
