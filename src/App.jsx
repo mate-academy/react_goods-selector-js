@@ -51,7 +51,7 @@ export const App = () => {
                 className={cn('', {
                   'has-background-success-light': isSelected,
                 })}
-                key={item.toString()}
+                key={item}
               >
                 <td>
                   <button
