@@ -27,12 +27,14 @@ export const App = () => {
       <h1 className="title is-flex is-align-items-center">
         {selectedGood}
 
-        {selectedGood && <button
+        {selectedGood && (
+        <button
           onClick={() => setGood('')}
           data-cy="ClearButton"
           type="button"
           className="delete ml-3"
-        />}
+        />
+        )}
       </h1>
 
       <table className="table">
@@ -46,14 +48,16 @@ export const App = () => {
               data-cy="Good"
             >
               <td>
-                {!selectedGood && <button
+                {!selectedGood && (
+                <button
                   data-cy="AddButton"
                   type="button"
                   className="button"
                   onClick={() => setGood(`${good} is selected`)}
                 >
                   +
-                </button>}
+                </button>
+                )}
               </td>
 
               <td data-cy="GoodTitle" className="is-vcentered">
