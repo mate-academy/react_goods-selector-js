@@ -27,32 +27,38 @@ export const App = () => {
       <h1 className="title is-flex is-align-items-center">
         {selectedGood ? `${selectedGood} is selected` : ''}
 
-        {selectedGood && <button
+        {selectedGood && (
+        <button
           onClick={() => setGood('' && 'Nothing is selected')}
           data-cy="ClearButton"
           type="button"
           className="delete ml-3"
-        />}
+        />
+        )}
       </h1>
 
       <table className="table">
         <tbody>
           {goods.map(good => (
-            <tr className={`${good === selectedGood
-              ? 'has-background-success-light'
-              : ''}`
+            <tr
+              key={good}
+              className={`${good === selectedGood
+                ? 'has-background-success-light'
+                : ''}`
             }
               data-cy="Good"
             >
               <td>
-                {selectedGood === '' && <button
+                {selectedGood === '' && (
+                <button
                   data-cy="AddButton"
                   type="button"
                   className="button"
                   onClick={() => setGood(good)}
                 >
                   +
-                </button>}
+                </button>
+                )}
               </td>
 
               <td data-cy="GoodTitle" className="is-vcentered">
