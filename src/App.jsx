@@ -16,27 +16,19 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [name, setName] = useState('Jam');
-  const selected = true;
-  // let value = '+';
-  // const [selected, setSelected] = useState(true);
+  const [currentGood, setCurrentGood] = useState('Jam');
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selected ? '' : 'No goods selected'}
-      </h1>
-
-      <h1 className="title is-flex is-align-items-center">
-        {
-          selected
-            ? `${name} is selected`
-            : ''
-        }
+        {currentGood === '' ? 'No goods selected' : `${currentGood} is selected`}
 
         {
-          selected && (
+          currentGood !== '' && (
             <button
+              onClick={() => (
+                setCurrentGood('')
+              )}
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
@@ -48,25 +40,37 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map((good) => {
-            const [value, setValue] = useState('+');
+            const [isActive, setIsActive] = useState(true);
+            const handleButtonClick = () => {
+              setIsActive(!isActive);
+            };
+
+            const condition = isActive ? '+' : '-';
 
             return (
               <tr
                 key={good}
                 data-cy="Good"
-                className={good === 'Jam' ? 'has-background-success-light' : ''}
+                className={
+                  good === currentGood ? 'has-background-success-light' : ''
+                }
               >
                 <td>
                   <button
                     onClick={() => {
-                      setValue('-');
-                      setName(good);
+                      handleButtonClick();
+                      setCurrentGood(good);
+                      if (condition === '-') {
+                        setCurrentGood('');
+                      }
                     }}
-                    data-cy={good === 'Jam' ? 'RemoveButton' : 'AddButton'}
+                    data-cy={
+                      good === currentGood ? 'RemoveButton' : 'AddButton'
+                    }
                     type="button"
-                    className={`button ${good === 'Jam' ? 'is-info' : ''}`}
+                    className={`button ${good === currentGood ? 'is-info' : ''}`}
                   >
-                    {value}
+                    {isActive ? '+' : '-'}
                   </button>
                 </td>
 
