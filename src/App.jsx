@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+// import cn from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -20,66 +21,71 @@ export const App = () => {
 
   return (
     <main className="section container">
-      <h1 className="title is-flex is-align-items-center">
-        {currentGood === '' ? 'No goods selected' : `${currentGood} is selected`}
-
-        {
-          currentGood !== '' && (
-            <button
-              onClick={() => (
-                setCurrentGood('')
-              )}
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-            />
+      {
+        currentGood === ''
+          ? (
+            <h1 className="title is-flex is-align-items-center">
+              No goods selected
+            </h1>
           )
-        }
-      </h1>
+          : (
+            <h1 className="title is-flex is-align-items-center">
+              Jam is selected
+
+              <button
+                onClick={() => (
+                  setCurrentGood('')
+                )}
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+              />
+            </h1>
+          )
+      }
 
       <table className="table">
         <tbody>
-          {goods.map((good) => {
-            const [isActive, setIsActive] = useState(true);
-            const handleButtonClick = () => {
-              setIsActive(!isActive);
-            };
+          {goods.map(good => (
+            good === currentGood
+              ? (
+                <tr data-cy="Good" className="has-background-success-light">
+                  <td>
+                    <button
+                      data-cy="RemoveButton"
+                      type="button"
+                      className="button is-info"
+                    >
+                      -
+                    </button>
+                  </td>
 
-            const condition = isActive ? '+' : '-';
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              )
+              : (
+                <tr data-cy="Good">
+                  <td>
+                    <button
+                      onClick={() => (
+                        setCurrentGood(good)
+                      )}
+                      data-cy="AddButton"
+                      type="button"
+                      className="button"
+                    >
+                      +
+                    </button>
+                  </td>
 
-            return (
-              <tr
-                key={good}
-                data-cy="Good"
-                className={
-                  good === currentGood ? 'has-background-success-light' : ''
-                }
-              >
-                <td>
-                  <button
-                    onClick={() => {
-                      handleButtonClick();
-                      setCurrentGood(good);
-                      if (condition === '-') {
-                        setCurrentGood('');
-                      }
-                    }}
-                    data-cy={
-                      good === currentGood ? 'RemoveButton' : 'AddButton'
-                    }
-                    type="button"
-                    className={`button ${good === currentGood ? 'is-info' : ''}`}
-                  >
-                    {isActive ? '+' : '-'}
-                  </button>
-                </td>
-
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            );
-          })}
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              )
+          ))}
         </tbody>
       </table>
     </main>
