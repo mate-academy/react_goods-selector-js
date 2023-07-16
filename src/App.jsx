@@ -30,7 +30,7 @@ export const App = () => {
           )
           : (
             <h1 className="title is-flex is-align-items-center">
-              Jam is selected
+              {`${currentGood} is selected`}
 
               <button
                 onClick={() => (
@@ -52,6 +52,9 @@ export const App = () => {
                 <tr data-cy="Good" className="has-background-success-light">
                   <td>
                     <button
+                      onClick={() => (
+                        setCurrentGood('')
+                      )}
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
