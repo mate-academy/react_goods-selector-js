@@ -19,7 +19,7 @@ export const App = () => {
   const [selectedGood, setGood] = useState('Jam');
 
   function clearState() {
-    setGood(null);
+    setGood('');
   }
 
   return (
