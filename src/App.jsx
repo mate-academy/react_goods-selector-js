@@ -18,30 +18,28 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setGood] = useState('Jam');
 
-  function clearState() {
+  const clearState = () => {
     setGood('');
-  }
+  };
 
   return (
     <main className="section container">
-      {!selectedGood
-        ? (
-          <h1 className="title is-flex is-align-items-center">
-            No goods selected
-          </h1>
-        )
-        : (
-          <h1 className="title is-flex is-align-items-center">
-            {`${selectedGood} is selected`}
+      {!selectedGood ? (
+        <h1 className="title is-flex is-align-items-center">
+          No goods selected
+        </h1>
+      ) : (
+        <h1 className="title is-flex is-align-items-center">
+          {`${selectedGood} is selected`}
 
-            <button
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-              onClick={clearState}
-            />
-          </h1>
-        )
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={clearState}
+          />
+        </h1>
+      )
       }
 
       <table className="table">
@@ -56,6 +54,10 @@ export const App = () => {
             const buttonTextContent = isSelected ? '-' : '+';
             const buttonDataCy = isSelected ? 'RemoveButton' : 'AddButton';
 
+            const addButton = () => (
+              isSelected ? clearState() : setGood(good)
+            );
+
             return (
               <tr data-cy="Good" className={goodClassName} key={good}>
                 <td>
@@ -63,12 +65,7 @@ export const App = () => {
                     data-cy={buttonDataCy}
                     type="button"
                     className={buttonClassName}
-                    onClick={() => {
-                      setGood(good);
-                      if (buttonTextContent === '-') {
-                        clearState();
-                      }
-                    }}
+                    onClick={addButton}
                   >
                     {buttonTextContent}
                   </button>
