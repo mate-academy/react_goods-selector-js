@@ -1,4 +1,4 @@
- import 'bulma/css/bulma.css';
+import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
 
@@ -16,72 +16,73 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setSelectedGood] = useState('Jam');
-  const makeSetSelectedGood = (good) => () => setSelectedGood(good);
+  const [selectedGood, setSelectedGood] = useState(goods[goods.indexOf('Jam')] 
+   || goods[0]);
+  const makeSetSelectedGood = good => () => setSelectedGood(good);
 
   return (
-  <main className="section container">
-    {selectedGood === '' 
+    <main className="section container">
+      {selectedGood === ''
         ? (
-          <h1 className= "title is-flex is-align-items-center">
-            No goods selected 
+          <h1 className="title is-flex is-align-items-center">
+            No goods selected
           </h1>
-          )
+        )
         : (
           <h1 className="title is-flex is-align-items-center">
-              {`${selectedGood} is selected`} 
-                <button
-                  onClick={makeSetSelectedGood('')}
-                  data-cy="ClearButton"
-                  type="button"
-                  className="delete ml-3"
-                />
+            {`${selectedGood} is selected`}
+            <button
+              onClick={makeSetSelectedGood('')}
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+            />
           </h1>
         )
     }
-    <table className="table">
-      <tbody>
-        {goods.map((good) => (
-          good === selectedGood
-            ? (
-              <tr data-cy="Good" className="has-background-success-light">
-                <td>
-                  <button
-                    onClick={makeSetSelectedGood(good)}
-                    data-cy="RemoveButton"
-                    type="button"
-                    className="button is-info"
-                  >
-                    -
-                  </button>
-                </td>
+      <table className="table">
+        <tbody>
+          {goods.map(good => (
+            good === selectedGood
+              ? (
+                <tr data-cy="Good" className="has-background-success-light">
+                  <td>
+                    <button
+                      onClick={makeSetSelectedGood(good)}
+                      data-cy="RemoveButton"
+                      type="button"
+                      className="button is-info"
+                    >
+                      -
+                    </button>
+                  </td>
 
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
               )
-            : (
-             <tr data-cy="Good">
-                <td>
-                  <button
-                    onClick={makeSetSelectedGood(good)}
-                    data-cy="AddButton"
-                    type="button"
-                    className="button"
-                  >
-                    +
-                  </button>
-                </td>
+              : (
+                <tr data-cy="Good">
+                  <td>
+                    <button
+                      onClick={makeSetSelectedGood(good)}
+                      data-cy="AddButton"
+                      type="button"
+                      className="button"
+                    >
+                      +
+                    </button>
+                  </td>
 
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            )
-        ))}
-      </tbody>
-    </table>
-  </main>
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              )
+          ))}
+        </tbody>
+      </table>
+    </main>
   );
 };
