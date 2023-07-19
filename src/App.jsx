@@ -16,9 +16,16 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setSelectedGood] = useState(goods[goods.indexOf('Jam')] 
+  const [selectedGood, setSelectedGood] = useState(goods[goods.indexOf('Jam')]
    || goods[0]);
-  const makeSetSelectedGood = good => () => setSelectedGood(good);
+
+  const makeSetSelectedGood = good => () => {
+    if (selectedGood === good) {
+      setSelectedGood('');
+    } else {
+      setSelectedGood(good);
+    }
+  };
 
   return (
     <main className="section container">
