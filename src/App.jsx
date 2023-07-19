@@ -29,6 +29,7 @@ export const App = () => {
           data-cy="ClearButton"
           type="button"
           className="delete ml-3"
+          style={{ display: !selectedGood ? 'none' : 'block' }}
           onClick={() => {
             setSelectedGoods('');
           }}
@@ -37,32 +38,40 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
-            <tr
-              key={good}
-              data-cy="Good"
-              className={cn({
-                'has-background-success-light': selectedGood === good,
-              })}
-            >
-              <td>
-                <button
-                  data-cy={selectedGood === good ? 'RemoveButton' : 'AddButton'}
-                  type="button"
-                  className="button"
-                  onClick={() => {
-                    setSelectedGoods(selectedGood === good ? '' : good);
-                  }}
-                >
-                  {selectedGood === good ? '-' : '+'}
-                </button>
-              </td>
+          {goods.map((good) => {
+            const isSelectedGood = selectedGood === good;
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
-          ))}
+            return (
+              <tr
+                key={good}
+                data-cy="Good"
+                className={cn({
+                  'has-background-success-light': isSelectedGood,
+                })}
+              >
+                <td>
+                  <button
+                    data-cy={
+                      isSelectedGood ? 'RemoveButton' : 'AddButton'
+                    }
+                    type="button"
+                    className={cn('button', {
+                      'is-info': isSelectedGood,
+                    })}
+                    onClick={() => {
+                      setSelectedGoods(isSelectedGood ? '' : good);
+                    }}
+                  >
+                    {isSelectedGood ? '-' : '+'}
+                  </button>
+                </td>
+
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </main>
