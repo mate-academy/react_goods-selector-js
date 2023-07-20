@@ -47,7 +47,11 @@ export const App = () => {
             goods.map(good => (
               good === valueGood
                 ? (
-                  <tr data-cy="Good" className="has-background-success-light">
+                  <tr
+                    key={good}
+                    data-cy="Good"
+                    className="has-background-success-light"
+                  >
                     <td>
                       <button
                         onClick={makeSetValueGood('')}
@@ -64,7 +68,7 @@ export const App = () => {
                   </tr>
                 )
                 : (
-                  <tr data-cy="Good">
+                  <tr key={good} data-cy="Good">
                     <td>
                       <button
                         onClick={makeSetValueGood(good)}
