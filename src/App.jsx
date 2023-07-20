@@ -49,7 +49,7 @@ export const App = () => {
                   onClick={() => {
                     setValue(good);
                     if (value === good) {
-                      setValue(defaultSelect)
+                      setValue(defaultSelect);
                     }
                   }}
                   data-cy={value === good ? 'RemoveButton' : 'AddButton'}
