@@ -50,7 +50,7 @@ export const App = () => {
                 data-cy="Good"
                 key={`${index + 1}`}
                 className={cn({
-                  'has-background-succsess-light': isSelectedGood,
+                  'has-background-success-light': isSelectedGood,
                 })}
               >
                 <td>
