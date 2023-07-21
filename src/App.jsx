@@ -21,15 +21,23 @@ export const App = () => {
 
   return (
     <main className="section container">
-      <h1 className="title is-flex is-align-items-center">
-        {activeGood ? `${activeGood} is selected` : 'No goods selected'}
-        <button
-          data-cy="ClearButton"
-          type="button"
-          className="delete ml-3"
-          onClick={() => setActiveGood('')}
-        />
-      </h1>
+      {activeGood ? (
+        <h1 className="title is-flex is-align-items-center">
+          {`${activeGood} is selected`}
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={() => setActiveGood('')}
+
+          />
+        </h1>
+      ) : (
+        <h1 className="title is-flex is-align-items-center">
+          No goods selected
+        </h1>
+      )
+    }
 
       <table className="table">
         <tbody>
