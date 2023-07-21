@@ -4,51 +4,54 @@ import cn from 'classnames';
 import { useState } from 'react';
 
 export const goods = [
-  'Dumplings',
-  'Carrot',
-  'Eggs',
-  'Ice cream',
-  'Apple',
-  'Bread',
-  'Fish',
-  'Honey',
-  'Jam',
-  'Garlic',
+  { id: 1, name: 'Dumplings' },
+  { id: 2, name: 'Carrot' },
+  { id: 3, name: 'Eggs' },
+  { id: 4, name: 'Ice cream' },
+  { id: 5, name: 'Apple' },
+  { id: 6, name: 'Bread' },
+  { id: 7, name: 'Fish' },
+  { id: 8, name: 'Honey' },
+  { id: 9, name: 'Jam' },
+  { id: 10, name: 'Garlic' },
 ];
 
 export const App = () => {
-  const firstSelected = 'Jam';
-  const [value, setValue] = useState(firstSelected);
+  const [selectedGood, setselectedGood] = useState(goods[8]);
+
+  const handleGoodClick = (good) => {
+    if (selectedGood === good) {
+      setselectedGood(null);
+    } else {
+      setselectedGood(good);
+    }
+  };
 
   return (
     <main className="section container">
-      {value === null ? (
-        <h1 className="title is-flex is-align-items-center">
-          No goods selected
-        </h1>
-      ) : (
-        <h1 className="title is-flex is-align-items-center">
-          {`${value} is selected`}
+      <h1 className="title is-flex is-align-items-center">
+        {selectedGood === null ? 'No goods selected' : `${selectedGood.name} is selected`}
+        {(selectedGood !== null) ? (
           <button
             onClick={() => {
-              setValue(null);
+              setselectedGood(null);
             }}
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
           />
-        </h1>
-      )}
+        ) : null}
+      </h1>
 
       <table className="table">
         <tbody>
-          {goods.map((good, index) => {
-            const isSelectedGood = value === good;
+          {goods.map((good) => {
+            const isSelectedGood = selectedGood === good;
 
             return (
               <tr
                 data-cy="Good"
-                key={`${index + 1}`}
+                key={good.id}
                 className={cn({
                   'has-background-success-light': isSelectedGood,
                 })}
@@ -56,10 +59,7 @@ export const App = () => {
                 <td>
                   <button
                     onClick={() => {
-                      setValue(good);
-                      if (isSelectedGood) {
-                        setValue(null);
-                      }
+                      handleGoodClick(good);
                     }}
                     data-cy={isSelectedGood ? 'RemoveButton' : 'AddButton'}
                     type="button"
@@ -69,7 +69,7 @@ export const App = () => {
                   </button>
                 </td>
                 <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
+                  {good.name}
                 </td>
               </tr>
             );
