@@ -17,24 +17,23 @@ export const goods = [
 
 export const App = () => {
   const [goodsValue, setGoodsValue] = useState('Jam');
-  const [title, setTitle] = useState(` is selected`);
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {goodsValue}
-        {title}
+        {goodsValue.length > 0 ? (
+          `${goodsValue} is selected`
+        ) : (
+          'No goods selected'
+        )}
 
-        {(title !== 'No goods selected')
+        {(goodsValue.length > 0)
           && (
             <button
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => {
-                setTitle('No goods selected');
-                setGoodsValue('');
-              }}
+              onClick={() => setGoodsValue('')}
             />
           )
         }
@@ -42,49 +41,34 @@ export const App = () => {
       </h1>
 
       <table className="table">
-        {goods.map(good => (
-          <tbody>
-            <tr
-              data-cy="Good"
-              className={
-                (goodsValue === good)
-                && ('has-background-success-light')
-              }
-            >
-              <td>
-                <button
-                  data-cy={(goodsValue === good)
-                    ? 'RemoveButton'
-                    : 'AddButton'
-                  }
-                  type="button"
-                  className={(goodsValue === good)
-                    ? 'button is-info'
-                    : 'button'
-                  }
-                  onClick={() => {
-                    if (goodsValue !== good) {
-                      setGoodsValue(good);
-                      setTitle(' is selected');
-                    } else {
-                      setGoodsValue('');
-                      setTitle('No goods selected');
-                    }
-                  }}
-                >
-                  {(goodsValue === good)
-                    ? '-'
-                    : '+'
-                  }
-                </button>
-              </td>
+        <tbody>
+          {goods.map((good) => {
+            const isSelected = goodsValue === good;
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
-          </tbody>
-        ))}
+            return (
+              <tr
+                key={good}
+                data-cy="Good"
+                className={isSelected ? 'has-background-success-light' : ''}
+              >
+                <td>
+                  <button
+                    data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
+                    type="button"
+                    className={isSelected ? 'button is-info' : 'button'}
+                    onClick={() => setGoodsValue(isSelected ? '' : good)}
+                  >
+                    {isSelected ? '-' : '+'}
+                  </button>
+                </td>
+
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
       </table>
     </main>
   );
