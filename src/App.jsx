@@ -15,111 +15,71 @@ export const goods = [
   'Garlic',
 ];
 
-export const Good = ({ good }) => {
-  const [buttonClass, setButtonClass] = useState('button');
-  const [bg, setBg] = useState('');
-  const [operator, setOperator] = useState('+');
-  const [button, setButton] = useState('AddButton');
+export const Good = ({ good, setSelectedGood, selectedGood, setNoGoods }) => (
+  <tr
+    data-cy="Good"
+    className={good === selectedGood ? 'has-background-success-light' : ''}
+  >
+    <td>
+      <button
+        onClick={() => {
+          setSelectedGood(good);
+          setNoGoods(false);
+        }}
+        data-cy={good === selectedGood ? `RemoveButton` : 'AddButton'}
+        type="button"
+        className={`button ${good === selectedGood ? 'is-info' : ''}`}
+      >
+        {good === selectedGood ? '-' : '+'}
+      </button>
+    </td>
+    <td data-cy="GoodTitle" className="is-vcentered">
+      {good}
+    </td>
+  </tr>
+);
+
+export const App = () => {
+  const [selectedGood, setSelectedGood] = useState('Jam');
+  const [noGoods, setNoGoods] = useState(false);
 
   return (
-    <tr
-      data-cy="Good"
-      className={bg}
-    >
-      <td>
-        <button
-          onClick={(event) => {
-            if (buttonClass === 'button is-info') {
-              setButtonClass(`button`);
-            } else {
-              setButtonClass('button is-info');
-            }
+    <main className="section container">
+      {noGoods === true && (
+      <h1 className="title is-flexis-align-items-center">No goods selected</h1>
+      )}
 
-            if (operator === '-') {
-              setOperator('+');
-            } else {
-              setOperator('-');
-            }
+      {noGoods === false ? (
+        <h1 className="title is-flex is-align-items-center">
+          {`${selectedGood} is selected`}
 
-            if (bg === '') {
-              setBg('has-background-success-light');
-            } else {
-              setBg('');
-            }
+          <button
+            onClick={() => {
+              setNoGoods(true);
+              setSelectedGood('');
+            }}
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+          />
+        </h1>
+      ) : (
+        ''
+      )}
 
-            if (button === 'AddButton') {
-              setButton('RemoveButton');
-            } else {
-              setButton('AddButton');
-            }
-          }}
-          data-cy={button}
-          type="button"
-          className={buttonClass}
-        >
-          {operator}
-        </button>
-      </td>
-
-      <td data-cy="GoodTitle" className="is-vcentered">
-        {good}
-      </td>
-    </tr>
+      <table className="table">
+        <tbody>
+          {goods.map(good => (
+            <Good
+              good={good}
+              selectedGood={selectedGood}
+              setSelectedGood={setSelectedGood}
+              setNoGoods={setNoGoods}
+              key={good}
+            />
+          ))}
+        </tbody>
+      </table>
+    </main>
   );
 };
-
-export const App = () => (
-  <main className="section container">
-    <h1 className="title is-flex is-align-items-center">No goods selected</h1>
-
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
-
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
-
-    <table className="table">
-      <tbody>
-        {goods && goods.map(good => (
-          <Good good={good} key={good} />
-        ))}
-
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
-
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
