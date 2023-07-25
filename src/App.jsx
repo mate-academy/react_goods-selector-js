@@ -15,47 +15,56 @@ export const goods = [
   'Garlic',
 ];
 
-export const Good = ({ good, setSelectedGood, selectedGood, setNoGoods }) => (
-  <tr
-    data-cy="Good"
-    className={good === selectedGood ? 'has-background-success-light' : ''}
-  >
-    <td>
-      <button
-        onClick={() => {
-          setSelectedGood(good);
-          setNoGoods(false);
-        }}
-        data-cy={good === selectedGood ? `RemoveButton` : 'AddButton'}
-        type="button"
-        className={`button ${good === selectedGood ? 'is-info' : ''}`}
-      >
-        {good === selectedGood ? '-' : '+'}
-      </button>
-    </td>
-    <td data-cy="GoodTitle" className="is-vcentered">
-      {good}
-    </td>
-  </tr>
-);
+export const Good = ({ good, setSelectedGood, selectedGood, setNoGoods }) => {
+  const IS_SELECTED_GOOD = good === selectedGood;
+
+  return (
+    <tr
+      data-cy="Good"
+      className={IS_SELECTED_GOOD ? 'has-background-success-light' : ''}
+    >
+      <td>
+        <button
+          onClick={() => {
+            if (IS_SELECTED_GOOD) {
+              setSelectedGood('');
+              setNoGoods(false);
+            } else {
+              setSelectedGood(good);
+              setNoGoods(true);
+            }
+          }}
+          data-cy={IS_SELECTED_GOOD ? `RemoveButton` : 'AddButton'}
+          type="button"
+          className={`button ${IS_SELECTED_GOOD ? 'is-info' : ''}`}
+        >
+          {IS_SELECTED_GOOD ? '-' : '+'}
+        </button>
+      </td>
+      <td data-cy="GoodTitle" className="is-vcentered">
+        {good}
+      </td>
+    </tr>
+  );
+};
 
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
-  const [noGoods, setNoGoods] = useState(false);
+  const [noGoods, setNoGoods] = useState(true);
 
   return (
     <main className="section container">
-      {noGoods === true && (
-      <h1 className="title is-flexis-align-items-center">No goods selected</h1>
+      {noGoods === false && (
+      <h1 className="title is-flex is-align-items-center">No goods selected</h1>
       )}
 
-      {noGoods === false ? (
+      {noGoods === true ? (
         <h1 className="title is-flex is-align-items-center">
           {`${selectedGood} is selected`}
 
           <button
             onClick={() => {
-              setNoGoods(true);
+              setNoGoods(false);
               setSelectedGood('');
             }}
             data-cy="ClearButton"
@@ -64,7 +73,7 @@ export const App = () => {
           />
         </h1>
       ) : (
-        ''
+        null
       )}
 
       <table className="table">
