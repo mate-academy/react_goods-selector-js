@@ -45,7 +45,7 @@ export const App = () => {
           {goods.map(good => (
             <GoodCard
               good={good}
-              callback={selectGood}
+              onGoodSelected={selectGood}
               selected={goodSelected}
             />
           ))}

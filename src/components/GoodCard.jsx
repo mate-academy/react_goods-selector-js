@@ -1,4 +1,4 @@
-export const GoodCard = ({ good, callback, selected }) => (
+export const GoodCard = ({ good, onGoodSelected, selected }) => (
   <tr data-cy="Good" className={`${good === selected && 'has-background-success-light'}`}>
     {good !== selected ? (
       <td>
@@ -6,7 +6,7 @@ export const GoodCard = ({ good, callback, selected }) => (
           data-cy="AddButton"
           type="button"
           className="button"
-          onClick={value => callback(good)}
+          onClick={value => onGoodSelected(good)}
         >
           +
         </button>
@@ -17,7 +17,7 @@ export const GoodCard = ({ good, callback, selected }) => (
           data-cy="RemoveButton"
           type="button"
           className="button is-info"
-          onClick={() => callback('')}
+          onClick={() => onGoodSelected('')}
         >
           -
         </button>
