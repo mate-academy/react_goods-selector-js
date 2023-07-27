@@ -20,23 +20,21 @@ export const App = () => {
 
   return (
     <main className="section container">
-      {selectedGood === ''
-        ? (
-          <h1 className="title is-flex is-align-items-center">
-            No goods selected
-          </h1>
-        )
-        : (
-          <h1 className="title is-flex is-align-items-center">
-            {`${selectedGood} is selected`}
-            <button
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-              onClick={() => setGood('')}
-            />
-          </h1>
-        )
+      {!selectedGood ? (
+        <h1 className="title is-flex is-align-items-center">
+          No goods selected
+        </h1>
+      ) : (
+        <h1 className="title is-flex is-align-items-center">
+          {`${selectedGood} is selected`}
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={() => setGood('')}
+          />
+        </h1>
+      )
       }
 
       <table className="table">
@@ -45,20 +43,19 @@ export const App = () => {
           {goods.map((good) => {
             const selected = selectedGood === good;
 
+            function selectGoog() {
+              return selected ? setGood('') : setGood(good);
+            }
+
             return (
               <tr
+                key={good}
                 data-cy="Good"
-                className={selected && 'has-background-success-light'}
+                className={selected ? 'has-background-success-light' : ''}
               >
                 <td>
                   <button
-                    onClick={() => {
-                      if (selected) {
-                        setGood('');
-                      } else {
-                        setGood(good);
-                      }
-                    }}
+                    onClick={selectGoog}
                     data-cy={selected ? 'RemoveButton' : 'AddButton'}
                     type="button"
                     className={`button ${selected && 'is-info'}`}
