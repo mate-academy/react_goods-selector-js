@@ -19,6 +19,10 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
+  function setGood(good) {
+    setSelectedGood(prev => (prev === good ? '' : good));
+  }
+
   return (
     <main className="section container">
       {selectedGood ? (
@@ -39,7 +43,6 @@ export const App = () => {
         <tbody>
           {goods.map((good) => {
             const goodIsSelected = good === selectedGood;
-            const setGood = () => setSelectedGood(goodIsSelected ? '' : good);
 
             return (
               <tr
@@ -51,7 +54,7 @@ export const App = () => {
               >
                 <td>
                   <button
-                    onClick={() => setGood()}
+                    onClick={() => setGood(good)}
                     data-cy={goodIsSelected ? 'RemoveButton' : 'AddButton'}
                     type="button"
                     className={cn('button', { 'is-info': goodIsSelected })}
