@@ -19,38 +19,13 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
-  const checkSelectingGood = (row) => {
-    if (selectedGood) {
-      const selected = document.querySelector(
-        '.has-background-success-light',
-      );
-
-      if (selected !== row) {
-        selected.classList.remove(
-          'has-background-success-light',
-        );
-      }
-    }
-  };
-
-  const selectItem = (e) => {
-    const row = e.target.closest('tr');
-
-    if (!row) {
-      return;
-    }
-
-    checkSelectingGood(row);
-    const goodInnerText = row.querySelector('[data-cy="GoodTitle"]').innerText;
-
-    row.classList.toggle('has-background-success-light');
-
-    if (row.classList.contains('has-background-success-light')) {
-      setSelectedGood(goodInnerText);
-    } else {
+  function handleClick(good) {
+    if (selectedGood === good) {
       setSelectedGood('');
+    } else {
+      setSelectedGood(good);
     }
-  };
+  }
 
   return (
     <main className="section container">
@@ -92,7 +67,7 @@ export const App = () => {
                       'is-info': selectedGood === good,
                     },
                   )}
-                  onClick={selectItem}
+                  onClick={() => handleClick(good)}
                 >
                   {selectedGood === good ? '-' : '+'}
                 </button>
