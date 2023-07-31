@@ -19,7 +19,7 @@ export const goods = [
 
 export class App extends React.Component {
   state = {
-    selectedGood: 'Jam',
+    selectedGood: goods[goods.indexOf('Jam')] || goods[0],
   };
 
   handleAddButton = (condition, newGood) => {
