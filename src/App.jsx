@@ -20,26 +20,27 @@ export const App = () => {
 
   return (
     <main className="section container">
-      {selectedGood ? (
-        <h1 className="title is-flex is-align-items-center">
-          {`${selectedGood} is selected`}
-          <button
-            data-cy="ClearButton"
-            type="button"
-            className="delete ml-3"
-            onClick={() => setSelectedGood('')}
-          />
-        </h1>
-      ) : (
-        <h1 className="title is-flex is-align-items-center">
-          No goods selected
-        </h1>
-      )}
+      <h1 className="title is-flex is-align-items-center">
+        {selectedGood ? (
+          <>
+            {`${selectedGood} is selected`}
+            <button
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={() => setSelectedGood('')}
+            />
+          </>
+        ) : (
+          'No goods selected'
+        )}
+      </h1>
 
       <table className="table">
         <tbody>
           {goods.map(good => (
             <tr
+              key={good}
               data-cy="Good"
               className={`${selectedGood === good
                 ? 'has-background-success-light'
