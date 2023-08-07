@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import cn from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -18,14 +19,16 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setValue] = useState('Jam');
 
-  const renderActionButton = good => (
+  const handleSelect = good => () => setValue(good);
+
+  const renderActionButton = (good, isSelected) => (
     <button
-      onClick={() => setValue(good === selectedGood ? '' : good)}
-      data-cy={good === selectedGood ? 'RemoveButton' : 'AddButton'}
+      onClick={handleSelect(isSelected ? '' : good)}
+      data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
       type="button"
-      className={`button ${good === selectedGood ? 'is-info' : ''}`}
+      className={cn('button', { 'is-info': isSelected })}
     >
-      {good === selectedGood ? '-' : '+'}
+      {isSelected ? '-' : '+'}
     </button>
   );
 
@@ -42,26 +45,29 @@ export const App = () => {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => setValue(null)}
+              onClick={handleSelect('')}
             />
           )}
         </div>
 
         <table className="table">
           <tbody>
-            {goods.map(good => (
-              <tr
-                data-cy="Good"
-                key={good}
-                className={selectedGood === good
-                  ? 'has-background-success-light' : ''}
-              >
-                <td>{renderActionButton(good)}</td>
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            ))}
+            {goods.map((good) => {
+              const isSelected = good === selectedGood;
+
+              return (
+                <tr
+                  data-cy="Good"
+                  key={good}
+                  className={cn({ 'has-background-success-light': isSelected })}
+                >
+                  <td>{renderActionButton(good, isSelected)}</td>
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </main>
