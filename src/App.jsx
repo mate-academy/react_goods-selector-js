@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import cn from 'classnames'
 
 export const goods = [
   'Dumplings',
@@ -18,11 +19,11 @@ export const goods = [
 export const App = () => {
   const startIndex = goods.findIndex(elem => elem === 'Jam');
 
-  const [value, setValue] = useState(goods[startIndex]);
+  const [selectedGood, setSelectedGood] = useState(goods[startIndex]);
 
   return (
     <main className="section container">
-      {!value
+      {!selectedGood
 
         ? (
           <h1 className="title is-flex is-align-items-center">
@@ -31,11 +32,11 @@ export const App = () => {
         )
         : (
           <h1 className="title is-flex is-align-items-center">
-            {value}
+            {selectedGood}
             {' '}
             is selected
 
-            {value
+            {selectedGood
 
             && (
             <button
@@ -43,7 +44,7 @@ export const App = () => {
               type="button"
               className="delete ml-3"
               onClick={() => {
-                setValue('');
+                setSelectedGood('');
               }}
             />
             )
@@ -58,17 +59,17 @@ export const App = () => {
             <tr
               data-cy="Good"
               key={good}
-              className={(value === good) && 'has-background-success-light'}
+              className={cn({'has-background-success-light' : selectedGood === good })}
             >
               <td>
-                {value !== good
+                {selectedGood !== good
                   ? (
                     <button
                       data-cy="AddButton"
                       type="button"
                       className="button"
                       onClick={() => {
-                        setValue(good);
+                        setSelectedGood(good);
                       }}
                     >
                       +
@@ -80,7 +81,7 @@ export const App = () => {
                       type="button"
                       className="button is-info"
                       onClick={() => {
-                        setValue('');
+                        setSelectedGood('');
                       }}
                     >
                       -
