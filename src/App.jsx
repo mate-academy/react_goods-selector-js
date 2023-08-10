@@ -17,21 +17,29 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [good, SetGood] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
+
+  const changeSelectedChoice = (initialGood) => {
+    if (selectedGood === initialGood) {
+      setSelectedGood('');
+    } else {
+      setSelectedGood(initialGood);
+    }
+  };
 
   return (
     <main className="section container">
-      {!good
+      {!selectedGood
         ? <h1 className="title">No goods selected</h1>
         : (
           <h1 className="title is-flex is-align-items-center">
-            {`${good} is selected`}
+            {`${selectedGood} is selected`}
             <button
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
               onClick={() => {
-                SetGood('');
+                setSelectedGood('');
               }}
               aria-label="clear"
             />
@@ -45,32 +53,25 @@ export const App = () => {
               key={initialGood}
               data-cy="Good"
               className={classNames({
-                'has-background-success-light': good === initialGood,
+                'has-background-success-light': selectedGood === initialGood,
               })}
             >
               <td>
                 <button
                   data-cy={
-                    good === initialGood
+                    selectedGood === initialGood
                       ? 'RemoveButton'
                       : 'AddButton'
                   }
                   type="button"
-                  className={
-                    good === initialGood
-                      ? 'button is-info'
-                      : 'button'
-                  }
-                  onClick={() => {
-                    if (good === initialGood) {
-                      SetGood('');
-                    } else {
-                      SetGood(initialGood);
-                    }
-                  }}
+                  className={classNames('button',
+                    {
+                      'button is-info': selectedGood === initialGood,
+                    })}
+                  onClick={() => changeSelectedChoice(initialGood)}
                 >
                   {
-                    good === initialGood
+                    selectedGood === initialGood
                       ? '-'
                       : '+'
                   }
