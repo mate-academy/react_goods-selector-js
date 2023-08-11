@@ -16,9 +16,9 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setGood] = useState('Jam');
-  const handleClick = good => setGood(good);
-  const resetClick = () => setGood('');
+  const [selectedGood, setSelectedGood] = useState('Jam');
+  const handleClick = good => setSelectedGood(good);
+  const resetClick = () => setSelectedGood('');
 
   return (
     <main className="section container">
@@ -43,7 +43,11 @@ export const App = () => {
               <tr
                 data-cy="Good"
                 key={product}
-                className={isSelected && 'has-background-success-light'}
+                className={isSelected ? (
+                  'has-background-success-light'
+                ) : (
+                  undefined
+                )}
               >
                 <td>
                   {isSelected ? (
