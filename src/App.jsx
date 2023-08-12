@@ -40,30 +40,30 @@ export const App = () => {
               key={item}
               data-cy="Good"
               className={
-                selectedItem === item
+                isCurrentItemSelected(selectedItem, item)
                   ? 'has-background-success-light'
                   : ''
               }
             >
               <td>
                 <button
-                  onClick={() => (selectedItem === item
+                  onClick={() => (isCurrentItemSelected(selectedItem, item)
                     ? setSelectedItem('')
                     : setSelectedItem(item))
                   }
                   data-cy={
-                    selectedItem === item
+                    isCurrentItemSelected(selectedItem, item)
                       ? 'RemoveButton'
                       : 'AddButton'
                   }
                   type="button"
                   className={
-                    selectedItem === item
+                    isCurrentItemSelected(selectedItem, item)
                       ? 'button is-info'
                       : 'button'
                   }
                 >
-                  {selectedItem === item ? `-` : '+'}
+                  {isCurrentItemSelected(selectedItem, item) ? `-` : '+'}
                 </button>
               </td>
 
@@ -77,3 +77,7 @@ export const App = () => {
     </main>
   );
 };
+
+function isCurrentItemSelected(selected, item) {
+  return selected === item;
+}
