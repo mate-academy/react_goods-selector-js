@@ -16,7 +16,8 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setSelectedGood] = useState('Jam');
+  const [selectedGood, setSelectedGood]
+    = useState(goods[goods.indexOf('Jam')] || goods[0]);
 
   return (
     <main className="section container">
