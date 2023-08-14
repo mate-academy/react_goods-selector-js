@@ -16,7 +16,7 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setselectedGood] = useState(goods[8]);
+  const [selectedGood, setSelectedGood] = useState(goods[8]);
 
   return (
     <main>
@@ -27,9 +27,7 @@ export const App = () => {
             <>
               {`${selectedGood} is selected`}
               <button
-                onClick={() => {
-                  setselectedGood('');
-                }}
+                onClick={() => setSelectedGood('')}
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
@@ -50,9 +48,7 @@ export const App = () => {
                 >
                   <td>
                     <button
-                      onClick={() => {
-                        setselectedGood('');
-                      }}
+                      onClick={() => setSelectedGood('')}
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
@@ -68,9 +64,7 @@ export const App = () => {
                 <tr data-cy="Good" key={good}>
                   <td>
                     <button
-                      onClick={() => {
-                        setselectedGood(good);
-                      }}
+                      onClick={() => setSelectedGood(good)}
                       data-cy="AddButton"
                       type="button"
                       className="button"
