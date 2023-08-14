@@ -1,5 +1,6 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
+import { useState } from 'react';
 
 export const goods = [
   'Dumplings',
@@ -14,70 +15,78 @@ export const goods = [
   'Garlic',
 ];
 
-export const App = () => (
-  <main className="section container">
-    <h1 className="title is-flex is-align-items-center">No goods selected</h1>
+export const Good = ({ good, selectedGood, setIsSelected }) => {
+  const addGood = () => {
+    if (selectedGood === good) {
+      setIsSelected(null);
+    } else {
+      setIsSelected(good);
+    }
+  };
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+  return (
+    <tr
+      data-cy="Good"
+      className={selectedGood === good ? 'has-background-success-light' : ''}
+    >
+      <td>
+        <button
+          data-cy={selectedGood === good ? 'RemoveButton' : 'AddButton'}
+          type="button"
+          className={`button${selectedGood === good ? ' is-info' : ''}`}
+          onClick={addGood}
+        >
+          {selectedGood === good ? '-' : '+'}
+        </button>
+      </td>
 
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+      <td data-cy="GoodTitle" className="is-vcentered">
+        {good}
+      </td>
+    </tr>
+  );
+};
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+export const App = () => {
+  const selectedByDefault = 'Jam';
+  const [isSelected, setIsSelected] = useState(selectedByDefault);
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+  const clearValue = () => {
+    setIsSelected(null);
+  };
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+  return (
+    <main className="section container">
+      {isSelected ? (
+        <h1 className="title is-flex is-align-items-center">
+          {`${isSelected} is selected`}
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={clearValue}
+          />
+        </h1>
+      ) : (
+        <h1 className="title is-flex is-align-items-center">
+          No goods selected
+        </h1>
+      )}
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+      <table className="table">
+        <tbody>
+          {goods.map(good => (
+            <Good
+              good={good}
+              key={good}
+              selectedGood={isSelected}
+              setIsSelected={setIsSelected}
+            />
+          ))}
+        </tbody>
+      </table>
+    </main>
+  );
+};
 
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+export default App;
