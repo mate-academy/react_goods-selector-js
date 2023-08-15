@@ -17,34 +17,27 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [value, setValue] = useState('Jam is selected');
-
-  function getTitle(item) {
-    return value.startsWith(item) ? setValue('No goods selected') : setValue(`${item} is selected`);
-  }
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   return (
     <main className="section container">
 
       <h1 className="title is-flex is-align-items-center">
-        {value}
-        {
-          !value.startsWith('No')
+        {selectedGood === '' ? 'No goods selected' : `${selectedGood} is selected`}
+        {selectedGood !== ''
           && (
             <button
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => setValue('No goods selected')}
+              onClick={() => setSelectedGood('')}
             />
-          )
-        }
+          )}
       </h1>
       <table className="table">
         <tbody>
-          {
-          goods.map((item) => {
-            const flag = value.startsWith(item);
+          {goods.map((item) => {
+            const flag = selectedGood === item;
 
             return (
               <tr
@@ -62,7 +55,7 @@ export const App = () => {
                     type="button"
                     className={classNames('button',
                       { 'is-info': flag })}
-                    onClick={() => getTitle(item)}
+                    onClick={() => setSelectedGood(item)}
                   >
                     {flag ? '-' : '+'}
                   </button>
@@ -73,8 +66,7 @@ export const App = () => {
                 </td>
               </tr>
             );
-          })
-        }
+          })}
         </tbody>
       </table>
     </main>
