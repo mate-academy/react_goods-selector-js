@@ -55,7 +55,7 @@ export const App = () => {
                     type="button"
                     className={classNames('button',
                       { 'is-info': flag })}
-                    onClick={() => setSelectedGood(item)}
+                    onClick={() => setSelectedGood(!flag ? item : '')}
                   >
                     {flag ? '-' : '+'}
                   </button>
