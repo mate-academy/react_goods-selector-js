@@ -44,8 +44,10 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
+          {goods.map((good, index) => (
             <tr
+              // eslint-disable-next-line react/no-array-index-key
+              key={index}
               data-cy="Good"
               className={`${isSelected(good)
                 ? 'has-background-success-light' : ''}`}
