@@ -23,10 +23,10 @@ export const App = () => {
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
         {selectedGood === '' ? (
-          <>No goods selected</>
+          'No goods selected'
         ) : (
           <>
-            <>{`${selectedGood} is selected`}</>
+            {`${selectedGood} is selected`}
 
             <button
               onClick={() => {
@@ -61,9 +61,9 @@ export const App = () => {
                   className={cn('button', { 'is-info': selectedGood === good })}
                 >
                   {selectedGood === good ? (
-                    <>-</>
+                    '-'
                   ) : (
-                    <>+</>
+                    '+'
                   )}
                 </button>
               </td>
