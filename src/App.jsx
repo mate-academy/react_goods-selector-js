@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import cn from 'classnames';
+
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -41,7 +43,7 @@ function Goods() {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => removeClick()}
+            onClick={removeClick}
           />
         </h1>
       ) : (
@@ -64,7 +66,7 @@ function Goods() {
               <tr
                 data-cy="Good"
                 key={good}
-                className={isSelected && 'has-background-success-light'}
+                className={cn({ 'has-background-success-light': isSelected })}
               >
                 <td>
                   {isSelected ? (
