@@ -58,21 +58,21 @@ function Goods() {
       <table className="table">
         <tbody>
           {goods.map((good) => {
-            const isSelested = good === selectedGood;
+            const isSelected = good === selectedGood;
 
             return (
               <tr
                 data-cy="Good"
                 key={good}
-                className={isSelested && 'has-background-success-light'}
+                className={isSelected && 'has-background-success-light'}
               >
                 <td>
-                  {isSelested ? (
+                  {isSelected ? (
                     <button
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={() => removeClick()}
+                      onClick={removeClick}
                     >
                       -
                     </button>
