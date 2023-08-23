@@ -17,23 +17,34 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectGood, setSelectGood] = useState('No goods selected');
-  const [styleForSelect, setStyleForSelect] = useState(null);
+  const [selectGood, setSelectGood] = useState(goods[8]);
+
+  const handleProductClick = (product) => {
+    if (selectGood === product) {
+      setSelectGood(null);
+    } else {
+      setSelectGood(product);
+    }
+  };
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectGood}
-
-        <button
-          onClick={() => {
-            setSelectGood('No goods selected');
-            setStyleForSelect(null);
-          }}
-          data-cy="ClearButton"
-          type="button"
-          className="delete ml-3"
-        />
+        {selectGood ? (
+          <>
+            <span>{`${selectGood} is selected`}</span>
+            <button
+              onClick={() => {
+                setSelectGood(null);
+              }}
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+            />
+          </>
+        )
+          : ('No goods selected')
+        }
       </h1>
 
       <table className="table">
@@ -42,22 +53,19 @@ export const App = () => {
             <tr
               data-cy="Good"
               className={cn({
-                'has-background-success-light': styleForSelect === good,
+                'has-background-success-light': selectGood === good,
               })}
             >
               <td>
                 <button
-                  onClick={() => {
-                    setSelectGood(`${good} is selected`);
-                    setStyleForSelect(good);
-                  }}
-                  data-cy="AddButton"
+                  onClick={() => handleProductClick(good)}
+                  data-cy={selectGood === good ? 'RemoveButton' : 'AddButton'}
                   type="button"
                   className={cn('button', {
-                    'is-info': styleForSelect === good,
+                    'is-info': selectGood === good,
                   })}
                 >
-                  +
+                  {selectGood === good ? '-' : '+'}
                 </button>
               </td>
 
@@ -68,58 +76,6 @@ export const App = () => {
           ))}
         </tbody>
       </table>
-
-      <table className="table">
-        <tbody>
-          <tr data-cy="Good">
-            <td>
-              <button
-                data-cy="AddButton"
-                type="button"
-                className="button"
-              >
-                +
-              </button>
-            </td>
-
-            <td data-cy="GoodTitle" className="is-vcentered">
-              Dumplings
-            </td>
-          </tr>
-
-          <tr data-cy="Good" className="has-background-success-light">
-            <td>
-              <button
-                data-cy="RemoveButton"
-                type="button"
-                className="button is-info"
-              >
-                -
-              </button>
-            </td>
-
-            <td data-cy="GoodTitle" className="is-vcentered">
-              Jam
-            </td>
-          </tr>
-
-          <tr data-cy="Good">
-            <td>
-              <button
-                data-cy="AddButton"
-                type="button"
-                className="button"
-              >
-                +
-              </button>
-            </td>
-
-            <td data-cy="GoodTitle" className="is-vcentered">
-              Garlic
-            </td>
-          </tr>
-        </tbody>
-      </table>
     </main>
-  )
-}
+  );
+};
