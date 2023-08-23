@@ -1,4 +1,5 @@
 import 'bulma/css/bulma.css';
+import classNames from 'classnames';
 import './App.scss';
 import { useState } from 'react';
 
@@ -20,7 +21,7 @@ export const App = () => {
 
   return (
     <main className="section container">
-      {selectedGood !== ''
+      {selectedGood
         ? (
           <h1 className="title is-flex is-align-items-center">
             {`${selectedGood} is selected`}
@@ -42,13 +43,14 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(item => (
+          {goods.map((item, index) => (
             <tr
               data-cy="Good"
-              key={goods.indexOf(item)}
-              className={selectedGood === item
-                ? 'has-background-success-light'
-                : ''}
+              // eslint-disable-next-line react/no-array-index-key
+              key={index}
+              className={classNames({
+                'has-background-success-light': selectedGood === item,
+              })}
             >
               <td>
                 {selectedGood === item
