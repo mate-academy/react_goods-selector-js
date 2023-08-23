@@ -19,6 +19,14 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
+  const handleClearButtonClick = () => {
+    setSelectedGood('');
+  };
+
+  function check(myGood, hookGood) {
+    return myGood === hookGood;
+  }
+
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
@@ -29,9 +37,7 @@ export const App = () => {
               data-cy="ClearButton"
               className="delete ml-3"
               type="button"
-              onClick={() => {
-                setSelectedGood('');
-              }}
+              onClick={handleClearButtonClick}
             />
           </>
         )}
@@ -40,21 +46,20 @@ export const App = () => {
         <tbody>
           {goods.map(good => (
             <tr
+              key={good}
               data-cy="Good"
               className={cn({
-                'has-background-success-light': good === selectedGood,
+                'has-background-success-light': check(good, selectedGood),
               })}
             >
               <td>
-                {good === selectedGood ? (
+                {check(good, selectedGood) ? (
                   <>
                     <button
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={() => {
-                        setSelectedGood('');
-                      }}
+                      onClick={handleClearButtonClick}
                     >
                       -
                     </button>
