@@ -40,7 +40,7 @@ export const App = () => (
               +
             </button>
           </td>
-
+123213
           <td data-cy="GoodTitle" className="is-vcentered">
             Dumplings
           </td>
