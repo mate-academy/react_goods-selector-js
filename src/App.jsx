@@ -19,6 +19,14 @@ export const goods = [
 export const App = () => {
   const [value, setValue] = useState('Jam');
 
+  const valueCheck = (good) => {
+    if (value === good) {
+      setValue(null);
+    } else {
+      setValue(good);
+    }
+  };
+
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
@@ -42,11 +50,7 @@ export const App = () => {
         <tbody>
           {goods.map((good) => {
             const handleClick = () => {
-              if (value === good) {
-                setValue(null);
-              } else {
-                setValue(good);
-              }
+              valueCheck(good);
             };
 
             return (
