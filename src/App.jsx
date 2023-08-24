@@ -28,9 +28,11 @@ export const App = () => {
   const handleProductClick = (product) => {
     if (selectGood === product) {
       setSelectGood(null);
-    } else {
-      setSelectGood(product);
+
+      return;
     }
+
+    setSelectGood(product);
   };
 
   return (
