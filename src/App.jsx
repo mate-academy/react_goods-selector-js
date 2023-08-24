@@ -18,23 +18,24 @@ export const goods = [
 
 export const App = () => {
   const [product, setProduct] = useState('Jam');
+  const NO_GOODS_SELECTED = 'No goods';
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
         {product}
-        {product !== 'No goods'
+        {product !== NO_GOODS_SELECTED
           ? ' is '
           : ' '
         }
         selected
 
-        {product !== 'No goods' && (
+        {product !== NO_GOODS_SELECTED && (
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => setProduct('No goods')}
+            onClick={() => setProduct(NO_GOODS_SELECTED)}
           />
         )}
       </h1>
@@ -64,7 +65,7 @@ export const App = () => {
 
                       setProduct(product !== good
                         ? good
-                        : 'No goods');
+                        : NO_GOODS_SELECTED);
                     }}
                   >
                     {isSelected ? '-' : '+'}
