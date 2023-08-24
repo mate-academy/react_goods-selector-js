@@ -16,8 +16,14 @@ export const goods = [
   'Garlic',
 ];
 
+const getPrepareGoods = allGoods => allGoods
+  .map((good, index) => ({ good, key: index }));
+
+const prepareGoods = getPrepareGoods(goods);
+
 export const App = () => {
-  const [selectGood, setSelectGood] = useState(goods[8]);
+  const startSelectGood = prepareGoods[8].good;
+  const [selectGood, setSelectGood] = useState(startSelectGood);
 
   const handleProductClick = (product) => {
     if (selectGood === product) {
@@ -49,8 +55,9 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
+          {prepareGoods.map(({ good, key }) => (
             <tr
+              key={key}
               data-cy="Good"
               className={cn({
                 'has-background-success-light': selectGood === good,
