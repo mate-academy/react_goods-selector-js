@@ -16,8 +16,10 @@ export const goods = [
   'Garlic',
 ];
 
+const DEFAULT_GOOD_VALUE = 'Jam';
+
 export const App = () => {
-  const [selectedGood, setSelectedGood] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState(DEFAULT_GOOD_VALUE);
 
   const handleGoodClick = (good) => {
     setSelectedGood(prevGood => (prevGood === good
