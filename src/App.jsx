@@ -17,6 +17,11 @@ export const goods = [
 
 export const App = () => {
   const [good, setGood] = useState('Jam');
+
+  const goodClass = item => item === good
+    ? 'has-background-success-light'
+    : '';
+
   const deleteButton = (
     <button
       data-cy="RemoveButton"
@@ -63,11 +68,9 @@ export const App = () => {
 
   const goodsList = goods.map(item => (
     <tr
+      key={item}
       data-cy="Good"
-      className={item === good
-        ? 'has-background-success-light'
-        : ''
-      }
+      className={goodClass(item)}
     >
       <td>
         {item === good ? deleteButton : addButton(item)}
