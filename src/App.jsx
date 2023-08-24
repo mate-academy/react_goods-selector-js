@@ -1,6 +1,9 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 
+import { useState } from 'react';
+import cn from 'classnames';
+
 export const goods = [
   'Dumplings',
   'Carrot',
@@ -14,70 +17,69 @@ export const goods = [
   'Garlic',
 ];
 
-export const App = () => (
-  <main className="section container">
-    <h1 className="title is-flex is-align-items-center">No goods selected</h1>
+export const App = () => {
+  const [selectedProduct, setSelectedProduct] = useState('Jam');
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+  return (
+    <main className="section container">
+      <h1 className="title is-flex is-align-items-center">
+        {selectedProduct
+          ? `${selectedProduct} is selected`
+          : 'No goods selected'
+        }
 
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+        {selectedProduct && (
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={() => setSelectedProduct('')}
+          />
+        )}
+      </h1>
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
+      <table className="table">
+        <tbody>
+          {goods.map(product => (
+            <tr
+              data-cy="Good"
+              key={product}
+              className={cn({
+                'has-background-success-light': selectedProduct === product,
+              })}
             >
-              +
-            </button>
-          </td>
+              <td>
+                {selectedProduct === product
+                  ? (
+                    <button
+                      data-cy="RemoveButton"
+                      type="button"
+                      className="button is-info"
+                      onClick={() => setSelectedProduct(null)}
+                    >
+                      -
+                    </button>
+                  )
+                  : (
+                    <button
+                      data-cy="AddButton"
+                      type="button"
+                      className="button"
+                      onClick={() => setSelectedProduct(product)}
+                    >
+                      +
+                    </button>
+                  )
+                }
+              </td>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
-
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
-
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+              <td data-cy="GoodTitle" className="is-vcentered">
+                {product}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </main>
+  );
+};
