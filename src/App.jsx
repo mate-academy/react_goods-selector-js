@@ -28,9 +28,7 @@ export const App = () => {
             <>
               {message}
               <button
-                onClick={() => {
-                  setSelectedGood('');
-                }}
+                onClick={() => setSelectedGood('')}
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
@@ -43,33 +41,33 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map((good) => {
-            const selectionFlag = good === selectedGood;
+            const isSelected = good === selectedGood;
 
             return (
               <tr
                 key={good}
                 data-cy="Good"
                 className={cn(
-                  { 'has-background-success-light': selectionFlag },
+                  { 'has-background-success-light': isSelected },
                 )}
               >
                 <td>
                   <button
                     onClick={() => {
-                      setSelectedGood(!selectionFlag && good);
-                      setMessage(!selectionFlag && `${good} is selected`);
+                      setSelectedGood(!isSelected && good);
+                      setMessage(!isSelected && `${good} is selected`);
                     }}
                     data-cy={
-                      selectionFlag
+                      isSelected
                         ? 'RemoveButton'
                         : 'AddButton'
                     }
                     type="button"
                     className={cn(
-                      'button', { 'is-info': selectionFlag },
+                      'button', { 'is-info': isSelected },
                     )}
                   >
-                    {selectionFlag ? '-' : '+'}
+                    {isSelected ? '-' : '+'}
                   </button>
                 </td>
 
