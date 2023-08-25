@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -20,31 +21,34 @@ export const App = () => {
 
   return (
     <main className="section container">
-      {selectedGood ? (
-        <h1 className="title is-flex is-align-items-center">
-          {`${selectedGood} is selected`}
-          <button
-            data-cy="ClearButton"
-            type="button"
-            className="delete ml-3"
-            onClick={() => setSelectedGood('')}
-          />
-        </h1>
-      ) : (
-        <h1 className="title is-flex is-align-items-center">
-          No goods selected
-        </h1>
-      )}
-
+      <h1 className="title is-flex is-align-items-center">
+        {selectedGood ? (
+          <>
+            {`${selectedGood} is selected`}
+            <button
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={() => setSelectedGood('')}
+            />
+          </>
+        ) : (
+          'No goods selected'
+        )}
+      </h1>
       <table className="table">
         <tbody>
           {goods.map((good) => {
             const isSelected = good === selectedGood;
+            const btnClass = classNames({
+              'has-background-success-light': isSelected,
+              '': !isSelected,
+            });
 
             return (
               <tr
                 data-cy="Good"
-                className={isSelected ? 'has-background-success-light' : ''}
+                className={btnClass}
                 key={good}
               >
                 <td>
@@ -62,9 +66,7 @@ export const App = () => {
                       data-cy="AddButton"
                       type="button"
                       className="button"
-                      onClick={() => {
-                        setSelectedGood(good);
-                      }}
+                      onClick={() => setSelectedGood(good)}
                     >
                       +
                     </button>
