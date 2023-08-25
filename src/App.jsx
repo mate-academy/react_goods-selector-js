@@ -21,7 +21,7 @@ export const App = () => {
   const EMPTY_VALUE = '';
 
   const [selectedGood, setSelectedGood] = useState(DEFAULT_GOOD);
-  const isSelected = good => good === selectedGood;
+  const isSelectedGood = good => good === selectedGood;
 
   return (
     <main className="section container">
@@ -47,26 +47,26 @@ export const App = () => {
             <tr
               data-cy="Good"
               className={cn({
-                'has-background-success-light': isSelected(good),
+                'has-background-success-light': isSelectedGood(good),
               }) || null}
               key={good}
             >
               <td>
                 <button
-                  onClick={() => (isSelected(good)
+                  onClick={() => (isSelectedGood(good)
                     ? setSelectedGood(EMPTY_VALUE)
                     : setSelectedGood(good)
                   )}
                   className={cn('button', {
-                    'is-info': isSelected(good),
+                    'is-info': isSelectedGood(good),
                   })}
-                  data-cy={isSelected(good)
+                  data-cy={isSelectedGood(good)
                     ? 'RemoveButton'
                     : 'AddButton'
                   }
                   type="button"
                 >
-                  {isSelected(good)
+                  {isSelectedGood(good)
                     ? '-'
                     : '+'
                   }
