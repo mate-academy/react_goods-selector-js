@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import cn from 'classnames';
+import { nanoid } from 'nanoid';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -49,7 +50,7 @@ export const App = () => {
             return (
               <tr
                 data-cy="Good"
-                key={good}
+                key={nanoid()}
                 className={cn({
                   'has-background-success-light': isGoodActive,
                 })}
