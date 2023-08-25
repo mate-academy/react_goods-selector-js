@@ -48,7 +48,7 @@ export const App = () => {
               data-cy="Good"
               className={cn({
                 'has-background-success-light': isSelected(good),
-              })}
+              }) || null}
               key={good}
             >
               <td>
