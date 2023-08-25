@@ -23,7 +23,7 @@ export const App = () => {
 
   const handleGoodClick = (good) => {
     setSelectedGood(prevGood => (prevGood === good
-      ? null
+      ? ''
       : good
     ));
   };
