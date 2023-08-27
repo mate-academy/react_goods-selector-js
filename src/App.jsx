@@ -24,10 +24,7 @@ export const App = () => {
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
         {product}
-        {product !== NO_GOODS_SELECTED
-          ? ' is '
-          : ' '
-        }
+        {product !== NO_GOODS_SELECTED ? ' is ' : ' '}
         selected
 
         {product !== NO_GOODS_SELECTED && (
@@ -43,32 +40,32 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map((good) => {
-            let isSelected = product === good;
+            const isCurrentGoodSelected = product === good;
 
             return (
               <tr
+                key={good}
                 data-cy="Good"
                 className={classNames({
-                  'has-background-success-light': isSelected,
+                  'has-background-success-light': isCurrentGoodSelected,
                 })}
               >
                 <td>
                   <button
-                    data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
+                    data-cy={
+                      isCurrentGoodSelected ? 'RemoveButton' : 'AddButton'}
                     type="button"
                     className={classNames({
                       button: true,
-                      'is-info': isSelected,
+                      'is-info': isCurrentGoodSelected,
                     })}
                     onClick={() => {
-                      isSelected = !isSelected;
-
-                      setProduct(product !== good
-                        ? good
-                        : NO_GOODS_SELECTED);
+                      setProduct(
+                        isCurrentGoodSelected ? NO_GOODS_SELECTED : good,
+                      );
                     }}
                   >
-                    {isSelected ? '-' : '+'}
+                    {isCurrentGoodSelected ? '-' : '+'}
                   </button>
                 </td>
 
