@@ -67,10 +67,16 @@ export const App = () => {
                         : () => setSelectedGood(good)
                     }
                   >
-                    {isSelectedGood ? '-' : '+'}
+                    {isSelectedGood
+                      ? '-'
+                      : '+'
+                    }
                   </button>
                 </td>
-                <td data-cy="GoodTitle" className="is-vcentered">
+                <td
+                  data-cy="GoodTitle"
+                  className="is-vcentered"
+                >
                   {good}
                 </td>
               </tr>
