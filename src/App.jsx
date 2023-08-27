@@ -15,32 +15,34 @@ export const goods = [
   'Garlic',
 ];
 
+const DEFAULT_SELECTED_GOOD = 'Jam';
+const NO_GOOD_SELECTOR = 'No goods selected';
+const IS_SELECT = 'is selected';
+
 export const App = () => {
-  const [selectedGood, setSelectedGood] = useState('Jam');
-
-  function onClearButton() {
-    setSelectedGood('');
-  }
-
-  function addGood(goodItem) {
-    setSelectedGood(goodItem);
-  }
+  const [selectedGood, setSelectedGood] = useState(DEFAULT_SELECTED_GOOD);
 
   return (
     <main className="section container">
       {selectedGood ? (
         <h1 className="title is-flex is-align-items-center">
-          {`${selectedGood} is selected`}
-          <button
-            onClick={onClearButton}
-            data-cy="ClearButton"
-            type="button"
-            className="delete ml-3"
-          />
+          {selectedGood
+            ? `${selectedGood} ${IS_SELECT}`
+            : NO_GOOD_SELECTOR
+          }
+
+          {!!selectedGood && (
+            <button
+              onClick={() => setSelectedGood('')}
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+            />
+          )}
         </h1>
       ) : (
         <h1 className="title is-flex is-align-items-center">
-          No goods selected
+          {NO_GOOD_SELECTOR}
         </h1>
       )}
 
@@ -53,28 +55,27 @@ export const App = () => {
               className={
                 selectedGood === goodItem
                   ? 'has-background-success-light'
-                  : ''
+                  : null
               }
             >
               <td>
-                {selectedGood !== goodItem && (
+                {selectedGood === goodItem ? (
                   <button
-                    onClick={() => addGood(goodItem)}
-                    data-cy="AddButton"
-                    type="button"
-                    className="button is-normal is-success"
-                  >
-                    +
-                  </button>
-                )}
-                {selectedGood === goodItem && (
-                  <button
-                    onClick={onClearButton}
+                    onClick={() => setSelectedGood('')}
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
                   >
                     -
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setSelectedGood(goodItem)}
+                    data-cy="AddButton"
+                    type="button"
+                    className="button is-normal is-success"
+                  >
+                    +
                   </button>
                 )}
               </td>
