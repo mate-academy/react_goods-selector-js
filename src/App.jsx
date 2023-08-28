@@ -2,6 +2,7 @@ import 'bulma/css/bulma.css';
 import './App.scss';
 
 import { useState } from 'react';
+import { GoodsList } from './components/GoodsList';
 
 export const goods = [
   'Dumplings',
@@ -23,9 +24,7 @@ export const App = () => {
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
         {selectedGood === ''
-          ? (
-            'No goods selected'
-          )
+          ? 'No goods selected'
           : (
             <>
               {`${selectedGood} is selected`}
@@ -43,47 +42,11 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
-            <tr
-              data-cy="Good"
-              className={good === selectedGood
-                  && 'has-background-success-light'}
-              key={good}
-            >
-              <td>
-                {good !== selectedGood
-                  ? (
-                    <td>
-                      <button
-                        data-cy="AddButton"
-                        type="button"
-                        className="button"
-                        onClick={() => setSelectedGood(good)}
-                      >
-                        +
-                      </button>
-                    </td>
-                  )
-                  : (
-                    <td>
-                      <button
-                        data-cy="RemoveButton"
-                        type="button"
-                        className="button is-info"
-                        onClick={() => setSelectedGood('')}
-                      >
-                        -
-                      </button>
-                    </td>
-                  )
-                }
-              </td>
-
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
-          ))}
+          <GoodsList
+            goods={goods}
+            selectedGood={selectedGood}
+            onGoodsSelect={setSelectedGood}
+          />
         </tbody>
       </table>
     </main>
