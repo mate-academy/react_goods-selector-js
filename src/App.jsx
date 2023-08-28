@@ -16,18 +16,10 @@ export const goods = [
   'Jam',
   'Garlic',
 ];
+const DEFAULT_PRODUCT = 'Jam';
 
 export const App = () => {
-  const DEFAULT_PRODUCT = 'Jam';
   const [selectedProduct, setSelectedProduct] = useState(DEFAULT_PRODUCT);
-  const goodsWithId = goods.reduce((goodsList, product, index) => {
-    goodsList.push({
-      product,
-      id: index + 1,
-    });
-
-    return goodsList;
-  }, []);
 
   return (
     <main className="section container">
@@ -49,10 +41,10 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goodsWithId.map(({ product, id }) => (
+          {goods.map(product => (
             <tr
               data-cy="Good"
-              key={id}
+              key={product}
               className={cn({
                 'has-background-success-light': selectedProduct === product,
               })}
