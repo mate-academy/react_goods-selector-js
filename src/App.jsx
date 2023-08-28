@@ -16,13 +16,9 @@ export const goods = [
   'Garlic',
 ];
 
-const getPrepareGoods = allGoods => allGoods
-  .map((good, index) => ({ good, key: index }));
-
-const prepareGoods = getPrepareGoods(goods);
+const initialSelectedGood = goods[8];
 
 export const App = () => {
-  const initialSelectedGood = prepareGoods[8].good;
   const [selectGood, setSelectGood] = useState(initialSelectedGood);
 
   const handleProductClick = product => setSelectGood(product);
@@ -49,12 +45,12 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {prepareGoods.map(({ good, key }) => {
+          {goods.map((good) => {
             const isSelected = selectGood === good;
 
             return (
               <tr
-                key={key}
+                key={good}
                 data-cy="Good"
                 className={cn({
                   'has-background-success-light': isSelected,
@@ -62,7 +58,7 @@ export const App = () => {
               >
                 <td>
                   <button
-                    onClick={() => handleProductClick(isSelected ? null : good)}
+                    onClick={() => handleProductClick(isSelected ? '' : good)}
                     data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
                     type="button"
                     className={cn('button', {
