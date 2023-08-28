@@ -39,37 +39,41 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
-            <tr
-              data-cy="Good"
-              className={cn({
-                'has-background-success-light': selectedGood === good,
-              })}
-              key={good}
-            >
-              <td>
-                <button
-                  data-cy={selectedGood === good ? 'RemoveButton' : 'AddButton'}
-                  type="button"
-                  className={cn('button', {
-                    'is-info': selectedGood === good,
-                  })}
-                  onClick={
-                    () => setSelectedGood(selectedGood === good ? '' : good)
-                  }
-                >
-                  {selectedGood !== good
-                    ? '+'
-                    : '-'
-                  }
-                </button>
-              </td>
+          {goods.map((good) => {
+            const isSelected = selectedGood === good;
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
-          ))}
+            return (
+              <tr
+                data-cy="Good"
+                className={cn({
+                  'has-background-success-light': isSelected,
+                })}
+                key={good}
+              >
+                <td>
+                  <button
+                    data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
+                    type="button"
+                    className={cn('button', {
+                      'is-info': isSelected,
+                    })}
+                    onClick={
+                      () => setSelectedGood(isSelected ? '' : good)
+                    }
+                  >
+                    {isSelected
+                      ? '-'
+                      : '+'
+                    }
+                  </button>
+                </td>
+
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </main>
