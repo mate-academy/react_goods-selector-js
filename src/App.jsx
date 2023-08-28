@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import cn from 'classnames';
-import { nanoid } from 'nanoid';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -18,17 +17,17 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [currentGood, setCurrentGood] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
-  const handleAddSelectedGood = good => setCurrentGood(good);
-  const handleClearSelectedGood = () => setCurrentGood(null);
+  const handleAddSelectedGood = good => setSelectedGood(good);
+  const handleClearSelectedGood = () => setSelectedGood(null);
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {currentGood ? (
+        {selectedGood ? (
           <>
-            {`${currentGood} is selected`}
+            {`${selectedGood} is selected`}
 
             <button
               data-cy="ClearButton"
@@ -45,12 +44,12 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map((good) => {
-            const isGoodActive = good === currentGood;
+            const isGoodActive = good === selectedGood;
 
             return (
               <tr
                 data-cy="Good"
-                key={nanoid()}
+                key={good}
                 className={cn({
                   'has-background-success-light': isGoodActive,
                 })}
