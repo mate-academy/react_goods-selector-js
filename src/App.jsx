@@ -31,7 +31,7 @@ export const App = () => {
             <span>{`${selectGood} is selected`}</span>
             <button
               onClick={() => {
-                setSelectGood(null);
+                setSelectGood('');
               }}
               data-cy="ClearButton"
               type="button"
