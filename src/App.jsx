@@ -18,34 +18,26 @@ export const goods = [
 
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
-  const isSelected = good => (good === selectedGood);
+  const isSelected = good => good === selectedGood;
 
   return (
     <main className="section container">
-      { selectedGood ? (
-        <h1
-          className="title is-flex is-align-items-center"
-        >
-          {`${selectedGood} is selected`}
+      <h1 className="title is-flex is-align-items-center">
+        {selectedGood
+          ? `${selectedGood} is selected` : 'No goods selected'}
+      </h1>
 
-          <button
-            data-cy="ClearButton"
-            type="button"
-            className="delete ml-3"
-            onClick={() => {
-              setSelectedGood('');
-            }}
-          />
-        </h1>
-      )
-        : (
-          <h1
-            className="title is-flex is-align-items-center"
-          >
-            No goods selected
-          </h1>
-          )
-      }
+      {selectedGood
+        && (
+        <button
+          data-cy="ClearButton"
+          type="button"
+          className="delete ml-3"
+          onClick={() => {
+            setSelectedGood('');
+          }}
+        />
+        )}
 
       <table className="table">
         <tbody>
@@ -55,26 +47,12 @@ export const App = () => {
             return (
               <tr
                 data-cy="Good"
-                className={cn('',
-                  { 'has-background-success-light': isGoodSelected })}
+                className={cn('', {
+                  'has-background-success-light': isGoodSelected,
+                })}
               >
                 <td>
-                  { !isGoodSelected
-                  && (
-                    <button
-                      onClick={() => {
-                        setSelectedGood(good);
-                      }}
-                      data-cy="AddButton"
-                      type="button"
-                      className="button"
-                    >
-                      +
-                    </button>
-                  )}
-
-                  { isGoodSelected
-                  && (
+                  {isGoodSelected ? (
                     <button
                       onClick={() => {
                         setSelectedGood('');
@@ -84,6 +62,17 @@ export const App = () => {
                       className="button is-info"
                     >
                       -
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        setSelectedGood(good);
+                      }}
+                      data-cy="AddButton"
+                      type="button"
+                      className="button"
+                    >
+                      +
                     </button>
                   )}
                 </td>
