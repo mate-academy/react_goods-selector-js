@@ -22,17 +22,7 @@ export const App = () => {
 
   return (
     <main className="section container">
-      { !selectedGood
-      && (
-        <h1
-          className="title is-flex is-align-items-center"
-        >
-          No goods selected
-        </h1>
-      )}
-
-      { selectedGood
-      && (
+      { selectedGood ? (
         <h1
           className="title is-flex is-align-items-center"
         >
@@ -47,51 +37,63 @@ export const App = () => {
             }}
           />
         </h1>
-      )}
+      )
+        : (
+          <h1
+            className="title is-flex is-align-items-center"
+          >
+            No goods selected
+          </h1>
+          )
+      }
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
-            <tr
-              data-cy="Good"
-              className={cn('',
-                { 'has-background-success-light': isSelected(good) })}
-            >
-              <td>
-                { !isSelected(good)
-                && (
-                  <button
-                    onClick={() => {
-                      setSelectedGood(good);
-                    }}
-                    data-cy="AddButton"
-                    type="button"
-                    className="button"
-                  >
-                    +
-                  </button>
-                )}
+          {goods.map((good) => {
+            const isGoodSelected = isSelected(good);
 
-                { isSelected(good)
-                && (
-                  <button
-                    onClick={() => {
-                      setSelectedGood('');
-                    }}
-                    data-cy="RemoveButton"
-                    type="button"
-                    className="button is-info"
-                  >
-                    -
-                  </button>
-                )}
-              </td>
+            return (
+              <tr
+                data-cy="Good"
+                className={cn('',
+                  { 'has-background-success-light': isGoodSelected })}
+              >
+                <td>
+                  { !isGoodSelected
+                  && (
+                    <button
+                      onClick={() => {
+                        setSelectedGood(good);
+                      }}
+                      data-cy="AddButton"
+                      type="button"
+                      className="button"
+                    >
+                      +
+                    </button>
+                  )}
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
-          ))}
+                  { isGoodSelected
+                  && (
+                    <button
+                      onClick={() => {
+                        setSelectedGood('');
+                      }}
+                      data-cy="RemoveButton"
+                      type="button"
+                      className="button is-info"
+                    >
+                      -
+                    </button>
+                  )}
+                </td>
+
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </main>
