@@ -22,12 +22,12 @@ export const App = () => {
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedGood !== ''
+        {selectedGood
           ? `${selectedGood} is selected`
           : 'No goods selected'
         }
 
-        {selectedGood !== '' && (
+        {selectedGood && (
           <button
             data-cy="ClearButton"
             type="button"
