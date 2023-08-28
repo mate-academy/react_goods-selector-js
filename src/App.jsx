@@ -16,10 +16,10 @@ export const goods = [
   'Garlic',
 ];
 
+const PREPARED_GOODS = goods.map((good, index) => ({ good, id: index + 1 }));
+
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
-  const preparedGoods = goods.map((good, index) => ({ good, id: index }
-  ));
 
   return (
     <main className="section container">
@@ -43,33 +43,33 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {preparedGoods.map(({ good, id }) => {
-            const selectedProduct = selectedGood === good;
+          {PREPARED_GOODS.map(({ good, id }) => {
+            const isSelectedProduct = selectedGood === good;
 
             return (
               <tr
                 data-cy="Good"
                 key={id}
                 className={
-                  cn({ 'has-background-success-light': selectedProduct })
+                  cn({ 'has-background-success-light': isSelectedProduct })
                 }
               >
                 <td>
                   <button
-                    data-cy={selectedProduct
+                    data-cy={isSelectedProduct
                       ? 'RemoveButton'
                       : 'AddButton'
                     }
                     type="button"
                     className={
-                      cn('button', { 'is-info': selectedProduct })
+                      cn('button', { 'is-info': isSelectedProduct })
                     }
-                    onClick={() => (selectedProduct
+                    onClick={() => (isSelectedProduct
                       ? setSelectedGood('')
                       : setSelectedGood(good)
                     )}
                   >
-                    {selectedProduct
+                    {isSelectedProduct
                       ? '-'
                       : '+'
                     }
