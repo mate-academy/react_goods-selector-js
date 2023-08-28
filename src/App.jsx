@@ -3,6 +3,9 @@ import './App.scss';
 import cn from 'classnames';
 import { useState } from 'react';
 
+const DEFAULT_GOOD = 'Jam';
+const NO_GOOD_SELECTED = '';
+
 export const goods = [
   'Dumplings',
   'Carrot',
@@ -12,14 +15,11 @@ export const goods = [
   'Bread',
   'Fish',
   'Honey',
-  'Jam',
+  DEFAULT_GOOD,
   'Garlic',
 ];
 
 export const App = () => {
-  const DEFAULT_GOOD = 'Jam';
-  const NO_GOOD_SELECTED = '';
-
   const [selectedGood, setGood] = useState(DEFAULT_GOOD);
   const isSelectedGood = good => good === selectedGood;
 
@@ -55,28 +55,18 @@ export const App = () => {
               })}
             >
               <td>
-                {selectedGood === good
-                  ? (
-                    <button
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                      onClick={() => setGood(NO_GOOD_SELECTED)}
-                    >
-                      -
-                    </button>
-                  )
-                  : (
-                    <button
-                      data-cy="AddButton"
-                      type="button"
-                      className="button"
-                      onClick={() => setGood(good)}
-                    >
-                      +
-                    </button>
-                  )
-                }
+                <button
+                  data-cy={isSelectedGood(good) ? 'RemoveButton' : 'AddButton'}
+                  type="button"
+                  className={isSelectedGood(good) ? 'button is-info' : 'button'}
+                  onClick={() => setGood(isSelectedGood(good)
+                    ? NO_GOOD_SELECTED
+                    : good)}
+                >
+                  {isSelectedGood(good)
+                    ? '-'
+                    : '+'}
+                </button>
               </td>
 
               <td data-cy="GoodTitle" className="is-vcentered">
