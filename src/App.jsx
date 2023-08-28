@@ -16,8 +16,13 @@ export const goods = [
   'Garlic',
 ];
 
+const EMPTY_SPACE = '';
+const ADD_BUTTON_TEXT = '+';
+const REMOVE_BUTTON_TEXT = '-';
+const DEFAULT_GOOD_VALUE = 'Jam';
+
 export const App = () => {
-  const [goodState, setGoodState] = useState('Jam');
+  const [goodState, setGoodState] = useState(DEFAULT_GOOD_VALUE);
 
   const selectedGoodMessage = `${goodState} is selected`;
   const noGoodSelectedMessage = 'No goods selected';
@@ -33,7 +38,7 @@ export const App = () => {
               type="button"
               className="delete ml-3"
               onClick={() => {
-                setGoodState('');
+                setGoodState(EMPTY_SPACE);
               }}
             />
           </>
@@ -55,12 +60,12 @@ export const App = () => {
                 <button
                   data-cy={`${good === goodState ? 'RemoveButton' : 'AddButton'}`}
                   type="button"
-                  className={`button ${good === goodState ? 'is-info' : ''}`}
+                  className={`button ${good === goodState ? 'is-info' : EMPTY_SPACE}`}
                   onClick={() => {
-                    setGoodState(goodState === good ? '' : good);
+                    setGoodState(goodState === good ? EMPTY_SPACE : good);
                   }}
                 >
-                  {good === goodState ? '-' : '+'}
+                  {good === goodState ? REMOVE_BUTTON_TEXT : ADD_BUTTON_TEXT}
                 </button>
               </td>
               <td data-cy="GoodTitle" className="is-vcentered">
