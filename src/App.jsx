@@ -40,22 +40,11 @@ export const App = () => {
 
           {goods.map(good => (
             <tr
+              key={good}
               data-cy="Good"
               className={values === good ? 'has-background-success-light' : ''}
             >
               <td>
-                {/* {!values && (
-                  <button
-                    data-cy="AddButton"
-                    type="button"
-                    className="button"
-                    onClick={() => {
-                      setPosition(good);
-                    }}
-                  >
-                    +
-                  </button>
-                )} */}
                 {values === good ? (
                   <button
                     data-cy="RemoveButton"
