@@ -17,7 +17,7 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setGood] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   return (
     <main className="section container">
@@ -33,7 +33,7 @@ export const App = () => {
             type="button"
             className="delete ml-3"
             onClick={() => {
-              setGood('');
+              setSelectedGood('');
             }}
           />
         )}
@@ -56,7 +56,7 @@ export const App = () => {
                       type="button"
                       className="button"
                       onClick={() => {
-                        setGood(good);
+                        setSelectedGood(good);
                       }}
                     >
                       +
@@ -68,7 +68,7 @@ export const App = () => {
                       type="button"
                       className="button is-info"
                       onClick={() => {
-                        setGood('');
+                        setSelectedGood('');
                       }}
                     >
                       -
