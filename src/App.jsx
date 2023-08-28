@@ -23,13 +23,7 @@ goods.forEach((good, index) => {
 
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
-  const selectGoodHandler = (good, isSelected) => {
-    if (isSelected) {
-      setSelectedGood('');
-
-      return;
-    }
-
+  const selectGoodHandler = (good) => {
     setSelectedGood(good);
   };
 
@@ -72,7 +66,7 @@ export const App = () => {
                     type="button"
                     className={classNames('button',
                       { 'is-info': isSelected })}
-                    onClick={() => selectGoodHandler(good, isSelected)}
+                    onClick={() => selectGoodHandler(isSelected ? '' : good)}
                   >
                     {isSelected
                       ? '-'
