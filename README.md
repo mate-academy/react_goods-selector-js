@@ -17,9 +17,8 @@ In this task, we use the [Bulma CSS framework](https://bulma.io/). It is already
     - only 1 good can be selected at a time;
 1. Don't show `AddButton` when a good is selected.
 1. Show `RemoveButton` for the selected good to clear the selection.
-
 ## Instructions
 
 - Implement a solution following the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline).
 - Open one more terminal and run tests with `npm test` to ensure your solution is correct.
-- Replace `<your_account>` with your Github username in the [DEMO LINK](https://<your_account>.github.io/react_goods-selector-js/) and add it to the PR description.
+- Replace `<your_account>` with your Github username in the [DEMO LINK](https://voronine.github.io/react_goods-selector-js/) and add it to the PR description.
