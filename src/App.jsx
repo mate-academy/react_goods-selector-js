@@ -56,7 +56,7 @@ export const App = () => {
             >
               <td>
                 <button
-                  data-cy={isSelectedGood(good) ? 'RemoveButton' : 'AddButton'}
+                  data-cy={isSelectedGood ? 'RemoveButton' : 'AddButton'}
                   type="button"
                   className={isSelectedGood(good) ? 'button is-info' : 'button'}
                   onClick={() => setGood(isSelectedGood(good)
