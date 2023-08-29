@@ -44,35 +44,33 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map((goodItem) => {
-            const whenSelectedGood = selectedGood === goodItem;
+            const hasSelectedGood = selectedGood === goodItem;
 
             return (
               <tr
                 key={goodItem}
                 data-cy="Good"
-                className={
-                  whenSelectedGood
-                    ? 'has-background-success-light'
-                    : null
-                }
+                className={cn({
+                  'has-background-success-light': hasSelectedGood,
+                })}
               >
                 <td>
                   <button
                     onClick={() => setSelectedGood(
-                      whenSelectedGood
+                      hasSelectedGood
                         ? ''
                         : goodItem,
                     )}
                     data-cy={
-                      whenSelectedGood
+                      hasSelectedGood
                         ? 'RemoveButton'
                         : 'AddButton'}
                     type="button"
                     className={cn('button', {
-                      'is-info': whenSelectedGood,
+                      'is-info': hasSelectedGood,
                     })}
                   >
-                    {whenSelectedGood
+                    {hasSelectedGood
                       ? '-'
                       : '+'}
                   </button>
