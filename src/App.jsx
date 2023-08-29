@@ -17,25 +17,22 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [product, setProduct] = useState('Jam');
-  const NO_GOODS_SELECTED = 'No goods';
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {product}
-        {product !== NO_GOODS_SELECTED
-          ? ' is '
-          : ' '
+        {selectedGood
+          ? `${selectedGood} is selected`
+          : 'No goods selected'
         }
-        selected
 
-        {product !== NO_GOODS_SELECTED && (
+        {selectedGood !== '' && (
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => setProduct(NO_GOODS_SELECTED)}
+            onClick={() => setSelectedGood('')}
           />
         )}
       </h1>
@@ -43,7 +40,7 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map((good) => {
-            let isSelected = product === good;
+            const isSelected = selectedGood === good;
 
             return (
               <tr
@@ -56,16 +53,13 @@ export const App = () => {
                   <button
                     data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
                     type="button"
-                    className={classNames({
-                      button: true,
+                    className={classNames('button', {
                       'is-info': isSelected,
                     })}
                     onClick={() => {
-                      isSelected = !isSelected;
-
-                      setProduct(product !== good
-                        ? good
-                        : NO_GOODS_SELECTED);
+                      setSelectedGood(isSelected
+                        ? ''
+                        : good);
                     }}
                   >
                     {isSelected ? '-' : '+'}
