@@ -15,10 +15,10 @@ export const goods = [
   'Jam',
   'Garlic',
 ];
+const NO_GOODS_MESSAGE = 'No goods selected';
 
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
-  const [message, setMessage] = useState(`${selectedGood} is selected`);
 
   return (
     <main className="section container">
@@ -26,7 +26,7 @@ export const App = () => {
         {selectedGood
           ? (
             <>
-              {message}
+              {`${selectedGood} is selected`}
               <button
                 onClick={() => setSelectedGood('')}
                 data-cy="ClearButton"
@@ -35,7 +35,7 @@ export const App = () => {
               />
             </>
           )
-          : 'No goods selected'}
+          : NO_GOODS_MESSAGE}
       </h1>
 
       <table className="table">
@@ -55,7 +55,6 @@ export const App = () => {
                   <button
                     onClick={() => {
                       setSelectedGood(!isSelected && good);
-                      setMessage(!isSelected && `${good} is selected`);
                     }}
                     data-cy={
                       isSelected
