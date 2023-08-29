@@ -22,11 +22,7 @@ export const App = () => {
   const [selectedGood, setSelectedGood] = useState(DEFAULT_VALUE);
 
   const selectGoodHandler = (good) => {
-    if (selectedGood === good) {
-      setSelectedGood('');
-    } else {
-      setSelectedGood(good);
-    }
+    setSelectedGood(selectedGood === good ? '' : good);
   };
 
   const removeSelectedGood = () => {
@@ -36,7 +32,10 @@ export const App = () => {
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
+        {selectedGood
+          ? `${selectedGood} is selected`
+          : 'No goods selected'
+        }
         {selectedGood && (
           <button
             data-cy="ClearButton"
@@ -54,6 +53,7 @@ export const App = () => {
 
             return (
               <tr
+                key={good}
                 data-cy="Good"
                 className={cn(
                   { 'has-background-success-light': isSelected },
