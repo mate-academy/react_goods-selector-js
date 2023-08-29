@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -26,21 +27,24 @@ export const App = () => {
     setSelectedGood(selectedGood === good ? '' : good);
   };
 
-  const isGoodSelected = selectedGood !== '';
-
   return (
     <main className="section container">
-      <h1 className="title is-flex is-align-items-center">
-        {isGoodSelected
+      <h1 className={classNames(
+        'title',
+        'is-flex',
+        'is-align-items-center',
+      )}
+      >
+        {selectedGood
           ? `${selectedGood} is selected`
           : noGoodsSelectedMessage
         }
 
-        {isGoodSelected && (
+        {selectedGood && (
           <button
             data-cy="ClearButton"
             type="button"
-            className="delete ml-3"
+            className={classNames('delete', 'ml-3')}
             onClick={() => setSelectedGood('')}
           />
         )}
@@ -48,41 +52,42 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
-            <tr
-              key={good}
-              data-cy="Good"
-              className={
-                selectedGood === good
-                  ? selectedBackgroundClass
-                  : ''
-              }
-            >
-              <td>
-                <button
-                  data-cy={isGoodSelected && selectedGood === good
-                    ? 'RemoveButton'
-                    : 'AddButton'
-                  }
-                  type="button"
-                  className={`button ${isGoodSelected && selectedGood === good
-                    ? 'is-info'
-                    : ''}`
-                  }
-                  onClick={() => handleToggleSelection(good)}
-                >
-                  {isGoodSelected && selectedGood === good
-                    ? '-'
-                    : '+'
-                  }
-                </button>
-              </td>
+          {goods.map((good) => {
+            const isSelectedGood = selectedGood === good;
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
-          ))}
+            return (
+              <tr
+                key={good}
+                data-cy="Good"
+                className={classNames({
+                  [selectedBackgroundClass]: isSelectedGood,
+                })}
+              >
+                <td>
+                  <button
+                    data-cy={isSelectedGood
+                      ? 'RemoveButton'
+                      : 'AddButton'
+                    }
+                    type="button"
+                    className={classNames('button', {
+                      'is-info': isSelectedGood,
+                    })}
+                    onClick={() => handleToggleSelection(good)}
+                  >
+                    {isSelectedGood
+                      ? '-'
+                      : '+'
+                    }
+                  </button>
+                </td>
+
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </main>
