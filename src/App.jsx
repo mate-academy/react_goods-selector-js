@@ -19,9 +19,6 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
-  const handleAddSelectedGood = good => setSelectedGood(good);
-  const handleClearSelectedGood = () => setSelectedGood(null);
-
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
@@ -33,7 +30,7 @@ export const App = () => {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={handleClearSelectedGood}
+              onClick={() => setSelectedGood(null)}
             />
           </>
         ) : (
@@ -55,25 +52,22 @@ export const App = () => {
                 })}
               >
                 <td>
-                  {isGoodActive ? (
-                    <button
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                      onClick={handleClearSelectedGood}
-                    >
-                      -
-                    </button>
-                  ) : (
-                    <button
-                      data-cy="AddButton"
-                      type="button"
-                      className="button"
-                      onClick={() => handleAddSelectedGood(good)}
-                    >
-                      +
-                    </button>
-                  )}
+                  <button
+                    data-cy={isGoodActive ? 'RemoveButton' : 'AddButton'}
+                    type="button"
+                    className={cn('button', {
+                      'is-info': isGoodActive,
+                    })}
+                    onClick={isGoodActive
+                      ? () => setSelectedGood(null)
+                      : () => setSelectedGood(good)
+                    }
+                  >
+                    {isGoodActive
+                      ? '-'
+                      : '+'
+                    }
+                  </button>
                 </td>
 
                 <td data-cy="GoodTitle" className="is-vcentered">
