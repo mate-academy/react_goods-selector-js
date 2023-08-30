@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import 'bulma/css/bulma.css';
 import { useState } from 'react';
 import './App.scss';
@@ -40,9 +41,15 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map(good => (
-            good !== selectedGood ? (
-              <tr key={good} data-cy="Good">
-                <td>
+            <tr
+              key={good}
+              data-cy="Good"
+              className={cn({
+                'has-background-success-light': good === selectedGood,
+              })}
+            >
+              <td>
+                {good !== selectedGood ? (
                   <button
                     onClick={() => {
                       setSelectedGood(good);
@@ -53,33 +60,28 @@ export const App = () => {
                   >
                     +
                   </button>
-                </td>
+                ) : (
+                  <button
+                    onClick={() => {
+                      setSelectedGood('');
+                    }}
+                    data-cy="RemoveButton"
+                    type="button"
+                    className="button is-info"
+                  >
+                    -
+                  </button>
+                )}
+              </td>
 
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            )
-              : (
-                <tr data-cy="Good" className="has-background-success-light">
-                  <td>
-                    <button
-                      onClick={() => {
-                        setSelectedGood('');
-                      }}
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                    >
-                      -
-                    </button>
-                  </td>
-
-                  <td data-cy="GoodTitle" className="is-vcentered">
-                    {good}
-                  </td>
-                </tr>
-              )))}
+              <td
+                data-cy="GoodTitle"
+                className="is-vcentered"
+              >
+                {good}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </main>
