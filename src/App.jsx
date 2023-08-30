@@ -19,6 +19,14 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setGood] = useState('Jam');
 
+  const handleGoodClick = (good) => {
+    if (selectedGood !== good) {
+      setGood(good);
+    } else {
+      setGood('');
+    }
+  };
+
   return (
     <main className="section container">
       {!selectedGood ? (
@@ -33,19 +41,17 @@ export const App = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => {
-              setGood('');
-            }}
+            onClick={() => setGood('')}
           />
         </h1>
       )}
 
       <table className="table">
         <tbody>
-          {goods.map((good, index) => (
+          {goods.map(good => (
             <tr
               data-cy="Good"
-              key={goods[index]}
+              key={good}
               className={cn({
                 'has-background-success-light': selectedGood === good,
               })}
@@ -60,13 +66,7 @@ export const App = () => {
                   className={cn('button', {
                     'is-info': selectedGood === good,
                   })}
-                  onClick={() => {
-                    if (selectedGood !== good) {
-                      setGood(good);
-                    } else {
-                      setGood('');
-                    }
-                  }}
+                  onClick={() => handleGoodClick(good)}
                 >
                   {selectedGood === good
                     ? '-'
