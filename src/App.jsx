@@ -45,16 +45,16 @@ export const App = () => {
           {goods.map(good => (
             <tr data-cy="Good">
               <td>
-                {(good === selectedGood || !selectedGood) && (
-                  <button
-                    onClick={() => setSelectedGood(!selectedGood ? good : '')}
-                    data-cy="AddButton"
-                    type="button"
-                    className={selectedGood ? 'button is-info' : 'button'}
-                  >
-                    {selectedGood ? '-' : '+'}
-                  </button>
-                )}
+                <button
+                  onClick={() => setSelectedGood(selectedGood ? good : '')}
+                  data-cy="AddButton"
+                  type="button"
+                  className={selectedGood === good
+                    ? 'button is-info'
+                    : 'button'}
+                >
+                  {selectedGood === good ? '-' : '+'}
+                </button>
               </td>
               <td data-cy="GoodTitle" className="is-vcentered">
                 {good}
