@@ -23,20 +23,20 @@ const SELECTED_GOOD_MESSAGE = ' is selected';
 const NO_GOOD_SELECTED_MESSAGE = 'No goods selected';
 
 export const App = () => {
-  const [selectedState, setSelectedState] = useState(goods[8]);
+  const [selectedGood, setSelectedGood] = useState(goods[8]);
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedState.length ? (
+        {selectedGood ? (
           <>
-            {selectedState + SELECTED_GOOD_MESSAGE}
+            {selectedGood + SELECTED_GOOD_MESSAGE}
             <button
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
               onClick={() => {
-                setSelectedState(EMPTY_VALUE);
+                setSelectedGood(EMPTY_VALUE);
               }}
             />
           </>
@@ -49,7 +49,7 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map((good) => {
-            const isGoodSelected = good === selectedState;
+            const isGoodSelected = good === selectedGood;
 
             return (
               <tr
@@ -67,7 +67,7 @@ export const App = () => {
                       'is-info': isGoodSelected,
                     })}
                     onClick={() => {
-                      setSelectedState(
+                      setSelectedGood(
                         isGoodSelected
                           ? EMPTY_VALUE
                           : good,
