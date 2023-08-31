@@ -17,6 +17,19 @@ export const goods = [
   'Garlic',
 ];
 
+export const keys = [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+];
+
 const isCurrentGoodSelect = (selectGood, currentGood) => (
   selectGood === currentGood
 );
@@ -44,8 +57,9 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
+          {goods.map((good, index) => (
             <tr
+              key={keys[index]}
               data-cy="Good"
               className={cn(
                 'Good',
