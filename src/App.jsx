@@ -19,6 +19,14 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
+  const selectGoodOnClick = (isGoodSelected, good) => {
+    if (isGoodSelected) {
+      setSelectedGood('');
+    } else {
+      setSelectedGood(good);
+    }
+  };
+
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
@@ -29,7 +37,7 @@ export const App = () => {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => setSelectedGood('')}
+              onClick={() => selectGoodOnClick()}
             />
           </>
         ) : (
@@ -61,11 +69,7 @@ export const App = () => {
                     className={
                       classNames('button', { 'is-info': isGoodSelected })
                     }
-                    onClick={
-                      isGoodSelected
-                        ? () => setSelectedGood('')
-                        : () => setSelectedGood(good)
-                    }
+                    onClick={() => selectGoodOnClick(isGoodSelected, good)}
                   >
                     {isGoodSelected
                       ? '-'
