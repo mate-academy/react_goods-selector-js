@@ -32,7 +32,7 @@ export const App = () => {
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {!isSelected('') ? (
+        {selectedGood ? (
           <>
             {`${selectedGood} is selected`}
             <button
