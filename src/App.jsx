@@ -22,7 +22,7 @@ export const App = () => {
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {product || 'No goods selected'}
+        {product === '' ? 'No goods selected' : product}
 
         {product && (
           <button
