@@ -17,7 +17,7 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [product, setProduct] = useState('');
+  const [product, setProduct] = useState('Jam');
 
   return (
     <main className="section container">
