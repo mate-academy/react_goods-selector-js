@@ -17,7 +17,7 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setSelectedGood] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState(goods[8]);
 
   return (
     <main className="section container">
@@ -62,9 +62,7 @@ export const App = () => {
                       cn('button', { 'is-info': isSelectedGood })
                     }
                     onClick={
-                      isSelectedGood
-                        ? () => setSelectedGood('')
-                        : () => setSelectedGood(good)
+                      setSelectedGood(isSelectedGood ? '' : good)
                     }
                   >
                     {isSelectedGood ? '-' : '+'}
