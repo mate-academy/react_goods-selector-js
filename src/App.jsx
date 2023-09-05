@@ -16,27 +16,25 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [element, setElement] = useState('Jam');
-  const [count, setCount] = useState(2);
-  const selectedGood = count % 2 === 0;
+  const [selectedElement, setSelectedElement] = useState('Jam');
 
   return (
     <main className="section container">
 
       <h1 className="title is-flex is-align-items-center">
-        {element && selectedGood
-          ? `${element} is selected`
+        {selectedElement
+          ? `${selectedElement} is selected`
           : `No goods selected`
         }
 
         <button
           onClick={() => {
-            setElement('');
+            setSelectedElement('');
           }}
-          data-cy={element && selectedGood ? 'ClearButton' : ''}
+          data-cy={selectedElement ? 'ClearButton' : ''}
           type="button"
           className="delete ml-3"
-          style={{ display: element && selectedGood ? 'block' : 'none' }}
+          style={{ display: selectedElement ? 'block' : 'none' }}
         />
       </h1>
 
@@ -45,20 +43,21 @@ export const App = () => {
           {goods.map(good => (
             <tr
               data-cy="Good"
-              className={element === good && selectedGood
+              className={selectedElement === good
                 ? 'has-background-success-light' : ''}
             >
               <td>
                 <button
                   onClick={() => {
-                    setElement(good);
-                    setCount(element === good ? count + 1 : 2);
+                    setSelectedElement(selectedElement === good
+                      ? null : good);
                   }}
-                  data-cy={element === good ? 'RemoveButton' : 'AddButton'}
+                  data-cy={selectedElement === good
+                    ? 'RemoveButton' : 'AddButton'}
                   type="button"
-                  className={`button ${element === good && selectedGood ? 'is-info' : ''}`}
+                  className={`button ${selectedElement === good ? 'is-info' : ''}`}
                 >
-                  {element === good && selectedGood ? '-' : '+'}
+                  {selectedElement === good ? '-' : '+'}
                 </button>
               </td>
 
