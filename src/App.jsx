@@ -62,7 +62,7 @@ export const App = () => {
                       cn('button', { 'is-info': isSelectedGood })
                     }
                     onClick={
-                      setSelectedGood(isSelectedGood ? '' : good)
+                      () => setSelectedGood(isSelectedGood ? '' : good)
                     }
                   >
                     {isSelectedGood ? '-' : '+'}
