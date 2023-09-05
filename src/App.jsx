@@ -17,7 +17,7 @@ export const goods = [
 ];
 
 export const App = () => {
-  let [value, setValue] = useState('Jam')
+  const [value, setValue] = useState(goods[goods.indexOf('Jam')] || goods[0]);
 
   return (
     <main className="section container">
@@ -29,7 +29,7 @@ export const App = () => {
 
             <button
               onClick={() => {
-                setValue('')
+                setValue('');
               }}
               data-cy="ClearButton"
               type="button"
@@ -58,12 +58,12 @@ export const App = () => {
                         ? () => setValue('')
                         : () => setValue(good)
                     }
-                    data-cy={isSelected 
+                    data-cy={isSelected
                       ? 'RemoveButton'
                       : 'AddButton'
                     }
                     type="button"
-                    className={cn('button', {'is-info' : isSelected})}
+                    className={cn('button', { 'is-info': isSelected })}
                   >
                     {
                       isSelected
@@ -77,11 +77,11 @@ export const App = () => {
                   {good}
                 </td>
               </tr>
-            )
+            );
           })
           }
         </tbody>
       </table>
     </main>
   );
-}
+};
