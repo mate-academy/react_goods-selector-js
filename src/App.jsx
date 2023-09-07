@@ -22,9 +22,10 @@ export const App = () => {
     <main className="section container">
 
       <h1 className="title is-flex is-align-items-center">
-       {value ?
-       `${value} is selected`
-       : 'No goods selected'}
+        {value
+          ? `${value} is selected`
+          : 'No goods selected'
+       }
         {value && (
           <button
             onClick={() => {
@@ -41,40 +42,24 @@ export const App = () => {
         <tbody>
           {goods.map(good => (
             <tr
+              key={good}
               data-cy="Good"
               className={value === good
                   && 'has-background-success-light'
                   }
             >
-              {value === good
-                ? (
-                  <td>
-                    <button
-                      onClick={() => {
-                        setValue('');
-                      }}
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                    >
-                      -
-                    </button>
-                  </td>
-                ) : (
-                  <td>
-                    <button
-                      onClick={() => {
-                        setValue(good);
-                      }}
-                      data-cy="AddButton"
-                      type="button"
-                      className="button"
-                    >
-                      +
-                    </button>
-                  </td>
-                )}
-
+              <td>
+                <button
+                  onClick={() => {
+                    setValue(value === good ? '' : good);
+                  }}
+                  data-cy={value === good ? 'RemoveButton' : 'AddButton'}
+                  type="button"
+                  className={value === good ? 'button is-info' : 'button'}
+                >
+                  {value === good ? '-' : '+'}
+                </button>
+              </td>
               <td
                 data-cy="GoodTitle"
                 className="is-vcentered"
@@ -86,5 +71,5 @@ export const App = () => {
         </tbody>
       </table>
     </main>
-  )
+  );
 };
