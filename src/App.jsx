@@ -16,31 +16,30 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setValue] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
+
+  const handleButton = () => {
+    setSelectedGood(null);
+  };
 
   return (
     <main className="section container">
-      {
-        (selectedGood === '')
-          ? (
-            <h1 className="title is-flex is-align-items-center">
-              No goods selected
-            </h1>
-          )
-          : (
-            <h1 className="title is-flex is-align-items-center">
-              {`${selectedGood} is selected`}
-              <button
-                data-cy="ClearButton"
-                type="button"
-                className="delete ml-3"
-                onClick={() => {
-                  setValue('');
-                }}
-              />
-            </h1>
-          )
-      }
+      <h1 className="title is-flex is-align-items-center">
+        {
+        !selectedGood
+          ? 'No goods selected'
+          : `${selectedGood} is selected`
+        }
+
+        {selectedGood && (
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={handleButton}
+          />
+        )}
+      </h1>
 
       <table className="table">
         <tbody>
@@ -51,14 +50,14 @@ export const App = () => {
               className={
                 good === selectedGood
                   ? 'has-background-success-light'
-                  : ''
+                  : null
               }
             >
               <td>
                 {selectedGood !== good ? (
                   <button
                     onClick={() => {
-                      setValue(good);
+                      setSelectedGood(good);
                     }}
                     data-cy="AddButton"
                     type="button"
@@ -66,19 +65,16 @@ export const App = () => {
                   >
                     +
                   </button>
+                ) : (
+                  <button
+                    onClick={handleButton}
+                    data-cy="RemoveButton"
+                    type="button"
+                    className="button is-info"
+                  >
+                    -
+                  </button>
                 )
-                  : (
-                    <button
-                      onClick={() => {
-                        setValue('');
-                      }}
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                    >
-                      -
-                    </button>
-                  )
                 }
               </td>
 
