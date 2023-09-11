@@ -48,9 +48,6 @@ export const App = () => {
               className={cn({
                 'has-background-success-light': selectedGood === good,
               })}
-              onClick={() => {
-                setselectedGood(good);
-              }}
               key={good}
             >
 
