@@ -20,11 +20,9 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
   const onClick = good => () => {
-    if (selectedGood === good) {
-      setSelectedGood('');
-    } else {
-      setSelectedGood(good);
-    }
+    setSelectedGood(
+      selectedGood === good ? '' : good,
+    );
   };
 
   return (
