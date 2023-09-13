@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import cn from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -20,13 +21,8 @@ export const App = () => {
 
   return (
     <main className="section container">
-      {selectedGood === ''
+      {selectedGood
         ? (
-          <h1 className="title is-flex is-align-items-center">
-            No goods selected
-          </h1>
-        )
-        : (
           <h1 className="title is-flex is-align-items-center">
             {`${selectedGood} is selected`}
 
@@ -34,10 +30,13 @@ export const App = () => {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => {
-                setGood('');
-              }}
+              onClick={() => setGood('')}
             />
+          </h1>
+        )
+        : (
+          <h1 className="title is-flex is-align-items-center">
+            No goods selected
           </h1>
         )
       }
@@ -48,9 +47,9 @@ export const App = () => {
             <tr
               data-cy="Good"
               key={good}
-              className={
-                good === selectedGood ? 'has-background-success-light' : ''
-              }
+              className={cn({
+                'has-background-success-light': good === selectedGood,
+              })}
             >
               <td>
                 {good === selectedGood
@@ -59,9 +58,7 @@ export const App = () => {
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={() => {
-                        setGood('');
-                      }}
+                      onClick={() => setGood('')}
                     >
                       -
                     </button>
@@ -71,9 +68,7 @@ export const App = () => {
                       data-cy="AddButton"
                       type="button"
                       className="button"
-                      onClick={() => {
-                        setGood(good);
-                      }}
+                      onClick={() => setGood(good)}
                     >
                       +
                     </button>
