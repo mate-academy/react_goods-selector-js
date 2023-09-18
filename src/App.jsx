@@ -28,9 +28,7 @@ export const App = () => {
           data-cy="ClearButton"
           type="button"
           className="delete ml-3"
-          onClick={() => {
-            setProduct();
-          }}
+          onClick={() => setProduct('')}
         />
         )}
       </h1>
@@ -39,6 +37,7 @@ export const App = () => {
         <tbody>
           {goods.map(good => (
             <tr
+              key={good}
               data-cy="Good"
               className={`${product === good ? 'has-background-success-light' : ''}`}
             >
@@ -48,7 +47,7 @@ export const App = () => {
                   type="button"
                   className={`button ${product === good ? 'is-info' : ''}`}
                   onClick={product === good ? () => {
-                    setProduct();
+                    setProduct('');
                   } : () => {
                     setProduct(good);
                   }}
