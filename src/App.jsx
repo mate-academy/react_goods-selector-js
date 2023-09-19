@@ -17,17 +17,16 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setSelected]
-    = useState(goods.find(item => item === 'Jam'));
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   function removeBtnClickHandler() {
-    setSelected(null);
+    setSelectedGood(null);
   }
 
   function itemBtnClickHandler(item) {
     return item === selectedGood
-      ? setSelected(null)
-      : setSelected(goods.find(product => product === item));
+      ? setSelectedGood(null)
+      : setSelectedGood(goods.find(product => product === item));
   }
 
   return (
@@ -40,16 +39,18 @@ export const App = () => {
 
       {selectedGood && (
         <h1 className="title is-flex is-align-items-center">
-          {selectedGood}
-          {' '}
-          is selected
+          {selectedGood
+            ? `${selectedGood} is selected`
+            : 'No goods selected'}
 
-          <button
-            data-cy="ClearButton"
-            type="button"
-            className="delete ml-3"
-            onClick={removeBtnClickHandler}
-          />
+          {selectedGood && (
+            <button
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={removeBtnClickHandler}
+            />
+          )}
         </h1>
       )}
 
