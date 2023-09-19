@@ -53,6 +53,7 @@ export const App = () => {
             <tr
               data-cy="Good"
               className={good === item ? 'has-background-success-light' : ''}
+              key={item}
             >
               <td>
                 {good !== item ? (
