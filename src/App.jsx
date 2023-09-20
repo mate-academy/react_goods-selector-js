@@ -44,6 +44,7 @@ export const App = () => {
         <tbody>
           {goods.map(good => (
             <tr
+              key={good}
               data-cy="Good"
               className={cn({
                 'has-background-success-light': good === selectedGood,
@@ -67,7 +68,7 @@ export const App = () => {
                     type="button"
                     className="button is-info"
                     onClick={() => {
-                      setSelectedGood(undefined);
+                      setSelectedGood(null);
                     }}
                   >
                     -
