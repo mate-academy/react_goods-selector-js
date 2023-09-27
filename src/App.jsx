@@ -17,10 +17,18 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [thisGood, setGood] = useState('Jam');
+  const [thisGood, setThisGood] = useState('Jam');
   const NoSelected = 'No goods selected';
-  const clearGoodsSDtate = () => {
-    setGood(null);
+  const clearGoodsState = () => {
+    setThisGood(null);
+  };
+
+  const checkToRemove = (good) => {
+    if (thisGood !== good) {
+      setThisGood(good);
+    } else {
+      clearGoodsState();
+    }
   };
 
   return (
@@ -30,8 +38,8 @@ export const App = () => {
         {thisGood !== null && (
           <button
             onClick={() => {
-              setGood('');
-              clearGoodsSDtate();
+              setThisGood('');
+              clearGoodsState();
             }}
             data-cy="ClearButton"
             type="button"
@@ -55,7 +63,7 @@ export const App = () => {
                 <td>
                   <button
                     onClick={() => {
-                      setGood(good);
+                      checkToRemove(good);
                     }}
                     data-cy="AddButton"
                     type="button"
