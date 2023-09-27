@@ -1,7 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
-import cn from 'classnames';
 import { useState } from 'react';
+import { Table } from './components/Table';
 
 export const goods = [
   'Dumplings',
@@ -20,7 +20,7 @@ export const App = () => {
   const [thisGood, setThisGood] = useState('Jam');
   const NoSelected = 'No goods selected';
   const clearGoodsState = () => {
-    setThisGood(null);
+    setThisGood('');
   };
 
   const checkToRemove = (good) => {
@@ -35,7 +35,7 @@ export const App = () => {
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
         {thisGood ? `${thisGood} is selected` : NoSelected}
-        {thisGood !== null && (
+        {thisGood !== '' && (
           <button
             onClick={() => {
               setThisGood('');
@@ -51,38 +51,14 @@ export const App = () => {
       </h1>
 
       <table className="table">
-        <tbody>
-          {goods.map(good => (
-            <>
-              <tr
-                data-cy="Good"
-                className={cn('td', {
-                  'has-background-success-light': thisGood === good,
-                })}
-              >
-                <td>
-                  <button
-                    onClick={() => {
-                      checkToRemove(good);
-                    }}
-                    data-cy="AddButton"
-                    type="button"
-                    className={cn('button', {
-                      'button is-info': thisGood === good,
-                    })}
-                  >
-                    {thisGood === good ? '-' : '+'}
-                  </button>
-                </td>
-
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            </>
-
-          ))}
-        </tbody>
+        <Table
+          key={goods}
+          goods={goods}
+          thisGood={thisGood}
+          setThisGood={setThisGood}
+          clearGoodsState={clearGoodsState}
+          checkToRemove={checkToRemove}
+        />
       </table>
     </main>
   );
