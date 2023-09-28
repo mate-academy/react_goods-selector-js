@@ -21,6 +21,12 @@ export const App = () => {
 
   const isSelectedProduct = product => product === selectedProduct;
 
+  const handleClick = product => (
+    isSelectedProduct(product)
+      ? setProduct('')
+      : setProduct(product)
+  );
+
   return (
     <main className="section container">
 
@@ -66,13 +72,7 @@ export const App = () => {
                   type="button"
                   className={cn('button',
                     { 'is-info': isSelectedProduct(product) })}
-                  onClick={() => {
-                    if (isSelectedProduct(product)) {
-                      setProduct('');
-                    } else {
-                      setProduct(product);
-                    }
-                  }}
+                  onClick={() => handleClick(product)}
                 >
                   {isSelectedProduct(product) ? '-' : '+'}
                 </button>
