@@ -18,12 +18,6 @@ export const goods = [
 
 export const App = () => {
   const [item, setItem] = useState('Jam');
-  const isSelected = product => product === item;
-  const removeClick = product => (
-    isSelected(product)
-      ? setItem('')
-      : setItem(product)
-  );
 
   return (
     <main className="section container">
@@ -49,38 +43,40 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(nameOfItem => (
-            <tr
-              data-cy="Good"
-              key={nameOfItem}
-              className={cn({
-                'has-background-success-light': isSelected(nameOfItem),
-              })}
-            >
-              <td>
-                <button
-                  data-cy={isSelected(nameOfItem)
-                    ? 'RemoveButton'
-                    : 'AddButton'
-                  }
-                  type="button"
-                  className={cn('button', {
-                    'is-info': isSelected(nameOfItem),
-                  })}
-                  onClick={() => removeClick(nameOfItem)}
-                >
-                  {isSelected(nameOfItem)
-                    ? '-'
-                    : '+'
-                  }
-                </button>
-              </td>
+          {goods.map((nameOfItem) => {
+            const isActive = nameOfItem === item;
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {nameOfItem}
-              </td>
-            </tr>
-          ))}
+            return (
+              <tr
+                data-cy="Good"
+                key={nameOfItem}
+                className={cn({
+                  'has-background-success-light': isActive,
+                })}
+              >
+                <td>
+                  <button
+                    data-cy={isActive
+                      ? 'RemoveButton'
+                      : 'AddButton'
+                    }
+                    type="button"
+                    className={cn('button', {
+                      'is-info': isActive,
+                    })}
+                    onClick={() => setItem(isActive ? '' : nameOfItem)}
+                  >
+                    {isActive ? '-' : '+'
+                    }
+                  </button>
+                </td>
+
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {nameOfItem}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </main>
