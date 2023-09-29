@@ -53,7 +53,6 @@ export const App = () => {
                 : null}
               data-cy="Good"
               key={el}
-              id={el.split(' ').join('')}
             >
               <td>
                 {selectedGood === el
@@ -75,7 +74,6 @@ export const App = () => {
                       type="button"
                       className="button"
                       onClick={() => {
-                        highlightGood(el.split(' ').join(''));
                         setGood(el);
                       }}
                     >
@@ -93,10 +91,4 @@ export const App = () => {
       </table>
     </main>
   );
-};
-
-const highlightGood = (id) => {
-  document.querySelectorAll('tr')
-    .forEach(el => el.classList.remove('has-background-success-light'));
-  document.querySelector(`#${id}`).classList.add('has-background-success-light');
 };
