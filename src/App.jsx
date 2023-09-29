@@ -18,8 +18,6 @@ export const goods = [
 
 export const App = () => {
   const [value, setValue] = useState('Jam');
-  const PLUS = <span>+</span>;
-  const MINUS = <span>-</span>;
 
   const AddButtonClick = (good) => {
     setValue(good);
@@ -48,6 +46,7 @@ export const App = () => {
           {goods.map(good => (
             <tr
               data-cy="Good"
+              key={good}
               className={cn({ 'has-background-success-light': good === value })}
             >
               <td>
@@ -68,7 +67,7 @@ export const App = () => {
                     className="button is-info"
                     onClick={RemoveButtonClick}
                   >
-                    {MINUS}
+                    -
                   </button>
                 )}
                 {(value && value !== good) ? (
@@ -78,7 +77,7 @@ export const App = () => {
                     className="button"
                     onClick={() => AddButtonClick(good)}
                   >
-                    {PLUS}
+                    +
                   </button>
                 ) : false
                 }
