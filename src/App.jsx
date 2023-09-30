@@ -27,7 +27,25 @@ export const App = () => {
           </h1>
         )}
 
-      <h1 className="title is-flex is-align-items-center">
+
+      {selectedGood &&
+        <h1 className="title is-flex is-align-items-center">
+          {selectedGood} is selected
+
+          {selectedGood && (
+            <button
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={() => {
+                setGood('');
+              }}
+            />
+          )}
+
+        </h1>
+      }
+      {/* <h1 className="title is-flex is-align-items-center">
         {selectedGood.length > 0 && `${selectedGood} is selected`}
 
         {selectedGood && (
@@ -41,7 +59,7 @@ export const App = () => {
           />
         )}
 
-      </h1>
+      </h1> */}
 
       <table className="table">
         <tbody>
