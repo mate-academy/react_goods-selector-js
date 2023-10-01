@@ -15,12 +15,14 @@ export const goods = [
   'Garlic',
 ];
 
+const NONE = 'No goods selected';
+
 export const App = () => {
   const [selected, setSelected] = useState('Jam');
 
   const onClick = (product) => {
     setSelected(selected === product
-      ? 'No goods selected'
+      ? NONE
       : product);
   };
 
@@ -29,7 +31,7 @@ export const App = () => {
 
   return (
     <main className="section container">
-      {selected !== 'No goods selected'
+      {selected !== NONE
         ? (
           <h1 className="title is-flex is-align-items-center">
             {`${selected} is selected`}
@@ -38,7 +40,7 @@ export const App = () => {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => setSelected('No goods selected')}
+              onClick={() => setSelected(NONE)}
             />
           </h1>
         )
