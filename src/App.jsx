@@ -21,7 +21,7 @@ export const App = () => {
   const [selected, setSelected] = useState(true);
 
   function setSelector(item) {
-    setGood(item || '');
+    setGood(item);
     setSelected(!!item);
   }
 
@@ -33,7 +33,7 @@ export const App = () => {
             {`${good} is selected`}
             <button
               data-cy="ClearButton"
-              onClick={() => setSelector(null)}
+              onClick={() => setSelector('')}
               type="button"
               className="delete ml-3"
             />
@@ -72,7 +72,7 @@ export const App = () => {
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={() => setSelector(null)}
+                      onClick={() => setSelector('')}
                     >
                       -
                     </button>
