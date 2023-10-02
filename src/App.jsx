@@ -18,7 +18,7 @@ export const goods = [
 
 export const App = () => {
   const [value, setValue] = useState('Jam');
-
+const resetValue = () => setValue(null);
   return (
     <main className="section container">
       {value === null ? (
