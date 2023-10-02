@@ -54,9 +54,7 @@ const resetValue = () => setValue(null);
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
-                    onClick={() => {
-                      setValue(null);
-                    }}
+                    onClick={resetValue}
                   >
                     -
                   </button>
