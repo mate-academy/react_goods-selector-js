@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import classnames from 'classnames'; // Import the classnames library
 
 export const goods = [
   'Dumplings',
@@ -41,11 +42,11 @@ export const App = () => {
         <tbody>
           {goods.map(good => (
             <tr
-              key={good.id}
+              key={good}
               data-cy="Good"
-              className={`${
-                selectedGood === good ? 'has-background-success-light' : ''
-              }`}
+              className={classnames({
+                'has-background-success-light': selectedGood === good,
+              })}
             >
               <td>
                 {selectedGood === good ? (
