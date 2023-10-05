@@ -17,14 +17,14 @@ export const goods = [
 
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
-  const toggleGood = (selected, thisGood) => {
-    if (selected === thisGood) {
+  const toggleGood = (selected, good) => {
+    if (selected === good) {
       setSelectedGood(null);
 
       return;
     }
 
-    setSelectedGood(thisGood);
+    setSelectedGood(good);
   };
 
   return (
@@ -74,11 +74,7 @@ export const App = () => {
                     }
                     onClick={() => toggleGood(selectedGood, good)}
                   >
-                    {
-                      selectedGood === good
-                        ? '-'
-                        : '+'
-                    }
+                    { selectedGood === good ? '-' : '+' }
                   </button>
                 </td>
 
