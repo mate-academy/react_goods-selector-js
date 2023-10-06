@@ -47,8 +47,9 @@ export const App = () => {
               <tr
                 data-cy="Good"
                 key={good}
-                className={cn('',
-                  { 'has-background-success-light': isGoodSelected })}
+                className={cn(
+                  { 'has-background-success-light': isGoodSelected },
+                )}
               >
                 <td>
                   <button
@@ -57,11 +58,7 @@ export const App = () => {
                     className={cn('button',
                       { 'is-info': isGoodSelected })}
                     onClick={() => {
-                      if (isGoodSelected) {
-                        setSelected('');
-                      } else {
-                        setSelected(good);
-                      }
+                      setSelected(isGoodSelected ? '' : good);
                     }}
                   >
                     {isGoodSelected ? '-' : '+'}
