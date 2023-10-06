@@ -1,5 +1,6 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
+import cn from 'classnames';
 import { useState } from 'react';
 
 export const goods = [
@@ -38,9 +39,9 @@ export const App = () => {
             <tr
               key={good}
               data-cy="Good"
-              className={
-                selectedGoods === good ? 'has-background-success-light' : ''
-              }
+              className={cn({
+                'has-background-success-light': selectedGoods === good,
+              })}
             >
               {selectedGoods !== good && (
                 <td>
