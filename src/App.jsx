@@ -45,13 +45,13 @@ export const App = () => {
   );
 
   const renderedGoods = goods.map((good) => {
-    const isCelected = selectedGood !== good;
+    const isSelected = selectedGood !== good;
 
-    const valueToSet = isCelected ? good : '';
-    const testText = isCelected ? 'AddButton' : 'RemoveButton';
-    const className = isCelected ? 'button' : 'button is-info';
-    const buttonText = isCelected ? '+' : '-';
-    const rowStyle = !isCelected && 'has-background-success-light';
+    const valueToSet = isSelected ? good : '';
+    const testText = isSelected ? 'AddButton' : 'RemoveButton';
+    const className = isSelected ? 'button' : 'button is-info';
+    const buttonText = isSelected ? '+' : '-';
+    const rowStyle = !isSelected && 'has-background-success-light';
 
     return (
       <tr
