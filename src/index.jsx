@@ -1,6 +1,6 @@
-import ReactDOM from "react-dom";
-import { App } from "./App";
-import { useState } from "react";
+import ReactDOM from 'react-dom';
+import { useState } from 'react';
+import { App } from './App';
 
-ReactDOM.render(<App />, document.getElementById("root"));
-export const [item, setItem] = useState("Jam");
+ReactDOM.render(<App />, document.getElementById('root'));
+export const [item, setItem] = useState('Jam');

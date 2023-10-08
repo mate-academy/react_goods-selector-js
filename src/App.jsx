@@ -1,7 +1,7 @@
+/* eslint-disable no-unused-vars */
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
-// eslint-disable-next-line no-unused-vars
 import classNames from 'classnames';
 
 export const goods = [
@@ -18,56 +18,57 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [item, setItem] = useState('Jam');
+  const [selectedGood, updateGood] = useState('Jam');
 
   return (
-    <main className="section containe">
-      {item ? (
-        <h1 className="title is-flex is-align-items-center">
-          {`${item} is selected`}
+    <main className="section container">
+      <h1 className="title is-flex is-align-items-center">
+        {selectedGood
+          ? (
+            <>
+              {`${selectedGood} is selected`}
 
-          <button
-            data-cy="Addbuton"
-            type="button"
-            className="delete ml-3"
-            onClick={() => setItem('')}
-          />
-        </h1>
-      ) : (
-        <h1 className="title is-flex is-align-items-center">
-          No goods selected
-        </h1>
-      )}
+              <button
+                onClick={() => {
+                  updateGood('');
+                }}
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+              />
+            </>
+          )
+          : 'No goods selected'}
+      </h1>
 
       <table className="table">
         <tbody>
-          {goods.map((nameofen) => {
-            const isActive = nameofen === item;
+          {goods.map(item => (
+            <tr data-cy="Good" className={`${selectedGood === item && 'has-background-success-light'}`}>
+              <td>
+                <button
+                  onClick={() => (
+                    selectedGood === item
+                      ? updateGood('')
+                      : updateGood(item)
+                  )}
+                  data-cy={
+                  selectedGood === item
+                    ? 'RemoveButton'
+                    : 'AddButton'
+                  }
+                  type="button"
+                  className={`button ${selectedGood === item && 'is-info'}`}
+                >
+                  {selectedGood === item ? '-' : '+'}
+                </button>
+              </td>
 
-            return (
-              <tr
-                data-cy="Good"
-                key={nameofen}
-                className={`${
-                  isActive ? 'has-background-success-light' : ''
-                }`}
-              >
-                <td>
-                  <button
-                    data-cy={isActive ? 'RemoveButton' : 'AddButton'}
-                    type="button"
-                    className={`button ${isActive ? 'is-info' : ''}`}
-                    onClick={() => setItem(isActive ? '' : nameofen)}
-                  >
-                    {isActive ? '-' : '+'}
-                  </button>
-                </td>
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {nameofen}
-                </td>
-              </tr>
-            );
-          })}
+              <td data-cy="GoodTitle" className="is-vcentered">
+                {item}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </main>
