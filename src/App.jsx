@@ -49,11 +49,7 @@ export const App = () => {
               <td>
                 <button
                   onClick={
-                    () => updateGood(
-                      isSelectedGood(item)
-                        ? ''
-                        : item,
-                    )
+                    () => updateGood(isSelectedGood(item) ? '' : item)
                   }
                   data-cy={
                     isSelectedGood(item)
