@@ -1,6 +1,6 @@
+/* eslint-disable no-unused-vars */
 import ReactDOM from 'react-dom';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { App } from './App';
 
 ReactDOM.render(<App />, document.getElementById('root'));
-export const [item, setItem] = useState('Jam');
