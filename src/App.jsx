@@ -57,7 +57,7 @@ export const App = () => {
                       isSelected ? 'RemoveButton' : 'AddButton'
                     }
                     type="button"
-                    className={`button ${isSelected && 'is-info'}`}
+                    className={classNames('button', { 'is-info': isSelected })}
                   >
                     {isSelected ? '-' : '+'}
                   </button>
