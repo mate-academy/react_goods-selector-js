@@ -91,7 +91,7 @@ export const App = () => {
                     onClick={
                       goodChecherFunction(
                         goodChecher,
-                        resetButton,
+                        resetButton(),
                         setButton(oneGood),
                       )
                     }
