@@ -17,48 +17,53 @@ export const goods = [
 
 export const App = () => {
   const [selectedGood, updateGood] = useState('Jam');
+  const isSelectedGood = item => item === selectedGood;
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedGood
-          ? (
-            <>
-              {`${selectedGood} is selected`}
+        {selectedGood ? (
+          <>
+            {`${selectedGood} is selected`}
 
-              <button
-                onClick={() => {
-                  updateGood('');
-                }}
-                data-cy="ClearButton"
-                type="button"
-                className="delete ml-3"
-              />
-            </>
-          )
-          : 'No goods selected'}
+            <button
+              onClick={() => updateGood('')}
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+            />
+          </>
+        ) : (
+          'No goods selected'
+        )}
       </h1>
 
       <table className="table">
         <tbody>
           {goods.map(item => (
-            <tr data-cy="Good" className={`${selectedGood === item && 'has-background-success-light'}`}>
+            <tr
+              data-cy="Good"
+              className={`${isSelectedGood(item) && 'has-background-success-light'}`}
+              key={item}
+            >
               <td>
                 <button
-                  onClick={() => (
-                    selectedGood === item
-                      ? updateGood('')
-                      : updateGood(item)
-                  )}
+                  onClick={
+                    () => updateGood(
+                      isSelectedGood(item)
+                        ? ''
+                        : item,
+                    )
+                  }
                   data-cy={
-                  selectedGood === item
-                    ? 'RemoveButton'
-                    : 'AddButton'
+                    isSelectedGood(item)
+                      ? 'RemoveButton'
+                      : 'AddButton'
                   }
                   type="button"
-                  className={`button ${selectedGood === item && 'is-info'}`}
+                  className={`button ${isSelectedGood(item) && 'is-info'}`}
                 >
-                  {selectedGood === item ? '-' : '+'}
+                  {isSelectedGood(item) ? '-' : '+'}
                 </button>
               </td>
 
