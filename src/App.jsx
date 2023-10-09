@@ -2,6 +2,7 @@ import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import classes from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -20,10 +21,8 @@ export const App = () => {
   const [title, setTitle] = useState('Jam');
 
   const handleTitleChange = (good) => {
-    if (good === title
-      || !good
-      || typeof good !== 'string') {
-      setTitle('');
+    if (good === title) {
+      setTitle(null);
 
       return;
     }
@@ -34,18 +33,19 @@ export const App = () => {
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {title !== ''
+        {title
           ? `${title} is selected`
           : 'No goods selected'
         }
 
-        {title !== ''
+        {title
           && (
             <button
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={handleTitleChange}
+              aria-label="clearTitle"
+              onClick={() => handleTitleChange(null)}
             />
           )}
       </h1>
@@ -56,8 +56,8 @@ export const App = () => {
             <tr
               data-cy="Good"
               key={uuidv4()}
-              className={good === title
-                && 'has-background-success-light'
+              className={
+                classes({ 'has-background-success-light': good === title })
               }
             >
               <td>
@@ -66,10 +66,14 @@ export const App = () => {
                     ? 'RemoveButton'
                     : 'AddButton'
                   }
+                  aria-label={good === title
+                    ? 'clearTitle'
+                    : 'setTitle'
+                  }
                   type="button"
-                  className={good === title
-                    ? 'button is-info'
-                    : 'button'}
+                  className={
+                    classes('button', { 'is-info': good === title })
+                  }
                   onClick={() => handleTitleChange(good)}
                 >
                   {good === title
