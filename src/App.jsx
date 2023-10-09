@@ -15,13 +15,16 @@ export const goods = [
   'Garlic',
 ];
 
+const goodsObj = goods
+  .map((item, index) => ({ nameGoods: item, id: index + 1 }));
+
 export const App = () => {
   const [checked, setChecked] = useState(8);
   const [currentName, setCurrentName] = useState('Jam');
 
   return (
     <main className="section container">
-      {checked === null
+      {!checked
         ? (
           <h1 className="title is-flex is-align-items-center">
             No goods selected
@@ -41,17 +44,19 @@ export const App = () => {
       }
       <table className="table">
         <tbody>
-          {goods.map((goodName, index) => {
-            const isChecked = checked === index;
+          {goodsObj.map((item) => {
+            const { nameGoods, id } = item;
+            const isChecked = checked === id;
 
             const handlerClickButton = () => {
-              setChecked(isChecked ? null : index);
-              setCurrentName(goodName);
+              setChecked(isChecked ? null : id);
+              setCurrentName(nameGoods);
             };
 
             return (
+
               <tr
-                key={goods[index]}
+                key={id}
                 data-cy="Good"
                 className={`${isChecked && 'has-background-success-light'}`}
               >
@@ -67,7 +72,7 @@ export const App = () => {
                 </td>
 
                 <td data-cy="GoodTitle" className="is-vcentered">
-                  {goodName}
+                  {nameGoods}
                 </td>
               </tr>
             );
