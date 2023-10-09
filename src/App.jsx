@@ -17,39 +17,40 @@ export const goods = [
 
 export const App = () => {
   const [selectedGood, setGood] = useState('Jam');
+  const reset = () => { // variable with a function for resets
+    setGood('');
+  };
 
   return (
     <main className="section container">
-      {(selectedGood === '')
-        ? (
-          <h1
-            className="title is-flex is-align-items-center"
-          >
-            No goods selected
-          </h1>
-        )
-        : (
-          <h1 className="title is-flex is-align-items-center">
-            {`${selectedGood} is selected`}
+      <h1
+        className="title is-flex is-align-items-center" // H1 is now outside ternary
+      >
+        {(selectedGood === '')
+          ? (
+            'No goods selected'
+          )
+          : (
+            <>
+              {`${selectedGood} is selected`}
 
-            <button
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-              onClick={() => {
-                setGood('');
-              }}
-            />
-          </h1>
-        )}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={reset()} // now a function
+              />
+            </>
+          )}
+      </h1>
 
       <table className="table">
         <tbody>
 
           {goods.map((good) => {
             const goodSection = (selectedGood !== good)
-              ? (
-                <tr data-cy="Good">
+              ? ( // Key added to the relevant tag
+                <tr data-cy="Good" key={good}>
                   <td>
                     <button
                       data-cy="AddButton"
@@ -69,15 +70,17 @@ export const App = () => {
                 </tr>
               )
               : (
-                <tr data-cy="Good" className="has-background-success-light">
+                <tr
+                  data-cy="Good"
+                  className="has-background-success-light"
+                  key={good}
+                >
                   <td>
                     <button
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={() => {
-                        setGood('');
-                      }}
+                      onClick={reset()}
                     >
                       -
                     </button>
