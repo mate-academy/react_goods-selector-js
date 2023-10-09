@@ -20,7 +20,9 @@ export const App = () => {
   const [title, setTitle] = useState('Jam');
 
   const handleTitleChange = (good) => {
-    if (!good) {
+    if (good === title
+      || !good
+      || typeof good !== 'string') {
       setTitle('');
 
       return;
@@ -43,7 +45,7 @@ export const App = () => {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => handleTitleChange()}
+              onClick={handleTitleChange}
             />
           )}
       </h1>
@@ -55,33 +57,26 @@ export const App = () => {
               data-cy="Good"
               key={uuidv4()}
               className={good === title
-                ? 'has-background-success-light'
-                : ''
+                && 'has-background-success-light'
               }
             >
               <td>
-                {good === title
-                  ? (
-                    <button
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                      onClick={() => handleTitleChange()}
-                    >
-                      -
-                    </button>
-                  )
-                  : (
-                    <button
-                      data-cy="AddButton"
-                      type="button"
-                      className="button"
-                      onClick={() => handleTitleChange(good)}
-                    >
-                      +
-                    </button>
-                  )
-                }
+                <button
+                  data-cy={good === title
+                    ? 'RemoveButton'
+                    : 'AddButton'
+                  }
+                  type="button"
+                  className={good === title
+                    ? 'button is-info'
+                    : 'button'}
+                  onClick={() => handleTitleChange(good)}
+                >
+                  {good === title
+                    ? '-'
+                    : '+'
+                  }
+                </button>
               </td>
 
               <td
