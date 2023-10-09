@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
