@@ -55,12 +55,12 @@ export const App = () => {
                   <button
                     onClick={() => setSelectedGood(isSelected ? '' : good)}
                     data-cy={
-                      selectedGood === good ? 'RemoveButton' : 'AddButton'
+                      isSelected ? 'RemoveButton' : 'AddButton'
                     }
                     type="button"
-                    className={`button ${selectedGood === good && 'is-info'}`}
+                    className={`button ${isSelected && 'is-info'}`}
                   >
-                    {selectedGood === good ? '-' : '+'}
+                    {isSelected ? '-' : '+'}
                   </button>
                 </td>
 
