@@ -62,10 +62,15 @@ export const App = () => {
                     type="button"
                     className={`button ${selectedGood === good && 'is-info'}`}
                     onClick={
-                      () => setSelectedGood(selectedGood === good ? '' : good)
+                      () => setSelectedGood(selectedGood === good
+                        ? ''
+                        : good)
                     }
                   >
-                    {selectedGood === good ? '-' : '+'}
+                    {selectedGood === good
+                      ? '-'
+                      : '+'
+                    }
                   </button>
                 </td>
 
