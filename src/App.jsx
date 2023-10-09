@@ -19,11 +19,14 @@ export const goodsObject = goods
   .map((good, index) => ({ name: good, id: index }));
 
 export const App = () => {
-  const [selectedGood, setGood] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
+  const EMPTY_FILTER_MESSAGE = 'No goods selected';
+  const reset = () => {
+    setSelectedGood('');
+  };
 
   return (
     <main className="section container">
-
       {selectedGood
         ? (
           <h1 className="title is-flex is-align-items-center">
@@ -33,16 +36,14 @@ export const App = () => {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => {
-                setGood('');
-              }}
+              onClick={reset}
             />
           </h1>
         )
 
         : (
           <h1 className="title is-flex is-align-items-center">
-            No goods selected
+            {EMPTY_FILTER_MESSAGE}
           </h1>
         )
       }
@@ -69,9 +70,7 @@ export const App = () => {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={() => {
-                          setGood('');
-                        }}
+                        onClick={reset}
                       >
                         -
                       </button>
@@ -82,7 +81,7 @@ export const App = () => {
                         type="button"
                         className="button"
                         onClick={() => {
-                          setGood(name);
+                          setSelectedGood(name);
                         }}
                       >
                         +
@@ -98,7 +97,6 @@ export const App = () => {
           })}
         </tbody>
       </table>
-
     </main>
   );
 };
