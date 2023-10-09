@@ -21,7 +21,7 @@ export const App = () => {
 
   return (
     <main className="section container">
-      {seletredGood !== null ? (
+      {seletredGood ? (
         <h1 className="title is-flex is-align-items-center">
           {`${seletredGood} is selected`}
 
@@ -43,6 +43,7 @@ export const App = () => {
           {
             goods.map(good => (
               <tr
+                key={good}
                 data-cy="Good"
                 className={
                   cn({ 'has-background-success-light': seletredGood === good })
