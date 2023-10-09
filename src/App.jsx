@@ -19,42 +19,41 @@ const goodsObj = goods
   .map((item, index) => ({ nameGoods: item, id: index + 1 }));
 
 export const App = () => {
-  const [checked, setChecked] = useState(9);
-  const [currentName, setCurrentName] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   return (
     <main className="section container">
-      {!checked
-        ? (
-          <h1 className="title is-flex is-align-items-center">
-            No goods selected
-          </h1>
-        )
-        : (
-          <h1 className="title is-flex is-align-items-center">
-            {`${currentName} is selected`}
-            <button
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-              onClick={() => setChecked(null)}
-            />
-          </h1>
-        )
-      }
+
+      <h1 className="title is-flex is-align-items-center">
+        {!selectedGood
+          ? (
+            'No goods selected'
+          )
+          : (
+            <>
+              {`${selectedGood} is selected`}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={() => setSelectedGood(null)}
+              />
+            </>
+          )
+        }
+      </h1>
+
       <table className="table">
         <tbody>
           {goodsObj.map((item) => {
             const { nameGoods, id } = item;
-            const isChecked = checked === id;
+            const isChecked = selectedGood === nameGoods;
 
             const handlerClickButton = () => {
-              setChecked(isChecked ? null : id);
-              setCurrentName(nameGoods);
+              setSelectedGood(isChecked ? null : nameGoods);
             };
 
             return (
-
               <tr
                 key={id}
                 data-cy="Good"
