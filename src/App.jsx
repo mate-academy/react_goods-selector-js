@@ -17,31 +17,29 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [select, setSelect] = useState('Jam');
+  const [select, selectedGood] = useState('Jam');
 
   return (
     <main className="section container">
-      {select === ''
-        ? (
-          <h1
-            className="title is-flex is-align-items-center"
-          >
-            No goods selected
-          </h1>
-        )
-        : (
-          <h1 className="title is-flex is-align-items-center">
-            {`${select} is selected`}
+      <h1
+        className="title is-flex is-align-items-center"
+      >
+        {select === ''
+          ? 'No goods selected'
+          : (
+            <>
+              {`${select} is selected`}
 
-            <button
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-              onClick={() => setSelect('')}
-            />
-          </h1>
-        )
-      }
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={() => selectedGood('')}
+              />
+            </>
+          )
+        }
+      </h1>
 
       <table className="table">
         <tbody>
@@ -51,6 +49,7 @@ export const App = () => {
               className={good === select
                 ? 'has-background-success-light'
                 : ''}
+              key={good}
             >
               <td>
                 <button
@@ -61,7 +60,7 @@ export const App = () => {
                   type="button"
                   className={cn('button', { 'is-info': good === select })}
                   onClick={() => {
-                    setSelect(good === select ? '' : good);
+                    selectedGood(good === select ? '' : good);
                   }}
                 >
                   {good === select
