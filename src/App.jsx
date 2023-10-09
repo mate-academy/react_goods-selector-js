@@ -20,8 +20,10 @@ export const goodsObject = goods
 
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
+
   const EMPTY_FILTER_MESSAGE = 'No goods selected';
-  const reset = () => {
+
+  const resetGoods = () => {
     setSelectedGood('');
   };
 
@@ -36,7 +38,7 @@ export const App = () => {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={reset}
+              onClick={resetGoods}
             />
           </h1>
         )
@@ -55,7 +57,16 @@ export const App = () => {
               name,
               id,
             } = goodItem;
+
             const isSelected = selectedGood === name;
+
+            const handleOnClick = () => {
+              if (isSelected) {
+                resetGoods();
+              } else {
+                setSelectedGood(name);
+              }
+            };
 
             return (
               <tr
@@ -64,29 +75,14 @@ export const App = () => {
                 className={isSelected ? 'has-background-success-light' : ''}
               >
                 <td>
-                  {isSelected
-                    ? (
-                      <button
-                        data-cy="RemoveButton"
-                        type="button"
-                        className="button is-info"
-                        onClick={reset}
-                      >
-                        -
-                      </button>
-                    )
-                    : (
-                      <button
-                        data-cy="AddButton"
-                        type="button"
-                        className="button"
-                        onClick={() => {
-                          setSelectedGood(name);
-                        }}
-                      >
-                        +
-                      </button>
-                    )}
+                  <button
+                    type="button"
+                    className={`button ${isSelected ? 'is-info' : ''}`}
+                    data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
+                    onClick={handleOnClick}
+                  >
+                    {isSelected ? '-' : '+'}
+                  </button>
                 </td>
 
                 <td data-cy="GoodTitle" className="is-vcentered">
