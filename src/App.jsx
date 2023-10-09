@@ -19,7 +19,7 @@ const goodsObj = goods
   .map((item, index) => ({ nameGoods: item, id: index + 1 }));
 
 export const App = () => {
-  const [checked, setChecked] = useState(8);
+  const [checked, setChecked] = useState(9);
   const [currentName, setCurrentName] = useState('Jam');
 
   return (
