@@ -38,7 +38,7 @@ export const App = () => {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={reset()} // now a function
+                onClick={reset} // now a function
               />
             </>
           )}
@@ -47,53 +47,29 @@ export const App = () => {
       <table className="table">
         <tbody>
 
-          {goods.map((good) => {
-            const goodSection = (selectedGood !== good)
-              ? ( // Key added to the relevant tag
-                <tr data-cy="Good" key={good}>
-                  <td>
-                    <button
-                      data-cy="AddButton"
-                      type="button"
-                      className="button"
-                      onClick={() => {
-                        setGood(good);
-                      }}
-                    >
-                      +
-                    </button>
-                  </td>
-
-                  <td data-cy="GoodTitle" className="is-vcentered">
-                    {good}
-                  </td>
-                </tr>
-              )
-              : (
-                <tr
-                  data-cy="Good"
-                  className="has-background-success-light"
-                  key={good}
+          {goods.map(good => ( // Key added to the relevant tag
+            <tr
+              data-cy="Good"
+              className={selectedGood === good
+                && 'has-background-success-light'}
+              key={good}
+            >
+              <td>
+                <button
+                  data-cy={selectedGood === good ? 'RemoveButton' : 'AddButton'}
+                  type="button"
+                  className={`button ${selectedGood === good ? 'is-info' : ''}`}
+                  onClick={() => setGood(selectedGood === good ? '' : good)}
                 >
-                  <td>
-                    <button
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                      onClick={reset()}
-                    >
-                      -
-                    </button>
-                  </td>
+                  {selectedGood === good ? `-` : `+`}
+                </button>
+              </td>
 
-                  <td data-cy="GoodTitle" className="is-vcentered">
-                    {good}
-                  </td>
-                </tr>
-              );
-
-            return goodSection;
-          })}
+              <td data-cy="GoodTitle" className="is-vcentered">
+                {good}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </main>
