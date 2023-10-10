@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import cn from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -18,42 +19,43 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
-  function styleForSelected(good) {
-    if (good === selectedGood) {
-      return 'has-background-success-light';
-    }
+  // goods.map()
 
-    return '';
+  function resetSelectedGoods() {
+    setSelectedGood('');
   }
 
   return (
     <main className="section container">
-      {selectedGood.length === 0
-        ? (
-          <h1 className="title is-flex is-align-items-center">
-            No goods selected
-          </h1>
-        )
-        : (
-          <h1 className="title is-flex is-align-items-center">
-            {`${selectedGood} is selected`}
+      <h1 className="title is-flex is-align-items-center">
+        {selectedGood.length === 0
+          ? ('No goods selected')
+          : (
+            <>
+              {`${selectedGood} is selected`}
 
-            <button
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-              onClick={() => {
-                setSelectedGood('');
-              }}
-            />
-          </h1>
-        )
-      }
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={() => {
+                  resetSelectedGoods();
+                }}
+              />
+            </>
+          )
+        }
+      </h1>
 
       <table className="table">
         <tbody>
           {goods.map(good => (
-            <tr data-cy="Good" className={styleForSelected(good)}>
+            <tr
+              data-cy="Good"
+              className={cn({ 'has-background-success-light':
+              good === selectedGood })}
+              key={good}
+            >
               <td>
                 {good === selectedGood
                   ? (
@@ -62,7 +64,7 @@ export const App = () => {
                       type="button"
                       className="button is-info"
                       onClick={() => {
-                        setSelectedGood('');
+                        resetSelectedGoods();
                       }}
                     >
                       -
