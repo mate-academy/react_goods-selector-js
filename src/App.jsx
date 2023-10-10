@@ -1,4 +1,5 @@
 import 'bulma/css/bulma.css';
+import { useState } from 'react';
 import './App.scss';
 
 export const goods = [
@@ -14,70 +15,85 @@ export const goods = [
   'Garlic',
 ];
 
-export const App = () => (
-  <main className="section container">
-    <h1 className="title is-flex is-align-items-center">No goods selected</h1>
+let counter = 0;
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+const fullGoods = goods.map((good) => {
+  counter += 1;
 
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+  return ({
+    good,
+    id: counter,
+  });
+});
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+export const App = () => {
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+  return (
+    <main className="section container">
+      <h1
+        className="title is-flex is-align-items-center"
+      >
+        {!selectedGood
+          ? 'No goods selected'
+          : `${selectedGood} is selected`
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+        }
+        {selectedGood
+        && (
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={() => setSelectedGood('')}
+          />
+        )}
+      </h1>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+      <table className="table">
+        <tbody>
+          {fullGoods.map(({ good, id }) => {
+            const isActive = good === selectedGood;
 
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+            return (
+              <tr
+                data-cy="Good"
+                className={
+                  isActive
+                  && 'has-background-success-light'
+                }
+                key={id}
+              >
+                <td>
+                  <button
+                    data-cy={isActive
+                      ? 'RemoveButton'
+                      : 'AddButton'
+                    }
+                    type="button"
+                    className={isActive
+                      ? 'button is-info'
+                      : 'button'
+                    }
+                    onClick={good === selectedGood
+                      ? () => setSelectedGood('')
+                      : () => setSelectedGood(good)
+                    }
+                  >
+                    {
+                      isActive ? '-' : '+'
+                    }
+                  </button>
+                </td>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </main>
+  );
+};
