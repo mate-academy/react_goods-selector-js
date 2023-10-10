@@ -20,38 +20,24 @@ export const goods = [
 export const App = () => {
   const [value, setValue] = useState('Jam');
 
-  const handleOnClick = (good) => {
-    if (value === good) {
-      setValue(null);
-    } else {
-      setValue(good);
-    }
-  };
-
   return (
     <main className="section container">
 
-      {value
-        ? (
-          <h1 className="title is-flex is-align-items-center">
-            {value}
-            {' '}
-            is selected
-
-            <button
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-              onClick={() => setValue(null)}
-            />
-          </h1>
-        )
-        : (
-          <h1 className="title is-flex is-align-items-center">
-            No goods selected
-          </h1>
-        )
-      }
+      <h1 className="title is-flex is-align-items-center">
+        {value
+          ? (
+            <>
+              {`${value} is selected`}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={() => setValue(null)}
+              />
+            </>
+          )
+          : 'No goods selected'}
+      </h1>
 
       <table className="table">
         <tbody>
@@ -64,32 +50,24 @@ export const App = () => {
               key={good}
             >
               <td>
-                {value === good
-                  ? (
-                    <button
-                      data-cy="RemoveButton"
-                      type="button"
-                      className={cn('button', {
-                        'is-info': value === good,
-                      })}
-                      onClick={() => handleOnClick(null)}
-                    >
-                      -
-                    </button>
-                  )
-                  : (
-                    <button
-                      data-cy="AddButton"
-                      type="button"
-                      className={cn('button', {
-                        'is-info': value === good,
-                      })}
-                      onClick={() => handleOnClick(good)}
-                    >
-                      +
-                    </button>
-                  )
-                }
+
+                <button
+                  type="button"
+                  data-cy={value === good
+                    ? 'RemoveButton'
+                    : 'AddButton'}
+                  className={cn('button', {
+                    'is-info': value === good,
+                  })}
+                  onClick={() => setValue(value === good
+                    ? null
+                    : good)}
+                >
+                  {value === good
+                    ? '-'
+                    : '+'
+                  }
+                </button>
 
               </td>
 
