@@ -21,23 +21,13 @@ const fullGoods = goods.map((good) => {
   counter += 1;
 
   return ({
-    oneGood: `${good}`,
+    good,
     id: counter,
   });
 });
 
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
-  const styleForTable = 'has-background-success-light';
-  const styleForButton = 'button is-info';
-
-  const resetButton = () => () => setSelectedGood('');
-  const setButton = value => () => setSelectedGood(value);
-  const goodChecherFunction = (condition, firstExp, secondExp) => (
-    condition
-      ? firstExp
-      : secondExp
-  );
 
   return (
     <main className="section container">
@@ -51,59 +41,53 @@ export const App = () => {
         }
         {selectedGood
         && (
-        <button
-          data-cy="ClearButton"
-          type="button"
-          className="delete ml-3"
-          onClick={resetButton()}
-        />
-        )
-        }
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={() => setSelectedGood('')}
+          />
+        )}
       </h1>
 
       <table className="table">
         <tbody>
-          {fullGoods.map(({ oneGood, id }) => {
-            const goodChecher = oneGood === selectedGood;
+          {fullGoods.map(({ good, id }) => {
+            const isActive = good === selectedGood;
 
             return (
               <tr
                 data-cy="Good"
                 className={
-                  goodChecher
-                  && `${styleForTable}`
+                  isActive
+                  && 'has-background-success-light'
                 }
                 key={id}
               >
                 <td>
                   <button
-                    data-cy={
-                      goodChecherFunction(
-                        goodChecher,
-                        'RemoveButton',
-                        'AddButton',
-                      )
+                    data-cy={isActive
+                      ? 'RemoveButton'
+                      : 'AddButton'
                     }
                     type="button"
-                    className={
-                      goodChecherFunction(goodChecher, styleForButton, 'button')
+                    className={isActive
+                      ? 'button is-info'
+                      : 'button'
                     }
-                    onClick={
-                      goodChecherFunction(
-                        goodChecher,
-                        resetButton(),
-                        setButton(oneGood),
-                      )
+                    onClick={good === selectedGood
+                      ? () => setSelectedGood('')
+                      : () => setSelectedGood(good)
                     }
                   >
                     {
-                      goodChecherFunction(goodChecher, '-', '+')
+                      isActive ? '-' : '+'
                     }
                   </button>
                 </td>
 
                 <td data-cy="GoodTitle" className="is-vcentered">
-                  {oneGood}
+                  {good}
                 </td>
               </tr>
             );
