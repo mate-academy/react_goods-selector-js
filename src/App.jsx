@@ -19,7 +19,13 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
-  // goods.map()
+  function checkIfSelected(good) {
+    if (good === selectedGood) {
+      return true;
+    }
+
+    return false;
+  }
 
   function resetSelectedGoods() {
     setSelectedGood('');
@@ -28,7 +34,7 @@ export const App = () => {
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedGood.length === 0
+        {!selectedGood
           ? ('No goods selected')
           : (
             <>
@@ -38,9 +44,7 @@ export const App = () => {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => {
-                  resetSelectedGoods();
-                }}
+                onClick={() => resetSelectedGoods()}
               />
             </>
           )
@@ -53,19 +57,17 @@ export const App = () => {
             <tr
               data-cy="Good"
               className={cn({ 'has-background-success-light':
-              good === selectedGood })}
+              checkIfSelected(good) })}
               key={good}
             >
               <td>
-                {good === selectedGood
+                {checkIfSelected(good)
                   ? (
                     <button
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={() => {
-                        resetSelectedGoods();
-                      }}
+                      onClick={() => resetSelectedGoods()}
                     >
                       -
                     </button>
@@ -75,9 +77,7 @@ export const App = () => {
                       data-cy="AddButton"
                       type="button"
                       className="button"
-                      onClick={() => {
-                        setSelectedGood(good);
-                      }}
+                      onClick={() => setSelectedGood(good)}
                     >
                       +
                     </button>
