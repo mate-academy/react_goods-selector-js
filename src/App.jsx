@@ -33,7 +33,7 @@ export const App = () => {
             />
           </>
         ) : (
-          `No goods selected`
+          'No goods selected'
         )}
       </h1>
 
@@ -45,7 +45,7 @@ export const App = () => {
             return (
               <tr
                 data-cy="Good"
-                key={goods}
+                key={good}
                 className={cn({
                   'has-background-success-light': isSelected,
                 })}
@@ -58,7 +58,10 @@ export const App = () => {
                         : 'AddButton'
                     }
                     type="button"
-                    className={`button ${isSelected && 'is-info'}`}
+                    className={cn(
+                      'button',
+                      { 'is-info': isSelected },
+                    )}
                     onClick={
                       () => setSelectedGood(!isSelected && good)
                     }
@@ -70,7 +73,11 @@ export const App = () => {
 
                   </button>
                 </td>
-                <td data-cy="GoodTitle" className="is-vcentered">
+
+                <td
+                  data-cy="GoodTitle"
+                  className="is-vcentered"
+                >
                   {good}
                 </td>
               </tr>
