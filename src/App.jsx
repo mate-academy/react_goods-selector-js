@@ -16,24 +16,19 @@ export const goods = [
   'Garlic',
 ];
 
-export const App = () => {
-  function setHeading(selectedGood) {
-    return goods.includes(selectedGood)
-      ? `${selectedGood} is selected`
-      : 'No goods selected';
-  }
+function setHeading(selectedGood) {
+  return goods.includes(selectedGood)
+    ? `${selectedGood} is selected`
+    : 'No goods selected';
+}
 
-  const [selectedGood, setselectedGood] = useState('Jam');
-  let key = 0;
+export const App = () => {
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedGood ? (
-          setHeading(selectedGood)
-        ) : (
-          setHeading(selectedGood)
-        )}
+        {setHeading(selectedGood)}
 
         {goods.includes(selectedGood) && (
           <button
@@ -41,7 +36,7 @@ export const App = () => {
             type="button"
             className="delete ml-3"
             onClick={() => {
-              setselectedGood('');
+              setSelectedGood('');
             }}
           />
         )}
@@ -52,11 +47,9 @@ export const App = () => {
           {goods.map((good) => {
             const isSelected = selectedGood === good;
 
-            key += 1;
-
             return (
               <tr
-                key={key}
+                key={good}
                 data-cy="Good"
                 className={cn({
                   'has-background-success-light': isSelected,
@@ -67,26 +60,13 @@ export const App = () => {
                     className={cn('button', {
                       'is-info': isSelected,
                     })}
-                    data-cy={isSelected ? (
-                      'RemoveButton'
-                    ) : (
-                      'AddButton'
-                    )}
+                    data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
                     type="button"
-                    onClick={() => {
-                      if (isSelected) {
-                        return setselectedGood('');
-                      }
-
-                      return setselectedGood(good);
-                    }}
+                    onClick={() => (isSelected
+                      ? setSelectedGood('')
+                      : setSelectedGood(good))}
                   >
-                    {isSelected ? (
-                      '-'
-                    ) : (
-                      '+'
-                    )}
-
+                    {isSelected ? '-' : '+'}
                   </button>
                 </td>
 
