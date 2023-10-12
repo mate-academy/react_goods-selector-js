@@ -43,20 +43,14 @@ export const App = () => {
             return (
               <tr
                 data-cy="Good"
-                className={isSelectedGood
-                  ? 'has-background-success-light'
-                  : ''}
+                className={isSelectedGood && 'has-background-success-light'}
               >
                 <td>
                   <div>
                     <button
-                      onClick={() => {
-                        if (isSelectedGood) {
-                          setSelectedGood('');
-                        } else {
-                          setSelectedGood(goodName);
-                        }
-                      }}
+                      onClick={() => setSelectedGood(isSelectedGood
+                        ? ''
+                        : goodName)}
                       data-cy={isSelectedGood
                         ? 'RemoveButton'
                         : 'AddButton'}
