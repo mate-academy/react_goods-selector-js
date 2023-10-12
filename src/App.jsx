@@ -40,6 +40,7 @@ export const App = () => {
         <tbody>
           {goods.map((good) => {
             const isSelected = product === good;
+            const isNotSelected = product !== good;
 
             return (
               <tr
@@ -48,7 +49,7 @@ export const App = () => {
                 className={isSelected ? `has-background-success-light` : ''}
               >
                 <td>
-                  {product !== good && (
+                  {isNotSelected && (
                     <button
                       data-cy="AddButton"
                       type="button"
@@ -60,7 +61,7 @@ export const App = () => {
                       +
                     </button>
                   )}
-                  {product === good && (
+                  {isSelected && (
                     <button
                       data-cy="RemoveButton"
                       type="button"
