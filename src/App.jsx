@@ -16,13 +16,13 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setGood] = useState('Jam');
+  const [selectedGood, setselectedGood] = useState('Jam');
 
-  const click = (good) => {
+  const toggleSelectedGood = (good) => {
     if (selectedGood === good) {
-      setGood(null);
+      setselectedGood(null);
     } else {
-      setGood(good);
+      setselectedGood(good);
     }
   };
 
@@ -39,7 +39,7 @@ export const App = () => {
               type="button"
               className="delete ml-3"
               onClick={() => {
-                setGood(null);
+                setselectedGood(null);
               }}
             />
           </div>
@@ -49,22 +49,26 @@ export const App = () => {
         <tbody>
           {goods.map(good => (
             <tr
+              key={good}
               data-cy="Good"
               className={selectedGood
                 === good ? 'has-background-success-light' : ''}
-              onClick={() => click(good)}
+              onClick={() => toggleSelectedGood(good)}
             >
               <td>
                 <button
-                  data-cy={selectedGood
-                    === good ? 'RemoveButton' : 'AddButton'}
+                  data-cy={selectedGood === good
+                    ? 'RemoveButton'
+                    : 'AddButton'}
                   type="button"
-                  className={selectedGood
-                    === good ? 'button is-info' : 'button'}
+                  className={selectedGood === good
+                    ? 'button is-info'
+                    : 'button'}
                 >
                   {selectedGood === good ? '-' : '+'}
                 </button>
               </td>
+
               <td data-cy="GoodTitle" className="is-vcentered">
                 {good}
               </td>
