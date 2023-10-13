@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import cn from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -44,34 +45,33 @@ export const App = () => {
               <tr
                 key={good}
                 data-cy="Good"
-                className={good === selectedGood
-                  ? 'has-background-success-light'
-                  : ''
+                className={cn({
+                  'has-background-info-light': selectedGood === good,
+                })
                 }
               >
                 <td>
-                  {good === selectedGood
-                    ? (
-                      <button
-                        data-cy="addButton"
-                        type="button"
-                        className="button is-info"
-                        onClick={reset}
-                      >
-                        -
-                      </button>
-                    )
-                    : (
-                      <button
-                        data-cy="removeButton"
-                        type="button"
-                        className="button"
-                        onClick={() => setselectedGood(good)}
-                      >
-                        +
-                      </button>
-                    )
-                  }
+                  <button
+                    data-cy={selectedGood === good
+                      ? 'RemoveButton'
+                      : 'AddButton'
+                    }
+                    type="button"
+                    className={selectedGood === good
+                      ? 'button is-info'
+                      : 'button'
+                    }
+                    onClick={
+                      selectedGood === good
+                        ? reset
+                        : () => setselectedGood(good)
+                    }
+                  >
+                    {selectedGood === good
+                      ? '-'
+                      : '+'
+                    }
+                  </button>
                 </td>
 
                 <td data-cy="GoodTitle" className="is-vcentered">
