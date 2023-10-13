@@ -18,7 +18,7 @@ export const goods = [
 export const App = () => {
   const [product, setProduct] = useState('Jam');
 
-  function setGoods() {
+  const handleClearGood = () => {
     setProduct('');
   }
 
@@ -31,7 +31,7 @@ export const App = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={setGoods}
+            onClick={handleClearGood}
           />
         )}
       </h1>
@@ -40,16 +40,15 @@ export const App = () => {
         <tbody>
           {goods.map((good) => {
             const isSelected = product === good;
-            const isNotSelected = product !== good;
 
             return (
               <tr
                 key={good}
                 data-cy="Good"
-                className={isSelected ? `has-background-success-light` : ''}
+                className={isSelected && 'has-background-success-light'}
               >
                 <td>
-                  {isNotSelected && (
+                  {!isSelected && (
                     <button
                       data-cy="AddButton"
                       type="button"
@@ -66,7 +65,7 @@ export const App = () => {
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={setGoods}
+                      onClick={handleClearGood}
                     >
                       -
                     </button>
