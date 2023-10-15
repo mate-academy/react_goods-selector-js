@@ -1,5 +1,6 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
+import cn from 'classnames';
 import { useState } from 'react';
 
 export const goods = [
@@ -17,16 +18,17 @@ export const goods = [
 
 export const App = () => {
   const [value, setValue] = useState('Jam');
+  const isSelected = selected => selected === value;
 
   return (
     <main className="section container">
 
       <h1 className="title is-flex is-align-items-center">
-        {value === ''
-          ? `No goods selected`
-          : `${value} is selected`
+        {value
+          ? `${value} is selected`
+          : `No goods selected`
         }
-        {value !== ''
+        {value
           && (
             <button
               onClick={() => setValue('')}
@@ -41,34 +43,26 @@ export const App = () => {
         <tbody>
           {goods.map(good => (
             <tr
+              key={good}
               data-cy="Good"
-              className={`${value === good ? 'has-background-success-light' : ''}`}
+              className={cn(
+                { 'has-background-success-light': isSelected(good) },
+              )}
             >
               <td>
-                {value !== good
-                  ? (
 
-                    <button
-                      onClick={() => setValue(good)}
-                      data-cy="AddButton"
-                      type="button"
-                      className="button"
-                    >
-                      +
-                    </button>
-                  )
+                <button
+                  onClick={() => setValue(isSelected(good) ? '' : good)}
+                  data-cy={isSelected(good) ? 'RemoveButton' : 'AddButton'}
+                  type="button"
+                  className={cn('button', { 'is-info': isSelected(good) })}
+                >
+                  {value !== good
 
-                  : (
-                    <button
-                      onClick={() => setValue('')}
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                    >
-                      -
-                    </button>
-                  )
-                }
+                    ? ('+')
+                    : ('-') }
+
+                </button>
               </td>
 
               <td data-cy="GoodTitle" className="is-vcentered">
@@ -76,23 +70,6 @@ export const App = () => {
               </td>
             </tr>
           ))}
-
-          {/* <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr> */}
-
         </tbody>
       </table>
     </main>
