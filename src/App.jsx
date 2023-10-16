@@ -16,13 +16,13 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setselectedGood] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   const toggleSelectedGood = (good) => {
     if (selectedGood === good) {
-      setselectedGood(null);
+      setSelectedGood(null);
     } else {
-      setselectedGood(good);
+      setSelectedGood(good);
     }
   };
 
@@ -39,12 +39,13 @@ export const App = () => {
               type="button"
               className="delete ml-3"
               onClick={() => {
-                setselectedGood(null);
+                setSelectedGood(null);
               }}
             />
           </div>
         )}
       </h1>
+
       <table className="table">
         <tbody>
           {goods.map(good => (
@@ -52,7 +53,7 @@ export const App = () => {
               key={good}
               data-cy="Good"
               className={selectedGood
-                === good ? 'has-background-success-light' : ''}
+                === good && 'has-background-success-light'}
               onClick={() => toggleSelectedGood(good)}
             >
               <td>
