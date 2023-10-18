@@ -39,13 +39,13 @@ export const App = () => {
           />
         </div>
       )}
-      {goods.map(word => (
-        <div>
-          <table className="table">
-            <tbody>
-              {value !== word ? (
-                <tr data-cy="Good">
-                  <td>
+      <div>
+        <table className="table">
+          <tbody>
+            {goods.map(word => (
+              <tr data-cy="Good" key={word}>
+                <td>
+                  {value !== word ? (
                     <button
                       onClick={() => {
                         setValue(word);
@@ -56,34 +56,28 @@ export const App = () => {
                     >
                       +
                     </button>
-                  </td>
-                  <td data-cy="GoodTitle" className="is-vcentered">
-                    {word}
-                  </td>
-                </tr>
-              ) : (
-                <tr data-cy="Good" className="has-background-success-light">
-                  <td>
+                  ) : (
                     <button
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
                       onClick={() => {
                         setValue('');
                       }}
+                      data-cy="RemoveButton"
+                      type="button"
+                      className="button is-info"
                     >
                       -
                     </button>
-                  </td>
-                  <td data-cy="GoodTitle" className="is-vcentered">
-                    {word}
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      ))}
+                  )}
+                </td>
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {word}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+
+        </table>
+      </div>
     </main>
   );
 };
