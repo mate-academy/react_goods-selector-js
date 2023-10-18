@@ -16,11 +16,11 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [value, setValue] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   return (
     <main className="section container">
-      {value === '' ? (
+      {!selectedGood ? (
         <h1
           className="title is-flex is-align-items-center"
         >
@@ -28,11 +28,9 @@ export const App = () => {
         </h1>
       ) : (
         <div>
-          <h1 className="title is-flex is-align-items-center">{`${value} is selected`}</h1>
+          <h1 className="title is-flex is-align-items-center">{`${selectedGood} is selected`}</h1>
           <button
-            onClick={() => {
-              setValue('');
-            }}
+            onClick={() => setSelectedGood('')}
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
@@ -42,14 +40,12 @@ export const App = () => {
       <div>
         <table className="table">
           <tbody>
-            {goods.map(word => (
-              <tr data-cy="Good" key={word}>
+            {goods.map(good => (
+              <tr data-cy="Good" key={good}>
                 <td>
-                  {value !== word ? (
+                  {selectedGood !== good ? (
                     <button
-                      onClick={() => {
-                        setValue(word);
-                      }}
+                      onClick={() => setSelectedGood(good)}
                       data-cy="AddButton"
                       type="button"
                       className="button"
@@ -59,7 +55,7 @@ export const App = () => {
                   ) : (
                     <button
                       onClick={() => {
-                        setValue('');
+                        setSelectedGood('');
                       }}
                       data-cy="RemoveButton"
                       type="button"
@@ -70,7 +66,7 @@ export const App = () => {
                   )}
                 </td>
                 <td data-cy="GoodTitle" className="is-vcentered">
-                  {word}
+                  {good}
                 </td>
               </tr>
             ))}
