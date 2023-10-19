@@ -17,22 +17,22 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [isTarget, setIsTarget] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
   const handleTargetClick = (good) => {
-    setIsTarget(isTarget === good ? '' : good);
+    setSelectedGood(selectedGood === good ? '' : good);
   };
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {isTarget ? `${isTarget} is selected` : 'No goods selected'}
+        {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
 
-        {isTarget && (
+        {selectedGood && (
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => setIsTarget('')}
+            onClick={() => setSelectedGood('')}
           />
         )}
       </h1>
@@ -40,7 +40,7 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map((good) => {
-            const isSelected = isTarget === good;
+            const isSelected = selectedGood === good;
 
             return (
               <tr
