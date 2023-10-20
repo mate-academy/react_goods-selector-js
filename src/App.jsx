@@ -1,5 +1,6 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
+import cn from 'classnames';
 import { useState } from 'react';
 
 export const goods = [
@@ -18,6 +19,10 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
+  function reset() {
+    setSelectedGood('');
+  }
+
   return (
     <main className="section container">
 
@@ -29,7 +34,7 @@ export const App = () => {
             is selected
 
             <button
-              onClick={() => setSelectedGood('')}
+              onClick={reset}
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
@@ -49,9 +54,9 @@ export const App = () => {
             <tr
               data-cy="Good"
               key={item}
-              className={selectedGood === item
-                ? 'has-background-success-light'
-                : ''}
+              className={cn(
+                { 'has-background-success-light': selectedGood === item },
+              )}
             >
               <td>
                 {selectedGood !== item
@@ -67,7 +72,7 @@ export const App = () => {
                   )
                   : (
                     <button
-                      onClick={() => setSelectedGood('')}
+                      onClick={reset}
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
@@ -89,4 +94,3 @@ export const App = () => {
     </main>
   );
 };
-
