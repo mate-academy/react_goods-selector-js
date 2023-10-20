@@ -50,6 +50,8 @@ export const App = () => {
 };
 
 function getHeader(selectedGood, setSelectedGood) {
+  const reset = () => setSelectedGood(null);
+
   return (!selectedGood
     ? <h1 className="title is-flex is-align-items-center">No goods selected</h1>
     : (
@@ -60,9 +62,7 @@ function getHeader(selectedGood, setSelectedGood) {
           data-cy="ClearButton"
           type="button"
           className="delete ml-3"
-          onClick={() => {
-            setSelectedGood(null);
-          }}
+          onClick={reset}
         />
       </h1>
     ));
@@ -79,12 +79,14 @@ function getButton(good, selectedGood, setSelectedGood) {
     content = '-';
   }
 
+  const click = () => goodButtonCLick(good, selectedGood, setSelectedGood);
+
   return (
     <button
       data-cy={dataCy}
       type="button"
       className={className}
-      onClick={() => goodButtonCLick(good, selectedGood, setSelectedGood)}
+      onClick={click}
     >
       {content}
     </button>
