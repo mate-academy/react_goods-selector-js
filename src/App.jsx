@@ -26,6 +26,7 @@ export const App = () => {
         <tbody>
           {goods.map(good => (
             <tr
+              key={good}
               data-cy="Good"
               className={
                   good === selectedGood
@@ -83,15 +84,17 @@ function getButton(good, selectedGood, setSelectedGood) {
       data-cy={dataCy}
       type="button"
       className={className}
-      onClick={() => {
-        if (good === selectedGood) {
-          setSelectedGood(null);
-        } else {
-          setSelectedGood(good);
-        }
-      }}
+      onClick={() => goodButtonCLick(good, selectedGood, setSelectedGood)}
     >
       {content}
     </button>
   );
+}
+
+function goodButtonCLick(good, selectedGood, setSelectedGood) {
+  if (good === selectedGood) {
+    setSelectedGood(null);
+  } else {
+    setSelectedGood(good);
+  }
 }
