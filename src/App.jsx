@@ -16,8 +16,9 @@ export const goods = [
   'Garlic',
 ];
 
+const DEFAULT_GOOD = 'Jam';
+
 export const App = () => {
-  const DEFAULT_GOOD = 'Jam';
   const [selectedGood, setSelectedGood] = useState(DEFAULT_GOOD);
 
   return (
@@ -41,34 +42,34 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map((good) => {
-            const selectedProduct = selectedGood === good;
+            const isSelected = selectedGood === good;
 
             return (
               <tr
                 key={good}
                 data-cy="Good"
                 className={
-                classNames({ 'has-background-success-light': selectedProduct })
+                classNames({ 'has-background-success-light': isSelected })
                 }
               >
                 <td>
                   <button
                     data-cy={
-                      selectedProduct
+                      isSelected
                         ? 'RemoveButton'
                         : 'AddButton'
                     }
                     type="button"
                     className={
-                      classNames('button', { 'is-info': selectedProduct })
+                      classNames('button', { 'is-info': isSelected })
                     }
                     onClick={
-                      selectedProduct
+                      isSelected
                         ? () => setSelectedGood('')
                         : () => setSelectedGood(good)
                     }
                   >
-                    {selectedProduct
+                    {isSelected
                       ? '-'
                       : '+'
                     }
