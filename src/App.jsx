@@ -20,6 +20,8 @@ export const App = () => {
   const [value, setValue] = useState('Jam');
   const isSelected = selected => selected === value;
 
+  const reset = () => setValue('');
+
   return (
     <main className="section container">
 
@@ -31,7 +33,7 @@ export const App = () => {
         {value
           && (
             <button
-              onClick={() => setValue('')}
+              onClick={reset}
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
@@ -57,7 +59,7 @@ export const App = () => {
                   type="button"
                   className={cn('button', { 'is-info': isSelected(good) })}
                 >
-                  {value !== good
+                  {!isSelected(good)
 
                     ? ('+')
                     : ('-') }
