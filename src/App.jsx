@@ -22,7 +22,7 @@ export const App = () => {
   const isGoodSelected = good => good === selectedGood;
 
   const handleGoodClick = (good) => {
-    setSelectedGood(isGoodSelected(good) ? good : '');
+    setSelectedGood(!isGoodSelected(good) ? good : '');
   };
 
   return (
