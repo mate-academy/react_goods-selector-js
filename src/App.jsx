@@ -20,14 +20,17 @@ export const App = () => {
     goods[goods.indexOf('Jam')] || goods[0],
   );
 
+  const resetGood = () => {
+    setSelectedGood('');
+  };
+
   return (
     <main className="section container">
       {selectedGood ? (
         <h1 className="title is-flex is-align-items-center">
           {`${selectedGood} is selected`}
-
           <button
-            onClick={() => setSelectedGood('')}
+            onClick={resetGood}
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
@@ -61,7 +64,7 @@ export const App = () => {
                   </button>
                 ) : (
                   <button
-                    onClick={() => setSelectedGood('')}
+                    onClick={resetGood}
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
@@ -70,7 +73,6 @@ export const App = () => {
                   </button>
                 )}
               </td>
-
               <td data-cy="GoodTitle" className="is-vcentered">
                 {good}
               </td>
