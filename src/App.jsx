@@ -21,10 +21,6 @@ export const App = () => {
 
   const isGoodSelected = good => good === selectedGood;
 
-  const handleGoodClick = (good) => {
-    setSelectedGood(!isGoodSelected(good) ? good : '');
-  };
-
   return (
     <main className="section container">
 
@@ -56,20 +52,29 @@ export const App = () => {
               })}
             >
               <td>
-                <button
-                  onClick={() => {
-                    handleGoodClick(good);
-                  }}
-                  data-cy={
-                    isGoodSelected(good) ? 'RemoveButton' : 'AddButton'
-                  }
-                  type="button"
-                  className={classnames('button', {
-                    'is-info': isGoodSelected(good),
-                  })}
-                >
-                  {isGoodSelected(good) ? '-' : '+'}
-                </button>
+                {isGoodSelected(good) ? (
+                  <button
+                    onClick={() => {
+                      setSelectedGood('');
+                    }}
+                    data-cy="RemoveButton"
+                    type="button"
+                    className="button is-info"
+                  >
+                    -
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => {
+                      setSelectedGood(good);
+                    }}
+                    data-cy="AddButton"
+                    type="button"
+                    className="button"
+                  >
+                    +
+                  </button>
+                )}
               </td>
               <td data-cy="GoodTitle" className="is-vcentered">
                 {good}
