@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import cn from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -37,47 +38,48 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
-            <tr
-              data-cy="Good"
-              key={good}
-              className={good === activeGood
-                ? 'has-background-success-light'
-                : null}
-            >
-              <td>
-                {good === activeGood
-                  ? (
-                    <button
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                      onClick={() => {
-                        setActiveGood(good === activeGood ? null : good);
-                      }}
-                    >
-                      -
-                    </button>
-                  )
-                  : (
-                    <button
-                      data-cy="AddButton"
-                      type="button"
-                      className={`button `}
-                      onClick={() => {
-                        setActiveGood(good === activeGood ? null : good);
-                      }}
-                    >
-                      +
-                    </button>
-                  )}
-              </td>
+          {goods.map((good) => {
+            const clicker = () => {
+              setActiveGood(good === activeGood ? null : good);
+            };
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
-          ))}
+            return (
+              <tr
+                data-cy="Good"
+                key={good}
+                className={cn({
+                  'has-background-success-light': good === activeGood,
+                })}
+              >
+                <td>
+                  {good === activeGood
+                    ? (
+                      <button
+                        data-cy="RemoveButton"
+                        type="button"
+                        className="button is-info"
+                        onClick={clicker}
+                      >
+                        -
+                      </button>
+                    )
+                    : (
+                      <button
+                        data-cy="AddButton"
+                        type="button"
+                        className="button"
+                        onClick={clicker}
+                      >
+                        +
+                      </button>
+                    )}
+                </td>
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </main>
