@@ -16,11 +16,11 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [value, setValue] = useState('Jam');
+  const [selectedGood, setselectedGood] = useState('Jam');
 
   return (
     <main className="section container">
-      {!value.length
+      {!selectedGood.length
         ? (
           <h1 className="title is-flex is-align-items-center">
             No goods selected
@@ -28,7 +28,7 @@ export const App = () => {
         )
         : (
           <h1 className="title is-flex is-align-items-center">
-            {value}
+            {selectedGood}
             {' '}
             is selected
 
@@ -37,7 +37,7 @@ export const App = () => {
               type="button"
               className="delete ml-3"
               onClick={() => {
-                setValue('');
+                setselectedGood('');
               }}
             />
           </h1>
@@ -47,20 +47,23 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map((good) => {
-            const isGoods = x => x === value;
+            const isSelected = x => x === selectedGood;
 
             return (
-              <tr data-cy="Good" className={`${isGoods(good) && 'has-background-success-light'}`}>
+              <tr
+                data-cy="Good"
+                className={`${isSelected(good) && 'has-background-success-light'}`}
+              >
                 <td>
                   {
-                    isGoods(good)
+                    isSelected(good)
                       ? (
                         <button
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
                           onClick={() => {
-                            setValue('');
+                            setselectedGood('');
                           }}
                         >
                           -
@@ -73,7 +76,7 @@ export const App = () => {
                           type="button"
                           className="button"
                           onClick={() => {
-                            setValue(good);
+                            setselectedGood(good);
                           }}
                         >
                           +
