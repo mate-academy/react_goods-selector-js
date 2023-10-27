@@ -22,7 +22,7 @@ export const App = () => {
 
   return (
     <main className="section container">
-      {selectedGood !== '' ? (
+      {selectedGood ? (
         <h1 className="title is-flex is-align-items-center">
           {`${selectedGood} is selected`}
 
@@ -50,30 +50,13 @@ export const App = () => {
               data-cy="Good"
               className={selectedGood === good
                 ? 'has-background-success-light'
-                : undefined}
+                : ''}
             >
               <td>
                 <button
                   onClick={() => {
-                    if (selected === false && selectedGood !== good) {
-                      setSelectedGood(good);
-                      setSelected(true);
-                    }
-
-                    if (selected === false && selectedGood === good) {
-                      setSelectedGood('');
-                      setSelected(true);
-                    }
-
-                    if (selected === true && selectedGood === good) {
-                      setSelectedGood('');
-                      setSelected(false);
-                    }
-
-                    if (selected === true && selectedGood !== good) {
-                      setSelectedGood(good);
-                      setSelected(false);
-                    }
+                    setSelectedGood(selectedGood === good ? '' : good);
+                    setSelected(!selected);
                   }}
                   data-cy={selectedGood === good
                     ? 'RemoveButton'
