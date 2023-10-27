@@ -23,6 +23,10 @@ export const App = () => {
     setSelectedGood(prevGood => (prevGood === good ? '' : good));
   };
 
+  const resetGood = () => {
+    setSelectedGood('');
+  };
+
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
@@ -36,9 +40,7 @@ export const App = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => {
-              setSelectedGood('');
-            }}
+            onClick={resetGood}
           />
         )}
       </h1>
@@ -47,6 +49,7 @@ export const App = () => {
         <tbody>
           {goods.map(good => (
             <tr
+              key={good}
               data-cy="Good"
               className={
                 selectedGood === good && 'has-background-success-light'
