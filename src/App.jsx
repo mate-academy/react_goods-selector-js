@@ -29,7 +29,7 @@ export const App = () => {
 
   return (
     <main className="section container">
-      {selectedGood.length > 0 ? (
+      {selectedGood.length ? (
         <h1 className="title is-flex is-align-items-center">
           {selectedGood}
           {' '}
@@ -59,6 +59,7 @@ export const App = () => {
                 className={cn({
                   'has-background-success-light': isSelected,
                 })}
+                key={good}
               >
                 <td>
                   <button
