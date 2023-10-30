@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -20,7 +21,7 @@ export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
   const selectedGoodMessage = `${
-    selectedGood !== '' ? `${selectedGood} is selected` : 'No goods selected'
+    selectedGood ? `${selectedGood} is selected` : 'No goods selected'
   }`;
 
   const changeGood = (good) => {
@@ -47,30 +48,27 @@ export const App = () => {
             <tr
               data-cy="Good"
               key={good}
-              className={`${
-                selectedGood === good ? 'has-background-success-light' : ''
-              }`}
+              className={cn({
+                'has-background-success-light': selectedGood === good,
+              })}
             >
               <td>
-                {selectedGood !== good ? (
-                  <button
-                    data-cy="AddButton"
-                    type="button"
-                    className="button"
-                    onClick={() => changeGood(good)}
-                  >
-                    +
-                  </button>
-                ) : (
-                  <button
-                    data-cy="RemoveButton"
-                    type="button"
-                    className="button is-info"
-                    onClick={() => setSelectedGood('')}
-                  >
-                    -
-                  </button>
-                )}
+                <button
+                  data-cy={selectedGood !== good ? 'AddButton' : 'RemoveButton'}
+                  type="button"
+                  className={cn('button', {
+                    'is-info': selectedGood === good,
+                  })}
+                  onClick={() => {
+                    if (selectedGood !== good) {
+                      changeGood(good);
+                    } else {
+                      setSelectedGood('');
+                    }
+                  }}
+                >
+                  {selectedGood !== good ? '+' : '-'}
+                </button>
               </td>
 
               <td data-cy="GoodTitle" className="is-vcentered">
