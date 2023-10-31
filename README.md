@@ -14,7 +14,7 @@ In this task, we use the [Bulma CSS framework](https://bulma.io/). It is already
 1. `ClearButton` should clear the selection by setting an empty string to `selectedGood`.
 1. The title should show `No goods selected` when there is no selected good.
 1. Each good should have an `AddButton` to select the good.
-    - only 1 good can be selected at a time;
+   - only 1 good can be selected at a time;
 1. Don't show `AddButton` when a good is selected.
 1. Show `RemoveButton` for the selected good to clear the selection.
 
@@ -22,4 +22,4 @@ In this task, we use the [Bulma CSS framework](https://bulma.io/). It is already
 
 - Implement a solution following the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline).
 - Open one more terminal and run tests with `npm test` to ensure your solution is correct.
-- Replace `<your_account>` with your Github username in the [DEMO LINK](https://<your_account>.github.io/react_goods-selector-js/) and add it to the PR description.
+- Replace `<your_account>` with your Github username in the [DEMO LINK](https://duster-1.github.io/react_goods-selector-js/) and add it to the PR description.
