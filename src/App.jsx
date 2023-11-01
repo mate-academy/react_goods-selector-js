@@ -59,7 +59,7 @@ export const App = () => {
               key={good}
               className={selectedGood === good
                 ? 'has-background-success-light' : ''
-          }
+              }
             >
               <td>
                 <button
