@@ -26,6 +26,10 @@ export const App = () => {
     }
   }
 
+  function resetGood() {
+    setSelectedGood('');
+  }
+
   return (
     <main className="section container">
       {selectedGood.length === 0
@@ -38,7 +42,7 @@ export const App = () => {
             {`${selectedGood} is selected`}
 
             <button
-              onClick={() => setSelectedGood('')}
+              onClick={() => resetGood()}
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
