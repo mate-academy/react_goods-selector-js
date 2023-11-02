@@ -56,7 +56,6 @@ export const App = () => {
                 ? 'has-background-success-light'
                 : ''
               }
-              key={index}
             >
               <td>
                 {selectedGood !== good
