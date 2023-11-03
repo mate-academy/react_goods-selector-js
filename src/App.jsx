@@ -1,9 +1,13 @@
+import { useState } from 'react';
+import cn from 'classnames';
+
 import 'bulma/css/bulma.css';
 import './App.scss';
-import { useState } from 'react';
-import classnames from 'classnames'; // Import the classnames library
 
-export const goods = [
+const SORT_FIELD_NAME = 'name';
+const SORT_FIELD_LENGTH = 'length';
+
+export const goodsFromServer = [
   'Dumplings',
   'Carrot',
   'Eggs',
@@ -16,67 +20,96 @@ export const goods = [
   'Garlic',
 ];
 
+function getPreparedGoods(goods, { sortField, reverseList }) {
+  let prepearedGoods = [...goods];
+
+  if (sortField) {
+    prepearedGoods.sort((good1, good2) => {
+      switch (sortField) {
+        case SORT_FIELD_NAME:
+          return good1.localeCompare(good2);
+
+        case SORT_FIELD_LENGTH:
+          return good1.length - good2.length;
+
+        default:
+          return 0;
+      }
+    });
+  }
+
+  if (reverseList) {
+    prepearedGoods = prepearedGoods.reverse();
+  }
+
+  return prepearedGoods;
+}
+
 export const App = () => {
-  const [selectedGood, setSelectedGood] = useState('Jam');
+  const [sortField, setSortField] = useState('');
+  const [isReversed, setIsReversed] = useState(false);
+
+  const visibleGoods = getPreparedGoods(
+    goodsFromServer,
+    { sortField, reverseList: isReversed },
+  );
 
   return (
-    <main className="section container">
-      {!selectedGood ? (
-        <h1 className="title is-flex is-align-items-center">
-          No goods selected
-        </h1>
-      ) : (
-        <h1 className="title is-flex is-align-items-center">
-          {`${selectedGood} is selected`}
+    <div className="section content">
+      <div className="buttons">
+        <button
+          type="button"
+          className={
+            cn('button is-info', { 'is-light': sortField !== SORT_FIELD_NAME })
+          }
+          onClick={() => setSortField(SORT_FIELD_NAME)}
+        >
+          Sort alphabetically
+        </button>
 
+        <button
+          type="button"
+          className={
+            cn('button is-success',
+              { 'is-light': sortField !== SORT_FIELD_LENGTH })
+          }
+          onClick={() => setSortField(SORT_FIELD_LENGTH)}
+        >
+          Sort by length
+        </button>
+
+        <button
+          type="button"
+          className={
+            cn('button is-warning',
+              { 'is-light': !isReversed })
+          }
+          onClick={() => setIsReversed(!isReversed)}
+        >
+          Reverse
+        </button>
+
+        {(sortField || isReversed) && (
           <button
-            onClick={() => setSelectedGood('')}
-            data-cy="ClearButton"
             type="button"
-            className="delete ml-3"
-          />
-        </h1>
-      )}
+            className="button is-danger is-light"
+            onClick={() => {
+              setSortField('');
+              setIsReversed(false);
+            }}
+          >
+            Reset
+          </button>
+        )}
+      </div>
 
-      <table className="table">
-        <tbody>
-          {goods.map(good => (
-            <tr
-              key={good}
-              data-cy="Good"
-              className={classnames({
-                'has-background-success-light': selectedGood === good,
-              })}
-            >
-              <td>
-                {selectedGood === good ? (
-                  <button
-                    data-cy="RemoveButton"
-                    type="button"
-                    className="button is-info"
-                    onClick={() => setSelectedGood('')}
-                  >
-                    -
-                  </button>
-                ) : (
-                  <button
-                    data-cy="AddButton"
-                    type="button"
-                    className="button"
-                    onClick={() => setSelectedGood(good)}
-                  >
-                    +
-                  </button>
-                )}
-              </td>
-
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </main>
+      <ul>
+        {visibleGoods.map(good => (
+          <li data-cy="Good" key={good.id}>
+            {good}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
