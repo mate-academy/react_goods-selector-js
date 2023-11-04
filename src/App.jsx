@@ -17,9 +17,9 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selected, selectedGood] = useState('Jam');
+  const [selected, setSelectedGood] = useState('Jam');
   const handleClick = (good) => {
-    selectedGood(selected === good ? '' : good);
+    setSelectedGood(selected === good ? '' : good);
   };
 
   return (
@@ -28,7 +28,7 @@ export const App = () => {
         {selected ? `${selected} is selected` : 'No goods selected'}
         {selected && (
           <button
-            onClick={() => selectedGood('')}
+            onClick={() => setSelectedGood('')}
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
