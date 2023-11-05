@@ -41,9 +41,11 @@ export const App = () => {
           <div>
             {goods.map(good => (
               <tr
-                className={good === selected
-                  ? 'has-background-success-light' : ''}
+                className={cn({
+                  'has-background-success-light': good === selected,
+                })}
                 data-cy="Good"
+                key={good}
               >
                 <td>
                   <button
