@@ -11,9 +11,7 @@ export const Good = ({ good, selectedGood, setSelectedGood }) => (
           data-cy="AddButton"
           type="button"
           className="button"
-          onClick={() => {
-            setSelectedGood(good);
-          }}
+          onClick={() => setSelectedGood(good)}
         >
           +
         </button>
@@ -22,9 +20,7 @@ export const Good = ({ good, selectedGood, setSelectedGood }) => (
           data-cy="RemoveButton"
           type="button"
           className="button is-info"
-          onClick={() => {
-            setSelectedGood('');
-          }}
+          onClick={() => setSelectedGood('')}
         >
           -
         </button>

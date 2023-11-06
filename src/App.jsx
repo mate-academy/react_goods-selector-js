@@ -39,7 +39,12 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map(good => (
-            <Good key={`${good}`} good={good} selectedGood={selectedGood} setSelectedGood={setSelectedGood} />
+            <Good
+              key={`${good}`}
+              good={good}
+              selectedGood={selectedGood}
+              setSelectedGood={setSelectedGood}
+            />
           ))}
         </tbody>
       </table>
