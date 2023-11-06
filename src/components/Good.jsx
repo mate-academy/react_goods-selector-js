@@ -1,16 +1,18 @@
-export const Good = ({ good, selected, setGood }) => {
-  const itemClassName = selected === good ? 'has-background-success-light' : '';
+export const Good = ({ good, selectedGood, setSelectedGood }) => {
+  const itemClassName = selectedGood === good
+    ? 'has-background-success-light'
+    : '';
 
   return (
     <tr data-cy="Good" className={itemClassName}>
       <td>
-        {selected !== good ? (
+        {selectedGood !== good ? (
           <button
             data-cy="AddButton"
             type="button"
             className="button"
             onClick={() => {
-              setGood(good);
+              setSelectedGood(good);
             }}
           >
             +
@@ -21,7 +23,7 @@ export const Good = ({ good, selected, setGood }) => {
             type="button"
             className="button is-info"
             onClick={() => {
-              setGood('');
+              setSelectedGood('');
             }}
           >
             -
