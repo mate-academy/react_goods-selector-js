@@ -49,6 +49,7 @@ export const App = () => {
                   'has-background-success-light': isActive,
                 })}
                 data-cy="Good"
+                key={good}
               >
                 <td>
                   {isActive ? (
