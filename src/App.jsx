@@ -17,39 +17,39 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [good, setGood] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {good ? `${good} is selected` : 'No goods selected'}
-        {good && (
+        {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
+        {selectedGood && (
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => setGood('')}
+            onClick={() => setSelectedGood('')}
           />
         )}
       </h1>
 
       <table className="table">
         <tbody>
-          {goods.map(x => (
+          {goods.map(good => (
             <tr
               data-cy="Good"
-              key={x}
+              key={good}
               className={classNames({
-                'has-background-success-light': good === x,
+                'has-background-success-light': selectedGood === good,
               })}
             >
               <td>
-                {good === x ? (
+                {selectedGood === good ? (
                   <button
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
-                    onClick={() => setGood('')}
+                    onClick={() => setSelectedGood('')}
                   >
                     -
                   </button>
@@ -58,7 +58,7 @@ export const App = () => {
                     data-cy="AddButton"
                     type="button"
                     className="button"
-                    onClick={() => setGood(x)}
+                    onClick={() => setSelectedGood(good)}
                   >
                     +
                   </button>
@@ -66,7 +66,7 @@ export const App = () => {
               </td>
 
               <td data-cy="GoodTitle" className="is-vcentered">
-                {x}
+                {good}
               </td>
             </tr>
           ))}
