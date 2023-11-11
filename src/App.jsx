@@ -1,4 +1,5 @@
 import 'bulma/css/bulma.css';
+import classNames from 'classnames';
 import './App.scss';
 import { useState } from 'react';
 
@@ -16,37 +17,39 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [product, setProduct] = useState('Jam');
+  const [good, setGood] = useState('Jam');
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {product ? `${product} is selected` : 'No goods selected'}
-        {product && (
+        {good ? `${good} is selected` : 'No goods selected'}
+        {good && (
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => setProduct('')}
+            onClick={() => setGood('')}
           />
         )}
       </h1>
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
+          {goods.map(x => (
             <tr
               data-cy="Good"
-              key={good}
-              className={product === good ? 'has-background-success-light' : ''}
+              key={x}
+              className={classNames({
+                'has-background-success-light': good === x,
+              })}
             >
               <td>
-                {product === good ? (
+                {good === x ? (
                   <button
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
-                    onClick={() => setProduct('')}
+                    onClick={() => setGood('')}
                   >
                     -
                   </button>
@@ -55,7 +58,7 @@ export const App = () => {
                     data-cy="AddButton"
                     type="button"
                     className="button"
-                    onClick={() => setProduct(good)}
+                    onClick={() => setGood(x)}
                   >
                     +
                   </button>
@@ -63,7 +66,7 @@ export const App = () => {
               </td>
 
               <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
+                {x}
               </td>
             </tr>
           ))}
