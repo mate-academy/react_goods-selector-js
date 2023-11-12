@@ -28,6 +28,7 @@ export const App = () => {
       ) : (
         <h1 className="title is-flex is-align-items-center">
           {goodValue}
+          {' '}
           is selected
 
           <button
