@@ -29,6 +29,7 @@ export const App = () => {
 
         {selected && (
           <button
+            onClick={resetFilter}
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
