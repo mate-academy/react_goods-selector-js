@@ -22,4 +22,4 @@ In this task, we use the [Bulma CSS framework](https://bulma.io/). It is already
 
 - Implement a solution following the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline).
 - Open one more terminal and run tests with `npm test` to ensure your solution is correct.
-- Replace `ValeriiaFomenko` with your Github username in the [DEMO LINK](https://github.com/ValeriiaFomenko/react_goods-selector-js/) and add it to the PR description.
+- Replace `ValeriiaFomenko` with your Github username in the [DEMO LINK](https://valeriiafomenko.github.io/react_goods-selector-js/) and add it to the PR description.
