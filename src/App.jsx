@@ -23,6 +23,10 @@ export const App = () => {
     setSelectedGood('');
   };
 
+  const handleGoodClick = (good) => {
+    setSelectedGood(good);
+  };
+
   return (
     <main className="section container">
       {!selectedGood ? (
@@ -70,7 +74,7 @@ export const App = () => {
                       data-cy="AddButton"
                       type="button"
                       className="button"
-                      onClick={() => setSelectedGood(good)}
+                      onClick={() => handleGoodClick(good)}
                     >
                       +
                     </button>
