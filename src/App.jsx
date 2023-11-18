@@ -48,6 +48,7 @@ export const App = () => {
             good !== selectedGood
               ? (
                 <tr
+                  key={good}
                   data-cy="Good"
                   className=""
                 >
@@ -71,14 +72,15 @@ export const App = () => {
               )
               : (
                 <tr
+                  key={good}
                   data-cy="Good"
                   className="has-background-success-light"
                 >
                   <td>
                     <button
-                      data-cy="AddButton"
+                      data-cy="RemoveButton"
                       type="button"
-                      className="button"
+                      className="button is-info"
                       onClick={() => {
                         select('');
                       }}
