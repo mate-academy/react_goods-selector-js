@@ -24,7 +24,7 @@ export const App = () => {
       <h1 className="title is-flex is-align-items-center">
         {selectedGood !== '' ? `${selectedGood} is selected` : 'No goods selected'}
 
-        {selectedGood !== '' && (
+        {selectedGood && (
           <button
             onClick={() => setSelectedGood('')}
             data-cy="ClearButton"
