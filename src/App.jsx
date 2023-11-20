@@ -22,7 +22,7 @@ export const App = () => {
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedGood !== '' ? `${selectedGood} is selected` : 'No goods selected'}
+        {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
 
         {selectedGood && (
           <button
@@ -37,38 +37,46 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
-            <tr
-              key={good}
-              data-cy="Good"
-              className={cn({
-                'has-background-success-light': selectedGood === good,
-              })}
-            >
-              <td>
-                <button
-                  onClick={() => {
-                    if (selectedGood === good) {
-                      setSelectedGood('');
-                    } else {
-                      setSelectedGood(good);
-                    }
-                  }}
-                  data-cy={selectedGood === good ? 'RemoveButton' : 'AddButton'}
-                  type="button"
-                  className={cn('button', {
-                    'is-info': selectedGood === good,
-                  })}
-                >
-                  {selectedGood === good ? '-' : '+'}
-                </button>
-              </td>
+          {goods.map((good) => {
+            function handleClick() {
+              if (selectedGood === good) {
+                setSelectedGood('');
+              } else {
+                setSelectedGood(good);
+              }
+            }
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
-          ))}
+            return (
+              <tr
+                key={good}
+                data-cy="Good"
+                className={cn({
+                  'has-background-success-light': selectedGood === good,
+                })}
+              >
+                <td>
+                  <button
+                    onClick={handleClick}
+                    data-cy={
+                      selectedGood === good
+                        ? 'RemoveButton'
+                        : 'AddButton'
+                    }
+                    type="button"
+                    className={cn('button', {
+                      'is-info': selectedGood === good,
+                    })}
+                  >
+                    {selectedGood === good ? '-' : '+'}
+                  </button>
+                </td>
+
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </main>
