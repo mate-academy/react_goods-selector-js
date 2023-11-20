@@ -19,10 +19,14 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
+  function handleClick(good) {
+    setSelectedGood(selectedGood === good ? '' : good);
+  }
+
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
+        {selectedGood !== '' ? `${selectedGood} is selected` : 'No goods selected'}
 
         {selectedGood && (
           <button
@@ -38,36 +42,30 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map((good) => {
-            function handleClick() {
-              if (selectedGood === good) {
-                setSelectedGood('');
-              } else {
-                setSelectedGood(good);
-              }
-            }
+            const isGoodSelected = selectedGood === good;
 
             return (
               <tr
                 key={good}
                 data-cy="Good"
                 className={cn({
-                  'has-background-success-light': selectedGood === good,
+                  'has-background-success-light': isGoodSelected,
                 })}
               >
                 <td>
                   <button
-                    onClick={handleClick}
+                    onClick={() => handleClick(good)}
                     data-cy={
-                      selectedGood === good
+                      isGoodSelected
                         ? 'RemoveButton'
                         : 'AddButton'
                     }
                     type="button"
                     className={cn('button', {
-                      'is-info': selectedGood === good,
+                      'is-info': isGoodSelected,
                     })}
                   >
-                    {selectedGood === good ? '-' : '+'}
+                    {isGoodSelected ? '-' : '+'}
                   </button>
                 </td>
 
