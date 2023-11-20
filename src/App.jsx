@@ -58,7 +58,7 @@ export const App = () => {
                   onClick={() => {
                     setSelectedGood(good === selectedGood ? '' : good);
                   }}
-                  data-cy="RemoveButton"
+                  data-cy={good === selectedGood ? 'RemoveButton' : 'AddButton'}
                   type="button"
                   className={good === selectedGood
                     ? 'button is-info'
