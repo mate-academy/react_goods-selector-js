@@ -2,7 +2,7 @@
 
 You are given an array of goods. Render them in a table with the ability to select one or clear the selection.
 
-> Here is [the working version](https://mate-academy.github.io/react_goods-selector)
+> Here is [the working version](https://github.com/TenetaJ/react_goods-selector-js)
 
 In this task, we use the [Bulma CSS framework](https://bulma.io/). It is already installed and imported so that you may use its classes.
 
@@ -22,4 +22,4 @@ In this task, we use the [Bulma CSS framework](https://bulma.io/). It is already
 
 - Implement a solution following the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline).
 - Open one more terminal and run tests with `npm test` to ensure your solution is correct.
-- Replace `<your_account>` with your Github username in the [DEMO LINK](https://<your_account>.github.io/react_goods-selector-js/) and add it to the PR description.
+- Replace `<your_account>` with your Github username in the [DEMO LINK](https://TenetaJ.github.io/react_goods-selector-js/) and add it to the PR description.
