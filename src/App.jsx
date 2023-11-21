@@ -1,6 +1,9 @@
 import 'bulma/css/bulma.css';
-import './App.scss';
 import { useState } from 'react';
+import classNames from 'classnames/bind';
+import styles from './App.scss';
+
+const cx = classNames.bind(styles);
 
 export const goods = [
   'Dumplings',
@@ -35,54 +38,56 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
-            <tr
-              key={good}
-              data-cy="Good"
-              className={`is-vcentered ${selectedGood === good
-                ? 'has-background-success-light'
-                : ''
-              }`}
-            >
-              {selectedGood === good ? (
-                <td>
-                  <button
-                    data-cy="RemoveButton"
-                    type="button"
-                    className={`button ${selectedGood === good
-                      ? 'is-info'
-                      : ''
-                    }`}
-                    onClick={() => {
-                      setGood('');
-                    }}
-                  >
-                    -
-                  </button>
-                </td>
-              ) : (
-                <td>
-                  <button
-                    data-cy="AddButton"
-                    type="button"
-                    className="button"
-                    onClick={() => {
-                      setGood(good);
-                    }}
-                  >
-                    +
-                  </button>
-                </td>
-              )}
+          {goods.map((good) => {
+            const className = cx({
+              'is-vcentered': true,
+              'is-vcentered has-background-success-light':
+                selectedGood === good,
+            });
 
-              <td
-                data-cy="GoodTitle"
-                className="is-vcentered"
+            return (
+              <tr
+                key={good}
+                data-cy="Good"
+                className={className}
               >
-                {good}
-              </td>
-            </tr>
-          ))}
+                {selectedGood === good ? (
+                  <td>
+                    <button
+                      data-cy="RemoveButton"
+                      type="button"
+                      className="button is-info"
+                      onClick={() => {
+                        setGood('');
+                      }}
+                    >
+                      -
+                    </button>
+                  </td>
+                ) : (
+                  <td>
+                    <button
+                      data-cy="AddButton"
+                      type="button"
+                      className="button"
+                      onClick={() => {
+                        setGood(good);
+                      }}
+                    >
+                      +
+                    </button>
+                  </td>
+                )}
+
+                <td
+                  data-cy="GoodTitle"
+                  className="is-vcentered"
+                >
+                  {good}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </main>
