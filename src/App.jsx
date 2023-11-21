@@ -24,14 +24,14 @@ const goodsWithId = goods.map((good, i) => (
 ));
 
 export const App = () => {
-  const [selectedGood, setselectedGood] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   const handleClearSelection = () => {
-    setselectedGood('');
+    setSelectedGood('');
   };
 
   const handleClick = (name) => {
-    setselectedGood(name);
+    setSelectedGood(name);
   };
 
   return (
