@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -20,61 +21,55 @@ export const App = () => {
 
   return (
     <main className="section container">
-      {isSelected ? (
-        <h1 className="title is-flex is-align-items-center">
-          {`${isSelected} is selected`}
+      <h1 className="title is-flex is-align-items-center">
+        {isSelected ? (
+          `${isSelected} is selected`
+        ) : (
+          'No goods selected'
+        )}
 
+        {isSelected && (
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
             onClick={() => setIsSelected('')}
           />
-        </h1>
-      ) : (
-        <h1 className="title is-flex is-align-items-center">
-          No goods selected
-        </h1>
-      )}
+        )}
+      </h1>
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
-            <tr
-              data-cy="Good"
-              className={
-                `${isSelected === good
-                  && 'has-background-success-light'}`
-              }
-              key={good}
-            >
-              <td>
-                {isSelected === good ? (
-                  <button
-                    data-cy="RemoveButton"
-                    type="button"
-                    className="button is-info"
-                    onClick={() => setIsSelected('')}
-                  >
-                    -
-                  </button>
-                ) : (
-                  <button
-                    data-cy="AddButton"
-                    type="button"
-                    className="button"
-                    onClick={() => setIsSelected(good)}
-                  >
-                    +
-                  </button>
-                )}
-              </td>
+          {goods.map((good) => {
+            const isSelectedGood = isSelected === good;
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
-          ))}
+            return (
+              <tr
+                data-cy="Good"
+                className={classNames({
+                  'has-background-success-light': isSelectedGood,
+                })}
+                key={good}
+              >
+                <td>
+                  <button
+                    data-cy={isSelectedGood ? 'RemoveButton' : 'AddButton'}
+                    type="button"
+                    className={classNames('button', {
+                      'is-info': isSelectedGood,
+                    })}
+                    onClick={() => setIsSelected(isSelectedGood ? '' : good)}
+                  >
+                    {isSelectedGood ? '-' : '+'}
+                  </button>
+                </td>
+
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </main>
