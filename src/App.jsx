@@ -18,32 +18,29 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
-  const goodSelectedCondition = good => good === selectedGood;
-
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
         {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
 
         {
-            selectedGood
-              ? (
-                <button
-                  data-cy="ClearButton"
-                  type="button"
-                  className="delete ml-3"
-                  onClick={() => setSelectedGood('')}
-                />
-              )
-              : <></>
-          }
+          selectedGood
+          && (
+            <button
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={() => setSelectedGood('')}
+            />
+          )
+        }
       </h1>
 
       <table className="table">
         <tbody>
-          {goods.map(good => {
-            const uuid = crypto.randomUUID();
-            
+          {goods.map((good) => {
+            const goodSelectedCondition = () => good === selectedGood;
+
             return (
               <tr
                 data-cy="Good"
@@ -52,7 +49,7 @@ export const App = () => {
                     ? 'has-background-success-light'
                     : ''
                 }
-                key={uuid}
+                key={good}
               >
                 <td>
                   {
