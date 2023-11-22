@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import cn from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -34,50 +35,54 @@ export const App = () => {
         )}
       </h1>
 
-      {goods.map(goodsItem => (
-        <table className="table">
-          <tbody>
-            <tr
-              data-cy="Good"
-              className={
-                selectedGood === goodsItem
-                  ? 'has-background-success-light' : ''
-              }
-            >
-              <td>
-                {selectedGood !== goodsItem ? (
-                  <button
-                    data-cy="AddButton"
-                    type="button"
-                    className="button"
-                    onClick={() => {
-                      setValue(goodsItem);
-                    }}
-                  >
-                    +
-                  </button>
-                ) : (
-                  <button
-                    data-cy="RemoveButton"
-                    type="button"
-                    className="button is-info"
-                    onClick={() => {
-                      setValue(null);
-                    }}
-                  >
-                    -
-                  </button>
+      {goods.map((goodsItem) => {
+        const isSameState = selectedGood === goodsItem;
+
+        return (
+          <table className="table">
+            <tbody>
+              <tr
+                data-cy="Good"
+                className={cn(
+                  { 'has-background-success-light': isSameState },
                 )
                 }
-              </td>
+              >
+                <td>
+                  {!isSameState ? (
+                    <button
+                      data-cy="AddButton"
+                      type="button"
+                      className="button"
+                      onClick={() => {
+                        setValue(goodsItem);
+                      }}
+                    >
+                      +
+                    </button>
+                  ) : (
+                    <button
+                      data-cy="RemoveButton"
+                      type="button"
+                      className="button is-info"
+                      onClick={() => {
+                        setValue(null);
+                      }}
+                    >
+                      -
+                    </button>
+                  )
+                  }
+                </td>
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                { goodsItem }
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      ))}
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {goodsItem}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        );
+      })}
     </main>
   );
 };
