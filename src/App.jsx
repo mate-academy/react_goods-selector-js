@@ -22,9 +22,9 @@ export const App = () => {
   function toogleSelect(selectGood) {
     if (selectGood === good) {
       setGoods('');
+    } else {
+      setGoods(selectGood);
     }
-
-    setGoods(selectGood);
   }
 
   return (
@@ -33,15 +33,17 @@ export const App = () => {
       <h1 className="title is-flex is-align-items-center">
         {good.length > 0 ? `${good} is selected` : 'No goods selected'}
 
-        <button
-          onClick={() => {
-            toogleSelect('');
-          }}
-          data-cy="ClearButton"
-          type="button"
-          className="delete ml-3"
-
-        />
+        {good.length > 0 && (
+          <button
+            onClick={() => {
+              toogleSelect('');
+            }}
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+          />
+        )
+        }
       </h1>
 
       <table className="table">
@@ -51,7 +53,11 @@ export const App = () => {
             const isSelected = item === good;
 
             return (
-              <tr key={item} data-cy="Good">
+              <tr
+                key={item}
+                data-cy="Good"
+                className={cn({ 'has-background-success-light': isSelected })}
+              >
                 <td>
                   <button
                     onClick={() => toogleSelect(item)}
