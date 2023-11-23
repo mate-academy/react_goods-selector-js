@@ -36,7 +36,7 @@ export const App = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => clearSelection()}
+            onClick={clearSelection}
           />
         )}
       </h1>
@@ -52,8 +52,7 @@ export const App = () => {
                 key={good}
                 className={cn(
                   { 'has-background-success-light': isSelected },
-                )
-                }
+                )}
               >
                 <td>
                   <button
@@ -62,10 +61,7 @@ export const App = () => {
                       : 'AddButton'
                     }
                     type="button"
-                    className={`button ${isSelected
-                      ? ' is-info'
-                      : ''
-                    }`}
+                    className={cn('button', { 'is-info': isSelected })}
                     onClick={() => (
                       isSelected
                         ? clearSelection()
