@@ -19,12 +19,12 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setGoods] = useState(goods[8]);
 
-  const toogleSelect = (selectedElement) => {
-    if (selectedGood === selectedElement) {
-      setGoods('');
-    } else {
-      setGoods(selectedElement);
-    }
+  const clearSelect = () => {
+    setGoods('');
+  };
+
+  const selectedElement = (element) => {
+    setGoods(element);
   };
 
   return (
@@ -36,7 +36,7 @@ export const App = () => {
         {selectedGood && (
           <button
             onClick={() => {
-              toogleSelect('');
+              clearSelect('');
             }}
             data-cy="ClearButton"
             type="button"
@@ -60,7 +60,9 @@ export const App = () => {
               >
                 <td>
                   <button
-                    onClick={() => toogleSelect(item)}
+                    onClick={() => (isSelected
+                      ? clearSelect('')
+                      : selectedElement(item))}
                     data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
                     type="button"
                     className={cn('button', { 'is-info': isSelected })}
