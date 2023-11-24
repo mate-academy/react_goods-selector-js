@@ -27,7 +27,7 @@ export const App = () => {
         <h1 className="title is-flex is-align-items-center">
           {`${selectedGood} is selected`}
           <button
-            onClick={() => clear()}
+            onClick={clear}
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
@@ -55,7 +55,7 @@ export const App = () => {
                 <td>
                   {isSelected ? (
                     <button
-                      onClick={() => clear()}
+                      onClick={clear}
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
