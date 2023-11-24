@@ -17,23 +17,23 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [good, setGoods] = useState('Jam');
+  const [selectedGood, setGoods] = useState(goods[8]);
 
-  function toogleSelect(selectGood) {
-    if (selectGood === good) {
+  const toogleSelect = (selectedElement) => {
+    if (selectedGood === selectedElement) {
       setGoods('');
     } else {
-      setGoods(selectGood);
+      setGoods(selectedElement);
     }
-  }
+  };
 
   return (
     <main className="section container">
 
       <h1 className="title is-flex is-align-items-center">
-        {good.length > 0 ? `${good} is selected` : 'No goods selected'}
+        {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
 
-        {good.length > 0 && (
+        {selectedGood && (
           <button
             onClick={() => {
               toogleSelect('');
@@ -50,7 +50,7 @@ export const App = () => {
         <tbody>
 
           {goods.map((item) => {
-            const isSelected = item === good;
+            const isSelected = item === selectedGood;
 
             return (
               <tr
