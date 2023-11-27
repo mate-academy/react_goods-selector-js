@@ -27,7 +27,7 @@ export const App = () => {
           : `No goods selected`
         }
 
-        {selectedGood !== ''
+        {selectedGood
           && (
             <button
               data-cy="ClearButton"
@@ -46,26 +46,24 @@ export const App = () => {
           {goods.map((good) => {
             const isSelected = good === selectedGood;
 
+            function addSelection() {
+              return isSelected ? setSelectedGood('') : setSelectedGood(good);
+            }
+
             return (
               <tr
                 data-cy="Good"
+                key={good}
                 className={isSelected
                   && 'has-background-success-light'
                 }
               >
                 <td>
-                  {isSelected}
                   <button
                     data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
                     type="button"
                     className={isSelected ? 'button is-info' : 'button'}
-                    onClick={() => {
-                      if (isSelected) {
-                        setSelectedGood('');
-                      } else {
-                        setSelectedGood(good);
-                      }
-                    }}
+                    onClick={() => addSelection(isSelected)}
                   >
                     {isSelected
                       ? '-'
