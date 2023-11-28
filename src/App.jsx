@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -18,7 +19,7 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setGood] = useState('Jam');
 
-  const clearState = (value = '') => {
+  const toggleSelectedGood = (value = '') => {
     setGood(value);
   };
 
@@ -35,7 +36,7 @@ export const App = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => clearState()}
+            onClick={() => toggleSelectedGood('')}
           />
         </h1>
       )}
@@ -45,12 +46,13 @@ export const App = () => {
           {goods.map((good) => {
             const isSelected = selectedGood === good;
             const goodClassName = isSelected
-              ? 'has-background-success-light' : '';
+              ? 'has-background-success-light'
+              : '';
 
-            const buttonStyles = {
+            const buttonClasses = classNames({
               'button is-info': isSelected,
               button: !isSelected,
-            };
+            });
 
             return (
               <tr data-cy="Good" className={goodClassName} key={good}>
@@ -58,9 +60,8 @@ export const App = () => {
                   <button
                     data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
                     type="button"
-                    className={Object.keys(buttonStyles)
-                      .find(key => buttonStyles[key])}
-                    onClick={() => clearState(isSelected ? '' : good)}
+                    className={buttonClasses}
+                    onClick={() => toggleSelectedGood(isSelected ? '' : good)}
                   >
                     {isSelected ? '-' : '+'}
                   </button>
