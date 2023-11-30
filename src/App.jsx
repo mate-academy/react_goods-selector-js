@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import cn from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -43,40 +44,41 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map(good => (
-            <React.Fragment key={good}>
-              <tr
-                className={`${selectedGood === good ? 'has-background-success-light' : ''}`}
-                data-cy="Good"
-              >
-                {selectedGood === good ? (
-                  <td>
-                    <button
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                      onClick={clearButtonClick}
-                    >
-                      -
-                    </button>
-                  </td>
-                ) : (
-                  <td>
-                    <button
-                      data-cy="AddButton"
-                      type="button"
-                      className="button"
-                      onClick={() => addButtonClick(good)}
-                    >
-                      +
-                    </button>
-                  </td>
-                )}
-
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
+            <tr
+              key={good}
+              className={cn({
+                'has-background-success-light': selectedGood === good,
+              })}
+              data-cy="Good"
+            >
+              {selectedGood === good ? (
+                <td>
+                  <button
+                    data-cy="RemoveButton"
+                    type="button"
+                    className="button is-info"
+                    onClick={clearButtonClick}
+                  >
+                    -
+                  </button>
                 </td>
-              </tr>
-            </React.Fragment>
+              ) : (
+                <td>
+                  <button
+                    data-cy="AddButton"
+                    type="button"
+                    className="button"
+                    onClick={() => addButtonClick(good)}
+                  >
+                    +
+                  </button>
+                </td>
+              )}
+
+              <td data-cy="GoodTitle" className="is-vcentered">
+                {good}
+              </td>
+            </tr>
           ))}
         </tbody>
       </table>
