@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import cn from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -18,9 +19,19 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
-  const clearButton = () => {
+  const reset = () => {
     setSelectedGood('');
   };
+
+  const toggleGoodSelection = (good) => {
+    if (selectedGood !== good) {
+      setSelectedGood(good);
+    } else {
+      reset();
+    }
+  };
+
+  const isGoodSelected = good => selectedGood === good;
 
   return (
     <main className="section container">
@@ -32,7 +43,7 @@ export const App = () => {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => clearButton()}
+              onClick={reset}
             />
           </>
         ) : (
@@ -47,23 +58,18 @@ export const App = () => {
             <tr
               key={good}
               data-cy="Good"
-              className={selectedGood === good
-                ? 'has-background-success-light' : ''}
+              className={cn({
+                'has-background-success-light': isGoodSelected(good),
+              })}
             >
               <td>
                 <button
-                  data-cy={(selectedGood !== good)
+                  data-cy={(!isGoodSelected(good))
                     ? 'AddButton' : 'RemoveButton'}
                   type="button"
-                  className={selectedGood === good
+                  className={isGoodSelected(good)
                     ? 'button is-info' : 'button'}
-                  onClick={() => {
-                    if (selectedGood !== good) {
-                      setSelectedGood(good);
-                    } else {
-                      clearButton();
-                    }
-                  }}
+                  onClick={() => toggleGoodSelection(good)}
 
                 >
                   {selectedGood !== good ? '+' : '-'}
