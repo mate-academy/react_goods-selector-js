@@ -18,15 +18,6 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
-  // eslint-disable-next-line no-unused-vars
-  const handleButtonClick = (good) => {
-    if (selectedGood === 'No goods selected' || selectedGood !== good) {
-      setSelectedGood(good);
-    } else {
-      setSelectedGood('No goods selected');
-    }
-  };
-
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
