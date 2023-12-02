@@ -63,7 +63,7 @@ export const App = () => {
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
-                    onClick={() => selectGood('')}
+                    onClick={clearSelectedGood}
                   >
                     -
                   </button>
@@ -81,9 +81,7 @@ export const App = () => {
 
               <td
                 data-cy="GoodTitle"
-                className={cn(
-                  'is-vcentered',
-                )}
+                className="is-vcentered"
               >
                 {good}
               </td>
