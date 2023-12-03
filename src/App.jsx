@@ -18,6 +18,8 @@ export const goods = [
 
 export const App = () => {
   const [selected, setSelected] = useState('Jam');
+  const reset = () => setSelected('');
+  const goodSelected = x => x === selected;
 
   return (
     <main className="section container">
@@ -29,29 +31,29 @@ export const App = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => setSelected('')}
+            onClick={reset}
           />
         )}
       </h1>
 
       <table className="table">
         <tbody>
-          {goods.map((good, x) => (
+          {goods.map(good => (
             <tr
               key={good}
               data-cy="Good"
               className={cn({
-                'has-background-success-light': good === selected,
+                'has-background-success-light': goodSelected(good),
               })}
             >
               <td>
-                {good === selected
+                {goodSelected(good)
                   ? (
                     <button
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={() => setSelected('')}
+                      onClick={reset}
                     >
                       -
                     </button>
