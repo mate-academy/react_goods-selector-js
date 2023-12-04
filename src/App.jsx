@@ -1,19 +1,8 @@
+import { useState } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
-import { useState } from 'react';
-
-export const goods = [
-  'Dumplings',
-  'Carrot',
-  'Eggs',
-  'Ice cream',
-  'Apple',
-  'Bread',
-  'Fish',
-  'Honey',
-  'Jam',
-  'Garlic',
-];
+import goods from './api/goods.json';
+import { GoodsTable } from './components/GoodsTable';
 
 export const App = () => {
   const [title, setTitle] = useState('');
@@ -32,34 +21,7 @@ export const App = () => {
         />
       </h1>
 
-      <table className="table">
-        <tbody>
-          {goods.map(good => (
-            <tr
-              key={good}
-              data-cy="Good"
-              className={title === good ? 'has-background-success-light' : ''}
-            >
-              <td>
-                <button
-                  onClick={() => {
-                    setTitle(good);
-                  }}
-                  data-cy="AddButton"
-                  type="button"
-                  className={title === good ? 'button is-info' : 'button'}
-                >
-                  {title === good ? '-' : '+'}
-                </button>
-              </td>
-
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <GoodsTable goods={goods} title={title} setTitle={setTitle} />
     </main>
   );
 };
