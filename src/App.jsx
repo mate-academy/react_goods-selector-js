@@ -18,6 +18,10 @@ export const goods = [
 export const App = () => {
   const [title, setTitle] = useState('Jam');
 
+  const buttonClick = (good) => {
+    setTitle(prevTitle => (prevTitle === good ? '' : good));
+  };
+
   return (
     <main className="section container">
 
@@ -34,22 +38,23 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
+          {goods.map(good => {
+            const isGoodSelected = title === good;
+
+            return (
             <tr
               key={good}
               data-cy="Good"
-              className={title === good ? 'has-background-success-light' : ''}
+              className={isGoodSelected ? 'has-background-success-light' : ''}
             >
               <td>
                 <button
-                  onClick={() => {
-                    setTitle(prevTitle => (prevTitle === good ? '' : good));
-                  }}
+                  onClick={() => buttonClick(good)}
                   data-cy="AddButton"
                   type="button"
-                  className={title === good ? 'button is-info' : 'button'}
+                  className={isGoodSelected ? 'button is-info' : 'button'}
                 >
-                  {title === good ? '-' : '+'}
+                  {isGoodSelected ? '-' : '+'}
                 </button>
               </td>
 
@@ -57,7 +62,7 @@ export const App = () => {
                 {good}
               </td>
             </tr>
-          ))}
+          )})}
         </tbody>
       </table>
     </main>
