@@ -18,7 +18,7 @@ export const goods = [
 export const App = () => {
   const [title, setTitle] = useState('Jam');
 
-  const buttonClick = (good) => {
+  const handleButtonClick = (good) => {
     setTitle(prevTitle => (prevTitle === good ? '' : good));
   };
 
@@ -38,31 +38,32 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => {
+          {goods.map((good) => {
             const isGoodSelected = title === good;
 
             return (
-            <tr
-              key={good}
-              data-cy="Good"
-              className={isGoodSelected ? 'has-background-success-light' : ''}
-            >
-              <td>
-                <button
-                  onClick={() => buttonClick(good)}
-                  data-cy="AddButton"
-                  type="button"
-                  className={isGoodSelected ? 'button is-info' : 'button'}
-                >
-                  {isGoodSelected ? '-' : '+'}
-                </button>
-              </td>
+              <tr
+                key={good}
+                data-cy="Good"
+                className={isGoodSelected ? 'has-background-success-light' : ''}
+              >
+                <td>
+                  <button
+                    onClick={() => handleButtonClick(good)}
+                    data-cy="AddButton"
+                    type="button"
+                    className={isGoodSelected ? 'button is-info' : 'button'}
+                  >
+                    {isGoodSelected ? '-' : '+'}
+                  </button>
+                </td>
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
-          )})}
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </main>
