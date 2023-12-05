@@ -28,7 +28,7 @@ export const App = () => {
           onClick={() => setTitle('')}
           data-cy="ClearButton"
           type="button"
-          className={title ? 'delete ml-3' : 'botton-hidden'}                   
+          className={title ? 'delete ml-3' : 'botton-hidden'}
         />
       </h1>
 
