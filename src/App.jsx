@@ -16,7 +16,7 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState('Jam');
 
   return (
     <main className="section container">
@@ -28,7 +28,7 @@ export const App = () => {
           onClick={() => setTitle('')}
           data-cy="ClearButton"
           type="button"
-          className="delete ml-3"
+          className={title ? 'delete ml-3' : 'botton-hidden'}                   
         />
       </h1>
 
@@ -43,7 +43,7 @@ export const App = () => {
               <td>
                 <button
                   onClick={() => {
-                    setTitle(good);
+                    setTitle(prevTitle => (prevTitle === good ? '' : good));
                   }}
                   data-cy="AddButton"
                   type="button"
