@@ -38,36 +38,43 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => {
+          {goods.map((good) => {
             const isGoodSelected = selectedGood === good;
-            const chooseGood = () => (isGoodSelected ? undefined : good);
             return (
-            <tr
-              data-cy="Good"
-              className={isGoodSelected
-                ? 'has-background-success-light' : ''}
-            >
-              <td>
-                <button
-                  data-cy={isGoodSelected
-                    ? 'RemoveButton' : 'AddButton'}
-                  type="button"
-                  className={isGoodSelected
-                    ? 'button is-info' : 'button'}
-                  onClick={() => {
-                    setSelectedGood(chooseGood());
-                  }}
-                >
-                  { isGoodSelected ? '-' : '+'}
-                </button>
-              </td>
+              <tr
+                data-cy="Good"
+                className={isGoodSelected
+                  ? 'has-background-success-light' : ''}
+              >
+                <td>
+                  {isGoodSelected ? <button
+                    data-cy='RemoveButton'
+                    type="button"
+                    className='button is-info'
+                    onClick={() => {
+                      setSelectedGood(undefined);
+                    }}
+                  >
+                    -
+                  </button> : <button
+                    data-cy='AddButton'
+                    type="button"
+                    className='button'
+                    onClick={() => {
+                      setSelectedGood(good);
+                    }}
+                  >
+                    +
+                  </button>}
+                </td>
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
 
-            </tr>
-          )})}
+              </tr>
+            );
+          })}
 
         </tbody>
       </table>
