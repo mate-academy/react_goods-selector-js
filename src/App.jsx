@@ -1,5 +1,6 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
+import { useState } from 'react';
 
 export const goods = [
   'Dumplings',
@@ -14,70 +15,94 @@ export const goods = [
   'Garlic',
 ];
 
-export const App = () => (
-  <main className="section container">
-    <h1 className="title is-flex is-align-items-center">No goods selected</h1>
+export const App = () => {
+  function resetList(id) {
+    const activeElem = document.querySelector('.has-background-success-light');
+    const activeBtn = document.querySelector('.is-info');
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+    setSelectedGood('');
 
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+    if (activeElem && activeBtn.id !== id) {
+      activeElem.classList.remove('has-background-success-light');
+      activeBtn.classList.remove('is-info');
+      activeBtn.textContent = '+';
+    }
+  }
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
+  function clickHandler({ target }) {
+    resetList(target.id);
+    const btn = target;
+
+    btn.classList.toggle('is-info');
+    const parent = target.closest('[data-cy="Good');
+
+    btn.textContent
+      = target.textContent === '+' ? '-' : '+';
+
+    parent.classList.toggle('has-background-success-light');
+    const elementName = parent.lastChild.textContent;
+
+    if (btn.textContent === '-') {
+      setSelectedGood(elementName);
+    }
+  }
+
+  function createId(i) {
+    const random = i + (Math.random() + Date.now()) + (i + 1 - Date.now());
+
+    return Math.trunc(random);
+  }
+
+  const [selectedGood, setSelectedGood] = useState('');
+
+  return (
+    <main className="section container">
+      {selectedGood === ''
+        ? (
+          <h1 className="title is-flex is-align-items-center">
+            No goods selected
+          </h1>
+        )
+        : (
+          <h1 className="title is-flex is-align-items-center">
+            {`${selectedGood} is selected`}
+
             <button
-              data-cy="AddButton"
+              data-cy="ClearButton"
               type="button"
-              className="button"
+              className="delete ml-3"
+              onClick={resetList}
+            />
+          </h1>
+        )
+      }
+
+      <table className="table">
+        <tbody>
+          {goods.map((el, i) => (
+            <tr
+              data-cy="Good"
+              key={createId(i)}
             >
-              +
-            </button>
-          </td>
+              <td>
+                <button
+                  data-cy="AddButton"
+                  type="button"
+                  className="button"
+                  onClick={clickHandler}
+                  id={i}
+                >
+                  +
+                </button>
+              </td>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
-
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
-
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+              <td data-cy="GoodTitle" className="is-vcentered">
+                {el}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </main>
+  );
+};
