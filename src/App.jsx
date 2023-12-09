@@ -22,6 +22,10 @@ export const App = () => {
     setSelectedGood(prevGood => (prevGood === good ? '' : good));
   };
 
+  const resetButton = () => {
+    setSelectedGood('');
+  };
+
   return (
     <main className="section container">
       {selectedGood === '' && (
@@ -38,9 +42,7 @@ export const App = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => {
-              setSelectedGood('');
-            }}
+            onClick={resetButton}
           />
         </h1>
       )}
@@ -49,7 +51,7 @@ export const App = () => {
         <tbody>
 
           {goods.map(good => (
-            <tr data-cy="Good" className={`${selectedGood === good ? 'has-background-success-light' : ''}`}>
+            <tr data-cy="Good" className={`${selectedGood === good ? 'has-background-success-light' : ''}`} key={good}>
               <td>
                 <button
                   onClick={() => handleAddButtonClick(good)}
