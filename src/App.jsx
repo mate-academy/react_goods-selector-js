@@ -63,7 +63,6 @@ export const App = () => {
                   data-good={el}
                   className={`button ${el === selectedGood && 'is-info'}`}
                   onClick={clickHandler}
-                  id={i}
                 >
                   {el === selectedGood ? '-' : '+'}
                 </button>
