@@ -16,41 +16,12 @@ export const goods = [
 ];
 
 export const App = () => {
-  function resetList(id) {
-    const activeElem = document.querySelector('.has-background-success-light');
-    const activeBtn = document.querySelector('.is-info');
-
-    setSelectedGood('');
-
-    if (activeElem && activeBtn.id !== id) {
-      activeElem.classList.remove('has-background-success-light');
-      activeBtn.classList.remove('is-info');
-      activeBtn.textContent = '+';
-    }
-  }
-
   function clickHandler({ target }) {
-    resetList(target.id);
-    const btn = target;
-
-    btn.classList.toggle('is-info');
-    const parent = target.closest('[data-cy="Good');
-
-    btn.textContent
-      = target.textContent === '+' ? '-' : '+';
-
-    parent.classList.toggle('has-background-success-light');
-    const elementName = parent.lastChild.textContent;
-
-    if (btn.textContent === '-') {
-      setSelectedGood(elementName);
+    if (selectedGood === target.dataset.good) {
+      setSelectedGood('');
+    } else {
+      setSelectedGood(target.dataset.good);
     }
-  }
-
-  function createId(i) {
-    const random = i + (Math.random() + Date.now()) + (i + 1 - Date.now());
-
-    return Math.trunc(random);
   }
 
   const [selectedGood, setSelectedGood] = useState('');
@@ -71,7 +42,7 @@ export const App = () => {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={resetList}
+              onClick={() => setSelectedGood('')}
             />
           </h1>
         )
@@ -82,17 +53,19 @@ export const App = () => {
           {goods.map((el, i) => (
             <tr
               data-cy="Good"
-              key={createId(i)}
+              key={el}
+              className={`${el === selectedGood && 'has-background-success-light'}`}
             >
               <td>
                 <button
                   data-cy="AddButton"
                   type="button"
-                  className="button"
+                  data-good={el}
+                  className={`button ${el === selectedGood && 'is-info'}`}
                   onClick={clickHandler}
                   id={i}
                 >
-                  +
+                  {el === selectedGood ? '-' : '+'}
                 </button>
               </td>
 
