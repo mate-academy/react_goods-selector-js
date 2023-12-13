@@ -53,7 +53,7 @@ export const App = () => {
                 <button
                   data-cy={selectedGood === good ? 'RemoveButton' : 'AddButton'}
                   type="button"
-                  className={`button ${selectedGood === good && 'is-info'}`}
+                  className={`button ${isActive && 'is-info'}`}
                   onClick={handleClick(good)}
                 >
                   {isActive ? '-' : '+'}
