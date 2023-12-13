@@ -56,7 +56,7 @@ export const App = () => {
                   className={`button ${selectedGood === good && 'is-info'}`}
                   onClick={handleClick(good)}
                 >
-                  {selectedGood === good ? '-' : '+'}
+                  {isActive ? '-' : '+'}
                 </button>
               </td>
 
