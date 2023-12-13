@@ -17,6 +17,8 @@ export const goods = [
 
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState(goods.find(item => item === 'Jam') || goods[0]);
+  
+  const handleClick ....
 
   return (
     <main className="section container">
