@@ -1,6 +1,6 @@
 import 'bulma/css/bulma.css';
-import { useState } from 'react';
 import './App.scss';
+import { useState } from 'react';
 
 export const goods = [
   'Dumplings',
@@ -24,9 +24,9 @@ export const App = () => {
 
   const removeClickOnGood = () => {
     setSelectedGood('');
-  }
+  };
 
-  const ClearButton = selectedGood && (
+  const clearButton = selectedGood && (
     <button
       data-cy="ClearButton"
       type="button"
@@ -38,19 +38,19 @@ export const App = () => {
   const title = selectedGood ? (
     <h1 className="title is-flex is-align-items-center">
       {`${selectedGood} is selected`}
-      {ClearButton}
+      {clearButton}
     </h1>
   ) : (
     <h1 className="title is-flex is-align-items-center">
       No goods selected
     </h1>
-  )
+  );
 
   return (
-    <main className='section container'>
+    <main className="section container">
       {title}
 
-      <table className='table'>
+      <table className="table">
         <tbody>
           {goods.map(good => (
             <tr
@@ -64,7 +64,7 @@ export const App = () => {
               {selectedGood !== good ? (
                 <td>
                   <button
-                    data-cy="addButton"
+                    data-cy="AddButton"
                     type="button"
                     className="button"
                     onClick={() => clickOnGood(good)}
@@ -75,7 +75,7 @@ export const App = () => {
               ) : (
                 <td>
                   <button
-                    data-cy="removeButton"
+                    data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
                     onClick={removeClickOnGood}
