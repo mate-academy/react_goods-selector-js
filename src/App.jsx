@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import cn from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -26,6 +27,8 @@ export const App = () => {
     setProduct('');
   };
 
+  const isProductSelected = (a, b) => a === b;
+
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
@@ -42,13 +45,18 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map((item) => (
+          {goods.map(item => (
             <tr
               data-cy="Good"
               key={item}
-              className={product === item ? 'has-background-success-light' : ''}
+              className={cn({
+                'has-background-success-light': isProductSelected(
+                  product,
+                  item,
+                ),
+              })}
             >
-              {item === product ? (
+              {isProductSelected(product, item) ? (
                 <td>
                   <button
                     data-cy="RemoveButton"
