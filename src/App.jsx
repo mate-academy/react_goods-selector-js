@@ -61,7 +61,7 @@ export const App = () => {
                           type="button"
                           className="button is-info"
                           onClick={() => {
-                            setSelectedGood();
+                            setSelectedGood('');
                           }}
                         >
                           -
