@@ -17,15 +17,15 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [SelectedGoods, setSelectedGoods] = useState('Jam');
+  const [selectedGoods, setSelectedGoods] = useState('Jam');
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {SelectedGoods
+        {selectedGoods
           ? (
             <>
-              {`${SelectedGoods} is selected`}
+              {`${selectedGoods} is selected`}
 
               <button
                 onClick={() => setSelectedGoods('')}
@@ -44,7 +44,7 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map((good) => {
-            const isSelected = SelectedGoods === good;
+            const isSelected = selectedGoods === good;
 
             return (
               <tr
