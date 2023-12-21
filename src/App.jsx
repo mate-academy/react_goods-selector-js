@@ -22,10 +22,10 @@ export const App = () => {
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
         <span>
-          {goodState === '' ? 'No goods selected' : `${goodState} is selected`}
+          {!goodState ? 'No goods selected' : `${goodState} is selected`}
         </span>
 
-        {goodState === ''
+        {!goodState
           ? ''
           : (
             <button
@@ -53,30 +53,54 @@ export const Table = ({ setGood, goodState }) => (
   </table>
 );
 
-export const Good = ({ goodState, setGood, good }) => (
-  <tr
-    data-cy="Good"
-    className={`${goodState === good
-      ? 'has-background-success-light'
-      : ''}`}
-  >
-    <td>
-      <button
-        data-cy={`${goodState === good ? 'RemoveButton' : 'AddButton'}`}
-        type="button"
-        className={`button ${goodState === good
-          ? 'is-info'
-          : ''}`}
-        onClick={() => (
-          goodState === good ? setGood('') : setGood(good)
-        )}
-      >
-        {goodState === good ? '-' : '+'}
-      </button>
-    </td>
+export const Good = ({ goodState, setGood, good }) => {
+  const setGoodState = () => {
+    if (goodState === good) {
+      setGood('');
+    } else {
+      setGood(good);
+    }
+  };
 
-    <td data-cy="GoodTitle" className="is-vcentered">
-      {good}
-    </td>
-  </tr>
-);
+  let btnClass = 'button';
+
+  if (goodState === good) {
+    btnClass += ' is-info';
+  }
+
+  let dataCYButton = 'AddButton';
+
+  if (goodState === good) {
+    dataCYButton = 'RemoveButton';
+  }
+
+  let goodClass = '';
+
+  if (goodState === good) {
+    goodClass += ' has-background-success-light';
+  }
+
+  return (
+    <tr
+      data-cy="Good"
+      className={goodClass}
+    >
+      <td>
+        <button
+          data-cy={dataCYButton}
+          type="button"
+          className={btnClass}
+          onClick={() => (
+            setGoodState()
+          )}
+        >
+          {goodState === good ? '-' : '+'}
+        </button>
+      </td>
+
+      <td data-cy="GoodTitle" className="is-vcentered">
+        {good}
+      </td>
+    </tr>
+  );
+};
