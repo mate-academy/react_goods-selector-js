@@ -19,8 +19,8 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
-  function goodClick(good, select) {
-    setSelectedGood(select === good ? '' : good);
+  function goodClick(good) {
+    return setSelectedGood(selectedGood === good ? '' : good);
   }
 
   return (
@@ -60,7 +60,7 @@ export const App = () => {
                 <td>
                   <button
                     onClick={
-                      () => goodClick(good, selected)
+                      () => goodClick(good)
                     }
                     data-cy={
                       selected ? 'RemoveButton' : 'AddButton'
