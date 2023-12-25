@@ -17,15 +17,15 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGoods, setGoods] = useState('Jam');
+  const [selectedGood, setGoods] = useState('Jam');
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedGoods
+        {selectedGood
           ? (
             <>
-              {`${selectedGoods} is selected`}
+              {`${selectedGood} is selected`}
               <button
                 onClick={() => setGoods('')}
                 data-cy="ClearButton"
@@ -41,7 +41,7 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map((good) => {
-            const isSelected = selectedGoods === good;
+            const isSelected = selectedGood === good;
 
             return (
               <tr
@@ -52,11 +52,11 @@ export const App = () => {
                 <td>
                   <button
                     onClick={() => (
-                      setGoods(isSelected ? '' : good)
+                      setGoods(!isSelected && good)
                     )}
                     data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
                     type="button"
-                    className="button"
+                    className={`button ${isSelected && 'is-info'}`}
                   >
                     {isSelected ? '-' : '+'}
                   </button>
