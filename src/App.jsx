@@ -41,7 +41,7 @@ export const App = () => {
             />
           </>
         ) : (
-          'No goods is selected'
+          'No goods selected'
         )}
 
       </h1>
@@ -62,14 +62,14 @@ export const App = () => {
               >
                 <td>
                   <button
-                    data-cy="AddButton"
+                    data-cy={isSelectedGood ? 'RemoveButton' : 'AddButton'}
                     type="button"
                     className={cn('button', { 'is-info': isSelectedGood })}
                     onClick={() => {
                       setCurrentGood(isSelectedGood ? null : good);
                     }}
                   >
-                    {isSelectedGood ? '+' : '-'}
+                    {isSelectedGood ? '-' : '+'}
                   </button>
                 </td>
                 <td data-cy="GoodTitle" className="is-vcentered">
