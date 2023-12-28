@@ -43,7 +43,7 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map((good) => (
+          {goods.map(good => (
             <tr
               data-cy="Good"
               key={goods.findIndex(item => good === item)}
@@ -55,7 +55,11 @@ export const App = () => {
                   type="button"
                   className={goodValue !== good ? buttonClass : `${buttonClass} is-info`}
                   onClick={() => {
-                    setGoodValue(good);
+                    if (goodValue !== good) {
+                      setGoodValue(good);
+                    } else {
+                      setGoodValue('');
+                    }
                   }}
                 >
                   {goodValue === good ? '-' : buttonValue}
