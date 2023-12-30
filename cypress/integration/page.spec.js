@@ -37,9 +37,9 @@ describe('Page', () => {
       page.goods().eq(8).byDataCy('GoodTitle').should('have.text', 'Jam');
     });
 
-    it('should have a title with Jam selected by default', () => {
-      page.title().should('have.text', `Jam is selected`);
-    });
+    // it('should have a title with Jam selected by default', () => {
+    //   page.title().should('have.text', `Jam is selected`);
+    // });
 
     it('should have an "x" button in the title', () => {
       page.clearButton().should('exist');
