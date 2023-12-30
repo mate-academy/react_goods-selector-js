@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -17,16 +18,19 @@ export const goods = [
 
 export const App = () => {
   const [goodValue, setGoodValue] = useState('Jam');
-  const buttonClass = 'button';
-  const buttonValue = '+';
-  const activeElementClass = 'has-background-success-light';
-  const headerClass = 'title is-flex is-align-items-center';
+  const headerClassNoGoods = classNames('title is-flex is-align-items-center', {
+    'is-hidden': goodValue !== '',
+  });
+  const headerClassWithGood
+    = classNames('title is-flex is-align-items-center', {
+      'is-hidden': goodValue === '',
+    });
 
   return (
     <main className="section container">
-      <h1 className={goodValue !== '' ? `${headerClass} is-hidden` : headerClass}>No goods selected</h1>
+      <h1 className={headerClassNoGoods}>No goods selected</h1>
 
-      <h1 className={goodValue === '' ? `${headerClass} is-hidden` : headerClass}>
+      <h1 className={headerClassWithGood}>
         {goodValue}
         {' '}
         is selected
@@ -43,34 +47,39 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
-            <tr
-              data-cy="Good"
-              key={goods.findIndex(item => good === item)}
-              className={goodValue === good ? activeElementClass : ''}
-            >
-              <td>
-                <button
-                  data-cy="AddButton"
-                  type="button"
-                  className={goodValue !== good ? buttonClass : `${buttonClass} is-info`}
-                  onClick={() => {
-                    if (goodValue !== good) {
-                      setGoodValue(good);
-                    } else {
-                      setGoodValue('');
-                    }
-                  }}
-                >
-                  {goodValue === good ? '-' : buttonValue}
-                </button>
-              </td>
+          {goods.map((good) => {
+            const buttonClass = classNames('button', {
+              'is-info': goodValue === good,
+            });
+            const activeElementClass = classNames('', {
+              'has-background-success-light': goodValue === good,
+            });
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
-          ))
+            return (
+              <tr
+                data-cy="Good"
+                key={good}
+                className={activeElementClass}
+              >
+                <td>
+                  <button
+                    data-cy="AddButton"
+                    type="button"
+                    className={buttonClass}
+                    onClick={() => {
+                      setGoodValue(goodValue !== good ? good : '');
+                    }}
+                  >
+                    {goodValue === good ? '-' : '+'}
+                  </button>
+                </td>
+
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            );
+          })
           }
         </tbody>
       </table>
