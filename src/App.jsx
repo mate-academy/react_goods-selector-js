@@ -31,9 +31,7 @@ export const App = () => {
       <h1 className={headerClassNoGoods}>No goods selected</h1>
 
       <h1 className={headerClassWithGood}>
-        {goodValue}
-        {' '}
-        is selected
+        {goodValue + ' is selected'}
 
         <button
           data-cy="ClearButton"
