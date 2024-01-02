@@ -19,7 +19,7 @@ export const goods = [
 export const App = () => {
   const [state, setState] = useState('Jam');
 
-  const checkStateFunc = (good) => {
+  const setAndValidateState = (good) => {
     if (state === '') {
       setState(good);
     } else if (good === state) {
@@ -31,26 +31,6 @@ export const App = () => {
 
   return (
     <main className="section container">
-
-      {/* {state !== ''
-        ? (
-          <h1 className="title is-flex is-align-items-center">
-            {`${state} is selected`}
-            <button
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-              onClick={() => checkStateFunc('')}
-            />
-          </h1>
-        )
-        : (
-          <h1 className="title is-flex is-align-items-center">
-            No goods selected
-          </h1>
-        )
-      } */}
-
       <h1 className="title is-flex is-align-items-center">
         {state ? `${state} is selected` : 'No goods selected'}
         {state && (
@@ -58,7 +38,7 @@ export const App = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => checkStateFunc('')}
+            onClick={() => setAndValidateState('')}
           />
         )}
       </h1>
@@ -73,14 +53,28 @@ export const App = () => {
               })}
             >
               <td>
-                <button
-                  data-cy="AddButton"
-                  type="button"
-                  className="button"
-                  onClick={() => checkStateFunc(good)}
-                >
-                  +
-                </button>
+                {
+                  state && state === good ? (
+                    <button
+                      data-cy="RemoveButton"
+                      type="button"
+                      className="button is-info"
+                      onClick={() => setAndValidateState('')}
+                    >
+                      -
+                    </button>
+                  ) : (
+                    <button
+                      data-cy="AddButton"
+                      type="button"
+                      className="button"
+                      onClick={() => setAndValidateState(good)}
+                    >
+                      +
+                    </button>
+                  )
+                }
+
               </td>
 
               <td data-cy="GoodTitle" className="is-vcentered">
