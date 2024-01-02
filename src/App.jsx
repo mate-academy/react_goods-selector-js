@@ -4,20 +4,20 @@ import cn from 'classnames';
 import { useState } from 'react';
 
 export const goods = [
-  'Dumplings',
-  'Carrot',
-  'Eggs',
-  'Ice cream',
-  'Apple',
-  'Bread',
-  'Fish',
-  'Honey',
-  'Jam',
-  'Garlic',
+  { name: 'Dumplings', id: 0 },
+  { name: 'Carrot', id: 1 },
+  { name: 'Eggs', id: 2 },
+  { name: 'Ice cream', id: 3 },
+  { name: 'Apple', id: 4 },
+  { name: 'Bread', id: 5 },
+  { name: 'Fish', id: 6 },
+  { name: 'Honey', id: 7 },
+  { name: 'Jam', id: 8 },
+  { name: 'Garlic', id: 9 },
 ];
 
 export const App = () => {
-  const [state, setState] = useState('Jam');
+  const [state, setState] = useState({ name: 'Jam', id: 8 });
 
   const setAndValidateState = (good) => {
     if (state === '') {
@@ -32,7 +32,7 @@ export const App = () => {
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {state ? `${state} is selected` : 'No goods selected'}
+        {state ? `${state.name} is selected` : 'No goods selected'}
         {state && (
           <button
             data-cy="ClearButton"
@@ -47,14 +47,15 @@ export const App = () => {
         <tbody>
           {goods.map(good => (
             <tr
+              key={good.id}
               data-cy="Good"
               className={cn({
-                'has-background-success-light': state === good,
+                'has-background-success-light': state.name === good.name,
               })}
             >
               <td>
                 {
-                  state && state === good ? (
+                  state && state.name === good.name ? (
                     <button
                       data-cy="RemoveButton"
                       type="button"
@@ -78,7 +79,7 @@ export const App = () => {
               </td>
 
               <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
+                {good.name}
               </td>
             </tr>
           ))}
