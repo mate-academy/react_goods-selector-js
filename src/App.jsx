@@ -20,10 +20,10 @@ export const App = () => {
   const [state, setState] = useState('Jam');
 
   const checkStateFunc = (good) => {
-    if (state === null) {
+    if (state === '') {
       setState(good);
     } else if (good === state) {
-      setState(null);
+      setState('');
     } else {
       setState(good);
     }
@@ -32,7 +32,7 @@ export const App = () => {
   return (
     <main className="section container">
 
-      {state
+      {/* {state !== ''
         ? (
           <h1 className="title is-flex is-align-items-center">
             {`${state} is selected`}
@@ -40,6 +40,7 @@ export const App = () => {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
+              onClick={() => checkStateFunc('')}
             />
           </h1>
         )
@@ -48,7 +49,20 @@ export const App = () => {
             No goods selected
           </h1>
         )
-      }
+      } */}
+
+      <h1 className="title is-flex is-align-items-center">
+        {state ? `${state} is selected` : 'No goods selected'}
+        {state && (
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={() => checkStateFunc('')}
+          />
+        )}
+      </h1>
+
       <table className="table">
         <tbody>
           {goods.map(good => (
