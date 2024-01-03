@@ -66,7 +66,7 @@ export const App = () => {
                     setValue(good);
                   }}
                 >
-                  {good === value ? '+' : '-'}
+                  {good === value ? '-' : '+'}
                 </button>
               </td>
 
