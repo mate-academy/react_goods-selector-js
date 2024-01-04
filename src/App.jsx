@@ -16,6 +16,14 @@ export const goods = [
   'Garlic',
 ];
 
+function changeGoodState(selectedGood, clickedGood, setSelectedGood) {
+  if (selectedGood === clickedGood) {
+    return setSelectedGood('');
+  }
+
+  return setSelectedGood(clickedGood);
+}
+
 export const App = () => {
   const DEFAULT_GOOD = 'Jam';
   const [selectedGood, setSelectedGood] = useState(DEFAULT_GOOD);
@@ -23,9 +31,9 @@ export const App = () => {
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedGood === '' ? 'No goods selected' : `${selectedGood} is selected`}
+        {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
 
-        {selectedGood !== '' && (
+        {selectedGood && (
           <button
             onClick={() => setSelectedGood('')}
             data-cy="ClearButton"
@@ -49,13 +57,8 @@ export const App = () => {
                 <button
                   data-cy={selectedGood === good ? 'RemoveButton' : 'AddButton'}
                   type="button"
-                  onClick={() => {
-                    if (selectedGood === good) {
-                      return setSelectedGood('');
-                    }
-
-                    return setSelectedGood(good);
-                  }}
+                  onClick={
+                    () => changeGoodState(selectedGood, good, setSelectedGood)}
                   className={cn('button', {
                     'is-info': selectedGood === good,
                   })}
