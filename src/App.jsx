@@ -16,17 +16,17 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [value, setValue] = useState('Jam');
+  const [selectedProduct, setProduct] = useState('Jam');
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {value ? (
+        {selectedProduct ? (
           <>
-            {`${value} is selected`}
+            {`${selectedProduct} is selected`}
             <button
               onClick={() => {
-                setValue('');
+                setProduct('');
               }}
               data-cy="ClearButton"
               type="button"
@@ -41,12 +41,16 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map(good => (
-            value === good ? (
-              <tr data-cy="Good" className="has-background-success-light">
+            selectedProduct === good ? (
+              <tr
+                data-cy="Good"
+                className="has-background-success-light"
+                key={good}
+              >
                 <td>
                   <button
                     onClick={() => {
-                      setValue('');
+                      setProduct('');
                     }}
                     data-cy="RemoveButton"
                     type="button"
@@ -56,7 +60,11 @@ export const App = () => {
                   </button>
                 </td>
 
-                <td data-cy="GoodTitle" className="is-vcentered">
+                <td
+                  data-cy="GoodTitle"
+                  className="is-vcentered"
+                  key={good}
+                >
                   {good}
                 </td>
               </tr>
@@ -65,7 +73,7 @@ export const App = () => {
                 <td>
                   <button
                     onClick={() => {
-                      setValue(good);
+                      setProduct(good);
                     }}
                     data-cy="AddButton"
                     type="button"
