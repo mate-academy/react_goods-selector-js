@@ -21,39 +21,38 @@ export const App = () => {
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {
-          selectedGood
-            ? `${selectedGood} is selected`
-            : 'No goods selected'
+        {selectedGood
+          ? `${selectedGood} is selected`
+          : 'No goods selected'
         }
 
-        {
-          selectedGood
-          && (
-            <button
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-              onClick={() => setSelectedGood('')}
-            />
-          )
+        {selectedGood && (
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={() => setSelectedGood('')}
+          />
+        )
         }
 
       </h1>
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
-            <tr
-              data-cy="Good"
-              key={0}
-              className={
-                (good === selectedGood) && `has-background-success-light`
-              }
-            >
-              <td>
-                {
-                  good === selectedGood
+          {goods.map((good) => {
+            const isGoodSelected = good === selectedGood;
+
+            return (
+              <tr
+                data-cy="Good"
+                key={0}
+                className={
+                  isGoodSelected && `has-background-success-light`
+                }
+              >
+                <td>
+                  {isGoodSelected
                     ? (
                       <button
                         data-cy="RemoveButton"
@@ -74,14 +73,15 @@ export const App = () => {
                         +
                       </button>
                     )
-                }
-              </td>
+                  }
+                </td>
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
-          ))}
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            );
+          })}
 
         </tbody>
       </table>
