@@ -15,10 +15,6 @@ export const goods = [
   'Garlic',
 ];
 
-// function reset(setValue) {
-//   setValue('No goods selected');
-// }
-
 export const App = () => {
   const NO_GOODS = 'No goods selected';
   const [value, setValue] = useState('Jam');
