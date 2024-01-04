@@ -1,5 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
+import { useState } from 'react';
+import cn from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -14,70 +16,100 @@ export const goods = [
   'Garlic',
 ];
 
-export const App = () => (
-  <main className="section container">
-    <h1 className="title is-flex is-align-items-center">No goods selected</h1>
+const START_SELECTED_GOOD = 'Jam';
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+export const App = () => {
+  const [selectedGood, setSelectedGood] = useState(START_SELECTED_GOOD);
 
+  const selectGood = (name) => {
+    const callback = () => setSelectedGood(name);
+
+    return callback;
+  };
+
+  const unSelectGood = () => {
+    setSelectedGood('');
+  };
+
+  const Good = ({ name }) => {
+    const isSelected = name === selectedGood;
+
+    let button = (
       <button
-        data-cy="ClearButton"
+        data-cy="AddButton"
         type="button"
-        className="delete ml-3"
-      />
-    </h1>
+        className="button"
+        onClick={selectGood(name)}
+      >
+        +
+      </button>
+    );
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+    if (isSelected) {
+      button = (
+        <button
+          data-cy="RemoveButton"
+          type="button"
+          className="button is-info"
+          onClick={unSelectGood}
+        >
+          -
+        </button>
+      );
+    }
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+    return (
+      <tr
+        data-cy="Good"
+        className={cn({ 'has-background-success-light': isSelected })}
+      >
+        <td>
+          { button }
+        </td>
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+        <td data-cy="GoodTitle" className="is-vcentered">
+          { name }
+        </td>
+      </tr>
+    );
+  };
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+  const SelectedGood = ({ good }) => {
+    if (!good) {
+      return (
+        <h1 className="title is-flex is-align-items-center">
+          No goods selected
+        </h1>
+      );
+    }
 
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+    return (
+      <h1 className="title is-flex is-align-items-center">
+        {`${good} is selected`}
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+        <button
+          data-cy="ClearButton"
+          type="button"
+          className="delete ml-3"
+          onClick={unSelectGood}
+        />
+      </h1>
+    );
+  };
+
+  return (
+    <main className="section container">
+      <SelectedGood good={selectedGood} />
+
+      <table className="table">
+        <tbody>
+          {
+            goods.map(
+              (good, i) => <Good name={good} key={good} />,
+            )
+          }
+        </tbody>
+      </table>
+    </main>
+  );
+};
