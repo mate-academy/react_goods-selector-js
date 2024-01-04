@@ -15,9 +15,17 @@ export const goods = [
   'Garlic',
 ];
 
+// function reset(setValue) {
+//   setValue('No goods selected');
+// }
+
 export const App = () => {
   const NO_GOODS = 'No goods selected';
   const [value, setValue] = useState('Jam');
+
+  function reset() {
+    setValue(NO_GOODS);
+  }
 
   return (
     <main className="section container">
@@ -28,9 +36,7 @@ export const App = () => {
               {`${value} is selected`}
 
               <button
-                onClick={() => {
-                  setValue(NO_GOODS);
-                }}
+                onClick={reset}
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
@@ -65,9 +71,7 @@ export const App = () => {
                   )
                   : (
                     <button
-                      onClick={() => {
-                        setValue(NO_GOODS);
-                      }}
+                      onClick={reset}
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
