@@ -31,81 +31,75 @@ export const App = () => {
     setSelectedGood('');
   };
 
-  const Good = ({ name }) => {
-    const isSelected = name === selectedGood;
+  return (
+    <main className="section container">
 
-    let button = (
-      <button
-        data-cy="AddButton"
-        type="button"
-        className="button"
-        onClick={selectGood(name)}
-      >
-        +
-      </button>
-    );
+      { selectedGood ? (
+        <h1 className="title is-flex is-align-items-center">
+          {`${selectedGood} is selected`}
 
-    if (isSelected) {
-      button = (
-        <button
-          data-cy="RemoveButton"
-          type="button"
-          className="button is-info"
-          onClick={unSelectGood}
-        >
-          -
-        </button>
-      );
-    }
-
-    return (
-      <tr
-        data-cy="Good"
-        className={cn({ 'has-background-success-light': isSelected })}
-      >
-        <td>
-          { button }
-        </td>
-
-        <td data-cy="GoodTitle" className="is-vcentered">
-          { name }
-        </td>
-      </tr>
-    );
-  };
-
-  const SelectedGood = ({ good }) => {
-    if (!good) {
-      return (
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={unSelectGood}
+          />
+        </h1>
+      ) : (
         <h1 className="title is-flex is-align-items-center">
           No goods selected
         </h1>
-      );
-    }
-
-    return (
-      <h1 className="title is-flex is-align-items-center">
-        {`${good} is selected`}
-
-        <button
-          data-cy="ClearButton"
-          type="button"
-          className="delete ml-3"
-          onClick={unSelectGood}
-        />
-      </h1>
-    );
-  };
-
-  return (
-    <main className="section container">
-      <SelectedGood good={selectedGood} />
+      )
+      }
 
       <table className="table">
         <tbody>
           {
             goods.map(
-              (good, i) => <Good name={good} key={good} />,
+              (good) => {
+                const isSelected = good === selectedGood;
+
+                let button = (
+                  <button
+                    data-cy="AddButton"
+                    type="button"
+                    className="button"
+                    onClick={selectGood(good)}
+                  >
+                    +
+                  </button>
+                );
+
+                if (isSelected) {
+                  button = (
+                    <button
+                      data-cy="RemoveButton"
+                      type="button"
+                      className="button is-info"
+                      onClick={unSelectGood}
+                    >
+                      -
+                    </button>
+                  );
+                }
+
+                return (
+                  <tr
+                    data-cy="Good"
+                    className={
+                      cn({ 'has-background-success-light': isSelected })
+                    }
+                  >
+                    <td>
+                      { button }
+                    </td>
+
+                    <td data-cy="GoodTitle" className="is-vcentered">
+                      { good }
+                    </td>
+                  </tr>
+                );
+              },
             )
           }
         </tbody>
