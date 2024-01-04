@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import cn from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -16,17 +17,14 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [good, setGood] = useState('Jam');
+  const [selectedGood, setGood] = useState('Jam');
 
   return (
     <main className="section container">
-
       <h1 className="title is-flex is-align-items-center">
-        {!good ? (
-          'No goods selected'
-        ) : (
+        {selectedGood ? (
           <>
-            {`${good} is selected`}
+            {`${selectedGood} is selected`}
 
             <button
               onClick={() => setGood('')}
@@ -35,17 +33,24 @@ export const App = () => {
               className="delete ml-3"
             />
           </>
+        ) : (
+          'No goods selected'
         )}
       </h1>
 
       <table className="table">
         <tbody>
-          {goods.map(goodForTr => (
-            <tr data-cy="Good" className={`${goodForTr}` === `${good}` && 'has-background-success-light'}>
+          {goods.map(good => (
+            <tr
+              key={good}
+              data-cy="Good"
+              className={cn({ 'has-background-success-light':
+                good === selectedGood })}
+            >
               <td>
-                {`${goodForTr}` !== `${good}` ? (
+                {good !== selectedGood ? (
                   <button
-                    onClick={() => setGood(`${goodForTr}`)}
+                    onClick={() => setGood(good)}
                     data-cy="AddButton"
                     type="button"
                     className="button"
@@ -65,7 +70,7 @@ export const App = () => {
               </td>
 
               <td data-cy="GoodTitle" className="is-vcentered">
-                {goodForTr}
+                {good}
               </td>
             </tr>
           ))}
