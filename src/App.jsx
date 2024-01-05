@@ -24,7 +24,7 @@ export const App = () => {
   }
 
   function clearTouch() {
-    return setSelectedGood('');
+    return setSelectedGood(null);
   }
 
   return (
@@ -55,35 +55,32 @@ export const App = () => {
               }
             >
               <td>
-                {selectedGood !== currentGood && (
-                  <button
-                    type="button"
-                    className="button"
-                    data-cy="AddButton"
-                    onClick={() => touchGood(currentGood)}
-                  >
-                    +
-                  </button>
-                )}
-              </td>
-
-              <td>
-                {selectedGood === currentGood && (
-                  <button
-                    data-cy="RemoveButton"
-                    type="button"
-                    className="button is-info"
-                    onClick={clearTouch}
-                  >
-                    -
-                  </button>
-                )}
+                {selectedGood !== currentGood
+                  ? (
+                    <button
+                      type="button"
+                      className="button"
+                      data-cy="AddButton"
+                      onClick={() => touchGood(currentGood)}
+                    >
+                      +
+                    </button>
+                  )
+                  : (
+                    <button
+                      data-cy="RemoveButton"
+                      type="button"
+                      className="button is-info"
+                      onClick={clearTouch}
+                    >
+                      -
+                    </button>
+                  )}
               </td>
 
               <td data-cy="GoodTitle" className="is-vcentered">
                 {currentGood}
               </td>
-
             </tr>
           ))}
         </tbody>
