@@ -16,7 +16,8 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setSelectedGood] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState(goods[8]);
+  const clearTitle = () => setSelectedGood('');
 
   return (
     <main className="section container">
@@ -28,14 +29,13 @@ export const App = () => {
         )
         : (
           <h1 className="title is-flex is-align-items-center">
-            {selectedGood}
-            is selected
+            {`${selectedGood} is selected`}
 
             <button
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={setSelectedGood('')}
+              onClick={clearTitle}
             />
           </h1>
         )
@@ -52,16 +52,28 @@ export const App = () => {
                 : ''}
             >
               <td>
-                <button
-                  data-cy="AddButton" // "RemoveButton"
-                  type="button"
-                  className="button is-info"
-                  onClick={setSelectedGood(good)}
-                >
-                  {selectedGood === good
-                    ? '-'
-                    : '+'}
-                </button>
+                {selectedGood === good
+                  ? (
+                    <button
+                      data-cy="AddButton"
+                      type="button"
+                      className="button is-info"
+                      onClick={() => setSelectedGood(good)}
+                    >
+                      -
+                    </button>
+                  )
+                  : (
+                    <button
+                      data-cy="RemoveButton"
+                      type="button"
+                      className="button is-info"
+                      onClick={() => setSelectedGood(good)}
+                    >
+                      +
+                    </button>
+                  )
+                }
               </td>
 
               <td data-cy="GoodTitle" className="is-vcentered">
