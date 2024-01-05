@@ -19,6 +19,10 @@ export const goods = [
 export const App = () => {
   const [good, setGood] = useState('Jam');
 
+  function reset() {
+    setGood('');
+  }
+
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
@@ -26,9 +30,7 @@ export const App = () => {
 
         {good ? (
           <button
-            onClick={() => {
-              setGood('');
-            }}
+            onClick={reset}
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
@@ -44,12 +46,13 @@ export const App = () => {
                 'has-background-success-light': good === item,
               })}
               data-cy="Good"
+              key={item}
             >
               <td>
                 {good === item ? (
                   <button
                     onClick={() => {
-                      setGood(item);
+                      setGood('');
                     }}
                     data-cy="RemoveButton"
                     type="button"
@@ -59,9 +62,7 @@ export const App = () => {
                   </button>
                 ) : (
                   <button
-                    onClick={() => {
-                      setGood(item);
-                    }}
+                    onClick={() => setGood(item)}
                     data-cy="AddButton"
                     type="button"
                     className="button"
