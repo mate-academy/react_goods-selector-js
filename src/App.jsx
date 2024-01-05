@@ -14,12 +14,12 @@ export const goods = [
   'Jam',
   'Garlic',
 ];
-function Button({ changeButon, children, set }) {
+function Button({ changeButon, children, set, isActive }) {
   return (
     <button
       data-cy={changeButon}
       type="button"
-      className="button is-info"
+      className={`button ${isActive}`}
       onClick={set}
     >
       {children}
@@ -40,7 +40,7 @@ function ClearButton({ reset }) {
 
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState(goods[8]);
-  const clearTitle = () => setSelectedGood('');
+  const reset = () => setSelectedGood('');
 
   return (
     <main className="section container">
@@ -55,7 +55,7 @@ export const App = () => {
             {`${selectedGood} is selected`}
 
             <ClearButton
-              reset={clearTitle}
+              reset={reset}
             />
           </h1>
         )
@@ -76,7 +76,8 @@ export const App = () => {
                   ? (
                     <Button
                       changeButon="addButton"
-                      set={() => setSelectedGood(good)}
+                      set={reset}
+                      isActive="is-info"
                     >
                       -
                     </Button>
