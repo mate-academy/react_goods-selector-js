@@ -14,33 +14,10 @@ export const goods = [
   'Jam',
   'Garlic',
 ];
-function Button({ changeButon, children, set, isActive }) {
-  return (
-    <button
-      data-cy={changeButon}
-      type="button"
-      className={`button ${isActive}`}
-      onClick={set}
-    >
-      {children}
-    </button>
-  );
-}
-
-function ClearButton({ reset }) {
-  return (
-    <button
-      data-cy="ClearButton"
-      type="button"
-      className="delete ml-3"
-      onClick={reset}
-    />
-  );
-}
 
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState(goods[8]);
-  const reset = () => setSelectedGood('');
+  const clearTitle = () => setSelectedGood('');
 
   return (
     <main className="section container">
@@ -54,8 +31,11 @@ export const App = () => {
           <h1 className="title is-flex is-align-items-center">
             {`${selectedGood} is selected`}
 
-            <ClearButton
-              reset={reset}
+            <button
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={clearTitle}
             />
           </h1>
         )
@@ -74,21 +54,24 @@ export const App = () => {
               <td>
                 {selectedGood === good
                   ? (
-                    <Button
-                      changeButon="addButton"
-                      set={reset}
-                      isActive="is-info"
+                    <button
+                      data-cy="AddButton"
+                      type="button"
+                      className="button is-info"
+                      onClick={clearTitle}
                     >
                       -
-                    </Button>
+                    </button>
                   )
                   : (
-                    <Button
-                      changeButon="RemoveButton"
-                      set={() => setSelectedGood(good)}
+                    <button
+                      data-cy="RemoveButton"
+                      type="button"
+                      className="button"
+                      onClick={() => setSelectedGood(good)}
                     >
                       +
-                    </Button>
+                    </button>
                   )
                 }
               </td>
