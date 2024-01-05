@@ -14,6 +14,29 @@ export const goods = [
   'Jam',
   'Garlic',
 ];
+function Button({ changeButon, children, set }) {
+  return (
+    <button
+      data-cy={changeButon}
+      type="button"
+      className="button is-info"
+      onClick={set}
+    >
+      {children}
+    </button>
+  );
+}
+
+function ClearButton({ reset }) {
+  return (
+    <button
+      data-cy="ClearButton"
+      type="button"
+      className="delete ml-3"
+      onClick={reset}
+    />
+  );
+}
 
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState(goods[8]);
@@ -31,11 +54,8 @@ export const App = () => {
           <h1 className="title is-flex is-align-items-center">
             {`${selectedGood} is selected`}
 
-            <button
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-              onClick={clearTitle}
+            <ClearButton
+              reset={clearTitle}
             />
           </h1>
         )
@@ -54,24 +74,20 @@ export const App = () => {
               <td>
                 {selectedGood === good
                   ? (
-                    <button
-                      data-cy="AddButton"
-                      type="button"
-                      className="button is-info"
-                      onClick={() => setSelectedGood(good)}
+                    <Button
+                      changeButon="addButton"
+                      set={() => setSelectedGood(good)}
                     >
                       -
-                    </button>
+                    </Button>
                   )
                   : (
-                    <button
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                      onClick={() => setSelectedGood(good)}
+                    <Button
+                      changeButon="RemoveButton"
+                      set={() => setSelectedGood(good)}
                     >
                       +
-                    </button>
+                    </Button>
                   )
                 }
               </td>
