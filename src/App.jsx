@@ -16,7 +16,8 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setSelectedGood] = useState(goods[8]);
+  const [selectedGood, setSelectedGood] = useState(goods
+    .find(item => item === 'Jam') || goods[0]);
   const handleGood = (good) => {
     setSelectedGood(good);
 
