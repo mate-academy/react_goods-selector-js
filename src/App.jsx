@@ -17,38 +17,37 @@ export const goodsList = [
 ];
 
 export const App = () => {
-  const [selectedGoods, setSelectedGoods] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   function isSelected(good) {
-    return selectedGoods.includes(good);
+    return selectedGood === good;
   }
 
   function AddButton(good) {
-    setSelectedGoods([good]);
+    setSelectedGood(good);
   }
 
-  function RemoveButton(good) {
-    setSelectedGoods(selectedGoods
-      .filter(selectedGood => selectedGood !== good));
+  function ClearButton() {
+    setSelectedGood('');
   }
 
   return (
     <main className="section container">
-      <h1 className="title is-flex is-align-items-center">
-        {selectedGoods.length === 0 ? (
-          'No goods selected'
-        ) : (
-          <>
-            {`${selectedGoods} is selected`}
-            <button
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-              onClick={() => setSelectedGoods('')}
-            />
-          </>
-        )}
-      </h1>
+      {selectedGood.length === 0 ? (
+        <h1 className="title is-flex is-align-items-center">
+          No goods selected
+        </h1>
+      ) : (
+        <h1 className="title is-flex is-align-items-center">
+          {`${selectedGood} is selected`}
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={ClearButton}
+          />
+        </h1>
+      )}
 
       <table className="table">
         <tbody>
@@ -66,7 +65,7 @@ export const App = () => {
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
-                    onClick={() => RemoveButton(good)}
+                    onClick={ClearButton}
                   >
                     -
                   </button>
