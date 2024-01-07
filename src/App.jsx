@@ -16,16 +16,16 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [valueGood, SetValueGood] = useState('Jam');
+  const [selectedProduct, SetselectedProduct] = useState('Jam');
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {valueGood ? (
+        {selectedProduct ? (
           <>
-            {`${valueGood} is selected`}
+            {`${selectedProduct} is selected`}
             <button
-              onClick={() => SetValueGood('')}
+              onClick={() => SetselectedProduct('')}
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
@@ -40,11 +40,15 @@ export const App = () => {
         <tbody>
           {goods.map(good => (
             <>
-              {valueGood === good ? (
-                <tr data-cy="Good" className="has-background-success-light">
+              {selectedProduct === good ? (
+                <tr
+                  key={good}
+                  data-cy="Good"
+                  className="has-background-success-light"
+                >
                   <td>
                     <button
-                      onClick={() => SetValueGood('')}
+                      onClick={() => SetselectedProduct('')}
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
@@ -62,7 +66,7 @@ export const App = () => {
                   <td>
                     <button
                       onClick={() => {
-                        SetValueGood(good);
+                        SetselectedProduct(good);
                       }}
                       data-cy="AddButton"
                       type="button"
@@ -84,19 +88,3 @@ export const App = () => {
     </main>
   );
 };
-
-//   <tr data-cy="Good">
-//     <td>
-//       <button
-//         data-cy="AddButton"
-//         type="button"
-//         className="button"
-//       >
-//         +
-//       </button>
-//     </td>
-
-//     <td data-cy="GoodTitle" className="is-vcentered">
-//       Garlic
-//     </td>
-//   </tr>
