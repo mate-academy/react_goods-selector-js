@@ -21,23 +21,24 @@ export const App = () => {
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedGood === 'No goods selected'
+        {selectedGood === ''
           ? 'No goods selected'
           : `${selectedGood} is selected`}
-        {selectedGood !== 'No goods selected' && (
+        {selectedGood !== '' && (
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
             onClick={() => {
-              setSelectedGood('No goods selected');
+              setSelectedGood('');
             }}
           />
         )}
       </h1>
+
       <table className="table">
         <tbody>
-          {goods.map((good, index) => (
+          {goods.map(good => (
             <tr
               data-cy="Good"
               key={good}
@@ -54,15 +55,9 @@ export const App = () => {
                   className={good === selectedGood
                     ? 'button is-info'
                     : 'button'}
-                  onClick={() => {
-                    setSelectedGood((prev) => {
-                      const newSelectedGood = prev === good
-                        ? 'No goods selected'
-                        : good;
-
-                      return newSelectedGood;
-                    });
-                  }}
+                  onClick={() => setSelectedGood(prev => (
+                    prev === good ? 'No goods selected' : good
+                  ))}
                 >
                   {good === selectedGood
                     ? '-'
