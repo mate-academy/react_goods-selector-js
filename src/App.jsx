@@ -39,15 +39,13 @@ export const App = () => {
           'No goods selected'
         ) : (
           <>
-            <h1 className="title is-flex is-align-items-center">
-              {`${selectedGoods} is selected`}
-              <button
-                data-cy="ClearButton"
-                type="button"
-                className="delete ml-3"
-                onClick={() => setSelectedGoods('')}
-              />
-            </h1>
+            {`${selectedGoods} is selected`}
+            <button
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={() => setSelectedGoods('')}
+            />
           </>
         )}
       </h1>
