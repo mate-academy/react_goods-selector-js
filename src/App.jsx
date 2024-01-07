@@ -27,7 +27,7 @@ export const App = () => {
     setSelectedGoods([good]);
   }
 
-  function ClearButton(good) {
+  function RemoveButton(good) {
     setSelectedGoods(selectedGoods
       .filter(selectedGood => selectedGood !== good));
   }
@@ -66,7 +66,7 @@ export const App = () => {
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
-                    onClick={() => ClearButton(good)}
+                    onClick={() => RemoveButton(good)}
                   >
                     -
                   </button>
