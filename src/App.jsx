@@ -22,9 +22,7 @@ export const App = () => {
   const [selectedGood, setSelectedGood] = useState(START_SELECTED_GOOD);
 
   const selectGood = (name) => {
-    const callback = () => setSelectedGood(name);
-
-    return callback;
+    setSelectedGood(name);
   };
 
   const unSelectGood = () => {
@@ -34,7 +32,7 @@ export const App = () => {
   return (
     <main className="section container">
 
-      { selectedGood ? (
+      {selectedGood ? (
         <h1 className="title is-flex is-align-items-center">
           {`${selectedGood} is selected`}
 
@@ -54,54 +52,53 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {
-            goods.map(
-              (good) => {
-                const isSelected = good === selectedGood;
+          {goods.map(
+            (good) => {
+              const isSelected = good === selectedGood;
 
-                let button = (
+              let button = (
+                <button
+                  data-cy="AddButton"
+                  type="button"
+                  className="button"
+                  onClick={() => selectGood(good)}
+                >
+                  +
+                </button>
+              );
+
+              if (isSelected) {
+                button = (
                   <button
-                    data-cy="AddButton"
+                    data-cy="RemoveButton"
                     type="button"
-                    className="button"
-                    onClick={selectGood(good)}
+                    className="button is-info"
+                    onClick={unSelectGood}
                   >
-                    +
+                    -
                   </button>
                 );
+              }
 
-                if (isSelected) {
-                  button = (
-                    <button
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                      onClick={unSelectGood}
-                    >
-                      -
-                    </button>
-                  );
-                }
+              return (
+                <tr
+                  key={good}
+                  data-cy="Good"
+                  className={
+                    cn({ 'has-background-success-light': isSelected })
+                  }
+                >
+                  <td>
+                    {button}
+                  </td>
 
-                return (
-                  <tr
-                    key={good}
-                    data-cy="Good"
-                    className={
-                      cn({ 'has-background-success-light': isSelected })
-                    }
-                  >
-                    <td>
-                      { button }
-                    </td>
-
-                    <td data-cy="GoodTitle" className="is-vcentered">
-                      { good }
-                    </td>
-                  </tr>
-                );
-              },
-            )
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              );
+            },
+          )
           }
         </tbody>
       </table>
