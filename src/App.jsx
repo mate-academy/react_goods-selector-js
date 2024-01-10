@@ -42,40 +42,35 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
-            <tr
-              key={good}
-              data-cy="Good"
-              className={selectedGood === good
-                ? 'has-background-success-light' : ''}
-            >
-              <td>
-                {selectedGood !== good && (
+          {goods.map((good) => {
+            const isGoodSelected = selectedGood === good;
+
+            return (
+              <tr
+                key={good}
+                data-cy="Good"
+                className={isGoodSelected ? 'has-background-success-light' : ''}
+              >
+                <td>
                   <button
-                    data-cy="AddButton"
+                    data-cy={isGoodSelected ? 'RemoveButton' : 'AddButton'}
                     type="button"
-                    className="button"
-                    onClick={() => handleSelectGood(good)}
+                    className={`button ${isGoodSelected ? 'is-info' : ''}`}
+                    onClick={isGoodSelected ? handleClearSelection
+                      : () => handleSelectGood(good)}
                   >
-                    +
+                    {isGoodSelected ? '-' : '+'}
                   </button>
-                )}
-                {selectedGood === good && (
-                  <button
-                    data-cy="RemoveButton"
-                    type="button"
-                    className="button is-info"
-                    onClick={handleClearSelection}
-                  >
-                    -
-                  </button>
-                )}
-              </td>
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
-          ))}
+                </td>
+                <td
+                  data-cy="GoodTitle"
+                  className="is-vcentered"
+                >
+                  {good}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </main>
