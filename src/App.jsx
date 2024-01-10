@@ -20,7 +20,7 @@ export const App = () => {
 
   return (
     <main className="section container">
-      {selectedGood !== null ? (
+      {selectedGood ? (
         <h1 className="title is-flex is-align-items-center">
           {`${selectedGood} is selected`}
           <button
@@ -45,7 +45,7 @@ export const App = () => {
 
             return (
               <tr
-                key={good} // You should add a unique key when mapping over elements
+                key={good}
                 data-cy="Good"
                 className={isGoodSelected ? 'has-background-success-light' : ''}
               >
@@ -55,7 +55,7 @@ export const App = () => {
                     type="button"
                     className={`button ${isGoodSelected ? 'is-info' : ''}`}
                     onClick={() => {
-                      setSelectedGood(isGoodSelected ? null : good);
+                      setSelectedGood(isGoodSelected ? '' : good);
                     }}
                   >
                     {isGoodSelected ? '-' : '+'}
