@@ -23,17 +23,13 @@ export const App = () => {
     return selectedGood === good;
   }
 
-  function AddButton(good) {
-    setSelectedGood(good);
-  }
-
-  function ClearButton() {
+  function clearButton() {
     setSelectedGood('');
   }
 
   return (
     <main className="section container">
-      {selectedGood.length === 0 ? (
+      {!selectedGood.length ? (
         <h1 className="title is-flex is-align-items-center">
           No goods selected
         </h1>
@@ -44,7 +40,7 @@ export const App = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={ClearButton}
+            onClick={clearButton}
           />
         </h1>
       )}
@@ -65,7 +61,7 @@ export const App = () => {
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
-                    onClick={ClearButton}
+                    onClick={clearButton}
                   >
                     -
                   </button>
@@ -74,7 +70,7 @@ export const App = () => {
                     data-cy="AddButton"
                     type="button"
                     className="button"
-                    onClick={() => AddButton(good)}
+                    onClick={() => setSelectedGood(good)}
                   >
                     +
                   </button>
