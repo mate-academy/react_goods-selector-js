@@ -16,20 +16,20 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [value, setValue] = useState('Jam');
+  const [curGood, setCurGood] = useState('Jam');
 
   return (
     <main className="section container">
 
       <h1 className="title is-flex is-align-items-center">
         {
-        value === ''
+        curGood === ''
           ? 'No goods selected'
-          : `${value} is selected`}
+          : `${curGood} is selected`}
 
-        {value !== '' && (
+        {curGood !== '' && (
           <button
-            onClick={() => setValue('')}
+            onClick={() => setCurGood('')}
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
@@ -43,18 +43,18 @@ export const App = () => {
             <tr
               data-cy="Good"
               key={good}
-              className={`${value === good && 'has-background-success-light'}`}
+              className={`${curGood === good && 'has-background-success-light'}`}
             >
               <td>
                 <button
                   onClick={() => {
-                    setValue(value === good ? '' : good);
+                    setCurGood(curGood === good ? '' : good);
                   }}
-                  data-cy={`${value === good ? 'RemoveButton' : 'AddButton'}`}
+                  data-cy={`${curGood === good ? 'RemoveButton' : 'AddButton'}`}
                   type="button"
-                  className={`button ${value === good ? 'is-info' : ''}`}
+                  className={`button ${curGood === good ? 'is-info' : ''}`}
                 >
-                  {value === good ? '-' : '+'}
+                  {curGood === good ? '-' : '+'}
                 </button>
               </td>
               <td data-cy="GoodTitle" className="is-vcentered">
