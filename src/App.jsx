@@ -19,21 +19,21 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
-  const stateOfGood = (good) => {
+  const handleGoodClick = (good) => {
     const check = selectedGood === good
       ? setSelectedGood('') : setSelectedGood(good);
 
     return check;
   };
 
-  const checkGoods = selectedGood ? `${selectedGood} is selected` : 'No goods selected';
+  const title = selectedGood ? `${selectedGood} is selected` : 'No goods selected';
 
   return (
     <main className="section container">
       <h1 className={
         cn('title', { 'title is-flex is-align-items-center': selectedGood })}
       >
-        {checkGoods}
+        {title}
 
         {selectedGood && (
           <button
@@ -65,7 +65,7 @@ export const App = () => {
                     className={
                       cn('button', { 'button is-info': checkselectedGood })
                     }
-                    onClick={() => stateOfGood(good)}
+                    onClick={() => handleGoodClick(good)}
                   >
                     {checkselectedGood ? '-' : '+'}
                   </button>
