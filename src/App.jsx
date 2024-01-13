@@ -19,13 +19,17 @@ export const goods = [
 export default function App() {
   const [selectedItem, setSelectedItem] = useState('Jam');
 
+  function pick() {
+    setSelectedItem('');
+  }
+
   return (
     <main className="section container">
       {selectedItem ? (
         <h1 className="title is-flex is-align-items-center">
           {`${selectedItem} is selected`}
           <button
-            onClick={() => setSelectedItem('')}
+            onClick={pick}
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
@@ -52,7 +56,7 @@ export default function App() {
               <td>
                 {isItemSelected ? (
                   <button
-                    onClick={() => setSelectedItem('')}
+                    onClick={pick}
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
