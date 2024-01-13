@@ -23,6 +23,10 @@ export function App() {
     setSelectedGood(good);
   };
 
+  const clearSelectedGood = () => {
+    setSelectedGood('');
+  };
+
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
@@ -33,7 +37,7 @@ export function App() {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => handleGoodClick('')}
+              onClick={() => clearSelectedGood()}
             />
           </>
         ) : (
@@ -63,7 +67,7 @@ export function App() {
                   </button>
                 ) : (
                   <button
-                    onClick={() => handleGoodClick('')}
+                    onClick={() => clearSelectedGood()}
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
