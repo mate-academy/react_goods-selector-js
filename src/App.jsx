@@ -17,29 +17,30 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [isActive, selectedGood] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   const stateOfGood = (good) => {
-    const check = isActive === good ? selectedGood('') : selectedGood(good);
+    const check = selectedGood === good
+      ? setSelectedGood('') : setSelectedGood(good);
 
     return check;
   };
 
-  const checkGoods = isActive ? `${isActive} is selected` : 'No goods selected';
+  const checkGoods = selectedGood ? `${selectedGood} is selected` : 'No goods selected';
 
   return (
     <main className="section container">
       <h1 className={
-        cn('title', { 'title is-flex is-align-items-center': isActive })}
+        cn('title', { 'title is-flex is-align-items-center': selectedGood })}
       >
         {checkGoods}
 
-        {isActive && (
+        {selectedGood && (
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => (selectedGood(current => ''))}
+            onClick={() => (setSelectedGood(current => ''))}
           />
         )}
       </h1>
@@ -47,26 +48,26 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map((good) => {
-            const checkIsActive = isActive === good;
+            const checkselectedGood = selectedGood === good;
 
             return (
               <tr
                 key={good}
                 data-cy="Good"
                 className={
-                  cn('', { 'has-background-success-light': checkIsActive })
+                  cn({ 'has-background-success-light': checkselectedGood })
                 }
               >
                 <td>
                   <button
-                    data-cy={checkIsActive ? 'RemoveButton' : 'AddButton'}
+                    data-cy={checkselectedGood ? 'RemoveButton' : 'AddButton'}
                     type="button"
                     className={
-                      cn('button', { 'button is-info': checkIsActive })
+                      cn('button', { 'button is-info': checkselectedGood })
                     }
                     onClick={() => stateOfGood(good)}
                   >
-                    {checkIsActive ? '-' : '+'}
+                    {checkselectedGood ? '-' : '+'}
                   </button>
                 </td>
 
