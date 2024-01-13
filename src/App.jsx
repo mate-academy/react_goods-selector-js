@@ -1,25 +1,26 @@
-import "bulma/css/bulma.css";
-import "./App.scss";
-import { useState } from "react";
+import 'bulma/css/bulma.css';
+import './App.scss';
+import { useState } from 'react';
+import cn from 'classnames';
 
 export const goods = [
-  "Dumplings",
-  "Carrot",
-  "Eggs",
-  "Ice cream",
-  "Apple",
-  "Bread",
-  "Fish",
-  "Honey",
-  "Jam",
-  "Garlic",
+  'Dumplings',
+  'Carrot',
+  'Eggs',
+  'Ice cream',
+  'Apple',
+  'Bread',
+  'Fish',
+  'Honey',
+  'Jam',
+  'Garlic',
 ];
 
 export const App = () => {
-  const [selectedGood, setSelectedGood] = useState("Jam");
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   function removeGood() {
-    setSelectedGood("");
+    setSelectedGood('');
   }
 
   function addGood(good) {
@@ -29,20 +30,24 @@ export const App = () => {
   const elements = goods.map((good) => {
     const selected = selectedGood === good;
 
+    function toggle() {
+      return selected ? removeGood(good) : addGood(good);
+    }
+
     return (
       <tr
         key={good}
         data-cy="Good"
-        className={selected ? "has-background-success-light" : ""}
+        className={cn({ 'has-background-success-light': selected })}
       >
         <td>
           <button
-            data-cy={selected ? "RemoveButton" : "AddButton"}
+            data-cy={selected ? 'RemoveButton' : 'AddButton'}
             type="button"
-            className={selected ? "button is-info" : "button"}
-            onClick={selected ? () => removeGood(good) : () => addGood(good)}
+            className={cn({ 'button is-info': selected, button: !selected })}
+            onClick={toggle}
           >
-            {selected ? "-" : "+"}
+            {selected ? '-' : '+'}
           </button>
         </td>
         <td data-cy="GoodTitle" className="is-vcentered">
@@ -66,7 +71,7 @@ export const App = () => {
             />
           </>
         ) : (
-          "No goods selected"
+          'No goods selected'
         )}
       </h1>
 
