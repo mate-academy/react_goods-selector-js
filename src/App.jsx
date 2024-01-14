@@ -37,7 +37,7 @@ export function App() {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={clearSelectedGood()}
+              onClick={clearSelectedGood}
             />
           </>
         ) : (
@@ -67,7 +67,7 @@ export function App() {
                   </button>
                 ) : (
                   <button
-                    onClick={clearSelectedGood()}
+                    onClick={clearSelectedGood}
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
