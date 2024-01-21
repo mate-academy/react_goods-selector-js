@@ -56,16 +56,6 @@ export const App = () => {
   const [selectedGood, setselectedGood] = useState('Jam');
   const [goodsMod] = useState(goods);
 
-  const setTextTitleAppear = () => {
-    const showNoSelectionStr = document.querySelectorAll('.title')[0];
-
-    if (selectedGood === '') {
-      showNoSelectionStr.classList.remove('is-hidden');
-    } else if (selectedGood !== '') {
-      showNoSelectionStr.classList.add('is-hidden');
-    }
-  };
-
   return (
     <main className="section container">
       <h1 className={
@@ -88,7 +78,6 @@ export const App = () => {
           onClick={
             () => {
               setselectedGood('');
-              setTextTitleAppear();
             }
           }
         />
@@ -102,7 +91,6 @@ export const App = () => {
               good={item}
               selectedGood={selectedGood}
               setselectedGood={setselectedGood}
-              setTextTitleAppear={setTextTitleAppear}
             />
           ))}
         </tbody>
