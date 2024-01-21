@@ -36,7 +36,7 @@ export const ItemGood = (
             ({ type }) => {
               if (type === 'click') {
                 setBtnClVer(true);
-                setselectedGood(good);
+                setselectedGood(`${good} is selected`);
               }
             }
           }
@@ -53,7 +53,7 @@ export const ItemGood = (
 };
 
 export const App = () => {
-  const [selectedGood, setselectedGood] = useState('Jam');
+  const [selectedGood, setselectedGood] = useState('Jam is selected');
   const [goodsMod] = useState(goods);
 
   return (
@@ -69,7 +69,7 @@ export const App = () => {
         `title is-flex is-align-items-center ${!selectedGood ? 'is-hidden' : ''}`
         }
       >
-        {`${selectedGood} is selected`}
+        {selectedGood}
 
         <button
           data-cy="ClearButton"
