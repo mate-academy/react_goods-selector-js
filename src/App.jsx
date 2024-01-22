@@ -19,7 +19,7 @@ export const goods = [
 export const App = () => {
   const [good, setGood] = useState('Jam');
   const noGoodSelectedMsg = 'No goods selected';
-  const selectedGood = `${good} is selected`;
+  const selectedGoodMsg = `${good} is selected`;
 
   const handleGoodsClick = (clickedGood) => {
     setGood(clickedGood === good ? '' : clickedGood);
@@ -64,7 +64,7 @@ export const App = () => {
         {good === '' ? (
           noGoodSelectedMsg
         ) : (
-          selectedGood
+          selectedGoodMsg
         )}
 
         {good && (
