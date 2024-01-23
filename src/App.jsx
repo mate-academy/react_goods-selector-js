@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -17,8 +18,10 @@ export const goods = [
 
 const GoodRow = ({ good, selectedGood, onClick }) => {
   const isSelected = selectedGood === good;
-  const buttonClassName = `button ${isSelected ? 'is-info' : ''}`;
-  const rowClassName = isSelected ? 'has-background-success-light' : '';
+  const buttonClassName = classNames('button', { 'is-info': isSelected });
+  const rowClassName = classNames({
+    'has-background-success-light': isSelected,
+  });
 
   return (
     <tr data-cy="Good" className={rowClassName}>
@@ -40,8 +43,9 @@ const GoodRow = ({ good, selectedGood, onClick }) => {
   );
 };
 
+const defaultSelectedGood = 'Jam';
+
 export const App = () => {
-  const defaultSelectedGood = 'Jam';
   const [selectedGood, setSelectedGood] = useState(defaultSelectedGood);
 
   const handleGoodClick = (good) => {
@@ -54,15 +58,15 @@ export const App = () => {
     <main className="section container">
       {selectedGood ? (
         <h1 className="title is-flex is-align-items-center">
-          {selectedGood}
-          {' '}
-          is selected
+          {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
+          {selectedGood && (
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
             onClick={() => setSelectedGood(null)}
           />
+          )}
         </h1>
       ) : (
         <h1 className="title is-flex is-align-items-center">
