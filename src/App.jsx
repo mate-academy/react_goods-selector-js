@@ -16,37 +16,31 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [value, setValue] = useState(['Jam']);
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
-  // console.log(value);
-
-  const addValue = (good) => {
-    if (value.length === 0) {
-      setValue(good);
+  const addselectedGood = (good) => {
+    if (selectedGood.length === 0) {
+      setSelectedGood(good);
     }
-  };
-
-  const removeValue = () => {
-    setValue('');
   };
 
   return (
     <main className="section container">
-      { value === '' && (
+      { selectedGood === '' && (
       <h1 className="title is-flex is-align-items-center">
         No goods selected
       </h1>
       )}
 
-      {value && (
+      {selectedGood && (
         <h1 className="title is-flex is-align-items-center">
-          {`${value} is selected`}
+          {`${selectedGood} is selected`}
 
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => setValue('')}
+            onClick={() => setSelectedGood('')}
           />
         </h1>
       )}
@@ -55,16 +49,16 @@ export const App = () => {
         <tbody>
           <tr
             data-cy="Good"
-            className={`${value.includes('Dumplings') ? 'has-background-success-light' : ''}`}
+            className={`${selectedGood.includes('Dumplings') ? 'has-background-success-light' : ''}`}
           >
             <td>
-              {value.includes('Dumplings')
+              {selectedGood.length > 0
                 ? (
                   <button
                     data-cy="RemoveButton"
                     type="button"
                     className="button"
-                    onClick={() => removeValue('Dumplings')}
+                    onClick={() => setSelectedGood('')}
                   >
                     -
                   </button>
@@ -74,7 +68,7 @@ export const App = () => {
                     data-cy="AddButton"
                     type="button"
                     className="button is-info"
-                    onClick={() => addValue('Dumplings')}
+                    onClick={() => addselectedGood('Dumplings')}
                   >
                     +
                   </button>
@@ -88,16 +82,16 @@ export const App = () => {
 
           <tr
             data-cy="Good"
-            className={`${value.includes('Jam') ? 'has-background-success-light' : ''}`}
+            className={`${selectedGood.includes('Jam') ? 'has-background-success-light' : ''}`}
           >
             <td>
-              {value.includes('Jam')
+              {selectedGood.length > 0
                 ? (
                   <button
                     data-cy="RemoveButton"
                     type="button"
                     className="button"
-                    onClick={() => removeValue('Jam')}
+                    onClick={() => setSelectedGood('')}
                   >
                     -
                   </button>
@@ -107,7 +101,7 @@ export const App = () => {
                     data-cy="AddButton"
                     type="button"
                     className="button is-info"
-                    onClick={() => addValue('Jam')}
+                    onClick={() => addselectedGood('Jam')}
                   >
                     +
                   </button>
@@ -121,16 +115,16 @@ export const App = () => {
 
           <tr
             data-cy="Good"
-            className={`${value.includes('Garlic') ? 'has-background-success-light' : ''}`}
+            className={`${selectedGood.includes('Garlic') ? 'has-background-success-light' : ''}`}
           >
             <td>
-              {value.includes('Garlic')
+              {selectedGood.length > 0
                 ? (
                   <button
                     data-cy="RemoveButton"
                     type="button"
                     className="button"
-                    onClick={() => removeValue('Garlic')}
+                    onClick={() => setSelectedGood('')}
                   >
                     -
                   </button>
@@ -140,7 +134,7 @@ export const App = () => {
                     data-cy="AddButton"
                     type="button"
                     className="button is-info"
-                    onClick={() => addValue('Garlic')}
+                    onClick={() => addselectedGood('Garlic')}
                   >
                     +
                   </button>
