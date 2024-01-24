@@ -53,16 +53,27 @@ export const App = () => {
                 className={equals && 'has-background-success-light'}
               >
                 <td>
-                  <button
-                    data-cy="AddButton"
-                    type="button"
-                    className={`${equals ? 'button is-info' : 'button'}`}
-                    onClick={() => {
-                      setSelectedGood(good);
-                    }}
-                  >
-                    {equals ? '-' : '+'}
-                  </button>
+                  {equals
+                    ? (
+                      <button
+                        data-cy="RemoveButton"
+                        type="button"
+                        className="button is-info"
+                      >
+                        -
+                      </button>
+                    ) : (
+                      <button
+                        data-cy="AddButton"
+                        type="button"
+                        className="button"
+                        onClick={() => {
+                          setSelectedGood(good);
+                        }}
+                      >
+                        +
+                      </button>
+                    )}
                 </td>
 
                 <td data-cy="GoodTitle" className="is-vcentered">
