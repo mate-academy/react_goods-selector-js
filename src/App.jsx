@@ -47,104 +47,40 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          <tr
-            data-cy="Good"
-            className={`${selectedGood.includes('Dumplings') ? 'has-background-success-light' : ''}`}
-          >
-            <td>
-              {selectedGood.length > 0
-                ? (
-                  <button
-                    data-cy="RemoveButton"
-                    type="button"
-                    className="button"
-                    onClick={() => setSelectedGood('')}
-                  >
-                    -
-                  </button>
-                )
-                : (
-                  <button
-                    data-cy="AddButton"
-                    type="button"
-                    className="button is-info"
-                    onClick={() => addselectedGood('Dumplings')}
-                  >
-                    +
-                  </button>
-                )}
-            </td>
+          {goods.map(good => (
+            <tr
+              data-cy="Good"
+              className={`${selectedGood.includes(good) ? 'has-background-success-light' : ''}`}
+            >
+              <td>
+                {selectedGood.includes(good)
+                  ? (
+                    <button
+                      data-cy="RemoveButton"
+                      type="button"
+                      className="button is-info"
+                      onClick={() => setSelectedGood('')}
+                    >
+                      -
+                    </button>
+                  )
+                  : (
+                    <button
+                      data-cy="AddButton"
+                      type="button"
+                      className="button"
+                      onClick={() => addselectedGood(good)}
+                    >
+                      +
+                    </button>
+                  )}
+              </td>
 
-            <td data-cy="GoodTitle" className="is-vcentered">
-              Dumplings
-            </td>
-          </tr>
-
-          <tr
-            data-cy="Good"
-            className={`${selectedGood.includes('Jam') ? 'has-background-success-light' : ''}`}
-          >
-            <td>
-              {selectedGood.length > 0
-                ? (
-                  <button
-                    data-cy="RemoveButton"
-                    type="button"
-                    className="button"
-                    onClick={() => setSelectedGood('')}
-                  >
-                    -
-                  </button>
-                )
-                : (
-                  <button
-                    data-cy="AddButton"
-                    type="button"
-                    className="button is-info"
-                    onClick={() => addselectedGood('Jam')}
-                  >
-                    +
-                  </button>
-                )}
-            </td>
-
-            <td data-cy="GoodTitle" className="is-vcentered">
-              Jam
-            </td>
-          </tr>
-
-          <tr
-            data-cy="Good"
-            className={`${selectedGood.includes('Garlic') ? 'has-background-success-light' : ''}`}
-          >
-            <td>
-              {selectedGood.length > 0
-                ? (
-                  <button
-                    data-cy="RemoveButton"
-                    type="button"
-                    className="button"
-                    onClick={() => setSelectedGood('')}
-                  >
-                    -
-                  </button>
-                )
-                : (
-                  <button
-                    data-cy="AddButton"
-                    type="button"
-                    className="button is-info"
-                    onClick={() => addselectedGood('Garlic')}
-                  >
-                    +
-                  </button>
-                )}
-            </td>
-
-            <td data-cy="GoodTitle" className="is-vcentered">
-              Garlic
-            </td>
-          </tr>
+              <td data-cy="GoodTitle" className="is-vcentered">
+                {good}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </main>
