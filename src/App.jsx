@@ -16,7 +16,8 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setSelectedGood] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState(goods
+    .find(item => item === 'Jam') || goods[0]);
 
   const addselectedGood = (good) => {
     if (selectedGood.length === 0) {
@@ -51,6 +52,7 @@ export const App = () => {
             <tr
               data-cy="Good"
               className={`${selectedGood.includes(good) ? 'has-background-success-light' : ''}`}
+              key={good}
             >
               <td>
                 {selectedGood.includes(good)
