@@ -42,15 +42,18 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
-            <tr
-              data-cy="Good"
-              className={selectedGood === good
-                && 'has-background-success-light'}
-            >
-              <td>
-                {
-                  selectedGood === good
+          {goods.map((good) => {
+            const isActive = selectedGood === good;
+
+            return (
+              <tr
+                key={good}
+                data-cy="Good"
+                className={isActive && 'has-background-success-light'}
+              >
+                <td>
+                  {
+                  isActive
                     ? (
                       <button
                         data-cy="RemoveButton"
@@ -72,16 +75,16 @@ export const App = () => {
                       </button>
                     )
                 }
-              </td>
-
-              <td
-                data-cy="GoodTitle"
-                className="is-vcentered"
-              >
-                {good}
-              </td>
-            </tr>
-          ))}
+                </td>
+                <td
+                  data-cy="GoodTitle"
+                  className="is-vcentered"
+                >
+                  {good}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </main>
