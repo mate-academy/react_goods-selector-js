@@ -16,24 +16,26 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setSelectedGood] = useState(goods
-    .find(item => item === 'Jam') || goods[0]);
+  const [selectedGood, setSelectedGood] = useState([goods
+    .find(item => item === 'Jam') || goods[0]]);
 
   const addselectedGood = (good) => {
-    if (selectedGood.length === 0) {
-      setSelectedGood(good);
-    }
+    setSelectedGood([...selectedGood, good]);
+  };
+
+  const deleteGood = (good) => {
+    setSelectedGood(selectedGood.filter(elem => elem !== good));
   };
 
   return (
     <main className="section container">
-      { selectedGood === '' && (
+      { selectedGood.length === 0 && (
       <h1 className="title is-flex is-align-items-center">
         No goods selected
       </h1>
       )}
 
-      {selectedGood && (
+      { selectedGood.length > 0 && (
         <h1 className="title is-flex is-align-items-center">
           {`${selectedGood} is selected`}
 
@@ -61,7 +63,7 @@ export const App = () => {
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={() => setSelectedGood('')}
+                      onClick={() => deleteGood(good)}
                     >
                       -
                     </button>
