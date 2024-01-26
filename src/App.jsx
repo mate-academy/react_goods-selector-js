@@ -21,32 +21,35 @@ export const ItemGood = (
     good, goodsMod, selectedGood, setselectedGood, goodsCh, setGoodsCh,
   },
 ) => {
-  function setGoodsModChItm() {
+  function setNewValues() {
     const chosen = goodsMod.find(e => e.id === good.id);
 
-    chosen.bool = true;
+    if (chosen || selectedGood === 'Jam is selected') {
+      chosen.bool = true;
+    }
+
     setGoodsCh(goodsMod);
+    setselectedGood(`${good.name} is selected`);
   }
 
   return (
-    <tr data-cy="Good" className={`${good.bool && 'has-background-success-light'}`}>
+    <tr data-cy="Good" className={`${(good.bool && selectedGood !== '') && 'has-background-success-light'}`}>
       <td>
         <button
-          data-cy={`${good.bool ? 'RemoveButton' : 'AddButton'}`}
+          data-cy={`${good.bool && selectedGood !== '' ? 'RemoveButton' : 'AddButton'}`}
           type="button"
           className={cn('button', {
-            'is-info': good.bool,
+            'is-info': good.bool && selectedGood !== '',
           })}
           onClick={
             ({ type }) => {
               if (type === 'click') {
-                setGoodsModChItm();
-                setselectedGood(`${good.name} is selected`);
+                setNewValues();
               }
             }
           }
         >
-          {`${good.bool ? '-' : '+'}`}
+          {`${good.bool && selectedGood !== '' ? '-' : '+'}`}
         </button>
       </td>
 
