@@ -35,7 +35,7 @@ export const App = () => {
               />
             </>
           )
-          : `No goods selected`
+          : 'No goods selected'
         }
 
       </h1>
@@ -45,7 +45,10 @@ export const App = () => {
           {goods.map(good => (
             selected !== good
               ? (
-                <tr data-cy="Good">
+                <tr
+                  data-cy="Good"
+                  key={good.id}
+                >
                   <td>
                     <button
                       data-cy="AddButton"
@@ -65,7 +68,11 @@ export const App = () => {
                 </tr>
               )
               : (
-                <tr data-cy="Good" className="has-background-success-light">
+                <tr
+                  data-cy="Good"
+                  className="has-background-success-light"
+                  key={good.id}
+                >
                   <td>
                     <button
                       data-cy="RemoveButton"
