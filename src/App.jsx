@@ -18,35 +18,40 @@ export const goods = [
 
 export const ItemGood = (
   {
-    good, selectedGood, setselectedGood,
+    good, goodsMod, selectedGood, setselectedGood, goodsCh, setGoodsCh,
   },
 ) => {
-  const [btnClickVerification, setBtnClVer] = useState(false);
+  function setGoodsModChItm() {
+    const chosen = goodsMod.find(e => e.id === good.id);
+
+    chosen.bool = true;
+    setGoodsCh(goodsMod);
+  }
 
   return (
-    <tr data-cy="Good" className={`${btnClickVerification && 'has-background-success-light'}`}>
+    <tr data-cy="Good" className={`${good.bool && 'has-background-success-light'}`}>
       <td>
         <button
-          data-cy={`${btnClickVerification ? 'RemoveButton' : 'AddButton'}`}
+          data-cy={`${good.bool ? 'RemoveButton' : 'AddButton'}`}
           type="button"
           className={cn('button', {
-            'is-info': btnClickVerification,
+            'is-info': good.bool,
           })}
           onClick={
             ({ type }) => {
               if (type === 'click') {
-                setBtnClVer(true);
-                setselectedGood(`${good} is selected`);
+                setGoodsModChItm();
+                setselectedGood(`${good.name} is selected`);
               }
             }
           }
         >
-          {`${btnClickVerification ? '-' : '+'}`}
+          {`${good.bool ? '-' : '+'}`}
         </button>
       </td>
 
       <td data-cy="GoodTitle" className="is-vcentered">
-        {good}
+        {good.name}
       </td>
     </tr>
   );
@@ -54,7 +59,12 @@ export const ItemGood = (
 
 export const App = () => {
   const [selectedGood, setselectedGood] = useState('Jam is selected');
-  const [goodsMod] = useState(goods);
+
+  const goodsMod = goods.map(itemM => ({
+    id: goods.indexOf(itemM), name: itemM, bool: false,
+  }));
+
+  const [goodsCh, setGoodsCh] = useState(goodsMod);
 
   return (
     <main className="section container">
@@ -85,86 +95,17 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goodsMod.map(item => (
+          {goodsCh.map(item => (
             <ItemGood
-              key={item}
+              key={item.id}
               good={item}
               selectedGood={selectedGood}
               setselectedGood={setselectedGood}
+              goodsMod={goodsMod}
+              goodsCh={goodsCh}
+              setGoodsCh={setGoodsCh}
             />
           ))}
-        </tbody>
-      </table>
-    </main>
-  );
-};
-
-export const App1 = () => {
-  const [good] = useState('Jam is selected');
-
-  return (
-    <main className="section container">
-      <h1 className="title is-flex is-align-items-center">No goods selected</h1>
-
-      <h1 className="title is-flex is-align-items-center">
-        {good}
-
-        <button
-          data-cy="ClearButton"
-          type="button"
-          className="delete ml-3"
-        />
-      </h1>
-
-      <table className="table">
-        <tbody>
-          <tr data-cy="Good">
-            <td>
-              <button
-                data-cy="AddButton"
-                type="button"
-                className="button"
-              >
-                +
-              </button>
-            </td>
-
-            <td data-cy="GoodTitle" className="is-vcentered">
-              Dumplings
-            </td>
-          </tr>
-
-          <tr data-cy="Good" className="has-background-success-light">
-            <td>
-              <button
-                data-cy="RemoveButton"
-                type="button"
-                className="button is-info"
-              >
-                -
-              </button>
-            </td>
-
-            <td data-cy="GoodTitle" className="is-vcentered">
-              Jam
-            </td>
-          </tr>
-
-          <tr data-cy="Good">
-            <td>
-              <button
-                data-cy="AddButton"
-                type="button"
-                className="button"
-              >
-                +
-              </button>
-            </td>
-
-            <td data-cy="GoodTitle" className="is-vcentered">
-              Garlic
-            </td>
-          </tr>
         </tbody>
       </table>
     </main>
