@@ -24,22 +24,21 @@ export const ItemGood = (
   function setNewValues() {
     const chosen = goodsMod.find(e => e.id === good.id);
 
-    if (chosen || selectedGood === 'Jam is selected') {
-      chosen.bool = true;
-    }
+    chosen.bool = true;
 
     setGoodsCh(goodsMod);
-    setselectedGood(`${good.name} is selected`);
+    setselectedGood(good);
   }
 
   return (
-    <tr data-cy="Good" className={`${(good.bool && selectedGood !== '') && 'has-background-success-light'}`}>
+    <tr data-cy="Good" className={`${((good.bool && selectedGood !== '') || (good.name === selectedGood.name)) && 'has-background-success-light'}`}>
       <td>
         <button
-          data-cy={`${good.bool && selectedGood !== '' ? 'RemoveButton' : 'AddButton'}`}
+          data-cy={`${(good.bool && selectedGood !== '') || (good.name === selectedGood.name) ? 'RemoveButton' : 'AddButton'}`}
           type="button"
           className={cn('button', {
-            'is-info': good.bool && selectedGood !== '',
+            'is-info': (good.bool && selectedGood !== '')
+            || (good.name === selectedGood.name),
           })}
           onClick={
             ({ type }) => {
@@ -49,7 +48,7 @@ export const ItemGood = (
             }
           }
         >
-          {`${good.bool && selectedGood !== '' ? '-' : '+'}`}
+          {`${(good.bool && selectedGood !== '') || (good.name === selectedGood.name) ? '-' : '+'}`}
         </button>
       </td>
 
@@ -61,11 +60,14 @@ export const ItemGood = (
 };
 
 export const App = () => {
-  const [selectedGood, setselectedGood] = useState('Jam is selected');
-
   const goodsMod = goods.map(itemM => ({
     id: goods.indexOf(itemM), name: itemM, bool: false,
   }));
+
+  const goodsModSelectedOnload
+  = goodsMod.find(itm => itm.name === 'Jam');
+
+  const [selectedGood, setselectedGood] = useState(goodsModSelectedOnload);
 
   const [goodsCh, setGoodsCh] = useState(goodsMod);
 
@@ -82,7 +84,7 @@ export const App = () => {
         `title is-flex is-align-items-center ${!selectedGood ? 'is-hidden' : ''}`
         }
       >
-        {selectedGood}
+        {`${selectedGood.name} is selected`}
 
         <button
           data-cy="ClearButton"
