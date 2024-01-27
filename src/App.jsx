@@ -86,16 +86,16 @@ export const App = () => {
 
   return (
     <main className="section container">
-      <h1 className={
-        `title is-flex is-align-items-center ${selectedGood ? 'is-hidden' : ''}`
-        }
+      <h1 className={cn('title is-flex is-align-items-center', {
+        'is-hidden': selectedGood,
+      })}
       >
         No goods selected
       </h1>
 
-      <h1 className={
-        `title is-flex is-align-items-center ${!selectedGood ? 'is-hidden' : ''}`
-        }
+      <h1 className={cn('title is-flex is-align-items-center', {
+        'is-hidden': !selectedGood,
+      })}
       >
         {`${selectedGood.name} is selected`}
 
