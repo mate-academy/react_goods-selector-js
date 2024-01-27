@@ -16,11 +16,14 @@ export const goods = [
   'Garlic',
 ];
 
-export const ItemGood = (
-  {
-    good, goodsMod, selectedGood, setselectedGood, goodsCh, setGoodsCh,
-  },
-) => {
+export const ItemGood = ({
+  good,
+  goodsMod,
+  selectedGood,
+  setselectedGood,
+  goodsCh,
+  setGoodsCh,
+}) => {
   function setNewValues() {
     const chosen = goodsMod.find(e => e.id === good.id);
 
