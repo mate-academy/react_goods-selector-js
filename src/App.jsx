@@ -48,8 +48,8 @@ export const App = () => {
             return (
               <tr
                 data-cy="Good"
-                className={isSelected
-                  && 'has-background-success-light'}
+                key={good}
+                className={isSelected && 'has-background-success-light'}
               >
                 <td>
                   <button
