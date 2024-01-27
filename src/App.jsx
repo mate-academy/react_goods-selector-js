@@ -24,8 +24,10 @@ export const ItemGood = ({
   goodsCh,
   setGoodsCh,
 }) => {
+  const { id, name, bool } = good;
+
   function setNewValues() {
-    const chosen = goodsMod.find(e => e.id === good.id);
+    const chosen = goodsMod.find(e => e.id === id);
 
     chosen.bool = true;
 
@@ -33,30 +35,38 @@ export const ItemGood = ({
     setselectedGood(good);
   }
 
+  const btnClickAction = function clickAct({ type }) {
+    if (type === 'click') {
+      setNewValues();
+    }
+  };
+
   return (
-    <tr data-cy="Good" className={`${((good.bool && selectedGood !== '') || (good.name === selectedGood.name)) && 'has-background-success-light'}`}>
+    <tr
+      data-cy="Good"
+      className={cn({
+        'has-background-success-light':
+      ((bool && selectedGood !== '') || (name === selectedGood.name)),
+      })}
+    >
       <td>
         <button
-          data-cy={`${(good.bool && selectedGood !== '') || (good.name === selectedGood.name) ? 'RemoveButton' : 'AddButton'}`}
+          data-cy={`${(bool && selectedGood !== '') || (name === selectedGood.name) ? 'RemoveButton' : 'AddButton'}`}
           type="button"
           className={cn('button', {
-            'is-info': (good.bool && selectedGood !== '')
-            || (good.name === selectedGood.name),
+            'is-info': (bool && selectedGood !== '')
+            || (name === selectedGood.name),
           })}
           onClick={
-            ({ type }) => {
-              if (type === 'click') {
-                setNewValues();
-              }
-            }
+            btnClickAction
           }
         >
-          {`${(good.bool && selectedGood !== '') || (good.name === selectedGood.name) ? '-' : '+'}`}
+          {`${(bool && selectedGood !== '') || (name === selectedGood.name) ? '-' : '+'}`}
         </button>
       </td>
 
       <td data-cy="GoodTitle" className="is-vcentered">
-        {good.name}
+        {name}
       </td>
     </tr>
   );
