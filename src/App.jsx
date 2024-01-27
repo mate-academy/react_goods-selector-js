@@ -19,20 +19,33 @@ export const goods = [
 export const ItemGood = ({
   good,
   goodsMod,
-  selectedGood,
-  setselectedGood,
   goodsCh,
   setGoodsCh,
 }) => {
   const { id, name, bool } = good;
 
   function setNewValues() {
-    const chosen = goodsMod.find(e => e.id === id);
+    const itemHasTrueId
+    = goodsCh.find(i => i.bool === true)
+      ? goodsCh.find(i => i.bool === true).id
+      : 0;
 
-    chosen.bool = true;
+    if (itemHasTrueId !== id) {
+      const a = goodsMod.map(e => ({
+        ...e, bool: false,
+      }));
+      const chosen = a.find(e => e.id === id);
 
-    setGoodsCh(goodsMod);
-    setselectedGood(good);
+      chosen.bool = true;
+
+      setGoodsCh(a);
+    } else if (itemHasTrueId === id) {
+      const a = goodsMod.map(e => ({
+        ...e, bool: false,
+      }));
+
+      setGoodsCh(a);
+    }
   }
 
   const btnClickAction = function clickAct({ type }) {
@@ -45,23 +58,21 @@ export const ItemGood = ({
     <tr
       data-cy="Good"
       className={cn({
-        'has-background-success-light':
-      ((bool && selectedGood !== '') || (name === selectedGood.name)),
+        'has-background-success-light': bool,
       })}
     >
       <td>
         <button
-          data-cy={`${(bool && selectedGood !== '') || (name === selectedGood.name) ? 'RemoveButton' : 'AddButton'}`}
+          data-cy={`${bool ? 'RemoveButton' : 'AddButton'}`}
           type="button"
           className={cn('button', {
-            'is-info': (bool && selectedGood !== '')
-            || (name === selectedGood.name),
+            'is-info': bool,
           })}
           onClick={
             btnClickAction
           }
         >
-          {`${(bool && selectedGood !== '') || (name === selectedGood.name) ? '-' : '+'}`}
+          {`${bool ? '-' : '+'}`}
         </button>
       </td>
 
@@ -74,39 +85,48 @@ export const ItemGood = ({
 
 export const App = () => {
   const goodsMod = goods.map(itemM => ({
-    id: goods.indexOf(itemM), name: itemM, bool: false,
+    id: goods.indexOf(itemM) + 1, name: itemM, bool: false,
   }));
 
-  const goodsModSelectedOnload
-  = goodsMod.find(itm => itm.name === 'Jam');
+  const Jam = goodsMod.find(i => i.name === 'Jam');
 
-  const [selectedGood, setselectedGood] = useState(goodsModSelectedOnload);
+  Jam.bool = true;
 
   const [goodsCh, setGoodsCh] = useState(goodsMod);
+
+  const selectedName
+  = goodsCh.find(i => i.bool === true)
+    ? goodsCh.find(i => i.bool === true).name : '';
+
+  const setNoGoods = function setNo() {
+    const a = goodsMod.map(e => ({
+      ...e, bool: false,
+    }));
+
+    setGoodsCh(a);
+  };
 
   return (
     <main className="section container">
       <h1 className={cn('title is-flex is-align-items-center', {
-        'is-hidden': selectedGood,
+        'is-hidden': selectedName,
       })}
       >
         No goods selected
       </h1>
 
       <h1 className={cn('title is-flex is-align-items-center', {
-        'is-hidden': !selectedGood,
+        'is-hidden': !selectedName,
       })}
       >
-        {`${selectedGood.name} is selected`}
+        {`${selectedName} is selected`}
 
         <button
           data-cy="ClearButton"
           type="button"
           className="delete ml-3"
           onClick={
-            () => {
-              setselectedGood('');
-            }
+            setNoGoods
           }
         />
       </h1>
@@ -117,8 +137,6 @@ export const App = () => {
             <ItemGood
               key={item.id}
               good={item}
-              selectedGood={selectedGood}
-              setselectedGood={setselectedGood}
               goodsMod={goodsMod}
               goodsCh={goodsCh}
               setGoodsCh={setGoodsCh}
