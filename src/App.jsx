@@ -22,17 +22,17 @@ export const App = () => {
     <main className="section container">
 
       <h1 className="title is-flex is-align-items-center">
-        {value.length > 0
+        {value
           ? `${value} is selected`
           : 'No goods selected'
         }
 
-        {value.length > 0 && (
+        {value && (
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={event => setValue('')}
+            onClick={() => setValue('')}
           />
         )}
       </h1>
@@ -47,13 +47,7 @@ export const App = () => {
             >
               <td>
                 <button
-                  onClick={() => {
-                    if (value === good) {
-                      setValue('');
-                    } else {
-                      setValue(good);
-                    }
-                  }}
+                  onClick={() => setValue(value === good ? '' : good)}
                   data-cy={value !== good ? 'AddButton' : 'RemoveButton'}
                   type="button"
                   className={good === value ? 'button is-info' : 'button'}
