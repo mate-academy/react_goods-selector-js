@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -16,36 +17,31 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [message, setMessage] = useState('Jam is selected');
   const [selectedGood, setSelectedGood] = useState('Jam');
-  const [isCloseVisible, setIsCloseVisible] = useState(true);
 
-  const buttonClick = (good) => {
-    if (good === selectedGood) {
-      setSelectedGood('');
-      setMessage('No goods selected');
-      setIsCloseVisible(false);
-    } else {
-      setSelectedGood(good);
-      setMessage(`${good} is selected`);
-      setIsCloseVisible(true);
+  function master() {
+    if (selectedGood === '') {
+      return 'No goods selected';
     }
-  };
+
+    return `${selectedGood} is selected`;
+  }
+
+  const closeClass = classNames(
+    'delete ml-3', {
+      hiden: selectedGood === '',
+    },
+  );
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {message}
-
+        {master()}
         <button
-          onClick={() => {
-            setMessage('No goods selected');
-            setSelectedGood('');
-            setIsCloseVisible(false);
-          }}
+          onClick={() => setSelectedGood('')}
           data-cy="ClearButton"
           type="button"
-          className={`delete ml-3 ${isCloseVisible ? '' : 'hiden'}`}
+          className={closeClass}
         />
       </h1>
 
@@ -55,20 +51,29 @@ export const App = () => {
             const selection
               = good === selectedGood ? '-' : '+';
 
+            const fieldBackground = classNames({
+              'has-background-success-light': selectedGood === good,
+            });
+
+            const buttonStyle = classNames(
+              'button ml-3', {
+                'is-info': selectedGood === good,
+              },
+            );
+
             return (
               <tr
                 data-cy="Good"
-                className={`${selection === '-'
-                  && 'has-background-success-light'}`}
+                className={fieldBackground}
               >
                 <td>
                   <button
                     onClick={() => {
-                      buttonClick(good);
+                      setSelectedGood(selection === '+' ? good : '');
                     }}
                     data-cy="AddButton"
                     type="button"
-                    className="button"
+                    className={buttonStyle}
                   >
                     {selection}
                   </button>
