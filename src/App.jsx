@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -17,14 +18,29 @@ export const goods = [
 
 export const App = () => {
   const [value, setValue] = useState('Jam');
+  const isSelected = good => value === good;
+
+  const goodSelected = value ? `${value} is selected` : 'No goods selected';
+
+  const handleButtonClick = (good) => {
+    setValue(value === good ? null : good);
+  };
+
+  const buttonClasses = good => classNames('button', {
+    'is-info': isSelected(good),
+  });
+
+  const resetGood = () => {
+    setValue(null);
+  };
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {value ? `${value} is selected` : 'No goods selected'}
+        {goodSelected}
         {value && (
           <button
-            onClick={() => setValue(null)}
+            onClick={() => resetGood()}
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
@@ -37,16 +53,17 @@ export const App = () => {
           {goods.map(good => (
             <tr
               data-cy="Good"
-              className={value === good ? 'has-background-success-light' : ''}
+              key={good}
+              className={isSelected(good) ? 'has-background-success-light' : ''}
             >
               <td>
                 <button
-                  onClick={() => setValue(value === good ? null : good)}
-                  className={`button ${value === good ? 'is-info' : ''}`}
-                  data-cy={`${value === good ? 'RemoveButton' : 'AddButton'}`}
+                  onClick={() => handleButtonClick(good)}
+                  className={buttonClasses(good)}
+                  data-cy={`${isSelected(good) ? 'RemoveButton' : 'AddButton'}`}
                   type="button"
                 >
-                  {value === good ? '-' : '+'}
+                  {isSelected(good) ? '-' : '+'}
                 </button>
               </td>
 
