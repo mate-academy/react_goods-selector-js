@@ -18,6 +18,9 @@ export const goods = [
 export const App = () => {
   const [selectedGood, chahgeSelectedGood] = useState('Jam');
   const [title, setTitle] = useState(`${selectedGood} is selected`);
+
+  const RESET = 'No goods selected';
+
   const changeGood = (good, text) => {
     chahgeSelectedGood(good);
     setTitle(text);
@@ -32,7 +35,7 @@ export const App = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => changeGood('', 'No goods selected')}
+            onClick={() => changeGood('', RESET)}
           />
         )}
       </h1>
@@ -40,20 +43,16 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map(good => (
-            <tr key="product">
+            <tr key={good}>
               {good === selectedGood && (
-              <tr
-                data-cy="Good"
-                className="has-background-success-light"
-                key="selectedProduct"
-              >
+              <tr data-cy="Good" className="has-background-success-light">
                 <td>
                   <button
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
                     key="buttonRemove"
-                    onClick={() => changeGood('', 'No goods selected')}
+                    onClick={() => changeGood('', RESET)}
                   >
                     -
                   </button>
@@ -66,7 +65,7 @@ export const App = () => {
               )
               }
               {good !== selectedGood && (
-              <tr data-cy="Good" key="product">
+              <tr data-cy="Good">
                 <td>
                   <button
                     data-cy="AddButton"
