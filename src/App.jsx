@@ -27,41 +27,42 @@ export const App = () => {
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
         {title}
-
-        <button
-          data-cy="ClearButton"
-          type="button"
-          className="delete ml-3"
-          onClick={() => changeGood('', 'No goods selected')}
-        />
+        {title !== 'No goods selected' && (
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={() => changeGood('', 'No goods selected')}
+          />
+        )}
       </h1>
 
       <table className="table">
         <tbody>
           {goods.map(good => (
-            <tr>
+            <tr key="product">
               {good === selectedGood && (
-                <tr
-                  data-cy="Good"
-                  className="has-background-success-light"
-                  key="selectedProduct"
-                >
-                  <td>
-                    <button
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                      key="buttonRemove"
-                      onClick={() => changeGood(good, `${good} is selected`)}
-                    >
-                      -
-                    </button>
-                  </td>
+              <tr
+                data-cy="Good"
+                className="has-background-success-light"
+                key="selectedProduct"
+              >
+                <td>
+                  <button
+                    data-cy="RemoveButton"
+                    type="button"
+                    className="button is-info"
+                    key="buttonRemove"
+                    onClick={() => changeGood('', 'No goods selected')}
+                  >
+                    -
+                  </button>
+                </td>
 
-                  <td data-cy="GoodTitle" className="is-vcentered">
-                    {good}
-                  </td>
-                </tr>
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
               )
               }
               {good !== selectedGood && (
