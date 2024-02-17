@@ -43,18 +43,29 @@ export const App = () => {
               key={good}
               data-cy="Good"
               className={
-                good === selected ? 'has-background-success-light' : ''}
+                good === selected ? 'has-background-success-light' : ''
+              }
             >
               <td>
-                {good !== selected ?
-                ( <button data-cy='AddButton' type='button' className='button' onClick={() => setSelected(good)}>
-                +
-                </button>)
-                :
-                ( <button data-cy='RemoveButton' type='button' className='button is-info' onClick={clearGood}>
-                -
-                </button>)
-              }
+                {good !== selected ? (
+                  <button
+                    data-cy="AddButton"
+                    type="button"
+                    className="button"
+                    onClick={() => setSelected(good)}
+                  >
+                    +
+                  </button>
+                ) : (
+                  <button
+                    data-cy="RemoveButton"
+                    type="button"
+                    className="button is-info"
+                    onClick={clearGood}
+                  >
+                    -
+                  </button>
+                )}
               </td>
 
               <td data-cy="GoodTitle" className="is-vcentered">
