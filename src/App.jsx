@@ -32,7 +32,6 @@ export const App = () => {
       selectedGood ? (
         <h1 className="title is-flex is-align-items-center">
           {`${selectedGood} is selected`}
-
           <button
             onClick={handleClearSelection}
             data-cy="ClearButton"
@@ -68,7 +67,6 @@ export const App = () => {
                     >
                       -
                     </button>
-
                   ) : (
                     <button
                       onClick={() => handleSelection(good)}
@@ -80,7 +78,6 @@ export const App = () => {
                     </button>
                   )}
               </td>
-
               <td data-cy="GoodTitle" className="is-vcentered">
                 {good}
               </td>
