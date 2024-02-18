@@ -43,7 +43,7 @@ export const App = () => {
 
             return (
               <tr
-                key={goods.indexOf(prod)}
+                key={prod}
                 data-cy="Good"
                 className={currentGood ? 'has-background-success-light' : ''}
               >
