@@ -18,7 +18,7 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setValue] = useState('Jam');
   const isSelected = good => selectedGood === good;
-  const clearGood = () => setValue(undefined);
+  const clearGood = () => setValue(null);
   const handleSelectGood = good => setValue(good);
 
   return (
