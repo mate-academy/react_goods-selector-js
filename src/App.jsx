@@ -21,14 +21,23 @@ export const App = () => {
 
   return (
     <main className="section container">
-      <h1 className="title is-flex is-align-items-center">No goods selected</h1>
-
-      <h1 className="title is-flex is-align-items-center">
-        {selectedGood} is selected
-        {selectedGood && (
-          <button data-cy="ClearButton" type="button" className="delete ml-3" />
-        )}
-      </h1>
+      {selectedGood ? (
+        <h1 className="title is-flex is-align-items-center">
+          {selectedGood} is selected
+          <button
+            onClick={() => {
+              setValue(undefined);
+            }}
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+          />
+        </h1>
+      ) : (
+        <h1 className="title is-flex is-align-items-center">
+          No goods iselected
+        </h1>
+      )}
 
       <table className="table">
         <tbody>
@@ -40,18 +49,33 @@ export const App = () => {
                 'has-background-success-light': good === selectedGood,
               })}
             >
-              <td>
-                <button
-                  onClick={() => {
-                    setValue(good);
-                  }}
-                  data-cy="AddButton"
-                  type="button"
-                  className="button"
-                >
-                  +
-                </button>
-              </td>
+              {good === selectedGood ? (
+                <td>
+                  <button
+                    onClick={() => {
+                      setValue(good);
+                    }}
+                    data-cy="AddButton"
+                    type="button"
+                    className="button"
+                  >
+                    -
+                  </button>
+                </td>
+              ) : (
+                <td>
+                  <button
+                    onClick={() => {
+                      setValue(good);
+                    }}
+                    data-cy="AddButton"
+                    type="button"
+                    className="button"
+                  >
+                    +
+                  </button>
+                </td>
+              )}
 
               <td data-cy="GoodTitle" className="is-vcentered">
                 {good}
