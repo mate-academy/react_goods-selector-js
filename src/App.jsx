@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import 'bulma/css/bulma.css';
 import cn from 'classnames';
@@ -19,33 +19,25 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setSelectedGood] = React.useState('Jam');
-
-  const getGood = good => {
-    setSelectedGood(good);
-  };
-
-  const clearSelection = () => {
-    setSelectedGood('');
-  };
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   return (
     <main className="section container">
-      {!selectedGood ? (
-        <h1 className="title is-flex is-align-items-center">
-          No goods selected
-        </h1>
-      ) : (
-        <h1 className="title is-flex is-align-items-center">
-          {selectedGood} is selected
-          <button
-            onClick={clearSelection}
-            data-cy="ClearButton"
-            type="button"
-            className="delete ml-3"
-          />
-        </h1>
-      )}
+      <h1 className="title is-flex is-align-items-center">
+        {selectedGood ? (
+          <>
+            {selectedGood} is selected
+            <button
+              onClick={() => setSelectedGood('')}
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+            />
+          </>
+        ) : (
+          'No goods selected'
+        )}
+      </h1>
 
       <table className="table">
         <tbody>
@@ -60,7 +52,7 @@ export const App = () => {
               <td>
                 {good === selectedGood ? (
                   <button
-                    onClick={clearSelection}
+                    onClick={() => setSelectedGood('')}
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
@@ -69,7 +61,7 @@ export const App = () => {
                   </button>
                 ) : (
                   <button
-                    onClick={() => getGood(good)}
+                    onClick={() => setSelectedGood(good)}
                     data-cy="AddButton"
                     type="button"
                     className="button"
