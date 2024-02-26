@@ -16,38 +16,32 @@ export const goods = [
 ];
 
 function Good({ good, selectedGood, setSelectedGood }) {
-  return good === selectedGood ? (
+  return (
     <tr
       data-cy="Good"
       className={good === selectedGood ? 'has-background-success-light' : ''}
       key={good}
     >
       <td>
-        <button
-          data-cy="RemoveButton"
-          type="button"
-          className="button is-info"
-          onClick={() => setSelectedGood('')}
-        >
-          -
-        </button>
-      </td>
-
-      <td data-cy="GoodTitle" className="is-vcentered">
-        {good}
-      </td>
-    </tr>
-  ) : (
-    <tr data-cy="Good" key={good}>
-      <td>
-        <button
-          data-cy="AddButton"
-          type="button"
-          className="button"
-          onClick={() => setSelectedGood(good)}
-        >
-          +
-        </button>
+        {good === selectedGood ? (
+          <button
+            data-cy="RemoveButton"
+            type="button"
+            className="button is-info"
+            onClick={() => setSelectedGood('')}
+          >
+            -
+          </button>
+        ) : (
+          <button
+            data-cy="AddButton"
+            type="button"
+            className="button"
+            onClick={() => setSelectedGood(good)}
+          >
+            +
+          </button>
+        )}
       </td>
 
       <td data-cy="GoodTitle" className="is-vcentered">
