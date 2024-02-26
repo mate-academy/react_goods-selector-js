@@ -16,14 +16,16 @@ export const goods = [
 ];
 
 function Good({ good, selectedGood, setSelectedGood }) {
+  const selected = good === selectedGood;
+
   return (
     <tr
       data-cy="Good"
-      className={good === selectedGood ? 'has-background-success-light' : ''}
+      className={selected ? 'has-background-success-light' : ''}
       key={good}
     >
       <td>
-        {good === selectedGood ? (
+        {selected ? (
           <button
             data-cy="RemoveButton"
             type="button"
