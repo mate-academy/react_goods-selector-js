@@ -15,6 +15,48 @@ export const goods = [
   'Garlic',
 ];
 
+function Good({ good, selectedGood, setSelectedGood }) {
+  return good === selectedGood ? (
+    <tr
+      data-cy="Good"
+      className={good === selectedGood ? 'has-background-success-light' : ''}
+      key={good}
+    >
+      <td>
+        <button
+          data-cy="RemoveButton"
+          type="button"
+          className="button is-info"
+          onClick={() => setSelectedGood('')}
+        >
+          -
+        </button>
+      </td>
+
+      <td data-cy="GoodTitle" className="is-vcentered">
+        {good}
+      </td>
+    </tr>
+  ) : (
+    <tr data-cy="Good" key={good}>
+      <td>
+        <button
+          data-cy="AddButton"
+          type="button"
+          className="button"
+          onClick={() => setSelectedGood(good)}
+        >
+          +
+        </button>
+      </td>
+
+      <td data-cy="GoodTitle" className="is-vcentered">
+        {good}
+      </td>
+    </tr>
+  );
+}
+
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
@@ -38,48 +80,14 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good =>
-            good === selectedGood ? (
-              <tr
-                data-cy="Good"
-                className={
-                  good === selectedGood ? 'has-background-success-light' : ''
-                }
-                key={good}
-              >
-                <td>
-                  <button
-                    data-cy="RemoveButton"
-                    type="button"
-                    className="button is-info"
-                    onClick={() => setSelectedGood('')}
-                  >
-                    -
-                  </button>
-                </td>
-
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            ) : (
-              <tr data-cy="Good" key={good}>
-                <td>
-                  <button
-                    data-cy="AddButton"
-                    type="button"
-                    className="button"
-                    onClick={() => setSelectedGood(good)}
-                  >
-                    +
-                  </button>
-                </td>
-
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            ))}
+          {goods.map(good => (
+            <Good
+              good={good}
+              selectedGood={selectedGood}
+              setSelectedGood={setSelectedGood}
+              key={good}
+            />
+          ))}
         </tbody>
       </table>
     </main>
