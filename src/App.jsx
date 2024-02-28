@@ -17,56 +17,46 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [message, setMessage] = useState('No goods selected');
-  const [selectedGood, setSelectedGood] = useState(null);
-  const [selectedIndex, setSelectedIndex] = useState(null);
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   return (
     <main className="section container">
-      {/* <h1 className="title is-flex is-align-items-center">No goods selected</h1> */}
-
       <h1 className="title is-flex is-align-items-center">
-        {message}
+        {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
         <button
           data-cy="ClearButton"
           type="button"
           className="delete ml-3"
-          onClick={() => {
-            setMessage(`No goods selected`);
-            setSelectedGood(null);
-            setSelectedIndex(null);
-          }}
+          onClick={() => setSelectedGood('')}
         />
       </h1>
 
       <table className="table">
         <tbody>
-          {goods.map((good, index) => {
+          {goods.map(good => {
+            const isActive = selectedGood === good;
+
             return (
               <>
                 <tr
                   key={good}
                   data-cy="Good"
-                  className={
-                    selectedIndex === index
-                      ? 'has-background-success-light'
-                      : ''
-                  }
+                  className={cn('', {
+                    'has-background-success-light': isActive,
+                  })}
                 >
                   <td>
                     <button
                       data-cy="AddButton"
                       type="button"
                       className={cn('button', {
-                        'is-info': selectedIndex === index,
+                        'is-info': isActive,
                       })}
                       onClick={() => {
-                        setMessage(`${good} is selected`);
-                        setSelectedGood(selectedGood === good ? null : good);
-                        setSelectedIndex(selectedGood === good ? null : index);
+                        setSelectedGood(isActive ? '' : good);
                       }}
                     >
-                      {selectedGood === good ? '-' : '+'}
+                      {isActive ? '-' : '+'}
                     </button>
                   </td>
 
@@ -77,34 +67,6 @@ export const App = () => {
               </>
             );
           })}
-
-          {/* <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
-
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr> */}
         </tbody>
       </table>
     </main>
