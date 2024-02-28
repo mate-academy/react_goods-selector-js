@@ -17,6 +17,7 @@ export const goods = [
 
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
+  const removeClearButton = () => setSelectedGood('');
 
   return (
     <main className="section container">
@@ -27,7 +28,7 @@ export const App = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => setSelectedGood('')}
+            onClick={removeClearButton}
           />
         )}
       </h1>
@@ -38,7 +39,9 @@ export const App = () => {
             <tr
               data-cy="Good"
               key={good}
-              className={`${selectedGood === good ? 'has-background-success-light' : ''}`}
+              className={`${
+                selectedGood === good ? 'has-background-success-light' : ''
+              }`}
             >
               <td>
                 {selectedGood === good ? (
