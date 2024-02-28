@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import { Good } from './Good';
 
 export const goods = [
   'Dumplings',
@@ -16,56 +17,33 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setValue] = useState(`Jam`);
-  const [number, setNumber] = useState(0);
+  const [selectedGood, setSelectedGood] = useState(`Jam`);
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
         {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
-        {selectedGood ? (
+        {selectedGood && (
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
             onClick={() => {
-              setValue('');
+              setSelectedGood('');
             }}
           />
-        ) : (
-          ''
         )}
       </h1>
 
       <table className="table">
         <tbody>
           {goods.map(good => (
-            <tr
-              data-cy="Good"
-              className={
-                selectedGood === good ? 'has-background-success-light' : ''
-              }
-            >
-              <td>
-                <button
-                  data-cy={selectedGood === good ? 'RemoveButton' : 'AddButton'}
-                  type="button"
-                  className={
-                    selectedGood === good ? 'button is-info' : 'button'
-                  }
-                  onClick={() => {
-                    setNumber(number + 1);
-                    setValue(selectedGood !== good && good);
-                  }}
-                >
-                  {selectedGood === good ? '-' : '+'}
-                </button>
-              </td>
-
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
+            <Good
+              good={good}
+              selectedGood={selectedGood}
+              setSelectedGood={setSelectedGood}
+              key={good}
+            />
           ))}
         </tbody>
       </table>
