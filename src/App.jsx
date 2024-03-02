@@ -16,16 +16,8 @@ export const goods = [
   'Garlic',
 ];
 
-export const Good = () => {};
-
 export const App = () => {
   const [value, setValue] = useState('Jam');
-  const [selectedGood, setSelectedGood] = useState('Jam');
-
-  const handleButtonClick = good => {
-    setSelectedGood(good);
-    setValue(good);
-  };
 
   return (
     <main className="section container">
@@ -37,7 +29,7 @@ export const App = () => {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => handleButtonClick('')}
+              onClick={() => setValue('')}
             />
           </>
         ) : (
@@ -48,7 +40,7 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map(good => {
-            const isSelected = selectedGood === good;
+            const isSelected = value === good;
 
             return (
               <tr
@@ -62,7 +54,7 @@ export const App = () => {
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={() => handleButtonClick('')}
+                      onClick={() => setValue('')}
                     >
                       -
                     </button>
@@ -71,7 +63,7 @@ export const App = () => {
                       data-cy="AddButton"
                       type="button"
                       className="button"
-                      onClick={() => handleButtonClick(good)}
+                      onClick={() => setValue(good)}
                     >
                       +
                     </button>
@@ -88,4 +80,4 @@ export const App = () => {
     </main>
   );
 };
-//===
+//= ==
