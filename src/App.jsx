@@ -36,14 +36,6 @@ export const App = () => {
             className="delete ml-3"
             onClick={e => {
               setActive(false);
-
-              const activeItem = document.getElementsByClassName(
-                'has-background-success-light',
-              )[0];
-
-              if (activeItem) {
-                activeItem.querySelector('button').click();
-              }
             }}
           />
         </h1>
