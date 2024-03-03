@@ -17,57 +17,48 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [active, setActive] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   return (
     <main className="section container">
-      {!active && (
+      {!selectedGood && (
         <h1 className="title is-flex is-align-items-center">
           No goods selected
         </h1>
       )}
 
-      {active && (
+      {selectedGood && (
         <h1 className="title is-flex is-align-items-center">
-          {active} is selected
+          {selectedGood} is selected
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={e => {
-              setActive(false);
-            }}
+            onClick={() => setSelectedGood('')}
           />
         </h1>
       )}
 
       <table className="table">
         <tbody>
-          {goods.map((good, ind) => {
-            const clickBtn = e => {
-              if (active === good) {
-                setActive('');
-              } else {
-                setActive(good);
-              }
-            };
+          {goods.map(good => {
+            const isActive = good === selectedGood;
 
             return (
               <tr
-                // eslint-disable-next-line react/no-array-index-key
-                key={`good-${good}-${ind}`}
+                key={`good-${good}`}
                 data-cy="Good"
                 className={classNames({
-                  'has-background-success-light': good === active,
+                  'has-background-success-light': isActive,
                 })}
               >
                 <td>
-                  {!(good === active) ? (
+                  {!isActive ? (
                     <button
                       data-cy="AddButton"
                       type="button"
                       className="button"
-                      onClick={clickBtn}
+                      onClick={() => setSelectedGood(good)}
                     >
                       +
                     </button>
@@ -76,7 +67,7 @@ export const App = () => {
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={clickBtn}
+                      onClick={() => setSelectedGood('')}
                     >
                       -
                     </button>
