@@ -20,7 +20,7 @@ export const App = () => {
 
   return (
     <main className="section container">
-      {selectedGood === '' ? (
+      {!selectedGood ? (
         <h1 className="title is-flex is-align-items-center">
           No goods selected
         </h1>
@@ -42,6 +42,7 @@ export const App = () => {
         <tbody>
           {goods.map(good => (
             <tr
+              key={good}
               data-cy="Good"
               className={`${selectedGood === good ? 'has-background-success-light' : ''}`}
             >
