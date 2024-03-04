@@ -17,24 +17,24 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGoods, setSelectedGoods] = useState('Jam');
-  const goodsHandler = good => setSelectedGoods(good);
+  const [selectedGood, setSelectedGood] = useState('Jam');
+  const clearHandler = () => setSelectedGood('');
 
   const showSelected = () =>
-    selectedGoods.endsWith('s')
-      ? `${selectedGoods} are selected`
-      : `${selectedGoods} is selected`;
+    selectedGood.endsWith('s')
+      ? `${selectedGood} are selected`
+      : `${selectedGood} is selected`;
 
   return (
     <main className="section container">
-      {selectedGoods ? (
+      {selectedGood ? (
         <h1 className="title is-flex is-align-items-center">
           {showSelected()}
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => goodsHandler('')}
+            onClick={() => clearHandler()}
           />
         </h1>
       ) : (
@@ -45,18 +45,19 @@ export const App = () => {
         <tbody>
           {goods.map(good => (
             <tr
+              key={good}
               data-cy="Good"
               className={classNames({
-                'has-background-success-light': good === selectedGoods,
+                'has-background-success-light': good === selectedGood,
               })}
             >
               <td>
-                {good === selectedGoods ? (
+                {good === selectedGood ? (
                   <button
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
-                    onClick={() => goodsHandler('')}
+                    onClick={() => clearHandler()}
                   >
                     -
                   </button>
@@ -65,7 +66,7 @@ export const App = () => {
                     data-cy="AddButton"
                     type="button"
                     className="button"
-                    onClick={() => goodsHandler(good)}
+                    onClick={() => setSelectedGood(good)}
                   >
                     +
                   </button>
