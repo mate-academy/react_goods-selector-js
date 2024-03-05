@@ -26,10 +26,6 @@ export const App = () => {
     setSelectedGood(good);
   }
 
-  function removeAdd() {
-    clearGood();
-  }
-
   return (
     <>
       <main className="section container">
@@ -69,7 +65,7 @@ export const App = () => {
                       selectedGood === good ? 'button is-info' : 'button'
                     }
                     onClick={() =>
-                      selectedGood !== good ? addGood(good) : removeAdd()
+                      selectedGood !== good ? addGood(good) : clearGood()
                     }
                   >
                     {selectedGood === good ? '-' : '+'}
