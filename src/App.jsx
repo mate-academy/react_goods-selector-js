@@ -17,6 +17,8 @@ export const goods = [
   'Garlic',
 ];
 
+const classNames = require('classnames');
+
 const DEFAULT_GOOD = goods.find(good => good === 'Jam');
 
 export const App = () => {
@@ -25,7 +27,9 @@ export const App = () => {
   return (
     <main className="section container">
       <h1
-        className={`title ${chosenProduct && 'is-flex is-align-items-center'}`}
+        className={classNames('title', {
+          'is-flex is-align-items-center': chosenProduct,
+        })}
       >
         {chosenProduct ? `${chosenProduct} is selected` : 'No goods selected'}
         {chosenProduct && (
@@ -44,16 +48,18 @@ export const App = () => {
             return (
               <tr
                 data-cy="Good"
-                className={
-                  good === chosenProduct && 'has-background-success-light'
-                }
+                className={classNames({
+                  'has-background-success-light': good === chosenProduct,
+                })}
                 key={good}
               >
                 <td>
                   <button
                     data-cy={`${chosenProduct === good ? 'RemoveButton' : 'AddButton'}`}
                     type="button"
-                    className={`button ${chosenProduct === good && 'is-info'}`}
+                    className={classNames('button', {
+                      'is-info': chosenProduct === good,
+                    })}
                     onClick={() => {
                       if (good === chosenProduct) {
                         setGood('');
