@@ -16,21 +16,15 @@ export const goods = [
 ];
 
 export const App = () => {
-  const startIndex = goods.findIndex(products => products === 'Jam');
-  const [activeRow, setActiveRow] = useState(startIndex);
-  const [selectedGood, setGood] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
-  const [title, setTitle] = useState(false);
-
-  const RemoveButton = () => {
-    setGood(null);
-    setActiveRow(null);
-    setTitle(true);
+  const removeButton = () => {
+    setSelectedGood(null);
   };
 
   return (
     <main className="section container">
-      {title ? (
+      {!selectedGood ? (
         <h1 className="title is-flex is-align-items-center">
           No goods selected
         </h1>
@@ -42,7 +36,7 @@ export const App = () => {
             type="button"
             className="delete ml-3"
             onClick={() => {
-              RemoveButton();
+              removeButton();
             }}
           />
         </h1>
@@ -50,21 +44,21 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map((good, index) => (
+          {goods.map(good => (
             <tr
               data-cy="Good"
               className={
-                index === activeRow ? 'has-background-success-light' : ''
+                good === selectedGood ? 'has-background-success-light' : ''
               }
             >
               <td>
-                {index === activeRow ? (
+                {good === selectedGood ? (
                   <button
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
                     onClick={() => {
-                      RemoveButton();
+                      removeButton();
                     }}
                   >
                     -
@@ -75,9 +69,7 @@ export const App = () => {
                     type="button"
                     className="button"
                     onClick={() => {
-                      setTitle(false);
-                      setActiveRow(index);
-                      setGood(good);
+                      setSelectedGood(good);
                     }}
                   >
                     +
