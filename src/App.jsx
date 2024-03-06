@@ -41,7 +41,6 @@ export const App = () => {
         <tbody>
           {goods.map(good => {
             const isSelected = good === selectedGood;
-            const onSelect = setSelectedGood;
 
             const buttonText = isSelected ? '-' : '+';
             const buttonCy = isSelected ? 'RemoveButton' : 'AddButton';
@@ -57,7 +56,7 @@ export const App = () => {
                     onClick={() => {
                       const value = isSelected ? '' : good;
 
-                      onSelect(value);
+                      setSelectedGood(value);
                     }}
                     data-cy={buttonCy}
                     type="button"
