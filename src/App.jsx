@@ -1,4 +1,5 @@
 import 'bulma/css/bulma.css';
+import cn from 'classnames';
 import './App.scss';
 import { useState } from 'react';
 
@@ -17,11 +18,10 @@ export const goods = [
 
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
-  // let isActive = true;
 
-  function resetValue() {
+  const resetValue = () => {
     setSelectedGood('');
-  }
+  };
 
   return (
     <main className="section container">
@@ -49,7 +49,7 @@ export const App = () => {
               <tr
                 key={good}
                 data-cy="Good"
-                className={`${isActive ? 'has-background-success-light' : ''}`}
+                className={cn({ 'has-background-success-light': isActive })}
               >
                 <td>
                   {!isActive ? (
@@ -57,9 +57,7 @@ export const App = () => {
                       data-cy="AddButton"
                       type="button"
                       className="button"
-                      onClick={() => {
-                        setSelectedGood(good);
-                      }}
+                      onClick={() => setSelectedGood(good)}
                     >
                       +
                     </button>
