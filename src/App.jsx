@@ -1,7 +1,6 @@
-/* eslint-disable react/no-array-index-key */
+import { useState } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
-import { useState } from 'react';
 
 export const goods = [
   'Dumplings',
@@ -17,54 +16,55 @@ export const goods = [
 ];
 
 export const App = () => {
-  const startIndex = goods.findIndex(products => products === 'Jam');
-  const [activeRow, setActiveRow] = useState(startIndex);
+  const INITIAL_VALUE = 'Jam';
+  const EMPTY_MESSAGE = 'No goods selected';
 
-  const [message, setMessage] = useState('Jam');
+  const [selectedGood, setMessage] = useState(INITIAL_VALUE);
   const [isButtonVisible, setIsButtonVisible] = useState(true);
-  const RemoveButton = () => {
-    setMessage('No goods');
-    setActiveRow(null);
+
+  const handleClearSelection = () => {
+    setMessage(EMPTY_MESSAGE);
     setIsButtonVisible(false);
+  };
+
+  const handleUpdateSelection = goodValue => {
+    setMessage(goodValue);
+    setIsButtonVisible(true);
   };
 
   return (
     <main className="section container">
       {isButtonVisible ? (
         <h1 className="title is-flex is-align-items-center">
-          {message} is selected
+          {selectedGood} is selected
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => {
-              RemoveButton();
-            }}
+            onClick={handleClearSelection}
           />
         </h1>
       ) : (
-        <h1 className="title">{message} selected</h1>
+        <h1 className="title">{EMPTY_MESSAGE}</h1>
       )}
 
       <table className="table">
         <tbody>
-          {goods.map((good, index) => (
+          {goods.map(good => (
             <tr
-              key={index}
+              key={good}
               data-cy="Good"
               className={
-                index === activeRow ? 'has-background-success-light' : ''
+                selectedGood === good ? 'has-background-success-light' : ''
               }
             >
               <td>
-                {index === activeRow ? (
+                {selectedGood === good ? (
                   <button
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
-                    onClick={() => {
-                      RemoveButton();
-                    }}
+                    onClick={handleClearSelection}
                   >
                     -
                   </button>
@@ -73,11 +73,7 @@ export const App = () => {
                     data-cy="AddButton"
                     type="button"
                     className="button"
-                    onClick={() => {
-                      setMessage(`${good}`);
-                      setActiveRow(index);
-                      setIsButtonVisible(true);
-                    }}
+                    onClick={() => handleUpdateSelection(good)}
                   >
                     +
                   </button>
