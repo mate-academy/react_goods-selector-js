@@ -36,43 +36,48 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
-            <tr
-              data-cy="Good"
-              className={
-                `${good} is selected` === message &&
-                'has-background-success-light'
-              }
-            >
-              <td>
-                <button
-                  onClick={() => {
-                    // eslint-disable-next-line no-unused-expressions
-                    message === `${good} is selected`
-                      ? setMessage('No goods selected')
-                      : setMessage(`${good} is selected`);
-                  }}
-                  data-cy={
-                    `${good} is selected` === message
-                      ? 'RemoveButton'
-                      : 'AddButton'
-                  }
-                  type="button"
-                  className={
-                    `${good} is selected` === message
-                      ? 'button is-info'
-                      : 'button'
-                  }
-                >
-                  {`${good} is selected` === message ? '-' : '+'}
-                </button>
-              </td>
+          {goods.map(good =>
+            message === `${good} is selected` ? (
+              <tr data-cy="Good" className="has-background-success-light">
+                <td>
+                  <button
+                    onClick={() => {
+                      setMessage('No goods selected');
+                    }}
+                    data-cy="RemoveButton"
+                    type="button"
+                    className="button is-info"
+                  >
+                    -
+                  </button>
+                </td>
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
-          ))}
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            ) : (
+              <tr data-cy="Good">
+                <td>
+                  <button
+                    onClick={() => {
+                      // eslint-disable-next-line no-unused-expressions
+                      setMessage(`${good} is selected`);
+                    }}
+                    data-cy="AddButton"
+                    type="button"
+                    className="button"
+                  >
+                    +
+                  </button>
+                </td>
+
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+              // eslint-disable-next-line prettier/prettier
+            ))}
         </tbody>
       </table>
     </main>
