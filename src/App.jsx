@@ -16,33 +16,41 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [message, setMessage] = useState('Jam is selected');
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   return (
     <main className="section container">
-      <h1 className="title is-flex is-align-items-center">
-        {message}
-        {message !== 'No goods selected' && (
+      {!selectedGood ? (
+        <h1 className="title is-flex is-align-items-center">
+          No goods selected
+        </h1>
+      ) : (
+        <h1 className="title is-flex is-align-items-center">
+          {selectedGood} is selected
           <button
             onClick={() => {
-              setMessage('No goods selected');
+              setSelectedGood(null);
             }}
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
           />
-        )}
-      </h1>
+        </h1>
+      )}
 
       <table className="table">
         <tbody>
           {goods.map(good =>
-            message === `${good} is selected` ? (
-              <tr data-cy="Good" className="has-background-success-light">
+            selectedGood === `${good}` ? (
+              <tr
+                key={good}
+                data-cy="Good"
+                className="has-background-success-light"
+              >
                 <td>
                   <button
                     onClick={() => {
-                      setMessage('No goods selected');
+                      setSelectedGood(null);
                     }}
                     data-cy="RemoveButton"
                     type="button"
@@ -57,12 +65,11 @@ export const App = () => {
                 </td>
               </tr>
             ) : (
-              <tr data-cy="Good">
+              <tr key={good} data-cy="Good">
                 <td>
                   <button
                     onClick={() => {
-                      // eslint-disable-next-line no-unused-expressions
-                      setMessage(`${good} is selected`);
+                      setSelectedGood(`${good}`);
                     }}
                     data-cy="AddButton"
                     type="button"
