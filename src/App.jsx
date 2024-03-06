@@ -1,8 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
-// import { use } from 'chai';
 import { useState } from 'react';
-// import { set } from 'cypress/types/lodash';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -17,27 +16,30 @@ export const goods = [
   'Garlic',
 ];
 
-const classNames = require('classnames');
+// const classNames = require('classnames');
 
 const DEFAULT_GOOD = goods.find(good => good === 'Jam');
 
 export const App = () => {
-  const [chosenProduct, setGood] = useState(DEFAULT_GOOD);
+  const [selectedProduct, setSelectedProduct] = useState(DEFAULT_GOOD);
+  const isChosenProduct = good => good === selectedProduct;
 
   return (
     <main className="section container">
       <h1
         className={classNames('title', {
-          'is-flex is-align-items-center': chosenProduct,
+          'is-flex is-align-items-center': selectedProduct,
         })}
       >
-        {chosenProduct ? `${chosenProduct} is selected` : 'No goods selected'}
-        {chosenProduct && (
+        {selectedProduct
+          ? `${selectedProduct} is selected`
+          : 'No goods selected'}
+        {selectedProduct && (
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => setGood('')}
+            onClick={() => setSelectedProduct('')}
           />
         )}
       </h1>
@@ -49,26 +51,24 @@ export const App = () => {
               <tr
                 data-cy="Good"
                 className={classNames({
-                  'has-background-success-light': good === chosenProduct,
+                  'has-background-success-light': isChosenProduct(good),
                 })}
                 key={good}
               >
                 <td>
                   <button
-                    data-cy={`${chosenProduct === good ? 'RemoveButton' : 'AddButton'}`}
+                    data-cy={`${isChosenProduct(good) ? 'RemoveButton' : 'AddButton'}`}
                     type="button"
                     className={classNames('button', {
-                      'is-info': chosenProduct === good,
+                      'is-info': isChosenProduct(good),
                     })}
                     onClick={() => {
-                      if (good === chosenProduct) {
-                        setGood('');
-                      } else {
-                        setGood(good);
-                      }
+                      isChosenProduct(good)
+                        ? setSelectedProduct('')
+                        : setSelectedProduct(good);
                     }}
                   >
-                    {chosenProduct === good ? '-' : '+'}
+                    {isChosenProduct(good) ? '-' : '+'}
                   </button>
                 </td>
 
