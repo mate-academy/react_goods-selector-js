@@ -19,6 +19,8 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
+  const isSelectedGood = good => good === selectedGood;
+
   return (
     <main className="section container">
       {selectedGood === null ? (
@@ -44,21 +46,27 @@ export const App = () => {
                 data-cy="Good"
                 key={good}
                 className={classNames({
-                  'has-background-success-light': good === selectedGood,
+                  'has-background-success-light': isSelectedGood(good),
                 })}
               >
                 <td>
                   <button
                     onClick={() => {
-                      setSelectedGood(good);
+                      if (!isSelectedGood(good)) {
+                        setSelectedGood(good);
+                      } else {
+                        setSelectedGood(null);
+                      }
                     }}
-                    data-cy="AddButton"
+                    data-cy={
+                      isSelectedGood(good) ? 'RemoveButton' : 'AddButton'
+                    }
                     type="button"
                     className={classNames('button', {
-                      'button is-info': good === selectedGood,
+                      'button is-info': isSelectedGood(good),
                     })}
                   >
-                    {good !== selectedGood ? '+' : '-'}
+                    {isSelectedGood(good) ? '-' : '+'}
                   </button>
                 </td>
 

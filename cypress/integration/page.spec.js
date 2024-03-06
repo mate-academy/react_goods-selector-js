@@ -5,19 +5,20 @@ const page = {
   goods: () => cy.byDataCy('Good'),
 
   assertGoodSelected: index => {
-    page.goods().eq(index)
-      .should('have.class', 'has-background-success-light');
+    page.goods().eq(index).should('have.class', 'has-background-success-light');
   },
 
   assertSelectedGoodsCount: count => {
-    cy.get('[data-cy="Good"].has-background-success-light')
-      .should('have.length', count);
+    cy.get('[data-cy="Good"].has-background-success-light').should(
+      'have.length',
+      count,
+    );
   },
 };
 
 let failed = false;
 
-Cypress.on('fail', (e) => {
+Cypress.on('fail', e => {
   failed = true;
   throw e;
 });
@@ -55,9 +56,7 @@ describe('Page', () => {
     });
 
     it('should show RemoveButton for a selected good', () => {
-      page.goods().eq(8)
-        .byDataCy('RemoveButton')
-        .should('exist');
+      page.goods().eq(8).byDataCy('RemoveButton').should('exist');
     });
 
     it('should have only 1 RemoveButton', () => {
@@ -71,30 +70,24 @@ describe('Page', () => {
     });
 
     it('should not have AddButton for the selected good', () => {
-      page.goods().eq(8)
-        .byDataCy('AddButton')
-        .should('not.exist');
+      page.goods().eq(8).byDataCy('AddButton').should('not.exist');
     });
 
     it('should have an AddButton for each not selected goods', () => {
-      cy.byDataCy('AddButton')
-        .should('have.length', 9);
+      cy.byDataCy('AddButton').should('have.length', 9);
     });
 
     it('should have correct styles for AddButton', () => {
       cy.get('[data-cy="AddButton"].is-info').should('not.exist');
       cy.contains('[data-cy="AddButton"]', '-').should('not.exist');
 
-      cy.byDataCy('AddButton').eq(0)
-        .should('have.text', '+');
+      cy.byDataCy('AddButton').eq(0).should('have.text', '+');
     });
   });
 
   describe('after selecting another good', () => {
     beforeEach(() => {
-      page.goods().eq(1)
-        .byDataCy('AddButton')
-        .click();
+      page.goods().eq(1).byDataCy('AddButton').click();
     });
 
     it('should have title with a new selected good', () => {
@@ -114,14 +107,11 @@ describe('Page', () => {
     });
 
     it('should show RemoveButton for a new good', () => {
-      page.goods().eq(1)
-        .byDataCy('RemoveButton')
-        .should('exist');
+      page.goods().eq(1).byDataCy('RemoveButton').should('exist');
     });
 
     it('should have only 1 RemoveButton', () => {
-      cy.byDataCy('RemoveButton')
-        .should('have.length', 1);
+      cy.byDataCy('RemoveButton').should('have.length', 1);
     });
   });
 
@@ -143,8 +133,7 @@ describe('Page', () => {
     });
 
     it('should allow to select a good', () => {
-      page.goods().eq(4)
-        .byDataCy('AddButton').click();
+      page.goods().eq(4).byDataCy('AddButton').click();
 
       page.title().should('have.text', 'Apple is selected');
       page.assertGoodSelected(4);
@@ -169,9 +158,7 @@ describe('Page', () => {
     });
 
     it('should allow to select a good', () => {
-      page.goods().eq(5)
-        .byDataCy('AddButton')
-        .click();
+      page.goods().eq(5).byDataCy('AddButton').click();
 
       page.title().should('have.text', 'Bread is selected');
       page.assertGoodSelected(5);
