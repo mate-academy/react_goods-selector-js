@@ -17,8 +17,6 @@ export const goods = [
   'Garlic',
 ];
 
-const checkIsGoodSelected = (selectedGood, good) => selectedGood === good;
-
 const DEFAULT_VALUE = 'Jam';
 
 export const App = () => {
@@ -47,43 +45,41 @@ export const App = () => {
       </h1>
 
       <table className="table">
-        {goods.map(good => (
-          <tbody key={good}>
-            <tr
-              data-cy="Good"
-              className={
-                checkIsGoodSelected(selectedGood, good)
-                  ? 'has-background-success-light'
-                  : ''
-              }
-            >
-              <td>
-                <button
-                  onClick={
-                    checkIsGoodSelected(selectedGood, good)
-                      ? handleClearProduct
-                      : () => handleGoodClick(good)
-                  }
-                  data-cy={
-                    checkIsGoodSelected(selectedGood, good)
-                      ? 'RemoveButton'
-                      : 'AddButton'
-                  }
-                  type="button"
-                  className={cn('button', {
-                    'is-info': checkIsGoodSelected(selectedGood, good),
-                  })}
-                >
-                  {checkIsGoodSelected(selectedGood, good) ? '-' : '+'}
-                </button>
-              </td>
+        {goods.map(good => {
+          const isGoodSelected = selectedGood === good;
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
-          </tbody>
-        ))}
+          return (
+            <tbody key={good}>
+              <tr
+                data-cy="Good"
+                className={cn({
+                  'has-background-success-light': isGoodSelected,
+                })}
+              >
+                <td>
+                  <button
+                    onClick={
+                      isGoodSelected
+                        ? handleClearProduct
+                        : () => handleGoodClick(good)
+                    }
+                    data-cy={isGoodSelected ? 'RemoveButton' : 'AddButton'}
+                    type="button"
+                    className={cn('button', {
+                      'is-info': isGoodSelected,
+                    })}
+                  >
+                    {isGoodSelected ? '-' : '+'}
+                  </button>
+                </td>
+
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            </tbody>
+          );
+        })}
       </table>
     </main>
   );
