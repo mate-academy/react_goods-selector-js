@@ -18,9 +18,9 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
-  const clearSelection = () => {
-    setSelectedGood('');
-  };
+  const clearSelection = () => setSelectedGood('');
+
+  const isSelected = good => good === selectedGood;
 
   return (
     <main className="section container">
@@ -38,34 +38,25 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
+          {goods.map((good, index) => (
             <tr
+              key={good}
               data-cy="Good"
-              className={
-                selectedGood === good ? 'has-background-success-light' : ''
-              }
+              className={isSelected(good) ? 'has-background-success-light' : ''}
             >
               <td>
-                {selectedGood !== good && (
-                  <button
-                    data-cy="AddButton"
-                    type="button"
-                    className="button"
-                    onClick={() => setSelectedGood(good)}
-                  >
-                    +
-                  </button>
-                )}
-                {selectedGood === good && (
-                  <button
-                    data-cy="RemoveButton"
-                    type="button"
-                    className="button is-info"
-                    onClick={clearSelection}
-                  >
-                    -
-                  </button>
-                )}
+                <button
+                  data-cy={isSelected(good) ? 'RemoveButton' : 'AddButton'}
+                  type="button"
+                  className={`button ${isSelected(good) ? 'is-info' : ''}`}
+                  onClick={
+                    isSelected(good)
+                      ? clearSelection
+                      : () => setSelectedGood(good)
+                  }
+                >
+                  {selectedGood === good ? '-' : '+'}
+                </button>
               </td>
               <td data-cy="GoodTitle" className="is-vcentered">
                 {good}
