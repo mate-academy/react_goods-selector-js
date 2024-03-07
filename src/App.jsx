@@ -42,18 +42,18 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map(good => {
-            const isNotSelected = good !== selectedGood;
+            const isSelected = good === selectedGood;
 
             return (
               <tr
                 key={good}
                 data-cy="Good"
                 className={cn({
-                  'has-background-success-light': !isNotSelected,
+                  'has-background-success-light': isSelected,
                 })}
               >
                 <td>
-                  {isNotSelected ? (
+                  {isSelected ? (
                     <button
                       onClick={() => setSelectedGood(good)}
                       data-cy="AddButton"
