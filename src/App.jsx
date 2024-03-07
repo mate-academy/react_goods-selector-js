@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -28,7 +29,7 @@ export const App = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => clearSelectedGood()}
+            onClick={clearSelectedGood}
           />
         )}
       </h1>
@@ -37,18 +38,25 @@ export const App = () => {
         <tbody>
           {goods.map(good => {
             const isSelectedGood = selectedGood === good;
+            const goodClass = classNames({
+              'has-background-success-light': isSelectedGood,
+            });
+            const buttonClass = classNames({
+              button: true,
+              ' is-info': isSelectedGood,
+            });
+            const buttonData = classNames({
+              RemoveButton: isSelectedGood,
+              AddButton: !isSelectedGood,
+            });
 
             return (
-              <tr
-                key={good}
-                data-cy="Good"
-                className={isSelectedGood ? 'has-background-success-light' : ''}
-              >
+              <tr key={good} data-cy="Good" className={goodClass}>
                 <td>
                   <button
-                    data-cy={!isSelectedGood ? 'AddButton' : 'RemoveButton'}
+                    data-cy={buttonData}
                     type="button"
-                    className={`button ${isSelectedGood ? 'is-info' : ''}`}
+                    className={buttonClass}
                     onClick={() => {
                       if (isSelectedGood) {
                         clearSelectedGood();
@@ -59,7 +67,7 @@ export const App = () => {
                       setSelectedGood(good);
                     }}
                   >
-                    {!isSelectedGood ? '+' : '-'}
+                    {isSelectedGood ? '-' : '+'}
                   </button>
                 </td>
 
