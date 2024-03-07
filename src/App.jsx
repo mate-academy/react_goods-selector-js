@@ -16,8 +16,9 @@ export const goods = [
   'Garlic',
 ];
 
+const DEFAULT_GOOD = 'Jam';
+
 export const App = () => {
-  const DEFAULT_GOOD = 'Jam';
   const [good, setGood] = useState(DEFAULT_GOOD);
 
   return (
@@ -53,9 +54,7 @@ export const App = () => {
               >
                 <td>
                   <button
-                    onClick={() =>
-                      isGoodSelected ? setGood(null) : setGood(item)
-                    }
+                    onClick={() => setGood(isGoodSelected ? null : item)}
                     data-cy={isGoodSelected ? 'RemoveButton' : 'AddButton'}
                     type="button"
                     className={cn('button', {
