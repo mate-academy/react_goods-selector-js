@@ -35,9 +35,9 @@ export const App = () => {
   function handleGoodButtonClick(good) {
     if (isSelected(good)) {
       setGoodSelected('');
+    } else {
+      setGoodSelected(good);
     }
-
-    setGoodSelected(good);
   }
 
   return (
