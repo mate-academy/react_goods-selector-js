@@ -17,7 +17,8 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [good, setGood] = useState('Jam');
+  const DEFAULT_GOOD = 'Jam';
+  const [good, setGood] = useState(DEFAULT_GOOD);
 
   return (
     <main className="section container">
@@ -52,13 +53,9 @@ export const App = () => {
               >
                 <td>
                   <button
-                    onClick={() => {
-                      if (good !== item) {
-                        setGood(item);
-                      } else {
-                        setGood(null);
-                      }
-                    }}
+                    onClick={() =>
+                      isGoodSelected ? setGood(null) : setGood(item)
+                    }
                     data-cy={isGoodSelected ? 'RemoveButton' : 'AddButton'}
                     type="button"
                     className={cn('button', {
