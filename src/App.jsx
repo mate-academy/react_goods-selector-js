@@ -19,6 +19,7 @@ export const goods = [
 
 export const App = () => {
   const [selectedGood, setSelectedGoods] = useState(goods[8]);
+  const isSelected = good => good === selectedGood;
 
   return (
     <main className="section container">
@@ -41,21 +42,21 @@ export const App = () => {
               data-cy="Good"
               key={good}
               className={cn({
-                'has-background-success-light': good === selectedGood,
+                'has-background-success-light': isSelected(good),
               })}
             >
               <td>
                 <button
                   data-cy={selectedGood === good ? 'RemoveButton' : 'AddButton'}
                   type="button"
-                  className={cn('button', { 'is-info': good === selectedGood })}
+                  className={cn('button', { 'is-info': isSelected(good) })}
                   onClick={() =>
                     selectedGood === good
                       ? setSelectedGoods('')
                       : setSelectedGoods(good)
                   }
                 >
-                  {good === selectedGood ? '-' : '+'}
+                  {isSelected(good) ? '-' : '+'}
                 </button>
               </td>
 
