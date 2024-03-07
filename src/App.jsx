@@ -45,16 +45,12 @@ export const App = () => {
               button: true,
               ' is-info': isSelectedGood,
             });
-            const buttonData = classNames({
-              RemoveButton: isSelectedGood,
-              AddButton: !isSelectedGood,
-            });
 
             return (
               <tr key={good} data-cy="Good" className={goodClass}>
                 <td>
                   <button
-                    data-cy={buttonData}
+                    data-cy={isSelectedGood ? 'RemoveButton' : 'AddButton'}
                     type="button"
                     className={buttonClass}
                     onClick={() => {
