@@ -16,13 +16,10 @@ export const goods = [
   'Garlic',
 ];
 
-// const classNames = require('classnames');
-
 const DEFAULT_GOOD = goods.find(good => good === 'Jam');
 
 export const App = () => {
   const [selectedProduct, setSelectedProduct] = useState(DEFAULT_GOOD);
-  const isChosenProduct = good => good === selectedProduct;
 
   return (
     <main className="section container">
@@ -47,28 +44,33 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map(good => {
+            const isChosenProduct = currentGood =>
+              currentGood === selectedProduct;
+
+            const isSelected = isChosenProduct(good);
+
             return (
               <tr
                 data-cy="Good"
                 className={classNames({
-                  'has-background-success-light': isChosenProduct(good),
+                  'has-background-success-light': isSelected,
                 })}
                 key={good}
               >
                 <td>
                   <button
-                    data-cy={`${isChosenProduct(good) ? 'RemoveButton' : 'AddButton'}`}
+                    data-cy={`${isSelected ? 'RemoveButton' : 'AddButton'}`}
                     type="button"
                     className={classNames('button', {
-                      'is-info': isChosenProduct(good),
+                      'is-info': isSelected,
                     })}
                     onClick={() => {
-                      isChosenProduct(good)
+                      isSelected
                         ? setSelectedProduct('')
                         : setSelectedProduct(good);
                     }}
                   >
-                    {isChosenProduct(good) ? '-' : '+'}
+                    {isSelected ? '-' : '+'}
                   </button>
                 </td>
 
