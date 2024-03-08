@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -18,7 +19,8 @@ export const goods = [
 export const App = () => {
   const [selectedProduct, setSelectedProduct] = useState('Jam');
 
-  const isSelected = product => product === selectedProduct;
+  // Variable to store the selected product
+  const SELECTED_PRODUCT = selectedProduct;
 
   return (
     <main className="section container">
@@ -41,30 +43,32 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map(product => {
+            const productIsSelected = product === SELECTED_PRODUCT;
+
             return (
               <tr
                 data-cy="Good"
-                className={
-                  isSelected(product) ? 'has-background-success-light' : ''
-                }
+                className={classNames({
+                  'has-background-success-light': productIsSelected,
+                })}
                 key={product}
               >
                 <td>
                   <button
-                    data-cy={isSelected(product) ? 'RemoveButton' : 'AddButton'}
+                    data-cy={productIsSelected ? 'RemoveButton' : 'AddButton'}
                     type="button"
-                    className={`${isSelected(product) ? 'button is-info' : 'button'}`}
+                    className={classNames('button', {
+                      'is-info': productIsSelected,
+                    })}
                     onClick={() => {
-                      if (isSelected(product)) {
+                      if (productIsSelected) {
                         setSelectedProduct('');
-
-                        return;
+                      } else {
+                        setSelectedProduct(product);
                       }
-
-                      setSelectedProduct(product);
                     }}
                   >
-                    {isSelected(product) ? '-' : '+'}
+                    {productIsSelected ? '-' : '+'}
                   </button>
                 </td>
                 <td data-cy="GoodTitle" className="is-vcentered">
