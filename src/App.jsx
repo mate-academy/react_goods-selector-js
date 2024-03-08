@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -16,41 +17,45 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setSelectedGood] = useState(goods[8]);
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
-        {selectedGood && (
-          <button
-            data-cy="ClearButton"
-            type="button"
-            className="delete ml-3"
-            onClick={() => {
-              setSelectedGood('');
-            }}
-          />
+        {selectedGood ? (
+          <>
+            {`${selectedGood} is selected`}
+            <button
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={() => {
+                setSelectedGood('');
+              }}
+            />
+          </>
+        ) : (
+          'No goods selected'
         )}
       </h1>
 
       <table className="table">
         <tbody>
           {goods.map(good => {
-            const checkIsGoodSelected = good === selectedGood;
+            const isGoodSelected = good === selectedGood;
 
             return (
               <tr
                 data-cy="Good"
                 key={good}
-                className={
-                  checkIsGoodSelected ? 'has-background-success-light' : ''
-                }
+                className={classNames({
+                  'has-background-success-light': isGoodSelected,
+                })}
               >
                 <td>
                   <button
                     onClick={() => {
-                      if (checkIsGoodSelected) {
+                      if (isGoodSelected) {
                         setSelectedGood(null);
 
                         return;
@@ -58,13 +63,13 @@ export const App = () => {
 
                       setSelectedGood(good);
                     }}
-                    data-cy={checkIsGoodSelected ? 'RemoveButton' : 'AddButton'}
+                    data-cy={isGoodSelected ? 'RemoveButton' : 'AddButton'}
                     type="button"
-                    className={
-                      checkIsGoodSelected ? 'button is-info' : 'button'
-                    }
+                    className={classNames('button', {
+                      'is-info': isGoodSelected,
+                    })}
                   >
-                    {checkIsGoodSelected ? '-' : '+'}
+                    {isGoodSelected ? '-' : '+'}
                   </button>
                 </td>
 
