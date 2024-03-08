@@ -28,12 +28,8 @@ export const App = () => {
     />
   );
 
-  function isSelected(good) {
-    return good === goodSelected;
-  }
-
-  function handleGoodButtonClick(good) {
-    if (isSelected(good)) {
+  function handleGoodButtonClick(isSelected, good) {
+    if (isSelected) {
       setGoodSelected('');
     } else {
       setGoodSelected(good);
@@ -50,22 +46,22 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map(good => {
+            const isSelected = good === goodSelected;
+
             return (
               <tr
                 key={good}
                 data-cy="Good"
-                className={
-                  isSelected(good) ? 'has-background-success-light' : ''
-                }
+                className={isSelected ? 'has-background-success-light' : ''}
               >
                 <td>
                   <button
-                    data-cy={isSelected(good) ? 'RemoveButton' : 'AddButton'}
+                    data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
                     type="button"
-                    className={isSelected(good) ? 'button is-info' : 'button'}
-                    onClick={() => handleGoodButtonClick(good)}
+                    className={isSelected ? 'button is-info' : 'button'}
+                    onClick={() => handleGoodButtonClick(isSelected, good)}
                   >
-                    {isSelected(good) ? '-' : '+'}
+                    {isSelected ? '-' : '+'}
                   </button>
                 </td>
 
