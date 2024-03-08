@@ -16,29 +16,29 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [value, setValue] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   const clearSelection = () => {
-    setValue('');
+    setSelectedGood('');
   };
 
   return (
     <main className="section container">
-      {value.length > 0 ? (
-        <h1 className="title is-flex is-align-items-center">
-          {value} is selected
-          <button
-            data-cy="ClearButton"
-            type="button"
-            className="delete ml-3"
-            onClick={clearSelection}
-          />
-        </h1>
-      ) : (
-        <h1 className="title is-flex is-align-items-center">
-          No goods selected
-        </h1>
-      )}
+      <h1 className="title is-flex is-align-items-center">
+        {selectedGood.length ? (
+          <>
+            {`${selectedGood} is selected`}
+            <button
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={clearSelection}
+            />
+          </>
+        ) : (
+          'No goods selected'
+        )}
+      </h1>
 
       <table className="table">
         <tbody>
@@ -46,20 +46,22 @@ export const App = () => {
             <tr
               key={item}
               data-cy="Good"
-              className={value === item ? 'has-background-success-light' : ''}
+              className={
+                selectedGood === item ? 'has-background-success-light' : ''
+              }
             >
               <td>
-                {value !== item && (
+                {selectedGood !== item && (
                   <button
                     data-cy="AddButton"
                     type="button"
                     className="button"
-                    onClick={() => setValue(item)}
+                    onClick={() => setSelectedGood(item)}
                   >
                     +
                   </button>
                 )}
-                {value === item && (
+                {selectedGood === item && (
                   <button
                     data-cy="RemoveButton"
                     type="button"
