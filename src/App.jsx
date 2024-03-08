@@ -19,9 +19,6 @@ export const goods = [
 export const App = () => {
   const [selectedProduct, setSelectedProduct] = useState('Jam');
 
-  // Variable to store the selected product
-  const SELECTED_PRODUCT = selectedProduct;
-
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
@@ -43,32 +40,28 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map(product => {
-            const productIsSelected = product === SELECTED_PRODUCT;
+            const isProductSelected = product === selectedProduct;
 
             return (
               <tr
                 data-cy="Good"
                 className={classNames({
-                  'has-background-success-light': productIsSelected,
+                  'has-background-success-light': isProductSelected,
                 })}
                 key={product}
               >
                 <td>
                   <button
-                    data-cy={productIsSelected ? 'RemoveButton' : 'AddButton'}
+                    data-cy={isProductSelected ? 'RemoveButton' : 'AddButton'}
                     type="button"
                     className={classNames('button', {
-                      'is-info': productIsSelected,
+                      'is-info': isProductSelected,
                     })}
                     onClick={() => {
-                      if (productIsSelected) {
-                        setSelectedProduct('');
-                      } else {
-                        setSelectedProduct(product);
-                      }
+                      setSelectedProduct(isProductSelected ? '' : product);
                     }}
                   >
-                    {productIsSelected ? '-' : '+'}
+                    {isProductSelected ? '-' : '+'}
                   </button>
                 </td>
                 <td data-cy="GoodTitle" className="is-vcentered">
