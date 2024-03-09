@@ -53,7 +53,7 @@ export const App = () => {
                   <button
                     onClick={() => {
                       if (!isSelectedGood(good)) {
-                        setSelectedGood(good);
+                        setSelectedGood(good);  
                       } else {
                         setSelectedGood(null);
                       }
