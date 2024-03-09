@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -17,49 +18,50 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [goodSelected, setGoodSelected] = useState(goods[goods.length - 2]);
-  const goodSelectedTitle = `${goodSelected} is selected`;
-  const titleClearButton = (
-    <button
-      data-cy="ClearButton"
-      type="button"
-      className="delete ml-3"
-      onClick={() => setGoodSelected('')}
-    />
-  );
-
-  function handleGoodButtonClick(isSelected, good) {
-    if (isSelected) {
-      setGoodSelected('');
-    } else {
-      setGoodSelected(good);
-    }
-  }
+  const [selectedGood, setSelectedGood] = useState(goods[goods.length - 2]);
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {goodSelected ? goodSelectedTitle : 'No goods selected'}
-        {goodSelected && titleClearButton}
+        {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
+        {selectedGood && (
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={() => setSelectedGood('')}
+          />
+        )}
       </h1>
 
       <table className="table">
         <tbody>
           {goods.map(good => {
-            const isSelected = good === goodSelected;
+            const isSelected = good === selectedGood;
 
             return (
               <tr
                 key={good}
                 data-cy="Good"
-                className={isSelected ? 'has-background-success-light' : ''}
+                className={classNames({
+                  'has-background-success-light': isSelected,
+                })}
               >
                 <td>
                   <button
-                    data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
+                    data-cy={classNames(
+                      {
+                        RemoveButton: isSelected,
+                      },
+                      {
+                        AddButton: !isSelected,
+                      },
+                    )}
                     type="button"
-                    className={isSelected ? 'button is-info' : 'button'}
-                    onClick={() => handleGoodButtonClick(isSelected, good)}
+                    className={`button ${classNames({ 'button is-info': isSelected })}`}
+                    onClick={() =>
+                      isSelected ? setSelectedGood('') : setSelectedGood(good)
+                    }
                   >
                     {isSelected ? '-' : '+'}
                   </button>
