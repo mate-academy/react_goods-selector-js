@@ -17,21 +17,21 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGoods, setSelectedGoods] = useState([]);
+  const [selectedGoods, setSelectedGoods] = useState('Jam');
 
   const clearSelected = () => {
-    setSelectedGoods([]);
+    setSelectedGoods('');
   };
 
   const addSelected = good => {
-    setSelectedGoods([good]);
+    setSelectedGoods(good);
   };
 
   return (
     <main className="section container">
       {selectedGoods.length > 0 ? (
         <h1 className="title is-flex is-align-items-center">
-          {selectedGoods[0]} is selected
+          {selectedGoods} is selected
           <button
             data-cy="ClearButton"
             type="button"
@@ -53,10 +53,10 @@ export const App = () => {
                 key={good}
                 data-cy="Good"
                 className={cn({
-                  'has-background-success-light': selectedGoods.includes(good),
+                  'has-background-success-light': selectedGoods === good,
                 })}
               >
-                {selectedGoods.includes(good) ? (
+                {selectedGoods === good ? (
                   <td>
                     <button
                       data-cy="RemoveButton"
