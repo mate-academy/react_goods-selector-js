@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { useState } from 'react';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -17,15 +18,14 @@ export const goods = [
 
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState(goods[8]);
+  const isSelectedGood = good => selectedGood === good;
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedGood !== null
-          ? `${selectedGood} is selected`
-          : 'No goods selected'}
+        {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
 
-        {selectedGood !== null ? (
+        {selectedGood && (
           <button
             data-cy="ClearButton"
             type="button"
@@ -34,8 +34,6 @@ export const App = () => {
               setSelectedGood(null);
             }}
           />
-        ) : (
-          ''
         )}
       </h1>
 
@@ -45,17 +43,19 @@ export const App = () => {
             <tr
               key={good}
               data-cy="Good"
-              className={
-                selectedGood === good ? 'has-background-success-light' : ''
-              }
+              className={classNames({
+                'has-background-success-light': isSelectedGood(good),
+              })}
             >
               <td>
                 <button
-                  data-cy={selectedGood === good ? 'RemoveButton' : 'AddButton'}
+                  data-cy={isSelectedGood(good) ? 'RemoveButton' : 'AddButton'}
                   type="button"
-                  className={`button ${selectedGood === good ? 'is-info' : ''}`}
+                  className={classNames('button', {
+                    'is-info': isSelectedGood(good),
+                  })}
                   onClick={() => {
-                    if (selectedGood === good) {
+                    if (isSelectedGood(good)) {
                       setSelectedGood(null);
 
                       return;
@@ -64,7 +64,7 @@ export const App = () => {
                     setSelectedGood(good);
                   }}
                 >
-                  {selectedGood === good ? '-' : '+'}
+                  {isSelectedGood(good) ? '-' : '+'}
                 </button>
               </td>
 
