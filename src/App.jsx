@@ -16,7 +16,7 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setGood] = useState(goods.at(-2));
+  const [selectedGood, setSelectedGood] = useState(goods.at(-2));
   const message =
     selectedGood === '' ? 'No goods selected' : `${selectedGood} is selected`;
 
@@ -30,7 +30,7 @@ export const App = () => {
             type="button"
             className="delete ml-3"
             onClick={() => {
-              setGood('');
+              setSelectedGood('');
             }}
           />
         )}
@@ -38,13 +38,12 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map((good, id) => {
+          {goods.map(good => {
             const isSelected = selectedGood === good;
 
             return (
               <tr
-                // eslint-disable-next-line react/no-array-index-key
-                key={id}
+                key={good}
                 data-cy="Good"
                 className={isSelected ? 'has-background-success-light' : ''}
               >
@@ -55,7 +54,7 @@ export const App = () => {
                       type="button"
                       className="button"
                       onClick={() => {
-                        setGood(good);
+                        setSelectedGood(good);
                       }}
                     >
                       +
@@ -68,7 +67,7 @@ export const App = () => {
                       type="button"
                       className="button is-info"
                       onClick={() => {
-                        setGood('');
+                        setSelectedGood('');
                       }}
                     >
                       -
