@@ -18,7 +18,6 @@ export const goods = [
 
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState(goods[8]);
-  const isSelectedGood = good => selectedGood === good;
 
   return (
     <main className="section container">
@@ -39,40 +38,44 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
-            <tr
-              key={good}
-              data-cy="Good"
-              className={classNames({
-                'has-background-success-light': isSelectedGood(good),
-              })}
-            >
-              <td>
-                <button
-                  data-cy={isSelectedGood(good) ? 'RemoveButton' : 'AddButton'}
-                  type="button"
-                  className={classNames('button', {
-                    'is-info': isSelectedGood(good),
-                  })}
-                  onClick={() => {
-                    if (isSelectedGood(good)) {
-                      setSelectedGood(null);
+          {goods.map(good => {
+            const isSelectedGood = selectedGood === good;
 
-                      return;
-                    }
+            return (
+              <tr
+                key={good}
+                data-cy="Good"
+                className={classNames({
+                  'has-background-success-light': isSelectedGood,
+                })}
+              >
+                <td>
+                  <button
+                    data-cy={isSelectedGood ? 'RemoveButton' : 'AddButton'}
+                    type="button"
+                    className={classNames('button', {
+                      'is-info': isSelectedGood,
+                    })}
+                    onClick={() => {
+                      if (isSelectedGood) {
+                        setSelectedGood(null);
 
-                    setSelectedGood(good);
-                  }}
-                >
-                  {isSelectedGood(good) ? '-' : '+'}
-                </button>
-              </td>
+                        return;
+                      }
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
-          ))}
+                      setSelectedGood(good);
+                    }}
+                  >
+                    {isSelectedGood ? '-' : '+'}
+                  </button>
+                </td>
+
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </main>
