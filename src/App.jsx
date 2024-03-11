@@ -21,7 +21,7 @@ export const App = () => {
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedGood.length !== 0 ? (
+        {!!selectedGood.length ? (
           <>
             {selectedGood} is selected
             <button
