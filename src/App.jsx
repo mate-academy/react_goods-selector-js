@@ -35,23 +35,21 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map(item => {
-            const isItem = good === item;
+            const isActive = good === item;
 
             return (
               <tr
                 data-cy="Good"
-                className={isItem ? 'has-background-success-light' : ''}
+                className={isActive ? 'has-background-success-light' : ''}
               >
                 <td>
                   <button
-                    data-cy={isItem ? 'RemoveButton' : 'AddButton'}
+                    data-cy={isActive ? 'RemoveButton' : 'AddButton'}
                     type="button"
-                    className={isItem ? 'button is-info' : 'button'}
-                    onClick={() => {
-                      return isItem ? setGood('') : setGood(item);
-                    }}
+                    className={isActive ? 'button is-info' : 'button'}
+                    onClick={() => setGood(isActive ? '' : item)}
                   >
-                    {isItem ? '-' : '+'}
+                    {isActive ? '-' : '+'}
                   </button>
                 </td>
 
