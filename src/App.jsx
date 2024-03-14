@@ -17,16 +17,14 @@ const goods = [
 
 export const App = () => {
   const [name, setName] = useState(goods[8]);
-  const selected = name.length !== 0;
-  const clearSelected = () => setName('');
 
   return (
     <main className="section container">
-      {selected ? (
+      {name ? (
         <h1 className="title is-flex is-align-items-center">
           {name} is selected
           <button
-            onClick={clearSelected}
+            onClick={() => setName('')}
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
@@ -40,27 +38,24 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(product => {
-            const chosen = name === product;
-            const choiceConfirm = () => {
-              setName(product);
-            };
+          {goods.map((product, index) => {
+            const isChosen = name === product;
+            const keyNumber = index + 1;
 
             return (
               <tr
                 data-cy="Good"
-                className={`${chosen ? 'has-background-success-light' : ''}`}
+                key={keyNumber}
+                className={`${isChosen ? 'has-background-success-light' : ''}`}
               >
                 <td>
                   <button
-                    onClick={() => {
-                      return chosen ? clearSelected() : choiceConfirm();
-                    }}
-                    data-cy={chosen ? 'RemoveButton' : 'AddButton'}
+                    onClick={() => setName(isChosen ? '' : product)}
+                    data-cy={isChosen ? 'RemoveButton' : 'AddButton'}
                     type="button"
-                    className={chosen ? 'button is-info' : 'button'}
+                    className={isChosen ? 'button is-info' : 'button'}
                   >
-                    {chosen ? '-' : '+'}
+                    {isChosen ? '-' : '+'}
                   </button>
                 </td>
 
