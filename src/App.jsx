@@ -16,28 +16,30 @@ export const goods = [
   'Garlic',
 ];
 
+const GOODS = goods[0];
+
 export const App = () => {
-  const [selectedGood, setSelectedGood] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState(GOODS);
 
   const isSelectedGood = good => good === selectedGood;
 
   return (
     <main className="section container">
-      {selectedGood === null ? (
-        <h1 className="title is-flex is-align-items-center">
-          No goods selected
-        </h1>
-      ) : (
-        <h1 className="title is-flex is-align-items-center">
-          {`${selectedGood} is selected`}
-          <button
-            onClick={() => setSelectedGood(null)}
-            data-cy="ClearButton"
-            type="button"
-            className="delete ml-3"
-          />
-        </h1>
-      )}
+      <h1 className="title is-flex is-align-items-center">
+        {selectedGood === null ? (
+          'No goods selected'
+        ) : (
+          <>
+            {`${selectedGood} is selected`}
+            <button
+              onClick={() => setSelectedGood(null)}
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+            />
+          </>
+        )}
+      </h1>
       <table className="table">
         <tbody>
           {goods.map(good => {
@@ -53,7 +55,7 @@ export const App = () => {
                   <button
                     onClick={() => {
                       if (!isSelectedGood(good)) {
-                        setSelectedGood(good);  
+                        setSelectedGood(good);
                       } else {
                         setSelectedGood(null);
                       }
