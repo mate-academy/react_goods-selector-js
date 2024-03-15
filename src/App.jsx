@@ -16,7 +16,7 @@ export const goods = [
   'Garlic',
 ];
 
-const GOODS = goods[0];
+const GOODS = 'Jam';
 
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState(GOODS);
@@ -40,6 +40,7 @@ export const App = () => {
           </>
         )}
       </h1>
+
       <table className="table">
         <tbody>
           {goods.map(good => {
