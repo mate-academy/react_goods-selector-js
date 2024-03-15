@@ -24,7 +24,7 @@ export const App = () => {
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedGood === null ? (
+        {!selectedGood ? (
           'No goods selected'
         ) : (
           <>
@@ -54,13 +54,9 @@ export const App = () => {
               >
                 <td>
                   <button
-                    onClick={() => {
-                      if (!isSelectedGood) {
-                        setSelectedGood(good);
-                      } else {
-                        setSelectedGood(null);
-                      }
-                    }}
+                    onClick={() =>
+                      setSelectedGood(!isSelectedGood ? good : null)
+                    }
                     data-cy={isSelectedGood ? 'RemoveButton' : 'AddButton'}
                     type="button"
                     className={classNames('button', {
