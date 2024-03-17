@@ -43,30 +43,34 @@ export function App() {
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
-            <tr
-              data-cy="Good"
-              key={good}
-              className={classNames({
-                'has-background-success-light': selectedGood === good,
-              })}
-            >
-              <td>
-                <button
-                  data-cy={selectedGood === good ? 'RemoveButton' : 'AddButton'}
-                  type="button"
-                  className={`button ${selectedGood === good ? 'is-info' : ''}`}
-                  onClick={() => handleGoodButtonClick(good)}
-                >
-                  {selectedGood === good ? '-' : '+'}
-                </button>
-              </td>
+          {goods.map(good => {
+            const isSelected = selectedGood === good;
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
-          ))}
+            return (
+              <tr
+                data-cy="Good"
+                key={good}
+                className={classNames({
+                  'has-background-success-light': isSelected,
+                })}
+              >
+                <td>
+                  <button
+                    data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
+                    type="button"
+                    className={classNames('button', { 'is-info': isSelected })}
+                    onClick={() => handleGoodButtonClick(good)}
+                  >
+                    {isSelected ? '-' : '+'}
+                  </button>
+                </td>
+
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </main>
