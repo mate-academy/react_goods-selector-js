@@ -67,24 +67,6 @@ export const App = () => {
               </td>
             </tr>
           ))}
-
-          {/*
-
-          <tr data-cy="Good" className="has-background-success-light">
-            <td>
-              <button
-                data-cy="RemoveButton"
-                type="button"
-                className="button is-info"
-              >
-                -
-              </button>
-            </td>
-
-            <td data-cy="GoodTitle" className="is-vcentered">
-              Jam
-            </td>
-          </tr> */}
         </tbody>
       </table>
     </main>
