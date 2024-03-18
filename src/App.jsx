@@ -55,7 +55,7 @@ export const App = () => {
                     onClick={() => {
                       setSelectedGood(null);
                     }}
-                    data-cy="AddButton"
+                    data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
                   >
@@ -66,7 +66,7 @@ export const App = () => {
                     onClick={() => {
                       setSelectedGood(prod);
                     }}
-                    data-cy="RemoveButton"
+                    data-cy="AddButton"
                     type="button"
                     className="button"
                   >
