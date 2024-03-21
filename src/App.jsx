@@ -17,41 +17,22 @@ export const goods = [
 
 export const App = () => {
   const [good, setGood] = useState('Jam');
-  const [active, setActive] = useState(
-    goods.reduce((initObj, goodName) => {
-      return {
-        ...initObj,
-        [goodName]: goodName === 'Jam',
-      };
-    }, {}),
-  );
-
-  const clearButton = () => {
-    setActive(objGoods => ({
-      [good]: !objGoods[good],
-    }));
-  };
 
   return (
     <main className="section container">
-      {good ? (
-        <h1 className="title is-flex is-align-items-center">
-          {good} is selected
+      <h1 className="title is-flex is-align-items-center">
+        {good ? `${good} is selected` : 'No goods selected'}
+        {good && (
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
             onClick={() => {
               setGood(null);
-              clearButton();
             }}
           />
-        </h1>
-      ) : (
-        <h1 className="title is-flex is-align-items-center">
-          No goods selected
-        </h1>
-      )}
+        )}
+      </h1>
       <table className="table">
         <tbody>
           {goods.map(item => {
@@ -59,40 +40,20 @@ export const App = () => {
               <tr
                 key={item}
                 data-cy="Good"
-                className={`${active[item] ? 'has-background-success-light' : ''}`}
+                className={`${good === item ? 'has-background-success-light' : ''}`}
               >
                 <td>
-                  {active[item] ? (
-                    <button
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                      onClick={() => {
-                        setGood(null);
-                        setActive(objGoods => ({
-                          [item]: !objGoods[item],
-                        }));
-                      }}
-                    >
-                      -
-                    </button>
-                  ) : (
-                    <button
-                      data-cy="AddButton"
-                      type="button"
-                      className="button"
-                      onClick={() => {
-                        setGood(item);
-                        setActive(objGoods => ({
-                          [item]: !objGoods[item],
-                        }));
-                      }}
-                    >
-                      +
-                    </button>
-                  )}
+                  <button
+                    data-cy={good === item ? 'RemoveButton' : 'AddButton'}
+                    type="button"
+                    className={`button ${good === item ? 'is-info' : ''}`}
+                    onClick={() => {
+                      setGood(good === item ? null : item);
+                    }}
+                  >
+                    {good === item ? '-' : '+'}
+                  </button>
                 </td>
-
                 <td data-cy="GoodTitle" className="is-vcentered">
                   {item}
                 </td>
