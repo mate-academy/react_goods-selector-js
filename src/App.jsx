@@ -16,26 +16,16 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [good, setGood] = useState('Jam');
-  const [checkIndex, setCheckIndex] = useState(goods.indexOf('Jam'));
-  const [selectedGood, setSelectedGood] = useState(true);
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
-  const handleGoodSelection = (currentGood, index) => {
-    if (currentGood === good) {
-      setGood('');
-      setCheckIndex('');
-      setSelectedGood(false);
-    } else {
-      setGood(currentGood);
-      setCheckIndex(index);
-      setSelectedGood(true);
-    }
+  const handleGoodSelection = currentGood => {
+    setSelectedGood(selectedGood === currentGood ? null : currentGood);
   };
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedGood ? `${good} is selected` : 'No goods selected'}
+        {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
         {selectedGood && (
           <button
             data-cy="ClearButton"
@@ -43,8 +33,6 @@ export const App = () => {
             className="delete ml-3"
             onClick={() => {
               setSelectedGood(false);
-              setGood('');
-              setCheckIndex('');
             }}
           />
         )}
@@ -52,29 +40,26 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map((x, index) => (
+          {goods.map(good => (
             <tr
-              key={x}
               data-cy="Good"
               className={
-                checkIndex === index && selectedGood
-                  ? 'has-background-success-light'
-                  : ''
+                selectedGood === good ? 'has-background-success-light' : ''
               }
             >
               <td>
                 <button
-                  data-cy={`${selectedGood && index === checkIndex ? 'RemoveButton' : 'AddButton'}`}
+                  data-cy={`${selectedGood === good ? 'RemoveButton' : 'AddButton'}`}
                   type="button"
-                  className={`button ${checkIndex === index && selectedGood ? 'is-info' : ''}`}
-                  onClick={() => handleGoodSelection(x, index)}
+                  className={`button ${selectedGood === good ? 'is-info' : ''}`}
+                  onClick={() => handleGoodSelection(good)}
                 >
-                  {checkIndex === index && selectedGood ? '-' : '+'}
+                  {selectedGood === good ? '-' : '+'}
                 </button>
               </td>
 
               <td data-cy="GoodTitle" className="is-vcentered">
-                {x}
+                {good}
               </td>
             </tr>
           ))}
