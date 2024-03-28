@@ -50,26 +50,20 @@ export const App = () => {
               }
             >
               <td>
-                {selectedGood !== good && (
-                  <button
-                    data-cy="AddButton"
-                    type="button"
-                    className="button"
-                    onClick={() => handleSelectGood(good)}
-                  >
-                    +
-                  </button>
-                )}
-                {selectedGood === good && (
-                  <button
-                    data-cy="RemoveButton"
-                    type="button"
-                    className="button is-info"
-                    onClick={() => setSelectedGood(null)}
-                  >
-                    -
-                  </button>
-                )}
+                <button
+                  data-cy={selectedGood !== good ? 'AddButton' : 'RemoveButton'}
+                  type="button"
+                  className={
+                    selectedGood !== good ? 'button' : 'button is-info'
+                  }
+                  onClick={
+                    selectedGood !== good
+                      ? () => handleSelectGood(good)
+                      : () => setSelectedGood(null)
+                  }
+                >
+                  {selectedGood !== good ? '+' : '-'}
+                </button>
               </td>
               <td data-cy="GoodTitle" className="is-vcentered">
                 {good}
