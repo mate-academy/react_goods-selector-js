@@ -15,6 +15,11 @@ const page = {
   },
 };
 
+
+
+
+
+
 let failed = false;
 
 Cypress.on('fail', (e) => {
