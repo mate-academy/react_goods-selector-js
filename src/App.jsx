@@ -1,4 +1,6 @@
 import 'bulma/css/bulma.css';
+import cn from 'classnames';
+import { useState } from 'react';
 import './App.scss';
 
 export const goods = [
@@ -14,57 +16,62 @@ export const goods = [
   'Garlic',
 ];
 
-export const App = () => (
-  <main className="section container">
-    <h1 className="title is-flex is-align-items-center">No goods selected</h1>
+export const App = () => {
+  const [selectedGood, setGood] = useState('Jam');
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
-      <button data-cy="ClearButton" type="button" className="delete ml-3" />
-    </h1>
+  return (
+    <main className="section container">
+      <h1 className="title is-flex is-align-items-center">
+        {!selectedGood ? 'No goods selected' : `${selectedGood} is selected`}
+        {!!selectedGood && (
+          <button
+            onClick={() => {
+              setGood('');
+            }}
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+          />
+        )}
+      </h1>
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
+      <table className="table">
+        <tbody>
+          {goods.map(good => {
+            const currentGoodIsActive = selectedGood === good;
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+            return (
+              <tr
+                className={cn({
+                  'has-background-success-light': currentGoodIsActive,
+                })}
+                data-cy="Good"
+                key={goods.indexOf(good)}
+              >
+                <td>
+                  <button
+                    data-cy={currentGoodIsActive ? 'RemoveButton' : 'AddButton'}
+                    type="button"
+                    className={
+                      currentGoodIsActive ? 'button is-info' : 'button'
+                    }
+                    onClick={() => {
+                      setGood(good);
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
-
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+                      if (currentGoodIsActive) {
+                        setGood('');
+                      }
+                    }}
+                  >
+                    {currentGoodIsActive ? '-' : '+'}
+                  </button>
+                </td>
+                <td className="is-vcentered">{good}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </main>
+  );
+};
