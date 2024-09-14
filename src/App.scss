@@ -1,3 +1,15 @@
 iframe {
   display: none;
 }
+
+.custom-table {
+  border-collapse: collapse;
+}
+
+.custom-outline {
+  outline: 1px solid #dbdbdb;
+}
+
+.custom-border-bottom:not(.custom-border-bottom:last-of-type) {
+  border-bottom: 1.5px solid #dbdbdb;
+}
