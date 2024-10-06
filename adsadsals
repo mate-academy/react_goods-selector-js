@@ -1,0 +1,284 @@
+[33mcommit 3fa54ffe06e147fec04e60642afd55454727fad1[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mdevelop[m[33m, [m[1;31morigin/develop[m[33m)[m
+Author: Vadym <hatevadym@gmail.com>
+Date:   Sun Oct 6 09:54:12 2024 +0200
+
+    solution
+
+[33mcommit 7a1d39c9fac5f6ecfb26fbc1ab38c34712359cfc[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Misha Hrynko <glukym@gmail.com>
+Date:   Tue Sep 10 21:18:43 2024 +0300
+
+    Update test.yml
+
+[33mcommit 5b4dc2eb1d8b6da3dee40f785c75848221095817[m
+Merge: 2d14035 712e8d7
+Author: Misha Hrynko <glukym@gmail.com>
+Date:   Mon Sep 2 20:50:00 2024 +0300
+
+    Merge pull request #1011 from mate-academy/vite-infra
+    
+    add Vite
+
+[33mcommit 712e8d74d23c9d968908ab7967b1e4985d743988[m
+Author: Misha Grinko <glukym@gmail.com>
+Date:   Wed Jul 17 18:33:56 2024 +0300
+
+    add Vite
+
+[33mcommit 2d14035168e4407c9cc38582246ed1b3669f8f1a[m
+Author: Misha Grinko <glukym@gmail.com>
+Date:   Tue Mar 19 12:59:12 2024 +0200
+
+    fix node14 deps
+
+[33mcommit ec3c6209f3543ec84e79df98630216ba9019d243[m
+Merge: 547a6a1 aff05a2
+Author: Misha Grinko <glukym@gmail.com>
+Date:   Fri Feb 16 15:33:03 2024 +0200
+
+    Merge pull request #656 from mykhalenych/feature/prettier
+    
+    Feature/prettier
+
+[33mcommit aff05a23b212590aeabdb74e850c76279859a637[m
+Author: Misha Grinko <glukym@gmail.com>
+Date:   Fri Feb 16 15:32:42 2024 +0200
+
+    update package-lock
+
+[33mcommit fe6257f0c328d113dc4c6edb80ee6bc339cc1c8e[m
+Author: mykhalenych <mykhalenych@gmail.com>
+Date:   Fri Feb 16 09:26:02 2024 +0200
+
+    feature/prettier updated packages
+
+[33mcommit 2e68c169e5c7b2f2f1711a9d4337d4636bca1deb[m
+Author: mykhalenych <mykhalenych@gmail.com>
+Date:   Tue Feb 13 10:12:56 2024 +0200
+
+    feature/prettier added prettier, updated packages
+
+[33mcommit 547a6a1560efa233966449629490039d470c2fc7[m
+Author: Misha Grinko <glukym@gmail.com>
+Date:   Thu Feb 1 16:22:35 2024 +0200
+
+    fix typos in tests
+
+[33mcommit 4fcdee8a7d3ee51b09650a627ce620b2f296715c[m
+Author: Misha Grinko <glukym@gmail.com>
+Date:   Thu Nov 30 08:18:38 2023 +0200
+
+    fix deps
+
+[33mcommit 7e586dbb0e2d4cd6402556c18209200fc092c85f[m
+Author: Misha Grinko <glukym@gmail.com>
+Date:   Wed Nov 29 18:51:39 2023 +0200
+
+    fix deps
+
+[33mcommit 5b0464e7e23eb2107a0112a652342a5500f5d65a[m
+Author: Misha Grinko <glukym@gmail.com>
+Date:   Tue Nov 21 11:37:28 2023 +0200
+
+    Update package.json
+
+[33mcommit a7eb4fa3d9343c47c038ac1172221123ff974c15[m
+Author: Misha Grinko <glukym@gmail.com>
+Date:   Mon Nov 20 08:15:06 2023 +0200
+
+    Update package.json
+
+[33mcommit c3f3824d166f0a1f1268c401c37fdfa7df5b75e5[m
+Author: Marina Tilniak <94261494+marina-tilniak@users.noreply.github.com>
+Date:   Tue Jun 27 00:20:43 2023 +0300
+
+    Update README.md
+
+[33mcommit 86c87b6080817133524e267c9fcaf487057b2153[m
+Author: Misha Grinko <glukym@gmail.com>
+Date:   Wed Jun 21 15:17:38 2023 +0300
+
+    Update README.md
+
+[33mcommit edabfc8098cfc2d4cea427c530c5833b8f01775e[m
+Author: Misha Hrynko <misha@mate.academy>
+Date:   Wed Jun 21 15:15:35 2023 +0300
+
+    minor fixes
+
+[33mcommit ce65a3046fcf802c5598f8f1398359a66dec0478[m
+Author: Misha Hrynko <misha@mate.academy>
+Date:   Wed Jun 21 15:00:31 2023 +0300
+
+    remove TS
+
+[33mcommit 3b2c153fddfd36b75d8ae7e98aefe26cf38f97c5[m
+Merge: a601e4d 8caf2e1
+Author: Misha Grinko <glukym@gmail.com>
+Date:   Fri Sep 9 17:25:15 2022 +0300
+
+    Merge pull request #891 from mate-academy/Bohdan-Maksymiuk-patch-1
+    
+    Update checklist.md
+
+[33mcommit 8caf2e183a9ad861180b8f7fd68b101af9834511[m
+Author: Bohdan Maksymiuk <94289038+Bohdan-Maksymiuk@users.noreply.github.com>
+Date:   Thu Sep 8 14:19:54 2022 +0300
+
+    Update checklist.md
+
+[33mcommit a601e4d0391d0253723bcd04e9804717f385a6f4[m
+Author: mhrynko <glukym@gmail.com>
+Date:   Fri Sep 2 12:39:12 2022 +0300
+
+    hide linter iframe and stop test on first error
+
+[33mcommit 7795d87bee75ff989062734b878ed93a9a2b756b[m
+Author: Misha Grinko <glukym@gmail.com>
+Date:   Fri Sep 2 11:17:33 2022 +0300
+
+    Update package.json
+
+[33mcommit 65efcd62b5455ba91558dc5f2952114321cf9fb0[m
+Author: mhrynko <glukym@gmail.com>
+Date:   Thu Sep 1 18:29:51 2022 +0300
+
+    update description, markup and tests
+
+[33mcommit 23d7a58c20dd7a750012f7d77994b4da6a09af80[m
+Author: Volodymyr Pavlenko <32794096+solaryasha@users.noreply.github.com>
+Date:   Wed Aug 3 16:24:39 2022 +0300
+
+    Create checklist.md
+
+[33mcommit fa97f07e8ab478469f40322a152d5170f6a29c23[m
+Author: Misha Grinko <glukym@gmail.com>
+Date:   Thu Jul 14 11:18:46 2022 +0300
+
+    Update README.md
+
+[33mcommit e08fc909e817e4adbe0de34317b2fac5a3608d68[m
+Merge: 4b58d0d 0619b55
+Author: Misha Grinko <glukym@gmail.com>
+Date:   Wed Jul 13 11:27:40 2022 +0300
+
+    Merge pull request #778 from mate-academy/alenatovstukha-patch-1
+    
+    Update goods-selector README.md
+
+[33mcommit 0619b55158f6182e30913616ff8bedc01e2b95dc[m
+Author: Misha Grinko <glukym@gmail.com>
+Date:   Wed Jul 13 11:25:52 2022 +0300
+
+    Update README.md
+
+[33mcommit 5fab8b412a649faf726d556c593e0fac751c6975[m
+Author: alenatovstukha <106954440+alenatovstukha@users.noreply.github.com>
+Date:   Wed Jul 13 08:31:57 2022 +0200
+
+    Update README.md
+
+[33mcommit 4b58d0d3fc12fe73cb4377e7eec99e0b73c25fea[m
+Author: mhrynko <glukym@gmail.com>
+Date:   Tue Jul 12 17:40:33 2022 +0300
+
+    fix tests and description
+
+[33mcommit 0aa2a4d6545817c408d7fc029a4e1fd8118ef716[m
+Author: Misha Grinko <glukym@gmail.com>
+Date:   Tue Jul 12 07:47:46 2022 +0300
+
+    Update README.md
+
+[33mcommit 4b4ad4ceb492111f5909685eb8bc311e4d691636[m
+Merge: a125bf9 28161fe
+Author: Misha Grinko <glukym@gmail.com>
+Date:   Wed May 18 07:37:49 2022 +0300
+
+    Merge pull request #683 from mate-academy/Add-style-requirements
+    
+    Added style requirements
+
+[33mcommit 28161fe7d2c7bf7991d1b4bb092d49856049c3ee[m
+Author: Maks <max6leshok@gmail.com>
+Date:   Tue May 17 17:24:28 2022 +0300
+
+    Added style requirements optional
+
+[33mcommit d08328dd2cc59761ab2758292c8366a72d2b431d[m
+Author: Maks <max6leshok@gmail.com>
+Date:   Mon May 16 14:26:30 2022 +0300
+
+    Added style requirements
+
+[33mcommit a125bf90f9f758cee05ce219acc2a4749b40354e[m
+Merge: 0a01e35 d060a2c
+Author: Yaroslav Kostenko <39385053+iBrianWarner@users.noreply.github.com>
+Date:   Tue Apr 26 19:22:47 2022 +0300
+
+    Merge pull request #624 from mate-academy/cypress_test
+    
+    [React task]: Cypress tests added
+
+[33mcommit d060a2cdf7419b707c1045eec23232a9ceea071e[m
+Author: Yaroslav <adolas666@gmail.com>
+Date:   Thu Apr 21 16:55:39 2022 +0300
+
+    added basic page object
+
+[33mcommit bd99c6e77a8412fb9a2006144b9d36b9264549d9[m
+Author: Yaroslav <adolas666@gmail.com>
+Date:   Wed Apr 20 19:02:17 2022 +0300
+
+    tests updated
+
+[33mcommit 87f417602f6143e21630df62e5cff85f1585b7d7[m
+Author: Yaroslav <adolas666@gmail.com>
+Date:   Wed Apr 20 18:24:57 2022 +0300
+
+    tests & readme updated
+
+[33mcommit 43496927deb728476059b32b37a00e6fce9c220f[m
+Author: y.kostenko <y.kostenko@mate.academy>
+Date:   Fri Apr 1 13:38:03 2022 +0300
+
+    [React task]: Cypress tests added
+
+[33mcommit 0a01e3508e30f61344de2e8d3bc9b89f59454024[m
+Merge: 1779bba a749b2b
+Author: Yurii Holiuk <bionicuss@gmail.com>
+Date:   Thu Apr 7 17:40:55 2022 +0300
+
+    Merge pull request #627 from mate-academy/mate-scripts-update
+    
+    Update and init
+
+[33mcommit a749b2bdb20ba2a0317407aef90cb098d36cfb4a[m
+Author: YuriiHoliuk <yurii.holiuk@mate.academy>
+Date:   Thu Apr 7 17:40:50 2022 +0300
+
+    Update and init
+
+[33mcommit 1779bba3365ffa97a130210363af9ef196060d60[m
+Merge: 7ed6995 cc24041
+Author: Yurii Holiuk <bionicuss@gmail.com>
+Date:   Thu Apr 7 16:36:27 2022 +0300
+
+    Merge pull request #626 from mate-academy/mate-scripts-update
+    
+    Component tests and other improvements
+
+[33mcommit cc240418bfcf25902693a1af51d6e23d89726b14[m
+Author: YuriiHoliuk <yurii.holiuk@mate.academy>
+Date:   Thu Apr 7 16:25:26 2022 +0300
+
+    Update and init
+
+[33mcommit 5c8b924f1bc4da72ec94932aaeaefe2d41ee6716[m
+Author: YuriiHoliuk <yurii.holiuk@mate.academy>
+Date:   Thu Apr 7 16:03:04 2022 +0300
+
+    Update and init
+
+[33mcommit e1db5ef19f70c25f449891d086de35ba41358195[m
+Author: YuriiHoliuk <yurii.holiuk@ma
