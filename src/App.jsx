@@ -1,4 +1,6 @@
 import 'bulma/css/bulma.css';
+import { useState } from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 export const goods = [
@@ -14,57 +16,80 @@ export const goods = [
   'Garlic',
 ];
 
-export const App = () => (
-  <main className="section container">
-    <h1 className="title is-flex is-align-items-center">No goods selected</h1>
+const products = goods.map((item, index) => ({
+  productsId: index,
+  productName: item,
+}));
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
-      <button data-cy="ClearButton" type="button" className="delete ml-3" />
-    </h1>
+export const App = () => {
+  const [value, setValue] = useState('Jam');
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
+  return (
+    <main className="section container">
+      {value ? (
+        <h1 className="title is-flex is-align-items-center">
+          {value} is selected
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={() => {
+              setValue('');
+            }}
+          />
+        </h1>
+      ) : (
+        <h1 className="title is-flex is-align-items-center">
+          No goods selected
+        </h1>
+      )}
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
-
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
+      <table className="table">
+        <tbody>
+          {products.map(product => (
+            <tr
+              data-cy="Good"
+              // eslint-disable-next-line react/no-array-index-key
+              key={product.productsId}
+              className={classNames({
+                'has-background-success-light': product.productName === value,
+              })}
             >
-              -
-            </button>
-          </td>
+              {product.productName === value ? (
+                <td>
+                  <button
+                    data-cy="RemoveButton"
+                    type="button"
+                    className="button is-info"
+                    onClick={() => {
+                      setValue('');
+                    }}
+                  >
+                    -
+                  </button>
+                </td>
+              ) : (
+                <td>
+                  <button
+                    data-cy="AddButton"
+                    type="button"
+                    className="button"
+                    onClick={() => {
+                      setValue(product.productName);
+                    }}
+                  >
+                    +
+                  </button>
+                </td>
+              )}
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
-
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+              <td data-cy="GoodTitle" className="is-vcentered">
+                {product.productName}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </main>
+  );
+};
