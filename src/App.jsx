@@ -1,5 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
+import { useState } from 'react';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -14,18 +16,82 @@ export const goods = [
   'Garlic',
 ];
 
-export const App = () => (
-  <main className="section container">
-    <h1 className="title is-flex is-align-items-center">No goods selected</h1>
+export const App = () => {
+  const [select, setSelect] = useState('');
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
-      <button data-cy="ClearButton" type="button" className="delete ml-3" />
-    </h1>
+  const [message, setMessage] = useState('Jam is selected');
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
+  return (
+    <main className="section container">
+      <h1 className="title is-flex is-align-items-center">
+        {message}
+        {message !== 'No goods selected' && (
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={() => {
+              setMessage('No goods selected');
+              setSelect('');
+            }}
+          />
+        )}
+      </h1>
+
+      <table className="table">
+        <tbody>
+          {goods.map(item => (
+            <tr
+              data-cy="Good"
+              key={item}
+              className={classNames({
+                'has-background-success-light': select === item,
+              })}
+            >
+              <td>
+                {select === item ? (
+                  <button
+                    data-cy="RemoveButton"
+                    type="button"
+                    className="button is-info"
+                    onClick={() => {
+                      setSelect(``);
+                      setMessage(`No goods selected`);
+                    }}
+                  >
+                    -
+                  </button>
+                ) : (
+                  <button
+                    data-cy="AddButton"
+                    type="button"
+                    className="button is-info"
+                    onClick={() => {
+                      setSelect(`${item}`);
+                      setMessage(`${item} is is selected`);
+                    }}
+                  >
+                    +
+                  </button>
+                )}
+              </td>
+
+              <td data-cy="GoodTitle" className="is-vcentered">
+                {item}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </main>
+  );
+};
+
+/**
+ *
+  <h1 className="title is-flex is-align-items-center">No goods selected</h1>
+
+ *        <tr data-cy="Good">
           <td>
             <button data-cy="AddButton" type="button" className="button">
               +
@@ -64,7 +130,4 @@ export const App = () => (
             Garlic
           </td>
         </tr>
-      </tbody>
-    </table>
-  </main>
-);
+ */
