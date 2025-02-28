@@ -38,35 +38,49 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
-            <tr key={good} data-cy="Good">
-              <td>
-                {good === value ? (
-                  <button
-                    data-cy="RemoveButton"
-                    type="button"
-                    className="button is-info"
-                    onClick={() => setValue('')}
-                  >
-                    -
-                  </button>
-                ) : (
-                  <button
-                    data-cy="AddButton"
-                    type="button"
-                    className="button"
-                    onClick={() => setValue(good)}
-                  >
-                    +
-                  </button>
-                )}
-              </td>
+          {goods.map(
+            good =>
+              good === value ? (
+                <tr
+                  key={good}
+                  data-cy="Good"
+                  className="has-background-success-light"
+                >
+                  <td>
+                    <button
+                      data-cy="RemoveButton"
+                      type="button"
+                      className="button is-info"
+                      onClick={() => setValue('')}
+                    >
+                      -
+                    </button>
+                  </td>
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
-          ))}
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              ) : (
+                <tr key={good} data-cy="Good">
+                  <td>
+                    <button
+                      data-cy="AddButton"
+                      type="button"
+                      className="button"
+                      onClick={() => setValue(good)}
+                    >
+                      +
+                    </button>
+                  </td>
+
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              ),
+            // eslint-disable-next-line function-paren-newline
+          )}
         </tbody>
       </table>
     </main>
