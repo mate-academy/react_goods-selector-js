@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -14,57 +16,89 @@ export const goods = [
   'Garlic',
 ];
 
-export const App = () => (
-  <main className="section container">
-    <h1 className="title is-flex is-align-items-center">No goods selected</h1>
+export const App = () => {
+  const [selectedGood, setSelectedGood] = useState(null);
+  const [selectedValue, setSelectedValue] = useState('');
+  const [alertNoGoods, setAlertGoods] = useState('No goods selected');
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
-      <button data-cy="ClearButton" type="button" className="delete ml-3" />
-    </h1>
+  useEffect(() => {
+    // console.log(selectedGood + ' in effect');
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
+    if (selectedGood !== null) {
+      setSelectedValue(`${selectedGood} is selected`);
+      setAlertGoods('');
+    } else {
+      setSelectedValue('');
+      setAlertGoods('No goods selected');
+    }
+  }, [selectedGood]);
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+  return (
+    <main className="section container">
+      {/* No Selected */}
+      <h1
+        className={classNames('title', 'is-align-items-center', {
+          'is-flex': selectedGood === null,
+          hidden: selectedGood !== null,
+        })}
+      >
+        {alertNoGoods}
+      </h1>
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
+      {/* Selected Good */}
+
+      <h1
+        className={classNames('title', 'is-align-items-center', {
+          'is-flex': selectedGood !== null,
+          hidden: selectedGood === null,
+        })}
+      >
+        {selectedValue}
+
+        <button
+          data-cy="ClearButton"
+          type="button"
+          className={classNames('ml-3', 'delete', {
+            hidden: selectedGood === null,
+          })}
+          onClick={() => {
+            setSelectedGood(null);
+          }}
+        />
+      </h1>
+
+      {/* List if Goods */}
+
+      <table className="table">
+        <tbody>
+          {goods.map(good => (
+            <tr
+              data-cy="Good"
+              key={good}
+              className={classNames({
+                'has-background-success-light': selectedGood === good,
+              })}
             >
-              -
-            </button>
-          </td>
+              <td>
+                <button
+                  onClick={() => {
+                    setSelectedGood(prev => (prev === good ? null : good));
+                  }}
+                  data-cy="AddButton"
+                  type="button"
+                  className="button"
+                >
+                  {selectedGood === good ? '-' : '+'}
+                </button>
+              </td>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
-
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+              <td data-cy="GoodTitle" className="is-vcentered">
+                {good}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </main>
+  );
+};
