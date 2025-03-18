@@ -46,7 +46,6 @@ export const App = () => {
             >
               <td>
                 <button
-                  key={good}
                   data-cy={value === good ? 'RemoveButton' : 'AddButton'}
                   type="button"
                   className={classNames('button', {
