@@ -1,5 +1,6 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
+import { useState } from 'react';
 
 export const goods = [
   'Dumplings',
@@ -14,57 +15,65 @@ export const goods = [
   'Garlic',
 ];
 
-export const App = () => (
-  <main className="section container">
-    <h1 className="title is-flex is-align-items-center">No goods selected</h1>
+export const goodsList = goods.map(good => ({
+  title: good,
+  id: crypto.randomUUID,
+}));
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
-      <button data-cy="ClearButton" type="button" className="delete ml-3" />
-    </h1>
+export const App = () => {
+  const defaultGood = goods.find(good => good === 'Jam');
+  const [selectedGood, selectGood] = useState(defaultGood);
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
-
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
+  return (
+    <main className="section container">
+      <h1 className="title is-flex is-align-items-center">
+        {selectedGood ? (
+          <>
+            {selectedGood} is selected
             <button
-              data-cy="RemoveButton"
+              data-cy="ClearButton"
               type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+              className="delete ml-3"
+              onClick={() => selectGood(null)}
+            />
+          </>
+        ) : (
+          'No goods selected'
+        )}
+      </h1>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+      <table className="table">
+        <tbody>
+          {goodsList.map(good => {
+            const isSelected = good.title === selectedGood;
 
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
+            return (
+              <tr
+                data-cy="Good"
+                key={good.id}
+                className={isSelected ? 'has-background-success-light' : ''}
+              >
+                <td>
+                  <button
+                    data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
+                    type="button"
+                    className={`button ${isSelected ? 'is-info' : ''}`}
+                    onClick={() => {
+                      selectGood(isSelected ? null : good.title);
+                    }}
+                  >
+                    {isSelected ? '-' : '+'}
+                  </button>
+                </td>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good.title}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </main>
+  );
+};
