@@ -29,7 +29,9 @@ export const App = () => {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-            />
+            >
+              {' '}
+            </button>
           </>
         ) : (
           'No goods selected'
