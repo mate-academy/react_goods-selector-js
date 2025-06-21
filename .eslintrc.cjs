@@ -19,7 +19,7 @@ module.exports = {
   },
   plugins: ['jsx-a11y', 'import', 'react', 'prettier'],
   rules: {
-    'function-paren-newline': ['error', 'consistent'],
+    'function-paren-newline': ['off'],
     'comma-dangle': [
       'error',
       {
