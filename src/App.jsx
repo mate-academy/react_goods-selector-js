@@ -1,5 +1,6 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
+import React, { useState } from 'react';
 
 export const goods = [
   'Dumplings',
@@ -14,57 +15,81 @@ export const goods = [
   'Garlic',
 ];
 
-export const App = () => (
-  <main className="section container">
-    <h1 className="title is-flex is-align-items-center">No goods selected</h1>
+export const App = () => {
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
-      <button data-cy="ClearButton" type="button" className="delete ml-3" />
-    </h1>
+  const handleSelectedGood = (good) => {
+    setSelectedGood(good);
+  };
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
+  const handleClearSelection = () => {
+    setSelectedGood('');
+  };
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+  return (
+    <main className="section container">
+      {selectedGood === '' ? (
+        <h1
+          className="title is-flex is-align-items-center"
+          data-cy="NoGoodsSelected"
+        >
+          No goods selected
+        </h1>
+      ) : (
+        <h1
+          className="title is-flex is-align-items-center"
+          data-cy="SelectedGood"
+        >
+          {selectedGood} is selected
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={handleClearSelection}
+            aria-label='CLear'
+          />
+        </h1>
+      )}
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
+      <table className="table">
+        <tbody>
+          {goods.map((good) => (
+            <tr
+              data-cy="Good"
+              key={good}
+              className={selectedGood === good ? 'has-background-success-light' : ''}
             >
-              -
-            </button>
-          </td>
+              <td>
+                {selectedGood === good ? (
+                  <button
+                    data-cy="RemoveButton"
+                    type="button"
+                    className="button is-danger"
+                    onClick={handleClearSelection}
+                    aria-label={`Clear ${good}`}
+                  >
+                    -
+                  </button>
+                ) : (
+                  selectedGood === '' && (
+                    <button
+                      data-cy="AddButton"
+                      type="button"
+                      className="button is-info"
+                      onClick={() => handleSelectedGood(good)}
+                      aria-label={`Add ${good}`}
+                    >
+                      +
+                    </button>
+                  )
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </main>
+  );
+};
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
-
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+export default App;
