@@ -1,5 +1,6 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
+import React, { useState } from 'react';
 
 export const goods = [
   'Dumplings',
@@ -27,7 +28,7 @@ export const App = () => {
 
   return (
     <main className="section container">
-      {setSelectedGood === '' ? (
+      {selectedGood === '' ? (
         <h1
           className="title is-flex is-align-items-center"
           data-cy="NoGoodsSelected"
@@ -52,7 +53,7 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {good.map((good) => (
+          {goods.map((good) => (
             <tr
               data-cy="Good"
               key={good}
