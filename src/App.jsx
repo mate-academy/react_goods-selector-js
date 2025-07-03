@@ -31,7 +31,7 @@ export const App = () => {
       <ul>
         {goods.map(good => (
           <li key={good} data-cy="Good">
-            <span>{good}</span>
+            <span data-cy="GoodTitle">{good}</span>
 
             {selectedGood !== good && (
               <button
