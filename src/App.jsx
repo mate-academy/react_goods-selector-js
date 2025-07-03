@@ -51,18 +51,20 @@ export const App = () => {
                   <button
                     data-cy="AddButton"
                     type="button"
+                    className="is-success"
                     onClick={() => selectGood(good)}
                   >
-                    AddButton
+                    +
                   </button>
                 )}
                 {selectedGood === good && (
                   <button
                     data-cy="RemoveButton"
                     type="button"
+                    className="is-info"
                     onClick={removeSelection}
                   >
-                    RemoveButton
+                    -
                   </button>
                 )}
               </td>
