@@ -48,12 +48,20 @@ export const App = () => {
               <td>{good}</td>
               <td>
                 {!selectedGood && (
-                  <button type="button" onClick={() => selectGood(good)}>
+                  <button
+                    data-cy="AddButton"
+                    type="button"
+                    onClick={() => selectGood(good)}
+                  >
                     AddButton
                   </button>
                 )}
                 {selectedGood === good && (
-                  <button type="button" onClick={removeSelection}>
+                  <button
+                    data-cy="RemoveButton"
+                    type="button"
+                    onClick={removeSelection}
+                  >
                     RemoveButton
                   </button>
                 )}
