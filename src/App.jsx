@@ -26,38 +26,37 @@ export const App = () => {
 
   return (
     <div className="container">
-      <h1 className="title" data-cy="Title">
-        {selectedGood ? (
-          <>
-            {selectedGood} is selected{' '}
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              onClick={removeSelection}
-              aria-label="Remove selection"
-              style={{
-                marginLeft: '10px',
-                cursor: 'pointer',
-                background: 'transparent',
-                border: 'none',
-                fontWeight: 'bold',
-                fontSize: '1rem',
-              }}
-            >
-              x
-            </button>
-          </>
-        ) : (
-          'Goods'
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <h1 className="title" data-cy="Title">
+          {selectedGood ? `${selectedGood} is selected` : 'Goods'}
+        </h1>
+
+        {selectedGood && (
+          <button
+            data-cy="ClearButton"
+            type="button"
+            onClick={removeSelection}
+            aria-label="Remove selection"
+            style={{
+              marginLeft: '10px',
+              cursor: 'pointer',
+              background: 'transparent',
+              border: 'none',
+              fontWeight: 'bold',
+              fontSize: '1rem',
+            }}
+          >
+            x
+          </button>
         )}
-      </h1>
+      </div>
 
       <ul>
         {goods.map(good => (
           <li key={good} data-cy="Good">
             <span data-cy="GoodTitle">{good}</span>
 
-            {selectedGood !== good && (
+            {selectedGood !== good ? (
               <button
                 data-cy="AddButton"
                 type="button"
@@ -66,11 +65,9 @@ export const App = () => {
               >
                 +
               </button>
-            )}
-
-            {selectedGood === good && (
+            ) : (
               <button
-                data-cy="RemoveButton"
+                data-cy="RemoveFromListButton"
                 type="button"
                 className="is-info"
                 onClick={removeSelection}
