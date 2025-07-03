@@ -27,27 +27,30 @@ export const App = () => {
   return (
     <div className="container">
       <h1 className="title" data-cy="Title">
-        {selectedGood ? `${selectedGood} is selected` : 'Goods'}
+        {selectedGood ? (
+          <>
+            {selectedGood} is selected{' '}
+            <button
+              data-cy="RemoveButton"
+              type="button"
+              onClick={removeSelection}
+              aria-label="Remove selection"
+              style={{
+                marginLeft: '10px',
+                cursor: 'pointer',
+                background: 'transparent',
+                border: 'none',
+                fontWeight: 'bold',
+                fontSize: '1rem',
+              }}
+            >
+              x
+            </button>
+          </>
+        ) : (
+          'Goods'
+        )}
       </h1>
-
-      {selectedGood && (
-        <button
-          data-cy="RemoveButton"
-          type="button"
-          onClick={removeSelection}
-          style={{
-            marginLeft: '10px',
-            cursor: 'pointer',
-            background: 'transparent',
-            border: 'none',
-            fontWeight: 'bold',
-            fontSize: '1rem',
-          }}
-          aria-label="Remove selection"
-        >
-          x
-        </button>
-      )}
 
       <ul>
         {goods.map(good => (
