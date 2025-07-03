@@ -21,7 +21,7 @@ export const App = () => {
   };
 
   const removeSelection = () => {
-    setSelectedGood(null);
+    setSelectedGood('');
   };
 
   return (
