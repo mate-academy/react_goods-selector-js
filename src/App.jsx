@@ -53,7 +53,13 @@ export const App = () => {
 
       <ul>
         {goods.map(good => (
-          <li key={good} data-cy="Good">
+          <li
+            key={good}
+            data-cy="Good"
+            className={
+              selectedGood === good ? 'has-background-success-light' : ''
+            }
+          >
             <span data-cy="GoodTitle">{good}</span>
 
             {selectedGood !== good ? (
