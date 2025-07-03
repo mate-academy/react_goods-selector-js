@@ -1,6 +1,4 @@
-import 'bulma/css/bulma.css';
-import './App.scss';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 export const goods = [
   'Dumplings',
@@ -16,63 +14,53 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setSelectedGood] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState(null);
 
-  const clearSelection = () => setSelectedGood('');
-  const selectGood = good => setSelectedGood(good);
-  const removeSelection = () => setSelectedGood('');
+  const selectGood = good => {
+    setSelectedGood(good);
+  };
+
+  const removeSelection = () => {
+    setSelectedGood(null);
+  };
 
   return (
-    <main className="section container">
-      <h1 className="title is-flex is-align-items-center">
-        {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
-        {selectedGood && (
-          <button
-            data-cy="ClearButton"
-            type="button"
-            className="delete ml-3"
-            onClick={clearSelection}
-          />
-        )}
-      </h1>
+    <div className="container">
+      <h1 className="title">Goods</h1>
 
-      <table className="table">
-        <tbody>
-          {goods.map(good => (
-            <tr
-              key={good}
-              data-cy="Good"
-              className={
-                good === selectedGood ? 'has-background-success-light' : ''
-              }
-            >
-              <td>{good}</td>
-              <td>
-                {!selectedGood && (
-                  <button
-                    data-cy="AddButton"
-                    type="button"
-                    className="is-success"
-                    onClick={() => selectGood(good)}
-                  >
-                    +
-                  </button>
-                )}
-                {selectedGood === good && (
-                  <button
-                    data-cy="RemoveButton"
-                    type="button"
-                    className="is-info"
-                    onClick={removeSelection}
-                  >
-                    -
-                  </button>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </main>
+      <ul>
+        {goods.map(good => (
+          <li key={good} data-cy="Good">
+            <span>{good}</span>
+
+            {selectedGood !== good && (
+              <button
+                data-cy="AddButton"
+                type="button"
+                className="is-success"
+                onClick={() => selectGood(good)}
+              >
+                +
+              </button>
+            )}
+
+            {selectedGood === good && (
+              <button
+                data-cy="RemoveButton"
+                type="button"
+                className="is-info"
+                onClick={removeSelection}
+              >
+                -
+              </button>
+            )}
+          </li>
+        ))}
+      </ul>
+
+      {selectedGood && (
+        <p className="has-text-weight-bold">Selected good: {selectedGood}</p>
+      )}
+    </div>
   );
 };
