@@ -14,7 +14,7 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setSelectedGood] = useState(null);
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   const selectGood = good => {
     setSelectedGood(good);
@@ -26,7 +26,9 @@ export const App = () => {
 
   return (
     <div className="container">
-      <h1 className="title">Goods</h1>
+      <h1 className="title">
+        {selectedGood ? `${selectedGood} is selected` : 'Goods'}
+      </h1>
 
       <ul>
         {goods.map(good => (
@@ -57,10 +59,6 @@ export const App = () => {
           </li>
         ))}
       </ul>
-
-      {selectedGood && (
-        <p className="has-text-weight-bold">Selected good: {selectedGood}</p>
-      )}
     </div>
   );
 };
