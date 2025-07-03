@@ -21,7 +21,7 @@ export const App = () => {
   };
 
   const removeSelection = () => {
-    setSelectedGood('');
+    setSelectedGood(null); // Use null instead of empty string
   };
 
   return (
