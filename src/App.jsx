@@ -21,14 +21,14 @@ export const App = () => {
   };
 
   const removeSelection = () => {
-    setSelectedGood(null); // Use null instead of empty string
+    setSelectedGood(null);
   };
 
   return (
     <div className="container">
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <h1 className="title" data-cy="Title">
-          {selectedGood ? `${selectedGood} is selected` : 'Goods'}
+          {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
         </h1>
 
         {selectedGood && (
