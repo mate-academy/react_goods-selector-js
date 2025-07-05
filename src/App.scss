@@ -1,3 +1,39 @@
 iframe {
   display: none;
 }
+
+// Підсвітка вибраного рядка (ще сильніше, ніж Bulma)
+tr.has-background-success-light {
+  border-left: 4px solid #48c774; // Bulma success color
+  transition: background-color 0.3s ease;
+}
+
+// Вирівнювання кнопки в заголовку
+.title .delete {
+  margin-top: 4px;
+  margin-left: 1rem;
+}
+
+// Стилі для кнопок
+.button {
+  font-weight: bold;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+// Таблиця
+.table {
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+// Вирівнювання всередині клітинки
+td {
+  vertical-align: middle;
+}
