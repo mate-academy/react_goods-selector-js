@@ -1,3 +1,18 @@
 iframe {
   display: none;
 }
+
+/* #region Force light theme colors for correct display in dark mode */
+td,
+button,
+.title {
+  color: black !important;
+}
+
+main,
+tbody,
+.button {
+  background-color: white !important;
+}
+
+/* #endregion */
