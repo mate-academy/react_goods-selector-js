@@ -23,7 +23,7 @@ export const App = () => {
     setValue(prev => (prev === el ? null : el));
   };
 
-  const resetClikc = () => {
+  const resetClick = () => {
     setValue(null);
   };
 
@@ -33,7 +33,7 @@ export const App = () => {
         <h1 className="title is-flex is-align-items-center">
           {value} is selected
           <button
-            onClick={resetClikc}
+            onClick={resetClick}
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
