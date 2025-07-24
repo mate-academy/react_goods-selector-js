@@ -1,5 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
+import { useState } from 'react';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -14,57 +16,64 @@ export const goods = [
   'Garlic',
 ];
 
-export const App = () => (
-  <main className="section container">
-    <h1 className="title is-flex is-align-items-center">No goods selected</h1>
+export const App = () => {
+  const [value, setValue] = useState(goods[8]);
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
-      <button data-cy="ClearButton" type="button" className="delete ml-3" />
-    </h1>
+  const handleClick = el => {
+    setValue(prev => (prev === el ? null : el));
+  };
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
+  const resetClick = () => {
+    setValue(null);
+  };
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+  return (
+    <main className="section container">
+      {value ? (
+        <h1 className="title is-flex is-align-items-center">
+          {value} is selected
+          <button
+            onClick={resetClick}
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+          />
+        </h1>
+      ) : (
+        <h1 className="title is-flex is-align-items-center">
+          No goods selected
+        </h1>
+      )}
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
+      <table className="table">
+        <tbody>
+          {goods.map(el => (
+            <tr
+              data-cy="Good"
+              className={classNames('', {
+                'has-background-success-light': value === el,
+              })}
             >
-              -
-            </button>
-          </td>
+              <td>
+                <button
+                  data-cy={value === el ? 'RemoveButton' : 'AddButton'}
+                  type="button"
+                  onClick={() => handleClick(el)}
+                  className={classNames('button', {
+                    'is-info': value === el,
+                  })}
+                >
+                  {value === el ? '-' : '+'}
+                </button>
+              </td>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
-
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+              <td data-cy="GoodTitle" className="is-vcentered">
+                {el}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </main>
+  );
+};
