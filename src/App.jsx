@@ -22,20 +22,8 @@ export const App = () => {
     setGoodSelected('');
   };
 
-  const handleSelected = (event) => {
-
-    const dataCyButton = event.target.getAttribute('data-cy');
-
-    if (dataCyButton === 'AddButton') {
-
-      const good = event.target.classList[1];
-
+  const handleSelected = (good) => {
       setGoodSelected(good);
-
-      return;
-    }
-
-    handleClear();
   };
 
   return (
@@ -66,10 +54,10 @@ export const App = () => {
                 >
                   <td>
                     <button
-                      onClick={handleSelected}
+                      onClick={handleClear}
                       data-cy="RemoveButton"
                       type="button"
-                      className={`button ${good} is-info`}
+                      className={`button is-info`}
                     >
                       -
                     </button>
@@ -88,14 +76,14 @@ export const App = () => {
                   <button
                     data-cy="AddButton"
                     type="button"
-                    onClick={handleSelected}
-                    className={`button ${good}`}
+                    onClick={() => handleSelected(good)}
+                    className={`button`}
                   >
                     +
                   </button>
                 </td>
 
-                <td data-cy="GoodTitle" className={`is-vcentered`}>
+                <td data-cy="GoodTitle" className="is-vcentered">
                   {good}
                 </td>
               </tr>
