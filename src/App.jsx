@@ -22,14 +22,13 @@ export const App = () => {
     setGoodSelected('');
   };
 
-  const handleSelected = event => {
-    const { target } = event;
-    const dataCy = target.getAttribute('data-cy');
+  const handleSelected = (event) => {
 
-    if (dataCy === 'AddButton') {
-      const { parentNode } = target;
-      const goodTitle = parentNode.nextElementSibling;
-      const good = goodTitle.textContent;
+    const dataCyButton = event.target.getAttribute('data-cy');
+
+    if (dataCyButton === 'AddButton') {
+
+      const good = event.target.classList[1];
 
       setGoodSelected(good);
 
@@ -60,13 +59,17 @@ export const App = () => {
           {goods.map(good => {
             if (good === goodSelected) {
               return (
-                <tr key={good} data-cy="Good" className="has-background-success-light">
+                <tr
+                  key={good}
+                  data-cy="Good"
+                  className="has-background-success-light"
+                >
                   <td>
                     <button
                       onClick={handleSelected}
                       data-cy="RemoveButton"
                       type="button"
-                      className="button is-info"
+                      className={`button ${good} is-info`}
                     >
                       -
                     </button>
@@ -86,13 +89,13 @@ export const App = () => {
                     data-cy="AddButton"
                     type="button"
                     onClick={handleSelected}
-                    className="button"
+                    className={`button ${good}`}
                   >
                     +
                   </button>
                 </td>
 
-                <td data-cy="GoodTitle" className="is-vcentered">
+                <td data-cy="GoodTitle" className={`is-vcentered`}>
                   {good}
                 </td>
               </tr>
