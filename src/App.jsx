@@ -29,7 +29,7 @@ export const App = () => {
               type="button"
               className="delete ml-3"
               onClick={() => setSelected('')}
-            />
+            ></button>
           </>
         ) : (
           `No goods selected`
