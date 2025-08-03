@@ -1,70 +1,78 @@
-import 'bulma/css/bulma.css';
+import React, { useState } from 'react';
+import 'bulma/css/bulma.min.css';
 import './App.scss';
 
-export const goods = [
-  'Dumplings',
-  'Carrot',
-  'Eggs',
-  'Ice cream',
-  'Apple',
-  'Bread',
-  'Fish',
-  'Honey',
-  'Jam',
-  'Garlic',
-];
+import goods from './api/goods.json';
 
-export const App = () => (
-  <main className="section container">
-    <h1 className="title is-flex is-align-items-center">No goods selected</h1>
+function App() {
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
-      <button data-cy="ClearButton" type="button" className="delete ml-3" />
-    </h1>
+  const selectGood = (good) => setSelectedGood(good);
+  const clearSelection = () => setSelectedGood('');
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
+  return (
+    <div className="container">
+      <h1 className="title" data-cy="Title">
+        {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
+      </h1>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+      {selectedGood && (
+        <button
+          type="button"
+          className="button is-small is-light ml-3"
+          onClick={clearSelection}
+          data-cy="ClearButton"
+        >
+          Clear
+        </button>
+      )}
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
+      <table className="table is-fullwidth">
+        <thead>
+          <tr>
+            <th>Good</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {goods.map((good) => (
+            <tr
+              key={good}
+              data-cy="Good"
+              className={
+                good === selectedGood
+                  ? 'has-background-success-light'
+                  : ''
+              }
             >
-              -
-            </button>
-          </td>
+              <td data-cy="GoodTitle">{good}</td>
+              <td>
+                {good === selectedGood ? (
+                  <button
+                    type="button"
+                    className="button is-small is-danger is-info"
+                    onClick={clearSelection}
+                    data-cy="RemoveButton"
+                  >
+                    -
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="button is-small is-primary"
+                    onClick={() => selectGood(good)}
+                    data-cy="AddButton"
+                  >
+                    +
+                  </button>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
-
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+export default App;
