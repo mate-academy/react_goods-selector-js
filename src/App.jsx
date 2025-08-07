@@ -38,10 +38,10 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map((good, idx) => {
+          {goods.map(good => {
             return (
               <tr
-                key={idx}
+                key={good}
                 data-cy="Good"
                 className={
                   selectedGood === good &&
