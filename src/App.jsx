@@ -1,5 +1,8 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
+
+import React, { useState } from 'react';
 
 export const goods = [
   'Dumplings',
@@ -14,57 +17,67 @@ export const goods = [
   'Garlic',
 ];
 
-export const App = () => (
-  <main className="section container">
+export const App = () => {
+  const [selectedGood, setSelectedGood] = useState('Jam');
+  let mainTitle = (
     <h1 className="title is-flex is-align-items-center">No goods selected</h1>
+  );
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
-      <button data-cy="ClearButton" type="button" className="delete ml-3" />
-    </h1>
+  if (selectedGood && selectedGood.length > 0) {
+    mainTitle = (
+      <h1 className="title is-flex is-align-items-center">
+        {selectedGood} is selected
+        <button
+          className="delete ml-3"
+          data-cy="ClearButton"
+          type="button"
+          onClick={() => setSelectedGood('')}
+        />
+      </h1>
+    );
+  }
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
-
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
+  return (
+    <main className="section container">
+      {mainTitle}
+      <table className="table">
+        <tbody>
+          {goods.map(n => (
+            <tr
+              key={n}
+              data-cy="Good"
+              className={classNames('is-flex', 'is-align-items-center', {
+                'has-background-success-light': n === selectedGood,
+              })}
             >
-              -
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
-
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+              <td className="is-vcentered">
+                {n !== selectedGood ? (
+                  <button
+                    data-cy="AddButton"
+                    type="button"
+                    className="button"
+                    onClick={() => setSelectedGood(n)}
+                  >
+                    +
+                  </button>
+                ) : (
+                  <button
+                    data-cy="RemoveButton"
+                    type="button"
+                    className="is-info"
+                    onClick={() => setSelectedGood('')}
+                  >
+                    -
+                  </button>
+                )}
+              </td>
+              <td className="is-vcentered" data-cy="GoodTitle">
+                {n}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </main>
+  );
+};
