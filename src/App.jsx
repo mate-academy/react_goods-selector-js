@@ -1,6 +1,8 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 
+import React, { useState } from 'react';
+
 export const goods = [
   'Dumplings',
   'Carrot',
@@ -14,57 +16,76 @@ export const goods = [
   'Garlic',
 ];
 
-export const App = () => (
-  <main className="section container">
-    <h1 className="title is-flex is-align-items-center">No goods selected</h1>
+export const App = () => {
+  // 1. Inicializamos selectedGood com uma string vazia.
+  // Isso garante que no início, nenhum item esteja selecionado e os botões de adicionar sejam exibidos.
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
-      <button data-cy="ClearButton" type="button" className="delete ml-3" />
-    </h1>
+  const handleClearSelection = () => {
+    setSelectedGood('');
+  };
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
+  const handleSelectGood = goodName => {
+    setSelectedGood(goodName);
+  };
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+  return (
+    <main className="section container">
+      <h1 className="title is-flex is-align-items-center">
+        {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
+        {selectedGood && (
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={handleClearSelection}
+          />
+        )}
+      </h1>
+
+      <table className="table">
+        <tbody>
+          {goods.map(good => (
+            <tr
+              key={good}
+              data-cy="Good"
+              className={
+                good === selectedGood ? 'has-background-success-light' : ''
+              }
             >
-              -
-            </button>
-          </td>
+              <td>
+                {/* Lógica corrigida para os botões */}
+                {good === selectedGood ? (
+                  // Se este é o item selecionado, mostramos o botão de remover.
+                  <button
+                    data-cy="RemoveButton"
+                    type="button"
+                    className="button is-info"
+                    onClick={handleClearSelection}
+                  >
+                    -
+                  </button>
+                ) : (
+                  // Se este NÃO é o item selecionado, mostramos o botão de adicionar.
+                  <button
+                    data-cy="AddButton"
+                    type="button"
+                    className="button"
+                    onClick={() => handleSelectGood(good)}
+                  >
+                    +
+                  </button>
+                )}
+              </td>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
-
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+              <td data-cy="GoodTitle" className="is-vcentered">
+                {good}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </main>
+  );
+};
