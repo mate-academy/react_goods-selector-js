@@ -17,14 +17,14 @@ export const goods = [
 ];
 
 export const App = () => {
+  // 1. Inicializamos selectedGood com uma string vazia.
+  // Isso garante que no início, nenhum item esteja selecionado e os botões de adicionar sejam exibidos.
   const [selectedGood, setSelectedGood] = useState('Jam');
 
-  // Função para limpar a seleção
   const handleClearSelection = () => {
     setSelectedGood('');
   };
 
-  // Função para selecionar um produto
   const handleSelectGood = goodName => {
     setSelectedGood(goodName);
   };
@@ -46,52 +46,44 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => {
-            // Cria uma variável para armazenar o botão a ser renderizado
-            let buttonToRender;
+          {goods.map(good => (
+            <tr
+              key={good}
+              data-cy="Good"
+              className={
+                good === selectedGood ? 'has-background-success-light' : ''
+              }
+            >
+              <td>
+                {/* Lógica corrigida para os botões */}
+                {good === selectedGood ? (
+                  // Se este é o item selecionado, mostramos o botão de remover.
+                  <button
+                    data-cy="RemoveButton"
+                    type="button"
+                    className="button is-info"
+                    onClick={handleClearSelection}
+                  >
+                    -
+                  </button>
+                ) : (
+                  // Se este NÃO é o item selecionado, mostramos o botão de adicionar.
+                  <button
+                    data-cy="AddButton"
+                    type="button"
+                    className="button"
+                    onClick={() => handleSelectGood(good)}
+                  >
+                    +
+                  </button>
+                )}
+              </td>
 
-            if (good === selectedGood) {
-              buttonToRender = (
-                <button
-                  data-cy="RemoveButton"
-                  type="button"
-                  className="button is-info"
-                  onClick={handleClearSelection}
-                >
-                  -
-                </button>
-              );
-            } else if (selectedGood === '') {
-              buttonToRender = (
-                <button
-                  data-cy="AddButton"
-                  type="button"
-                  className="button"
-                  onClick={() => handleSelectGood(good)}
-                >
-                  +
-                </button>
-              );
-            } else {
-              buttonToRender = null;
-            }
-
-            return (
-              <tr
-                key={good}
-                data-cy="Good"
-                className={
-                  good === selectedGood ? 'has-background-success-light' : ''
-                }
-              >
-                <td>{buttonToRender}</td>
-
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            );
-          })}
+              <td data-cy="GoodTitle" className="is-vcentered">
+                {good}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </main>
