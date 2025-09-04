@@ -18,24 +18,34 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
-  return (
+  function handleSelectGood(name) {
+    setSelectedGood(name);
+  }
 
+  function handleClearSelection() {
+    setSelectedGood('');
+  }
+
+  function handleRemoveSelection() {
+    setSelectedGood('')
+  }
+
+  return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedGood
-          ? (
-            <>
-              {selectedGood} is selected
-              <button
-                data-cy="ClearButton"
-                type="button"
-                className="delete ml-3"
-                onClick={() => setSelectedGood('')}
-              />
-            </>
-          )
-          : 'No goods selected'
-        }
+        {selectedGood ? (
+          <>
+            {selectedGood} is selected
+            <button
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={handleClearSelection}
+            />
+          </>
+        ) : (
+          'No goods selected'
+        )}
       </h1>
 
       <table className="table">
@@ -44,31 +54,32 @@ export const App = () => {
             <tr
               key={good}
               data-cy="Good"
-              className={selectedGood === good ? 'has-background-success-light' : ''}
+              className={
+                selectedGood === good ? 'has-background-success-light' : ''
+              }
             >
               <td>
-                {selectedGood === ''
-                  ? (
-                    <button
-                      data-cy="AddButton"
-                      type="button"
-                      className="button"
-                      onClick={() => setSelectedGood(good)}
-                    >
-                      +
-                    </button>
-                  )
-                  : selectedGood === good && (
+                {selectedGood === '' ? (
+                  <button
+                    data-cy="AddButton"
+                    type="button"
+                    className="button"
+                    onClick={() => handleSelectGood(good)}
+                  >
+                    +
+                  </button>
+                ) : (
+                  selectedGood === good && (
                     <button
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={() => setSelectedGood('')}
+                      onClick={handleRemoveSelection}
                     >
                       -
                     </button>
                   )
-                }
+                )}
               </td>
               <td data-cy="GoodTitle" className="is-vcentered">
                 {good}
@@ -78,8 +89,5 @@ export const App = () => {
         </tbody>
       </table>
     </main>
-
-  )
+  );
 };
-
-
