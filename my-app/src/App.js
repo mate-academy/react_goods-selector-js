@@ -16,26 +16,26 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setSelectedGood] = useState('Jam');
+  const [value, setValue] = useState('Jam');
 
   function handleSelectGood(good) {
-    setSelectedGood(good);
+    setValue(good);
   }
 
   function handleClearSelection() {
-    setSelectedGood('');
+    setValue('');
   }
 
   function handleRemoveSelection() {
-    setSelectedGood('');
+    setValue('');
   }
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedGood ? `${selectedGood} is selected` : `No goods selected`}
+        {value ? `${value} is selected` : `No goods selected`}
 
-        {selectedGood && (
+        {value && (
           <button
             data-cy="ClearButton"
             type="button"
@@ -47,7 +47,7 @@ export const App = () => {
       <table className="table is-fullwidth">
         <tbody>
           {goods.map(good => {
-            const isValue = good === selectedGood;
+            const isValue = good === value;
 
             return (
               <tr
@@ -89,3 +89,6 @@ export const App = () => {
     </main>
   );
 };
+
+
+export default App;
