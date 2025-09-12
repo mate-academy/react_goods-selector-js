@@ -35,12 +35,15 @@ const App = () => {
     <div>
       <h1 className="title">
         {isGoodSelected ? `${selectedGood} is selected` : 'No goods selected'}
+        {isGoodSelected && (
+          <button
+            data-cy="ClearButton"
+            type="button"
+            aria-label="x"
+            onClick={handleClear}
+          />
+        )}
       </h1>
-      {isGoodSelected && (
-        <button data-cy="ClearButton" type="button" onClick={handleClear}>
-          x
-        </button>
-      )}
 
       <table className="table">
         <thead>
@@ -63,7 +66,7 @@ const App = () => {
                 <span data-cy="GoodTitle">{good.name}</span>
               </td>
               <td>
-                {selectedGood !== good.name && (
+                {!isGoodSelected && (
                   <button
                     data-cy="AddButton"
                     type="button"
