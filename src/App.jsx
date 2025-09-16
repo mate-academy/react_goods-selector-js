@@ -50,21 +50,12 @@ export const App = () => {
             <tr
               key={good}
               data-cy="Good"
-              className={good === selectedGood ? 'has-background-success-light' : ''}
+              className={
+                good === selectedGood ? 'has-background-success-light' : ''
+              }
             >
               <td>
-                {selectedGood === '' && (
-                  <button
-                    data-cy="AddButton"
-                    type="button"
-                    className="button"
-                    onClick={() => handleSelect(good)}
-                  >
-                    +
-                  </button>
-                )}
-
-                {selectedGood === good && (
+                {selectedGood === good ? (
                   <button
                     data-cy="RemoveButton"
                     type="button"
@@ -72,6 +63,15 @@ export const App = () => {
                     onClick={handleClear}
                   >
                     -
+                  </button>
+                ) : (
+                  <button
+                    data-cy="AddButton"
+                    type="button"
+                    className="button"
+                    onClick={() => handleSelect(good)}
+                  >
+                    +
                   </button>
                 )}
               </td>
