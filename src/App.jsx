@@ -22,6 +22,10 @@ export const App = () => {
     setSelectedGood('');
   };
 
+  const handleSelect = (good) => {
+    setSelectedGood(good);
+  };
+
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
@@ -54,7 +58,7 @@ export const App = () => {
                     data-cy="AddButton"
                     type="button"
                     className="button"
-                    onClick={() => setSelectedGood(good)}
+                    onClick={() => handleSelect(good)}
                   >
                     +
                   </button>
