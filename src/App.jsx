@@ -18,19 +18,29 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
+  const handleClear = () => {
+    setSelectedGood('');
+  };
+
+  const handleRemove = () => {
+    setSelectedGood('');
+  };
+
+  const handleSelect = good => {
+    setSelectedGood(good);
+  };
+
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedGood
-          ? `${selectedGood} is selected`
-          : 'No goods selected'}
+        {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
 
         {selectedGood && (
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => setSelectedGood('')}
+            onClick={handleClear}
           />
         )}
       </h1>
@@ -51,7 +61,7 @@ export const App = () => {
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
-                    onClick={() => setSelectedGood('')}
+                    onClick={handleRemove}
                   >
                     -
                   </button>
@@ -60,7 +70,7 @@ export const App = () => {
                     data-cy="AddButton"
                     type="button"
                     className="button"
-                    onClick={() => setSelectedGood(good)}
+                    onClick={() => handleSelect(good)}
                   >
                     +
                   </button>
@@ -77,4 +87,3 @@ export const App = () => {
     </main>
   );
 };
-
