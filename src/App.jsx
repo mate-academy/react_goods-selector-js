@@ -25,20 +25,23 @@ export const App = () => {
         {selectedGood === ''
           ? 'No goods selected'
           : `${selectedGood} is selected`}
-        <button
-          data-cy={selectedGood === '' ? '' : 'ClearButton'}
-          type="button"
-          className="delete ml-3"
-          onClick={() => {
-            setSelectedGood('');
-          }}
-        />
+        {selectedGood !== '' && (
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={() => {
+              setSelectedGood('');
+            }}
+          />
+        )}
       </h1>
 
       <table className="table">
         <tbody>
           {goods.map(good => (
             <tr
+              key={good}
               data-cy="Good"
               className={
                 selectedGood === good ? 'has-background-success-light' : ''
