@@ -23,20 +23,20 @@ export const App = () => {
   };
 
   const removeGood = () => {
-    setSelectedGood('No goods selected');
+    setSelectedGood('');
   };
 
   const clearAll = () => {
-    setSelectedGood('No goods selected');
+    setSelectedGood('');
   };
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedGood === 'No goods selected'
-          ? selectedGood
+        {selectedGood === ''
+          ? 'No goods selected'
           : `${selectedGood} is selected`}
-        {selectedGood !== 'No goods selected' && (
+        {selectedGood !== '' && (
           <button
             data-cy="ClearButton"
             type="button"
