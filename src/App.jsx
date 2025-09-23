@@ -1,6 +1,5 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
-import cn from 'classnames';
 import { useState } from 'react';
 
 export const goods = [
@@ -18,8 +17,6 @@ export const goods = [
 
 export const App = () => {
   const [goodSelected, setIsSelected] = useState('Jam');
-
-  let count = 0;
 
   return (
     <main className="section container">
@@ -43,21 +40,27 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {['Dumplings', 'Jam', 'Garlic'].map(value => {
-            count++;
-
+          {goods.map(value => {
             return (
-              <tr data-cy="Good" key={count}>
+              <tr
+                data-cy="Good"
+                key={value}
+                className={
+                  goodSelected === value ? 'has-background-success-light' : ''
+                }
+              >
                 <td>
                   <button
                     data-cy={
                       goodSelected === value ? 'RemoveButton' : 'AddButton'
                     }
                     type="button"
-                    className={`button ${goodSelected === value ? 'has-background-success-light' : ''}`}
+                    className={`button ${goodSelected === value ? 'is-info' : ''}`}
                     onClick={() => {
                       setIsSelected(value);
-                      goodSelected === value ? setIsSelected('') : '';
+                      if (goodSelected === value) {
+                        setIsSelected('');
+                      }
                     }}
                   >
                     {goodSelected === value ? '-' : '+'}
