@@ -26,10 +26,10 @@ export const App = () => {
             <button
               data-cy="ClearButton"
               type="button"
-              aria-label="x"
-              title="x"
               onClick={() => setSelectedGood('')}
-            />
+            >
+              x
+            </button>
           </>
         ) : (
           'No goods selected'
