@@ -16,8 +16,12 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setSelectedGood] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam'); // default Jam
   const hasSelection = selectedGood !== '';
+
+  // named handlers (verb-first)
+  const handleClear = () => setSelectedGood('');
+  const handleSelect = good => setSelectedGood(good);
 
   return (
     <main className="section container">
@@ -28,7 +32,7 @@ export const App = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => setSelectedGood('')}
+            onClick={handleClear}
           />
         </h1>
       ) : (
@@ -42,6 +46,37 @@ export const App = () => {
           {goods.map(good => {
             const isSelected = good === selectedGood;
 
+            const addButton = (
+              <button
+                data-cy="AddButton"
+                type="button"
+                className="button"
+                onClick={() => handleSelect(good)}
+              >
+                +
+              </button>
+            );
+
+            const removeButton = (
+              <button
+                data-cy="RemoveButton"
+                type="button"
+                className="button is-info"
+                onClick={handleClear}
+              >
+                -
+              </button>
+            );
+
+            let actionButton = null;
+
+            if (isSelected) {
+              actionButton = removeButton;
+            } else {
+              // ВАЖЛИВО: AddButton завжди видимий для не вибраних рядків
+              actionButton = addButton;
+            }
+
             return (
               <tr
                 key={good}
@@ -50,27 +85,7 @@ export const App = () => {
                   isSelected ? 'has-background-success-light' : undefined
                 }
               >
-                <td>
-                  {isSelected ? (
-                    <button
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                      onClick={() => setSelectedGood('')}
-                    >
-                      -
-                    </button>
-                  ) : (
-                    <button
-                      data-cy="AddButton"
-                      type="button"
-                      className="button"
-                      onClick={() => setSelectedGood(good)}
-                    >
-                      +
-                    </button>
-                  )}
-                </td>
+                <td>{actionButton}</td>
 
                 <td data-cy="GoodTitle" className="is-vcentered">
                   {good}
