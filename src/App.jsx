@@ -16,24 +16,31 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [good, selectedGood] = useState('Jam');
-  const [message, setMessage] = useState(`${good} is selected`);
-  const [button, setButton] = useState('-');
-  const [visible, setVisible] = useState(true);
+  const [selectedGood, setSelectedGood] = useState('Jam');
+
+  const handleSelect = good => {
+    if (good === selectedGood) {
+      setSelectedGood('');
+    } else {
+      setSelectedGood(good);
+    }
+  };
+
+  const handleClear = () => {
+    setSelectedGood('');
+  };
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {message}
-        {visible && (
+        {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
+
+        {selectedGood && (
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => {
-              setMessage('No goods selected');
-              setVisible(false);
-            }}
+            onClick={handleClear}
           />
         )}
       </h1>
@@ -42,31 +49,32 @@ export const App = () => {
         <tbody>
           {goods.map(x => (
             <tr
+              key={x}
               data-cy="Good"
-              className={`${good === x && message !== 'No goods selected' ? 'has-background-success-light' : ''}`}
+              className={
+                x === selectedGood ? 'has-background-success-light' : ''
+              }
             >
               <td>
-                <button
-                  data-cy={
-                    button === '-' && x === good ? 'RemoveButton' : 'AddButton'
-                  }
-                  type="button"
-                  className={`button ${button === '-' && x === good && message !== 'No goods selected' ? 'is-info' : ''}`}
-                  onClick={() => {
-                    selectedGood(x);
-                    setMessage(`${x} is selected`);
-                    setButton('-');
-                    setVisible(true);
-
-                    if (x === good) {
-                      selectedGood(null);
-                      setMessage('No goods selected');
-                      setVisible(false);
-                    }
-                  }}
-                >
-                  {x === good && message !== 'No goods selected' ? button : '+'}
-                </button>
+                {x === selectedGood ? (
+                  <button
+                    data-cy="RemoveButton"
+                    type="button"
+                    className="button is-info"
+                    onClick={() => handleSelect(x)}
+                  >
+                    -
+                  </button>
+                ) : (
+                  <button
+                    data-cy="AddButton"
+                    type="button"
+                    className="button"
+                    onClick={() => handleSelect(x)}
+                  >
+                    +
+                  </button>
+                )}
               </td>
 
               <td data-cy="GoodTitle" className="is-vcentered">
