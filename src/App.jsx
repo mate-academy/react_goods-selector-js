@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import 'bulma/css/bulma.css';
 
 const goods = [
   'Dumplings',
@@ -26,10 +27,9 @@ export const App = () => {
             <button
               data-cy="ClearButton"
               type="button"
+              className="delete"
               onClick={() => setSelectedGood('')}
-            >
-              x
-            </button>
+            />
           </>
         ) : (
           'No goods selected'
@@ -52,6 +52,7 @@ export const App = () => {
                     <button
                       data-cy="AddButton"
                       type="button"
+                      className="button"
                       onClick={() => setSelectedGood(good)}
                     >
                       +
@@ -62,7 +63,7 @@ export const App = () => {
                     <button
                       data-cy="RemoveButton"
                       type="button"
-                      className="is-info"
+                      className="button is-info"
                       onClick={() => setSelectedGood('')}
                     >
                       -
