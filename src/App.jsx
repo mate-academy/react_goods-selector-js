@@ -72,9 +72,10 @@ export const App = () => {
 
             if (isSelected) {
               actionButton = removeButton;
-            } else {
-              // ВАЖЛИВО: AddButton завжди видимий для не вибраних рядків
+            } else if (!hasSelection) {
               actionButton = addButton;
+            } else {
+              actionButton = null;
             }
 
             return (
