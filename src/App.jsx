@@ -19,6 +19,7 @@ export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
   const handleRemoveGood = () => setSelectedGood('');
+  const handleAddGood = good => setSelectedGood(good);
 
   return (
     <main className="section container">
@@ -63,7 +64,7 @@ export const App = () => {
               ) : (
                 <td>
                   <button
-                    onClick={() => setSelectedGood(good)}
+                    onClick={() => handleAddGood(good)}
                     data-cy="AddButton"
                     type="button"
                     className="button"
