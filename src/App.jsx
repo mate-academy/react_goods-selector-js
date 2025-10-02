@@ -43,7 +43,34 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map(good => {
-            if (selectedGood !== good) {
+            const allowAdd = selectedGood === '';
+
+            if (selectedGood === good) {
+              return (
+                <tr
+                  data-cy="Good"
+                  className="has-background-success-light"
+                  key={good}
+                >
+                  <td>
+                    <button
+                      data-cy="RemoveButton"
+                      type="button"
+                      className="button is-info"
+                      onClick={handleClearGood}
+                    >
+                      -
+                    </button>
+                  </td>
+
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              );
+            }
+
+            if (allowAdd) {
               return (
                 <tr data-cy="Good" key={good}>
                   <td>
@@ -65,22 +92,8 @@ export const App = () => {
             }
 
             return (
-              <tr
-                data-cy="Good"
-                className="has-background-success-light"
-                key={good}
-              >
-                <td>
-                  <button
-                    data-cy="RemoveButton"
-                    type="button"
-                    className="button is-info"
-                    onClick={handleClearGood}
-                  >
-                    -
-                  </button>
-                </td>
-
+              <tr data-cy="Good" key={good}>
+                <td />
                 <td data-cy="GoodTitle" className="is-vcentered">
                   {good}
                 </td>
