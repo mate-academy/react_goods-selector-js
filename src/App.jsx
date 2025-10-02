@@ -37,6 +37,7 @@ export const App = () => {
             type="button"
             className="delete ml-3"
             onClick={handleClear}
+            aria-label="Clear selection"
           />
         )}
       </h1>
@@ -58,19 +59,21 @@ export const App = () => {
                     type="button"
                     className="button is-info"
                     onClick={handleClear}
+                    aria-label={`Remove ${good}`}
                   >
                     -
                   </button>
-                ) : (
+                ) : !selectedGood ? (
                   <button
                     data-cy="AddButton"
                     type="button"
                     className="button"
                     onClick={() => handleSelect(good)}
+                    aria-label={`Add ${good}`}
                   >
                     +
                   </button>
-                )}
+                ) : null}
               </td>
               <td data-cy="GoodTitle" className="is-vcentered">
                 {good}
