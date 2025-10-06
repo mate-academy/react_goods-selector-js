@@ -18,8 +18,32 @@ In this task, we use the [Bulma CSS framework](https://bulma.io/). It is already
 1. Don't show `AddButton` when a good is selected.
 1. Show `RemoveButton` for the selected good to clear the selection.
 
+У цьому завданні ми використовуємо [CSS-фреймворк Bulma](https://bulma.io/). Він вже встановлений та імпортований, тому ви можете використовувати його класи.
+
+1. Напишіть все всередині `App` (**не** створюйте додаткові компоненти).
+
+1. Збережіть `selectedGood` у стані (`Jam` – значення за замовчуванням).
+
+1. Покажіть назву вибраного товару в `h1.title` (`Jam вибрано`).
+
+1. Додайте клас `has-background-success-light` до `tr` вибраного товару.
+
+1. Показуйте кнопку `ClearButton` у заголовку лише тоді, коли товар вибрано.
+
+1. `ClearButton` має очистити вибір, встановивши порожній рядок у `selectedGood`.
+
+1. Заголовок повинен показувати `No goods selected`, коли товар не вибрано.
+
+1. Кожен товар повинен мати `AddButton` для вибору товару.
+
+- одночасно можна вибрати лише 1 товар;
+1. Не показувати кнопку «Додати», коли товар вибрано.
+1. Показувати кнопку «Видалити» для вибраного товару, щоб очистити вибір.
+
+
+
 ## Instructions
 - Install Prettier Extention and use this [VSCode settings](https://mate-academy.github.io/fe-program/tools/vscode/settings.json) to enable format on save.
 - Implement a solution following the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline).
 - Open one more terminal and run tests with `npm test` to ensure your solution is correct.
-- Replace `<your_account>` with your Github username in the [DEMO LINK](https://<your_account>.github.io/react_goods-selector-js/) and add it to the PR description.
+- Replace `<your_account>` with your Github username in the [DEMO LINK](https://ElinaMrachkovska.github.io/react_goods-selector-js/) and add it to the PR description.
