@@ -20,7 +20,7 @@ export const App = () => {
 
   const noGoodSelectedMessage = 'No goods selected';
 
-  const handleSelect = (good) => setSelectedGood(good);
+  const handleSelect = good => setSelectedGood(good);
   const handleClear = () => setSelectedGood('');
   const handleRemove = () => setSelectedGood('');
 
@@ -51,7 +51,7 @@ export const App = () => {
                 className={isSelected ? 'has-background-success-light' : ''}
               >
                 <td>
-                  {!selectedGood && (
+                  {!isSelected && (
                     <button
                       data-cy="AddButton"
                       type="button"
