@@ -26,7 +26,7 @@ export const App = () => {
           <button
             data-cy="ClearButton"
             type="button"
-            className="delete ml-3"
+            className="delete ml-3 "
             onClick={() => selectGood('')}
           />
         </h1>
@@ -66,7 +66,6 @@ export const App = () => {
                   </button>
                 )}
               </td>
-
               <td data-cy="GoodTitle" className="is-vcentered">
                 {good}
               </td>
