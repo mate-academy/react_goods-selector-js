@@ -55,7 +55,7 @@ export const App = () => {
               }
             >
               <td>
-                {selectedGood === '' ? (
+                {good === selectedGood ? (
                   <button
                     onClick={() => setSelectedGood('')}
                     data-cy="RemoveButton"
