@@ -16,10 +16,10 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selected, setSelected] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
-  function onGoodsClick(el) {
-    setSelected(() => {
+  function handleSelectGood(el) {
+    setSelectedGood(() => {
       const newEl = el;
 
       return newEl;
@@ -28,11 +28,11 @@ export const App = () => {
 
   return (
     <main className="section container">
-      {selected ? (
+      {selectedGood ? (
         <h1 className="title is-flex is-align-items-center">
-          {selected} is selected
+          {selectedGood} is selected
           <button
-            onClick={() => setSelected('')}
+            onClick={() => setSelectedGood('')}
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
@@ -48,13 +48,16 @@ export const App = () => {
         <tbody>
           {goods.map(good => (
             <tr
+              key={good}
               data-cy="Good"
-              className={good === selected && 'has-background-success-light'}
+              className={
+                good === selectedGood && 'has-background-success-light'
+              }
             >
               <td>
-                {good === selected ? (
+                {selectedGood === '' ? (
                   <button
-                    onClick={() => setSelected('')}
+                    onClick={() => setSelectedGood('')}
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
@@ -63,7 +66,7 @@ export const App = () => {
                   </button>
                 ) : (
                   <button
-                    onClick={() => onGoodsClick(good)}
+                    onClick={() => handleSelectGood(good)}
                     data-cy="AddButton"
                     type="button"
                     className="button"
