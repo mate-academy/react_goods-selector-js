@@ -18,25 +18,23 @@ export const goods = [
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
-  const clearSelection = () => setSelectedGood('');
-
   return (
     <main className="section container">
-      <h1 className="title is-flex is-align-items-center">
-        {!goods.includes(selectedGood) ? (
-          'No goods selected'
-        ) : (
-          <>
-            {selectedGood} is selected
-            <button
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-              onClick={clearSelection}
-            />
-          </>
-        )}
-      </h1>
+      {selectedGood ? (
+        <h1 className="title is-flex is-align-items-center">
+          {selectedGood} is selected
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={() => setSelectedGood('')}
+          />
+        </h1>
+      ) : (
+        <h1 className="title is-flex is-align-items-center">
+          No goods selected
+        </h1>
+      )}
 
       <table className="table">
         <tbody>
@@ -45,12 +43,20 @@ export const App = () => {
               key={good}
               data-cy="Good"
               className={
-                good === selectedGood ? 'has-background-success-light' : ''
+                selectedGood === good ? 'has-background-success-light' : ''
               }
             >
               <td>
-                {/* AddButton показывается для всех НЕ выбранных товаров */}
-                {good !== selectedGood && (
+                {selectedGood === good ? (
+                  <button
+                    data-cy="RemoveButton"
+                    type="button"
+                    className="button is-info"
+                    onClick={() => setSelectedGood('')}
+                  >
+                    -
+                  </button>
+                ) : (
                   <button
                     data-cy="AddButton"
                     type="button"
@@ -58,18 +64,6 @@ export const App = () => {
                     onClick={() => setSelectedGood(good)}
                   >
                     +
-                  </button>
-                )}
-
-                {/* RemoveButton показывается только для выбранного товара */}
-                {good === selectedGood && (
-                  <button
-                    data-cy="RemoveButton"
-                    type="button"
-                    className="button is-info"
-                    onClick={clearSelection}
-                  >
-                    -
                   </button>
                 )}
               </td>
