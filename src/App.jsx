@@ -35,9 +35,10 @@ export const App = () => {
             ? `${selectedGood} is selected`
             : 'No goods selected'}
         </span>
+
         {selectedGood !== '' && (
           <button
-            onClick={() => handleClearSelection()}
+            onClick={handleClearSelection}
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
@@ -45,6 +46,7 @@ export const App = () => {
           />
         )}
       </h1>
+
       <table className="table">
         <tbody>
           {goods.map(good => (
@@ -56,22 +58,27 @@ export const App = () => {
               })}
             >
               <td>
-                <button
-                  onClick={() => {
-                    if (selectedGood === good) {
-                      handleClearSelection();
-                    } else {
-                      handleSelectGood(good);
-                    }
-                  }}
-                  data-cy={selectedGood === good ? 'RemoveButton' : 'AddButton'}
-                  type="button"
-                  className={classNames('button', {
-                    'is-info': good === selectedGood,
-                  })}
-                >
-                  {good === selectedGood ? '-' : '+'}
-                </button>
+                {selectedGood === '' && (
+                  <button
+                    onClick={() => handleSelectGood(good)}
+                    data-cy="AddButton"
+                    type="button"
+                    className="button"
+                  >
+                    +
+                  </button>
+                )}
+
+                {selectedGood === good && (
+                  <button
+                    onClick={() => handleClearSelection()}
+                    data-cy="RemoveButton"
+                    type="button"
+                    className="button is-info"
+                  >
+                    -
+                  </button>
+                )}
               </td>
               <td data-cy="GoodTitle" className="is-vcentered">
                 {good}
