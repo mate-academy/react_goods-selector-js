@@ -58,20 +58,16 @@ export const App = () => {
                       );
                     }
 
-                    if (selectedGood === '' && !isSelected) {
-                      return (
-                        <button
-                          data-cy="AddButton"
-                          type="button"
-                          className="button"
-                          onClick={() => setSelectedGood(good)}
-                        >
-                          +
-                        </button>
-                      );
-                    }
-
-                    return null;
+                    return (
+                      <button
+                        data-cy="AddButton"
+                        type="button"
+                        className="button"
+                        onClick={() => setSelectedGood(good)}
+                      >
+                        +
+                      </button>
+                    );
                   })()}
                 </td>
                 <td data-cy="GoodTitle" className="is-vcentered">
