@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -14,57 +15,120 @@ export const goods = [
   'Garlic',
 ];
 
-export const App = () => (
-  <main className="section container">
-    <h1 className="title is-flex is-align-items-center">No goods selected</h1>
+export const goodsAddOrLess = [
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  false,
+  true,
+];
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
-      <button data-cy="ClearButton" type="button" className="delete ml-3" />
-    </h1>
+export const App = () => {
+  const [selectedGood, setSelectedGood] = useState('Jam is selected');
+  const [goodsAddOrLess2, setGoodsAddOrLess2] = useState(goodsAddOrLess);
+  const [xButton, setXButton] = useState(true);
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
+  return (
+    <main className="section container">
+      <h1 className="title is-flex is-align-items-center">
+        {selectedGood === '' ? (
+          <h1>No goods selected</h1>
+        ) : (
+          <h1>{selectedGood}</h1>
+        )}
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+        {xButton ? (
+          <button
+            onClick={() => {
+              setSelectedGood('');
+              setXButton(false);
+              setGoodsAddOrLess2(
+                goodsAddOrLess2.map(flag => (flag === false ? true : flag)),
+              );
+            }}
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+          />
+        ) : (
+          <p />
+        )}
+      </h1>
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
+      <table className="table">
+        <tbody>
+          {goods.map((good, index) => (
+            <tr
+              key={good}
+              data-cy="Good"
+              className={
+                goodsAddOrLess2[index] ? '' : 'has-background-success-light'
+              }
             >
-              -
-            </button>
-          </td>
+              <td>
+                <button
+                  onClick={() => {
+                    if (goodsAddOrLess2[index]) {
+                      setSelectedGood(`${good} is selected`);
+                      setXButton(true);
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+                      const i = goodsAddOrLess2.findIndex(
+                        flag => flag === false,
+                      );
 
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
+                      if (i >= 0) {
+                        setGoodsAddOrLess2(prev => {
+                          const tempGoods = [];
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+                          for (let k = 0; k < prev.length; k += 1) {
+                            if (k === i) {
+                              tempGoods[k] = true;
+                            } else if (k === index) {
+                              tempGoods[k] = !prev[k];
+                            } else {
+                              tempGoods[k] = prev[k];
+                            }
+                          }
+
+                          return tempGoods;
+                        });
+                      }
+
+                      setGoodsAddOrLess2(prev =>
+                        prev.map((flag, j) => (j === index ? false : flag)),
+                      );
+                    } else {
+                      setSelectedGood('');
+                      setXButton(false);
+                      setGoodsAddOrLess2(prev =>
+                        prev.map((flag, i) => (i === index ? true : flag)),
+                      );
+                    }
+                  }}
+                  data-cy={
+                    goodsAddOrLess2[index] ? 'AddButton' : 'RemoveButton'
+                  }
+                  type="button"
+                  className={
+                    goodsAddOrLess2[index] ? 'button' : 'button is-info'
+                  }
+                >
+                  {goodsAddOrLess2[index] ? '+' : '-'}
+                </button>
+              </td>
+
+              <td data-cy="GoodTitle" className="is-vcentered">
+                {good}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </main>
+  );
+};
