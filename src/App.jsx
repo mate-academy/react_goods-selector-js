@@ -15,9 +15,9 @@ const goods = [
   'Garlic'
 ];
 
-const handleClearSelection = (func) => {
+const handleClearSelection = func => {
   func('');
-}
+};
 
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
@@ -25,11 +25,9 @@ export const App = () => {
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedGood === '' ?
-          'No goods selected'
-         :
-          `${selectedGood} is selected`
-        }
+        {selectedGood === ''
+          ? 'No goods selected'
+          : `${selectedGood} is selected`}
 
         {selectedGood !== '' ? (
           <button
@@ -41,9 +39,7 @@ export const App = () => {
             className="delete ml-3"
             aria-label="Clear selected goods"
           />
-        ) :
-          null
-        }
+        ) : null}
       </h1>
 
       <table className="table">
