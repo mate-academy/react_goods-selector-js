@@ -44,7 +44,7 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map((good, index) => (
+          {goods.map(good => (
             <tr
               key={good}
               data-cy="Good"
@@ -57,9 +57,7 @@ export const App = () => {
                   onClick={() => {
                     setSelectedGood(selectedGood === good ? '' : good);
                   }}
-                  data-cy={
-                    selectedGood === good ? 'RemoveButton' : 'AddButton'
-                  }
+                  data-cy={selectedGood === good ? 'RemoveButton' : 'AddButton'}
                   type="button"
                   className={
                     selectedGood === good ? 'button is-info' : 'button'
