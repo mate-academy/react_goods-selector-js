@@ -2,7 +2,7 @@ import { useState } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
-export const goods = [
+const goods = [
   'Dumplings',
   'Carrot',
   'Eggs',
@@ -15,23 +15,8 @@ export const goods = [
   'Garlic'
 ];
 
-export const goodsAddOrLess = [
-  true,
-  true,
-  true,
-  true,
-  true,
-  true,
-  true,
-  true,
-  false,
-  true
-];
-
 export const App = () => {
-  const [selectedGood, setSelectedGood] = useState('Jam is selected');
-  const [goodsAddOrLess2, setGoodsAddOrLess2] = useState(goodsAddOrLess);
-  const [xButton, setXButton] = useState(true);
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   return (
     <main className="section container">
@@ -39,17 +24,13 @@ export const App = () => {
         {selectedGood === '' ? (
           <h1>No goods selected</h1>
         ) : (
-          <h1>{selectedGood}</h1>
+          <h1>{selectedGood} is selected</h1>
         )}
 
-        {xButton ? (
+        {selectedGood !== '' ? (
           <button
             onClick={() => {
               setSelectedGood('');
-              setXButton(false);
-              setGoodsAddOrLess2(
-                goodsAddOrLess2.map(flag => (flag === false ? true : flag))
-              );
             }}
             data-cy="ClearButton"
             type="button"
@@ -68,58 +49,23 @@ export const App = () => {
               key={good}
               data-cy="Good"
               className={
-                goodsAddOrLess2[index] ? '' : 'has-background-success-light'
+                selectedGood === good ? 'has-background-success-light' : ''
               }
             >
               <td>
                 <button
                   onClick={() => {
-                    if (goodsAddOrLess2[index]) {
-                      setSelectedGood(`${good} is selected`);
-                      setXButton(true);
-
-                      const i = goodsAddOrLess2.findIndex(
-                        flag => flag === false
-                      );
-
-                      if (i >= 0) {
-                        setGoodsAddOrLess2(prev => {
-                          const tempGoods = [];
-
-                          for (let k = 0; k < prev.length; k += 1) {
-                            if (k === i) {
-                              tempGoods[k] = true;
-                            } else if (k === index) {
-                              tempGoods[k] = !prev[k];
-                            } else {
-                              tempGoods[k] = prev[k];
-                            }
-                          }
-
-                          return tempGoods;
-                        });
-                      }
-
-                      setGoodsAddOrLess2(prev =>
-                        prev.map((flag, j) => (j === index ? false : flag))
-                      );
-                    } else {
-                      setSelectedGood('');
-                      setXButton(false);
-                      setGoodsAddOrLess2(prev =>
-                        prev.map((flag, i) => (i === index ? true : flag))
-                      );
-                    }
+                    setSelectedGood(selectedGood === good ? '' : good);
                   }}
                   data-cy={
-                    goodsAddOrLess2[index] ? 'AddButton' : 'RemoveButton'
+                    selectedGood === good ? 'RemoveButton' : 'AddButton'
                   }
                   type="button"
                   className={
-                    goodsAddOrLess2[index] ? 'button' : 'button is-info'
+                    selectedGood === good ? 'button is-info' : 'button'
                   }
                 >
-                  {goodsAddOrLess2[index] ? '+' : '-'}
+                  {selectedGood === good ? '-' : '+'}
                 </button>
               </td>
 
