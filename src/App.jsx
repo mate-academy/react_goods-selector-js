@@ -12,7 +12,7 @@ export const goods = [
   'Fish',
   'Honey',
   'Jam',
-  'Garlic',
+  'Garlic'
 ];
 
 export const goodsAddOrLess = [
@@ -25,7 +25,7 @@ export const goodsAddOrLess = [
   true,
   true,
   false,
-  true,
+  true
 ];
 
 export const App = () => {
@@ -48,12 +48,13 @@ export const App = () => {
               setSelectedGood('');
               setXButton(false);
               setGoodsAddOrLess2(
-                goodsAddOrLess2.map(flag => (flag === false ? true : flag)),
+                goodsAddOrLess2.map(flag => (flag === false ? true : flag))
               );
             }}
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
+            aria-label="Clear selected goods"
           />
         ) : (
           <p />
@@ -78,7 +79,7 @@ export const App = () => {
                       setXButton(true);
 
                       const i = goodsAddOrLess2.findIndex(
-                        flag => flag === false,
+                        flag => flag === false
                       );
 
                       if (i >= 0) {
@@ -100,13 +101,13 @@ export const App = () => {
                       }
 
                       setGoodsAddOrLess2(prev =>
-                        prev.map((flag, j) => (j === index ? false : flag)),
+                        prev.map((flag, j) => (j === index ? false : flag))
                       );
                     } else {
                       setSelectedGood('');
                       setXButton(false);
                       setGoodsAddOrLess2(prev =>
-                        prev.map((flag, i) => (i === index ? true : flag)),
+                        prev.map((flag, i) => (i === index ? true : flag))
                       );
                     }
                   }}
