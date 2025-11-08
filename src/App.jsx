@@ -15,31 +15,35 @@ const goods = [
   'Garlic'
 ];
 
+const handleClearSelection = (func) => {
+  func('');
+}
+
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedGood === '' ? (
-          <h1>No goods selected</h1>
-        ) : (
-          <h1>{selectedGood} is selected</h1>
-        )}
+        {selectedGood === '' ?
+          'No goods selected'
+         :
+          `${selectedGood} is selected`
+        }
 
         {selectedGood !== '' ? (
           <button
             onClick={() => {
-              setSelectedGood('');
+              handleClearSelection(setSelectedGood);
             }}
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
             aria-label="Clear selected goods"
           />
-        ) : (
-          <p />
-        )}
+        ) :
+          null
+        }
       </h1>
 
       <table className="table">
