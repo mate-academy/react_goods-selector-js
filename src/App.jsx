@@ -44,7 +44,7 @@ export const App = () => {
 
             const handleClick = () => {
               if (isSelected) {
-                setSelectedGood(null);
+                setSelectedGood('');
               } else {
                 setSelectedGood(good);
               }
@@ -53,7 +53,6 @@ export const App = () => {
             return (
               <tr
                 key={good}
-                onClick={handleClick}
                 data-cy="Good"
                 className={cn({
                   'has-background-success-light': isSelected,
@@ -61,6 +60,7 @@ export const App = () => {
               >
                 <td>
                   <button
+                    onClick={handleClick}
                     data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
                     type="button"
                     className={cn('button', {
