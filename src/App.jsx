@@ -16,11 +16,11 @@ export const goods = [
 ];
 
 export const App = () => {
-  let [good, setGood] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
   let titleText;
 
-  if (good){
-    titleText = `${good} is selected`;
+  if (selectedGood) {
+    titleText = `${selectedGood} is selected`;
   } else {
     titleText = 'No goods selected';
   }
@@ -29,7 +29,14 @@ export const App = () => {
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
         {titleText}
-        {good && <button data-cy="ClearButton" type="button" className="delete ml-3" onClick={() => setGood('')}></button>}
+        {selectedGood && (
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={() => setSelectedGood('')}
+          />
+        )}
       </h1>
 
       <table className="table">
@@ -38,26 +45,26 @@ export const App = () => {
             <tr
               key={item}
               data-cy="Good"
-              className={good === item ? 'has-background-success-light' : ''}
+              className={selectedGood === item ? 'has-background-success-light' : ''}
             >
               <td>
-                {good !== item && (
+                {selectedGood !== item && (
                   <button
                     data-cy="AddButton"
                     type="button"
                     className="button"
-                    onClick={() => setGood(item)}
+                    onClick={() => setSelectedGood(item)}
                   >
                     +
                   </button>
                 )}
 
-                {good === item && (
+                {selectedGood === item && (
                   <button
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
-                    onClick={() => setGood('')}
+                    onClick={() => setSelectedGood('')}
                   >
                     -
                   </button>
@@ -72,5 +79,5 @@ export const App = () => {
         </tbody>
       </table>
     </main>
-  )
-}
+  );
+};
