@@ -16,23 +16,23 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGoods, setSelectedGoods] = useState(goods[8]);
+  const [selectedGood, setSelectedGood] = useState(goods[8]);
 
   return (
     <main className="section container">
-      {selectedGoods === '' ? (
+      {selectedGood === '' ? (
         <h1 className="title is-flex is-align-items-center">
           No goods selected
         </h1>
       ) : (
         <h1 className="title is-flex is-align-items-center">
-          {`${selectedGoods} is selected`}
+          {`${selectedGood} is selected`}
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
             onClick={() => {
-              setSelectedGoods('');
+              setSelectedGood('');
             }}
           />
         </h1>
@@ -42,28 +42,27 @@ export const App = () => {
           {goods.map(good => (
             <tr
               data-cy="Good"
+              key={good}
               className={
-                selectedGoods === good ? 'has-background-success-light' : ''
+                selectedGood === good ? 'has-background-success-light' : ''
               }
             >
               <td>
                 <button
-                  data-cy={
-                    selectedGoods === good ? 'RemoveButton' : 'AddButton'
-                  }
+                  data-cy={selectedGood === good ? 'RemoveButton' : 'AddButton'}
                   type="button"
                   className={
-                    selectedGoods === good ? 'button is-info' : 'button'
+                    selectedGood === good ? 'button is-info' : 'button'
                   }
                   onClick={
-                    selectedGoods === good
+                    selectedGood === good
                       ? // eslint-disable-next-line prettier/prettier
-                      () => {setSelectedGoods('');}
+                      () => {setSelectedGood('');}
                       : // eslint-disable-next-line prettier/prettier
-                      () => {setSelectedGoods(good);}
+                      () => {setSelectedGood(good);}
                   }
                 >
-                  {selectedGoods === good ? '-' : '+'}
+                  {selectedGood === good ? '-' : '+'}
                 </button>
               </td>
 
