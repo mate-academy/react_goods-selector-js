@@ -17,6 +17,7 @@ export const goods = [
 
 export const App = () => {
   const [selectedGoods, setSelectedGoods] = useState('Jam');
+
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
@@ -38,6 +39,7 @@ export const App = () => {
           {goods.map(good => (
             <tr
               data-cy="Good"
+              key={good}
               className={
                 good === selectedGoods ? 'has-background-success-light' : ''
               }
