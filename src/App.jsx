@@ -44,7 +44,9 @@ export const App = () => {
                 data-cy="Good"
                 className={isSelected ? 'has-background-success-light' : ''}
               >
+                {' '}
                 <td>
+                  {' '}
                   {isSelected ? (
                     <button
                       data-cy="RemoveButton"
@@ -52,23 +54,27 @@ export const App = () => {
                       className="button is-info"
                       onClick={() => setSelectedGood('')}
                     >
-                      -
+                      {' '}
+                      -{' '}
                     </button>
                   ) : (
-                    <button
-                      data-cy="AddButton"
-                      type="button"
-                      className="button"
-                      onClick={() => setSelectedGood(good)}
-                    >
-                      +
-                    </button>
-                  )}
-                </td>
-
+                    !selectedGood && (
+                      <button
+                        data-cy="AddButton"
+                        type="button"
+                        className="button"
+                        onClick={() => setSelectedGood(good)}
+                      >
+                        {' '}
+                        +{' '}
+                      </button>
+                    )
+                  )}{' '}
+                </td>{' '}
                 <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
+                  {' '}
+                  {good}{' '}
+                </td>{' '}
               </tr>
             );
           })}
