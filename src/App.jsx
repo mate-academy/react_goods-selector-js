@@ -47,18 +47,7 @@ export const App = () => {
               setSelectedGood(el);
             };
 
-            if (selectedGood === '') {
-              actionButton = (
-                <button
-                  data-cy="AddButton"
-                  type="button"
-                  className="button"
-                  onClick={selectGood}
-                >
-                  +
-                </button>
-              );
-            } else if (el === selectedGood) {
+            if (el === selectedGood) {
               actionButton = (
                 <button
                   data-cy="RemoveButton"
@@ -67,6 +56,17 @@ export const App = () => {
                   onClick={clearTitle}
                 >
                   -
+                </button>
+              );
+            } else {
+              actionButton = (
+                <button
+                  data-cy="AddButton"
+                  type="button"
+                  className="button"
+                  onClick={selectGood}
+                >
+                  +
                 </button>
               );
             }
