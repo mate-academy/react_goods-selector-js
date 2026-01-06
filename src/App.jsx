@@ -43,10 +43,18 @@ export const App = () => {
         <tbody>
           {goods.map(el => {
             let actionButton = null;
+            const selectGood = () => {
+              setSelectedGood(el);
+            };
 
             if (selectedGood === '') {
               actionButton = (
-                <button data-cy="AddButton" type="button" className="button">
+                <button
+                  data-cy="AddButton"
+                  type="button"
+                  className="button"
+                  onClick={selectGood}
+                >
                   +
                 </button>
               );
@@ -56,6 +64,7 @@ export const App = () => {
                   data-cy="RemoveButton"
                   type="button"
                   className="button is-info"
+                  onClick={clearTitle}
                 >
                   -
                 </button>
@@ -70,10 +79,7 @@ export const App = () => {
                   el === selectedGood ? 'has-background-success-light' : ''
                 }
               >
-                <td>
-                  {actionButton}
-                  {}
-                </td>
+                <td>{actionButton}</td>
 
                 <td data-cy="GoodTitle" className="is-vcentered">
                   {el}
@@ -86,31 +92,3 @@ export const App = () => {
     </main>
   );
 };
-
-// <tr data-cy="Good" className="has-background-success-light">
-//   <td>
-//     <button
-//       data-cy="RemoveButton"
-//       type="button"
-//       className="button is-info"
-//     >
-//       -
-//     </button>
-//   </td>
-
-//   <td data-cy="GoodTitle" className="is-vcentered">
-//     Jam
-//   </td>
-// </tr>
-
-// <tr data-cy="Good">
-//   <td>
-//     <button data-cy="AddButton" type="button" className="button">
-//       +
-//     </button>
-//   </td>
-
-//   <td data-cy="GoodTitle" className="is-vcentered">
-//     Garlic
-//   </td>
-// </tr>
