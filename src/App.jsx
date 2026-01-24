@@ -19,7 +19,7 @@ export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
   const titleText = selectedGood
     ? `${selectedGood} is selected`
-    : 'No goods is selected';
+    : 'No goods selected';
 
   return (
     <main className="section container">
