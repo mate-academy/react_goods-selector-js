@@ -29,7 +29,7 @@ export const App = () => {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => setValue(undefined)}
+                onClick={() => setValue('')}
               />
             </>
           )}
@@ -55,7 +55,7 @@ export const App = () => {
                     type="button"
                     className="button is-info"
                     onClick={() => {
-                      setValue(undefined);
+                      setValue('');
                     }}
                   >
                     -
