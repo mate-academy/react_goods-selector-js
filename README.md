@@ -1,25 +1,70 @@
-# React Goods Selector JS
+# React Goods Selector (JS)
 
-You are given an array of goods. Render them in a table with the ability to select one or clear the selection.
+Aplicação em React que renderiza uma lista de produtos em formato de tabela, permitindo selecionar apenas um item por vez ou limpar a seleção.
 
-> Here is [the working version](https://mate-academy.github.io/react_goods-selector)
+[DEMO LINK](https://Igor-hrm.github.io/react_goods-selector-js/)
 
-In this task, we use the [Bulma CSS framework](https://bulma.io/). It is already installed and imported so that you may use its classes.
+---
 
-1. Write everything inside the `App` (**don't** create additional components).
-1. Save a `selectedGood` in the state (`Jam` is the default value).
-1. Show the name of the selected good in the `h1.title` (`Jam is selected`).
-1. Add the `has-background-success-light` class to the `tr` of the selected Good.
-1. Show the `ClearButton` button in the title only when a good is selected.
-1. `ClearButton` should clear the selection by setting an empty string to `selectedGood`.
-1. The title should show `No goods selected` when there is no selected good.
-1. Each good should have an `AddButton` to select the good.
-    - only 1 good can be selected at a time;
-1. Don't show `AddButton` when a good is selected.
-1. Show `RemoveButton` for the selected good to clear the selection.
+## Sobre o projeto
 
-## Instructions
-- Install Prettier Extention and use this [VSCode settings](https://mate-academy.github.io/fe-program/tools/vscode/settings.json) to enable format on save.
-- Implement a solution following the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline).
-- Open one more terminal and run tests with `npm test` to ensure your solution is correct.
-- Replace `<your_account>` with your Github username in the [DEMO LINK](https://<your_account>.github.io/react_goods-selector-js/) and add it to the PR description.
+Este projeto utiliza React e o framework CSS **Bulma** para criar uma tabela interativa de produtos.
+O usuário pode selecionar um produto, visualizar o estado da seleção e limpar a escolha quando desejar.
+
+Toda a lógica foi implementada dentro do componente `App`, conforme solicitado pelo desafio.
+
+---
+
+## Tecnologias utilizadas
+
+- React
+- JavaScript
+- Bulma CSS
+- GitHub Pages
+
+---
+
+## Funcionalidades implementadas
+
+- Renderização dinâmica da lista de produtos em uma tabela
+- Controle de estado com `useState`
+- Seleção de apenas **um produto por vez**
+- Destaque visual do produto selecionado
+- Exibição dinâmica do título conforme o estado da seleção
+- Botões contextuais para adicionar, remover ou limpar a seleção
+
+---
+
+## Regras de funcionamento
+
+- O estado `selectedGood` é armazenado no `App`
+- Valor inicial do estado: **Jam**
+- Quando um produto está selecionado:
+  - O título exibe: `Jam is selected`
+  - A linha correspondente recebe a classe `has-background-success-light`
+  - Apenas o botão **Remove** é exibido para o item selecionado
+- Quando nenhum produto está selecionado:
+  - O título exibe: `No goods selected`
+  - O botão **Clear** não é exibido
+  - Todos os produtos mostram o botão **Add**
+
+---
+
+## Conceitos praticados
+
+- Estado no React (`useState`)
+- Renderização condicional
+- Manipulação de eventos
+- Classes dinâmicas
+- Uso de framework CSS (Bulma)
+- Regras de UI baseadas em estado
+
+---
+
+## Como rodar o projeto localmente
+
+1. Clone o repositório:
+
+```bash
+git clone https://github.com/Igor-hrm/react_goods-selector-js.git
+```
