@@ -22,14 +22,14 @@ export const App = () => {
   return (
     <main className="section container">
       {/* <h1 className="title is-flex is-align-items-center">No goods selected</h1> */}
-      {value !== null ? (
+      {value !== '' ? (
         <h1 className="title is-flex is-align-items-center">
           {value} is selected
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => setValue(null)}
+            onClick={() => setValue('')}
           />
         </h1>
       ) : (
@@ -47,6 +47,7 @@ export const App = () => {
             <tr
               data-cy="Good"
               className={cn({ 'has-background-success-light': value === good })}
+              key={good}
             >
               <td>
                 {value === good ? (
@@ -55,7 +56,7 @@ export const App = () => {
                     type="button"
                     className="button is-info"
                     onClick={() => {
-                      setValue(null);
+                      setValue('');
                     }}
                   >
                     -
