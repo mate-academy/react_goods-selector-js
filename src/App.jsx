@@ -16,25 +16,25 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGoods, setSelectedGoods] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   return (
     <main className="section container">
-      {selectedGoods === '' && (
+      {selectedGood === '' && (
         <h1 className="title is-flex is-align-items-center">
           No goods selected
         </h1>
       )}
 
-      {selectedGoods !== '' && (
+      {selectedGood !== '' && (
         <h1 className="title is-flex is-align-items-center">
-          {`${selectedGoods} is selected`}
+          {`${selectedGood} is selected`}
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
             onClick={() => {
-              setSelectedGoods('');
+              setSelectedGood('');
             }}
           />
         </h1>
@@ -46,11 +46,11 @@ export const App = () => {
             <tr
               data-cy="Good"
               className={
-                good === selectedGoods ? 'has-background-success-light' : ''
+                good === selectedGood ? 'has-background-success-light' : ''
               }
               key={good}
             >
-              {good === selectedGoods && (
+              {good === selectedGood && (
                 <>
                   <td>
                     <button
@@ -58,7 +58,7 @@ export const App = () => {
                       type="button"
                       className="button is-info"
                       onClick={() => {
-                        setSelectedGoods('');
+                        setSelectedGood('');
                       }}
                     >
                       -
@@ -71,7 +71,7 @@ export const App = () => {
                 </>
               )}
 
-              {good !== selectedGoods && (
+              {good !== selectedGood && (
                 <>
                   <td>
                     <button
@@ -79,7 +79,7 @@ export const App = () => {
                       type="button"
                       className="button"
                       onClick={() => {
-                        setSelectedGoods(good);
+                        setSelectedGood(good);
                       }}
                     >
                       +
