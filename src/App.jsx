@@ -41,10 +41,22 @@ export const App = () => {
         <tbody>
           {goods.map(good => {
             const isSelected = selectedGood === good;
+            const nothingSelected = selectedGood === '';
 
             let actionButton = null;
 
-            if (isSelected) {
+            if (nothingSelected) {
+              actionButton = (
+                <button
+                  data-cy="AddButton"
+                  type="button"
+                  className="button"
+                  onClick={() => setSelectedGood(good)}
+                >
+                  +
+                </button>
+              );
+            } else if (isSelected) {
               actionButton = (
                 <button
                   data-cy="RemoveButton"
@@ -58,7 +70,6 @@ export const App = () => {
             } else {
               actionButton = (
                 <button
-                  data-cy="AddButton"
                   type="button"
                   className="button"
                   onClick={() => setSelectedGood(good)}
