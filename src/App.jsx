@@ -40,18 +40,7 @@ export const App = () => {
             const isSelected = name === selectedGood;
             let control = null;
 
-            if (selectedGood === '') {
-              control = (
-                <button
-                  className="button"
-                  type="button"
-                  data-cy="AddButton"
-                  onClick={() => setSelectedGood(name)}
-                >
-                  +
-                </button>
-              );
-            } else if (isSelected) {
+            if (isSelected) {
               control = (
                 <button
                   className="button is-info"
@@ -60,6 +49,17 @@ export const App = () => {
                   onClick={() => setSelectedGood('')}
                 >
                   -
+                </button>
+              );
+            } else {
+              control = (
+                <button
+                  className="button"
+                  type="button"
+                  data-cy="AddButton"
+                  onClick={() => setSelectedGood(name)}
+                >
+                  +
                 </button>
               );
             }
