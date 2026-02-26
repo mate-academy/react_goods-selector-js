@@ -22,7 +22,7 @@ export const App = () => {
     <main className="section container">
       {selectedGood ? (
         <h1 className="title is-flex is-align-items-center">
-          {selectedGood} is select
+          {selectedGood} is selected
           <button
             data-cy="ClearButton"
             type="button"
