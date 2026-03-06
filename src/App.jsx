@@ -25,7 +25,7 @@ export const App = () => {
         <h1 className="title is-flex is-align-items-center">
           {selectedGood} is selected
           <button
-            onClick={() => setGood(null)}
+            onClick={() => setGood('')}
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
