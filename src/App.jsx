@@ -3,8 +3,16 @@ import './App.scss';
 import { useState } from 'react';
 
 export const goods = [
-  'Dumplings', 'Carrot', 'Eggs', 'Ice cream', 'Apple',
-  'Bread', 'Fish', 'Honey', 'Jam', 'Garlic',
+  'Dumplings',
+  'Carrot',
+  'Eggs',
+  'Ice cream',
+  'Apple',
+  'Bread',
+  'Fish',
+  'Honey',
+  'Jam',
+  'Garlic',
 ];
 
 export const App = () => {
@@ -47,7 +55,7 @@ export const App = () => {
                       -
                     </button>
                   ) : (
-                    !selectedGood && (
+                    selectedGood && (
                       <button
                         data-cy="AddButton"
                         type="button"
