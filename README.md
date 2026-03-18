@@ -1,5 +1,7 @@
 # React Goods Selector JS
 
+Hey luke check tests they are passing and we have conflict with your summerty when you say add button shold not be visible for rows if we have selected good, but test say that button needs to be shown for each none selected good items
+
 You are given an array of goods. Render them in a table with the ability to select one or clear the selection.
 
 > Here is [the working version](https://mate-academy.github.io/react_goods-selector)
