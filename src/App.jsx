@@ -31,29 +31,13 @@ export const App = () => {
     <h1 className="title is-flex is-align-items-center">No goods selected</h1>
   );
 
-  const blockTr = good => (
+  const renderGoodRow = good => (
     <tr
+      key={good}
       data-cy="Good"
       className={good === selectedGood ? 'has-background-success-light' : ''}
     >
-      {good !== selectedGood ? (
-        <>
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-              onClick={() => setSelectedGood(good)}
-            >
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            {good}
-          </td>
-        </>
-      ) : (
+      {good === selectedGood ? (
         <>
           <td>
             <button
@@ -70,6 +54,23 @@ export const App = () => {
             {good}
           </td>
         </>
+      ) : (
+        <>
+          <td>
+            <button
+              data-cy="AddButton"
+              type="button"
+              className="button"
+              onClick={() => setSelectedGood(good)}
+            >
+              +
+            </button>
+          </td>
+
+          <td data-cy="GoodTitle" className="is-vcentered">
+            {good}
+          </td>
+        </>
       )}
     </tr>
   );
@@ -79,7 +80,7 @@ export const App = () => {
       {title}
 
       <table className="table">
-        <tbody>{goods.map(good => blockTr(good))}</tbody>
+        <tbody>{goods.map(good => renderGoodRow(good))}</tbody>
       </table>
     </main>
   );
