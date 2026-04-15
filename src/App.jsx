@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 
+
 export const goods = [
   'Dumplings',
   'Carrot',
