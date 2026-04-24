@@ -36,7 +36,7 @@ export const App = () => {
     <h1 className="title is-flex is-align-items-center">No goods selected</h1>
   );
 
-  function goodAction(good) {
+  function getGoodAction(good) {
     if (selectedGood === good) {
       return (
         <button
@@ -62,14 +62,14 @@ export const App = () => {
     );
   }
 
-  function goodInfo(good) {
+  function getGoodInfo(good) {
     return (
       <tr
         key={good}
         data-cy="Good"
-        className={selectedGood === good && 'has-background-success-light'}
+        className={selectedGood === good ? 'has-background-success-light' : ''}
       >
-        <td>{goodAction(good)}</td>
+        <td>{getGoodAction(good)}</td>
 
         <td data-cy="GoodTitle" className="is-vcentered">
           {good}
@@ -83,7 +83,7 @@ export const App = () => {
       {selectedGoodMessage}
 
       <table className="table">
-        <tbody>{goods.map(item => goodInfo(item))}</tbody>
+        <tbody>{goods.map(item => getGoodInfo(item))}</tbody>
       </table>
     </main>
   );
