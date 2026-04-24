@@ -24,7 +24,7 @@ export const App = () => {
 
   const selectedGoodMessage = selectedGood ? (
     <h1 className="title is-flex is-align-items-center">
-      {selectedGood}
+      {selectedGood} is selected
       <button
         data-cy="ClearButton"
         type="button"
