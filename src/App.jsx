@@ -17,7 +17,7 @@ export const goods = [
 
 export const App = () => {
   const [selectedGood, setGood] = useState('Jam');
-  const clearGoods = () => setGood(''); 
+  const clearGoods = () => setGood('');
 
   return (
     <main className="section container">
@@ -28,19 +28,19 @@ export const App = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={clearGoods} 
-          /> 
+            onClick={clearGoods}
+          />
         )}
       </h1>
 
       <table className="table">
-        <tbody> 
+        <tbody>
           {goods.map(good => {
             const isSelected = good === selectedGood;
 
             return (
-              <tr 
-                key={good} 
+              <tr
+                key={good}
                 data-cy="Good"
                 className={isSelected ? 'has-background-success-light' : ''}
               >
@@ -55,15 +55,14 @@ export const App = () => {
                       -
                     </button>
                   ) : (
-                      <button 
-                        data-cy="AddButton" 
-                        type="button" 
-                        className="button"
-                        onClick={() => setGood(good)} 
-                      >
-                        +
-                      </button>
-                    
+                    <button
+                      data-cy="AddButton"
+                      type="button"
+                      className="button"
+                      onClick={() => setGood(good)}
+                    >
+                      +
+                    </button>
                   )}
                 </td>
                 <td data-cy="GoodTitle" className="is-vcentered">
