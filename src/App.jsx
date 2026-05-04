@@ -27,7 +27,7 @@ export const App = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => setSelectedGoog(null)}
+            onClick={() => setSelectedGoog('')}
           />
         </h1>
       ) : (
@@ -52,7 +52,7 @@ export const App = () => {
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
-                    onClick={() => setSelectedGoog(null)}
+                    onClick={() => setSelectedGoog('')}
                   >
                     -
                   </button>
