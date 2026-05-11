@@ -22,7 +22,7 @@ export const App = () => {
     setSelectedGood('');
   };
 
-  const handleSelect = (good) => {
+  const handleSelect = good => {
     setSelectedGood(good);
   };
 
@@ -46,7 +46,7 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map((good) => {
+          {goods.map(good => {
             const isSelected = selectedGood === good;
 
             return (
