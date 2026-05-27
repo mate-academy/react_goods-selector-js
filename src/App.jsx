@@ -16,13 +16,13 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [value, setValue] = useState('Jam');
+  const [selectedGood, setValue] = useState('Jam');
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {value ? `${value} is selected` : 'No goods selected'}
-        {value && (
+        {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
+        {selectedGood && (
           <button
             onClick={() => setValue('')}
             data-cy="ClearButton"
@@ -38,10 +38,12 @@ export const App = () => {
             <tr
               data-cy="Good"
               key={good}
-              className={good === value ? 'has-background-success-light' : ''}
+              className={
+                good === selectedGood ? 'has-background-success-light' : ''
+              }
             >
               <td>
-                {good === value ? (
+                {good === selectedGood ? (
                   <button
                     onClick={() => setValue('')}
                     data-cy="RemoveButton"
