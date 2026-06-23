@@ -25,12 +25,11 @@ export const App = () => {
       ) : (
         <h1 className="title is-flex is-align-items-center">
           {selectedGood} is selected
-
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => setSelectedGood(null)}
+            onClick={() => setSelectedGood('')}
           />
         </h1>
       )}
@@ -42,9 +41,7 @@ export const App = () => {
               key={good}
               data-cy="Good"
               className={
-                good === selectedGood
-                  ? 'has-background-success-light'
-                  : ''
+                good === selectedGood ? 'has-background-success-light' : ''
               }
             >
               <td>
@@ -53,7 +50,7 @@ export const App = () => {
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
-                    onClick={() => setSelectedGood(null)}
+                    onClick={() => setSelectedGood('')}
                   >
                     -
                   </button>
