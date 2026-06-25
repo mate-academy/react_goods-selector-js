@@ -24,7 +24,6 @@ Cypress.on('fail', (e) => {
 
 describe('Page', () => {
   beforeEach(() => {
-    if (failed) Cypress.runner.stop();
 
     cy.visit('/');
   });
