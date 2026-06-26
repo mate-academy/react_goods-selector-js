@@ -47,20 +47,31 @@ export const App = () => {
               className={product === pr ? 'has-background-success-light' : ''}
             >
               <td>
-                <button
-                  data-cy={product === pr ? 'RemoveButton' : 'AddButton'}
-                  type="button"
-                  className={product === pr ? 'button is-info' : 'button'}
-                  onClick={() => {
-                    if (product === pr) {
+                {product === pr && (
+                  <button
+                    data-cy="RemoveButton"
+                    type="button"
+                    className="button is-info"
+                    onClick={() => {
                       setValue('');
-                    } else {
+                    }}
+                  >
+                    -
+                  </button>
+                )}
+
+                {product === '' && (
+                  <button
+                    data-cy="AddButton"
+                    type="button"
+                    className="button"
+                    onClick={() => {
                       setValue(pr);
-                    }
-                  }}
-                >
-                  {product === pr ? '-' : '+'}
-                </button>
+                    }}
+                  >
+                    +
+                  </button>
+                )}
               </td>
 
               <td data-cy="GoodTitle" className="is-vcentered">
