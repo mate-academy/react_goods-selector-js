@@ -23,3 +23,19 @@ In this task, we use the [Bulma CSS framework](https://bulma.io/). It is already
 - Implement a solution following the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline).
 - Open one more terminal and run tests with `npm test` to ensure your solution is correct.
 - Replace `<your_account>` with your Github username in the [DEMO LINK](https://<your_account>.github.io/react_goods-selector-js/) and add it to the PR description.
+
+9 1. Напишите всё внутри `App` (**не** создавайте дополнительные компоненты).
+10 1. Сохраните выбранный товар в состоянии (значение по умолчанию — «Джем»).
+11 1. Отобразите название выбранного товара в заголовке `h1.title` («Выбран джем»).
+1. Добавьте класс `has-background-success-light` к `tr` выбранного товара.
+15
+12 13 1. Отображать кнопку `ClearButton` в заголовке только при выборе товара.
+14 1. ClearButton должен очистить выделение, установив пустую строку в значение `selectedGood`.
+1. В заголовке должно быть указано «Товары не выбраны», если товар не выбран.
+16
+1. Для каждого товара должна быть кнопка «Добавить», чтобы его можно было выбрать.
+17
+За один раз можно выбрать только один товар;
+18 1. Не отображать кнопку `AddButton` при выборе товара.
+19 1. Отобразите кнопку RemoveButton для выбранного товара, чтобы очистить выделение.
+20
