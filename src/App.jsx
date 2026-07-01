@@ -16,7 +16,7 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setSelectedGood] = useState('Fish');
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   const goodIsSelected = goods.some(good => good === selectedGood);
 
