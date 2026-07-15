@@ -16,44 +16,34 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [value, setValue] = useState('');
-  const [history, sethistory] = useState([]);
+  const [value, setValue] = useState('Jam');
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {value === '' ? 'No goods selected' : `${value} is selected`}
-      </h1>
-
-      {history.map((onegood, index) => {
-        return (
-          <h1 className="title is-flex is-align-items-center">
-            {onegood} is selected
+        {value === '' ? (
+          'No goods selected'
+        ) : (
+          <>
+            {value} is selected
             <button
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => {
-                sethistory(history.filter((_, i) => i !== index));
-              }}
+              onClick={() => setValue('')}
             />
-          </h1>
-        );
-      })}
+          </>
+        )}
+      </h1>
 
       <table className="table">
         <tbody>
           {goods.map(good => {
-            let isSelected = false;
-
-            if (good === value) {
-              isSelected = true;
-            } else {
-              isSelected = false;
-            }
+            const isSelected = good === value;
 
             return (
               <tr
+                key={good}
                 data-cy="Good"
                 className={
                   isSelected ? 'has-background-success-light' : 'is-vcentered'
@@ -70,8 +60,6 @@ export const App = () => {
                       } else {
                         setValue(good);
                       }
-
-                      sethistory([...history, good]);
                     }}
                   >
                     {isSelected ? '-' : '+'}
