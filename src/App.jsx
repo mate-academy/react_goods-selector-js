@@ -40,6 +40,7 @@ export const App = () => {
             return (
               <tr
                 data-cy="Good"
+                key={good}
                 className={
                   good === selectedGood ? 'has-background-success-light' : ''
                 }
@@ -76,7 +77,6 @@ export const App = () => {
               </tr>
             );
           })}
-          ;
         </tbody>
       </table>
     </main>
