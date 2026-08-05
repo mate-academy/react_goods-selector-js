@@ -38,7 +38,7 @@ export const App = () => {
         <tbody>
           {goods.map(good => {
             return selectedGood === good ? (
-              <tr data-cy="Good" className="has-background-success-light">
+              <tr data-cy="Good" className="has-background-success-light" key={good}>
                 <td>
                   <button
                     data-cy="RemoveButton"
@@ -55,7 +55,7 @@ export const App = () => {
                 </td>
               </tr>
             ) : (
-              <tr data-cy="Good">
+                <tr data-cy="Good" key={good}>
                 <td>
                   <button
                     data-cy="AddButton"
@@ -71,9 +71,8 @@ export const App = () => {
                   {good}
                 </td>
               </tr>
-            );
-          })
-          }
+            )
+          })}
         </tbody>
       </table>
     </main>
