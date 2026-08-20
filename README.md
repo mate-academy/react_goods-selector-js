@@ -1,4 +1,4 @@
-# React Goods Selector JS
+```# React Goods Selector JS
 
 You are given an array of goods. Render them in a table with the ability to select one or clear the selection.
 
