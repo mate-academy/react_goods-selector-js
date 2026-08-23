@@ -17,6 +17,8 @@ export const goods = [
 
 export const App = () => {
   const [value, setValue] = useState('Jam');
+  const handleClear = () => setValue('');
+  const handleAdd = good => setValue(good);
 
   return (
     <main className="section container">
@@ -27,9 +29,7 @@ export const App = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => {
-              setValue('');
-            }}
+            onClick={handleClear}
           />
         </h1>
       ) : (
@@ -43,6 +43,7 @@ export const App = () => {
           {goods.map(good => (
             <tr
               data-cy="Good"
+              key={good}
               className={value === good && 'has-background-success-light'}
             >
               <td>
@@ -51,9 +52,7 @@ export const App = () => {
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
-                    onClick={() => {
-                      setValue('');
-                    }}
+                    onClick={handleClear}
                   >
                     -
                   </button>
@@ -62,9 +61,7 @@ export const App = () => {
                     data-cy="AddButton"
                     type="button"
                     className="button"
-                    onClick={() => {
-                      setValue(good);
-                    }}
+                    onClick={() => handleAdd(good)}
                   >
                     +
                   </button>
