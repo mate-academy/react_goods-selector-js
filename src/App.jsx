@@ -42,14 +42,26 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map(good => {
+            const isSelectedGood = good === selectedGood;
+
+            const selectedClass = isSelectedGood
+              ? 'has-background-success-light'
+              : '';
+
             return (
-              <tr
-                data-cy="Good"
-                className={
-                  good === selectedGood && 'has-background-success-light'
-                }
-              >
-                {selectedGood !== good && (
+              <tr data-cy="Good" className={selectedClass} key={good}>
+                {isSelectedGood ? (
+                  <td>
+                    <button
+                      data-cy="RemoveButton"
+                      type="button"
+                      className="button is-info"
+                      onClick={() => setSelectedGood('')}
+                    >
+                      -
+                    </button>
+                  </td>
+                ) : (
                   <td>
                     <button
                       data-cy="AddButton"
@@ -64,63 +76,12 @@ export const App = () => {
                   </td>
                 )}
 
-                {selectedGood === good && (
-                  <td>
-                    <button
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                      onClick={() => setSelectedGood('')}
-                    >
-                      -
-                    </button>
-                  </td>
-                )}
                 <td data-cy="GoodTitle" className="is-vcentered">
                   {good}
                 </td>
               </tr>
             );
           })}
-          {/* <tr data-cy="Good">
-            <td>
-              <button data-cy="AddButton" type="button" className="button">
-                +
-              </button>
-            </td>
-
-            <td data-cy="GoodTitle" className="is-vcentered">
-              Dumplings
-            </td>
-          </tr>
-
-          <tr data-cy="Good" className="has-background-success-light">
-            <td>
-              <button
-                data-cy="RemoveButton"
-                type="button"
-                className="button is-info"
-              >
-                -
-              </button>
-            </td>
-
-            <td data-cy="GoodTitle" className="is-vcentered">
-              Jam
-            </td>
-          </tr>
-
-          <tr data-cy="Good">
-            <td>
-              <button data-cy="AddButton" type="button" className="button">
-                +
-              </button>
-            </td>
-
-            <td data-cy="GoodTitle" className="is-vcentered">
-              Garlic
-            </td>
-          </tr> */}
         </tbody>
       </table>
     </main>
