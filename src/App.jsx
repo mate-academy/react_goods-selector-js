@@ -14,12 +14,12 @@ export const goods = [
   'Jam',
   'Garlic',
 ];
-const NOT_SELECTED = 'No goods selected';
-const STARTED_GOOD = goods[8];
+const NOT_SELECTED = '';
+const STARTED_GOOD = 'Jam';
 
 function PrintSelectedGood(good, selectGood) {
   const isSelected = good === NOT_SELECTED;
-  const print = isSelected ? NOT_SELECTED : `${good} is selected`;
+  const print = isSelected ? 'No goods selected' : `${good} is selected`;
 
   return (
     <h1 className="title is-flex is-align-items-center">
