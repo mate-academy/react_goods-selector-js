@@ -17,16 +17,17 @@ export const goods = [
 
 export const App = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
+  const isSelected = selectedGood === '';
 
   return (
     <main className="section container">
-      {selectedGood === '' && (
+      {isSelected && (
         <h1 className="title is-flex is-align-items-center">
           No goods selected
         </h1>
       )}
 
-      {selectedGood !== '' && (
+      {!isSelected && (
         <h1 className="title is-flex is-align-items-center">
           {selectedGood} is selected
           <button
