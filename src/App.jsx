@@ -17,11 +17,11 @@ export const goods = [
 
 export const App = () => {
   const [value, setValue] = useState('Jam is selected');
-  const [active, setActive] = useState(['Jam']);
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   return (
     <main className="section container">
-      {active.length === 0 ? (
+      {selectedGood === '' ? (
         <h1 className="title is-flex is-align-items-center">
           No goods selected
         </h1>
@@ -32,7 +32,7 @@ export const App = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => setActive([])}
+            onClick={() => setSelectedGood('')}
           />
         </h1>
       )}
@@ -43,23 +43,28 @@ export const App = () => {
             <tr
               data-cy="Good"
               key={good}
-              className={`${active.includes(good) ? 'has-background-success-light' : ''}`}
+              className={
+                selectedGood === good ? 'has-background-success-light' : ''
+              }
             >
               <td>
                 <button
-                  data-cy={`${active.includes(good) ? 'RemoveButton' : 'AddButton'}`}
+                  data-cy={selectedGood === good ? 'RemoveButton' : 'AddButton'}
                   type="button"
-                  className={`${active.includes(good) ? 'button is-info' : 'button'}`}
+                  className={
+                    selectedGood === good ? 'button is-info' : 'button'
+                  }
                   onClick={() => {
                     setValue(`${good} is selected`);
-                    if (!active.includes(good)) {
-                      setActive(good);
+
+                    if (selectedGood !== good) {
+                      setSelectedGood(good);
                     } else {
-                      setActive(prev => prev.filter(item => item !== good));
+                      setSelectedGood('');
                     }
                   }}
                 >
-                  {active.includes(good) ? '-' : '+'}
+                  {selectedGood === good ? '-' : '+'}
                 </button>
               </td>
 
