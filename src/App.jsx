@@ -23,11 +23,11 @@ export const App = () => {
     <main className="section container">
       {selectedGood.length === 0 ? (
         <h1 className="title is-flex is-align-items-center">
-          No goods selectedGood
+          No goods selected
         </h1>
       ) : (
         <h1 className="title is-flex is-align-items-center">
-          {selectedGood} is selectedGood
+          {selectedGood} is selected
           <button
             data-cy="ClearButton"
             type="button"
