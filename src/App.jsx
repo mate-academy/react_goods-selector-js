@@ -17,43 +17,43 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selected, setSelected] = useState(8);
+  const [selected, setSelected] = useState('Jam');
 
   return (
     <main className="section container">
-      {selected === null ? (
+      {selected.length === 0 ? (
         <h1 className="title is-flex is-align-items-center">
           No goods selected
         </h1>
       ) : (
         <h1 className="title is-flex is-align-items-center">
-          {goods[selected]} is selected
+          {selected} is selected
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => setSelected(null)}
+            onClick={() => setSelected('')}
           />
         </h1>
       )}
 
       <table className="table">
         <tbody>
-          {goods.map((good, index) => (
+          {goods.map(good => (
             <tr
               data-cy="Good"
               key={good}
               className={
-                selected === index ? 'has-background-success-light' : ''
+                selected === good ? 'has-background-success-light' : ''
               }
             >
               <td>
-                {selected === index ? (
+                {selected === good ? (
                   <button
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
-                    onClick={() => setSelected(null)}
+                    onClick={() => setSelected('')}
                   >
                     -
                   </button>
@@ -62,7 +62,7 @@ export const App = () => {
                     data-cy="AddButton"
                     type="button"
                     className="button"
-                    onClick={() => setSelected(index)}
+                    onClick={() => setSelected(good)}
                   >
                     +
                   </button>
