@@ -55,7 +55,6 @@ export const App = () => {
                     -
                   </button>
                 ) : (
-                  !selectedGood && (
                     <button
                       data-cy="AddButton"
                       type="button"
@@ -64,7 +63,6 @@ export const App = () => {
                     >
                       +
                     </button>
-                  )
                 )}
               </td>
 
