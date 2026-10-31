@@ -27,9 +27,7 @@ export const App = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => {
-              setSelectedGood('');
-            }}
+            onClick={() => setSelectedGood('')}
           />
         )}
       </h1>
@@ -38,26 +36,32 @@ export const App = () => {
         <tbody>
           {goods.map(good => (
             <tr
+              key={good}
               data-cy="Good"
               className={
                 selectedGood === good ? 'has-background-success-light' : ''
               }
             >
               <td>
-                <button
-                  data-cy={selectedGood === good ? 'RemoveButton' : 'AddButton'}
-                  type="button"
-                  className={`button ${selectedGood === good ? 'is-info' : ''}`}
-                  onClick={() => {
-                    if (selectedGood === good) {
-                      setSelectedGood('');
-                    } else {
-                      setSelectedGood(good);
-                    }
-                  }}
-                >
-                  {selectedGood === good ? '-' : '+'}
-                </button>
+                {selectedGood === good ? (
+                  <button
+                    data-cy="RemoveButton"
+                    type="button"
+                    className="button is-info"
+                    onClick={() => setSelectedGood('')}
+                  >
+                    -
+                  </button>
+                ) : (
+                  <button
+                    data-cy="AddButton"
+                    type="button"
+                    className="button"
+                    onClick={() => setSelectedGood(good)}
+                  >
+                    +
+                  </button>
+                )}
               </td>
 
               <td data-cy="GoodTitle" className="is-vcentered">
