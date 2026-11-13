@@ -59,10 +59,7 @@ export const App = () => {
                     type="button"
                     className="button"
                     onClick={() => setSelectedGood(good)}
-                  >
-                    {' '}
-                    +
-                  </button>
+                  >+</button>
                 )}
               </td>
 
