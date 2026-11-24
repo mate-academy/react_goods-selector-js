@@ -51,7 +51,7 @@ export const App = () => {
                   <button
                     data-cy="RemoveButton"
                     type="button"
-                    className="button"
+                    className="button is-info"
                     onClick={() => setSelectedGood('')}
                   >
                     -
