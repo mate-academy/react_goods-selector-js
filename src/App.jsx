@@ -23,7 +23,12 @@ export const App = () => {
       {selectedGood ? (
         <h1 className="title is-flex is-align-items-center">
           {selectedGood} is selected
-          <button data-cy="ClearButton" type="button" className="delete ml-3" />
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={() => setSelectedGood('')}
+          />
         </h1>
       ) : (
         <h1 className="title is-flex is-align-items-center">
@@ -44,7 +49,7 @@ export const App = () => {
               <td>
                 {selectedGood === good ? (
                   <button
-                    data-cy="ClearButton"
+                    data-cy="RemoveButton"
                     type="button"
                     className="button"
                     onClick={() => setSelectedGood('')}
