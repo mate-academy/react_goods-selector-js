@@ -39,7 +39,13 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map(good => (
-            <tr key={good} data-cy="Good">
+            <tr
+              key={good}
+              data-cy="Good"
+              className={
+                selectedGood === good ? 'has-background-success-light' : ''
+              }
+            >
               <td>
                 {selectedGood === good ? (
                   <button
@@ -52,13 +58,13 @@ export const App = () => {
                   </button>
                 ) : (
                   <button
-                  data-cy="AddButton"
-                  type="button"
-                  className="button"
-                  onClick={() => setSelectedGood(good)}
-                >
-                  +
-                </button>
+                    data-cy="AddButton"
+                    type="button"
+                    className="button"
+                    onClick={() => setSelectedGood(good)}
+                  >
+                    +
+                  </button>
                 )}
               </td>
 
